@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent loginIntent = new Intent(SplashActivity.this, ViewpagerMain.class);
+                Intent loginIntent = new Intent(SplashActivity.this, IntroMain.class);
                 SplashActivity.this.startActivity(loginIntent);
                 SplashActivity.this.finish();
             }

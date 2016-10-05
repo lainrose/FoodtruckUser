@@ -1,33 +1,29 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
 
 /**
  * Created by AdminPond on 21/6/2558.
  */
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.MainActivity;
 
 public class IntroFive extends Fragment {
-    Sqlite sqlite;
-    private Button btnStart;
+        Sqlite sqlite;
+        private Button btnStart;
 
-    public static IntroFive newInstance() {
-        IntroFive fragment = new IntroFive();
-        return fragment;
-    }
+        public static IntroFive newInstance() {
+            IntroFive fragment = new IntroFive();
+            return fragment;
+        }
 
-    public IntroFive() {
-    }
+        public IntroFive() {
+        }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

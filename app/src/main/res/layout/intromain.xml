@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffebdb"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:ci_width="8dp"
+        app:ci_height="8dp"
+        app:ci_margin="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="148dp" />
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_login_fragment_subject"
+        android:layout_marginTop="175dp"
+        android:text="환영합니다" android:textColor="#ffffffff"
+        android:textSize="30.0sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_login_fragment_desc"
+        android:layout_marginTop="40dp"
+        android:text="빅데이터 맛집검색, 다이닝코드"
+        android:textColor="#ccffffff"
+        android:textSize="14.0sp"
+        android:gravity="center"
+        android:layout_below="@+id/tv_login_fragment_subject"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인?"
+        android:id="@+id/button"
+        android:layout_alignTop="@+id/indicator"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp" />
+
+</RelativeLayout>

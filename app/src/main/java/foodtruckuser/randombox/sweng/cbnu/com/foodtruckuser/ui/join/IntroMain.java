@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.MainActivity
 import me.relex.circleindicator.CircleIndicator;
 
 
-public class ViewpagerMain extends FragmentActivity {
+public class IntroMain extends FragmentActivity {
     IntroAdapter adapter;
     ViewPager pager;
     Context context = this;
@@ -20,7 +20,7 @@ public class ViewpagerMain extends FragmentActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewpagemain);
+        setContentView(R.layout.intromain);
 
         sqlite.getWritableDatabase();
         sqlite.InsertData();

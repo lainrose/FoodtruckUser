@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
 
 /**
  * Created by AdminPond on 21/6/2558.

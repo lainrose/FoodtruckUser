@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
 
 /**
  * Created by AdminPond on 21/6/2558.
@@ -13,19 +13,19 @@ import android.view.ViewGroup;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 
 
-public class IntroFour extends Fragment {
+public class IntroOne extends Fragment {
 
-    public static IntroFour newInstance() {
-        IntroFour fragment = new IntroFour();
+    public static IntroOne newInstance() {
+        IntroOne fragment = new IntroOne();
         return fragment;
     }
 
-    public IntroFour() {
+    public IntroOne() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.intro_four, null);
+        View root = inflater.inflate(R.layout.intro_one, null);
         return root;
     }
 }
