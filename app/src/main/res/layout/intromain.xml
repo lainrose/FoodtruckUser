@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffebdb"
@@ -13,7 +14,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="bt_email_login" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
@@ -39,19 +41,59 @@
         android:layout_width="wrap_content"
         android:id="@+id/tv_login_fragment_desc"
         android:layout_marginTop="40dp"
-        android:text="빅데이터 맛집검색, 다이닝코드"
+        android:text="빅데이터 맛집검색, 푸드트럭"
         android:textColor="#ccffffff"
         android:textSize="14.0sp"
         android:gravity="center"
         android:layout_below="@+id/tv_login_fragment_subject"
         android:layout_centerHorizontal="true" />
+
+
+        <Button
+            android:layout_width="180.0dip"
+            android:background="@drawable/border_login_button"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginLeft="5.0dip"
+            android:layout_height="wrap_content"
+            android:text="이메일로 로그인"
+            android:textStyle="bold"
+            android:textColor="#ff00cdcd"
+            android:textSize="14.0sp"
+            android:id="@+id/bt_email_login"
+            android:layout_alignTop="@+id/bt_email_signup"
+            android:layout_alignParentEnd="true"
+            android:onClick="onClick"/>
+
+        <Button
+            android:layout_width="180.0dip"
+            android:background="@drawable/border_signup_button"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="5.0dip"
+            android:layout_height="wrap_content"
+            android:text="이메일로 가입"
+            android:textSize="14.0sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:id="@+id/bt_email_signup"
+            android:layout_marginBottom="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/bt_email_login"
+            android:nestedScrollingEnabled="false"
+            android:onClick="onClick" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인?"
-        android:id="@+id/button"
-        android:layout_alignTop="@+id/indicator"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp" />
+        android:text="페이스북으로 로그인하기"
+        android:background="@drawable/border_facebooklogin_button"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:id="@+id/bt_faceebook_login"
+        android:layout_above="@+id/bt_email_login"
+        android:layout_alignStart="@+id/bt_email_signup"
+        android:layout_alignEnd="@+id/bt_email_login"
+        android:layout_marginBottom="5.0dip"/>
+
 
 </RelativeLayout>

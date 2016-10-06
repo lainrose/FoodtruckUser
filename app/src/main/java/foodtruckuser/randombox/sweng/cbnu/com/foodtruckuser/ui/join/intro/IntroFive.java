@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro;
 
 /**
  * Created by AdminPond on 21/6/2558.
@@ -14,7 +14,6 @@ import android.widget.Button;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 
 public class IntroFive extends Fragment {
-        Sqlite sqlite;
         private Button btnStart;
 
         public static IntroFive newInstance() {
@@ -29,7 +28,6 @@ public class IntroFive extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.intro_five, null);
 
-        sqlite = new Sqlite(getActivity());
 
         /*
         btnStart = (Button) root.findViewById(R.id.btnStart);
