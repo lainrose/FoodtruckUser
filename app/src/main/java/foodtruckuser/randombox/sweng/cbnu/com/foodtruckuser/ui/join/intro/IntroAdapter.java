@@ -1,9 +1,5 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro;
 
-/**
- * Created by AdminPond on 21/6/2558.
- */
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,7 +12,6 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroT
 
 public class IntroAdapter extends FragmentPagerAdapter {
     private final int NUM_ITEMS = 5;
-
 
     public IntroAdapter(FragmentManager fm) {
         super(fm);

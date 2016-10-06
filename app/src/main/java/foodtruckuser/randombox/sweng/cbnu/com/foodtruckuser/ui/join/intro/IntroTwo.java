@@ -1,9 +1,5 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro;
 
-/**
- * Created by AdminPond on 21/6/2558.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

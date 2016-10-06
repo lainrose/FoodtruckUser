@@ -18,7 +18,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText et_signup_fragment_pw;
     private TextView tv_singup_fragment_already_signup;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

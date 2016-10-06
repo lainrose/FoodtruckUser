@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.join.intro.IntroMain" />
+        <activity android:name=".ui.join.JoinMain" />
         <activity android:name=".ui.join.sign.SigninActivity"/>
         <activity android:name=".ui.join.sign.SignupActivity"/>
 
