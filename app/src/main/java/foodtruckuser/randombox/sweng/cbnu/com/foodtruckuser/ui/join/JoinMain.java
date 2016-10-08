@@ -26,7 +26,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelpe
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SigninActivity;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SignupActivity;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.MainActivity;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.mypage.User;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -108,7 +108,7 @@ public class JoinMain extends FragmentActivity implements View.OnClickListener{
                                     Log.d("FaceBook :::", "id : " + User.getInstance().getUserId());
                                     Log.d("FaceBook :::", "name : " + User.getInstance().getUserName());
 
-                                    Intent mainIntent = new Intent(JoinMain.this, MainActivity.class);
+                                    Intent mainIntent = new Intent(JoinMain.this, FragmentMain.class);
                                     startActivity(mainIntent);
                                     finish();
                                 }

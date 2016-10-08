@@ -10,7 +10,7 @@ import android.util.Log;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.JoinMain;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.MainActivity;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                 // 페이스북 로그인
                 if(facebook_login.equals("LOGIN"))
                 {
-                    Intent loginIntent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent loginIntent = new Intent(SplashActivity.this, FragmentMain.class);
                     SplashActivity.this.startActivity(loginIntent);
                     SplashActivity.this.finish();
                 }
