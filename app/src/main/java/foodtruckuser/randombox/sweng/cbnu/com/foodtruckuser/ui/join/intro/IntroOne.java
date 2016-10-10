@@ -12,7 +12,7 @@ public class IntroOne extends Fragment {
 
     public static IntroOne newInstance() {
         IntroOne fragment = new IntroOne();
-        return fragment;
+        return fragment; //1010테스트
     }
 
     public IntroOne() {
