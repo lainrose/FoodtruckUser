@@ -60,7 +60,6 @@ public class FragmentHome extends Fragment {
 
     public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         private ArrayList<WonderModel> list;
-
         public MyAdapter(ArrayList<WonderModel> Data) {
             list = Data;
         }
@@ -80,8 +79,7 @@ public class FragmentHome extends Fragment {
             holder.titleTextView.setText(list.get(position).getCardName());
             holder.coverImageView.setImageResource(list.get(position).getImageResourceId());
             holder.coverImageView.setTag(list.get(position).getImageResourceId());
-            holder.likeImageView.setTag(R.drawable.ic_like);
-
+            //holder.likeImageView.setTag(R.drawable.ic_like);
         }
 
        @Override
@@ -94,15 +92,16 @@ public class FragmentHome extends Fragment {
 
         public TextView titleTextView;
         public ImageView coverImageView;
-        public ImageView likeImageView;
+        //public ImageView likeImageView;
         public ImageView shareImageView;
 
         public MyViewHolder(View v) {
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.titleTextView);
             coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
-            likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
+            //likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
             shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
+            /*
             likeImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -110,73 +109,45 @@ public class FragmentHome extends Fragment {
 
                     int id = (int)likeImageView.getTag();
                         if( id == R.drawable.ic_like){
-
                             likeImageView.setTag(R.drawable.ic_liked);
                             likeImageView.setImageResource(R.drawable.ic_liked);
 
                             Toast.makeText(getActivity(),titleTextView.getText()+" added to favourites",Toast.LENGTH_SHORT).show();
-
                         }else{
-
                             likeImageView.setTag(R.drawable.ic_like);
                             likeImageView.setImageResource(R.drawable.ic_like);
                             Toast.makeText(getActivity(),titleTextView.getText()+" removed from favourites",Toast.LENGTH_SHORT).show();
-
-
                         }
 
                 }
             });
-
-
-
+            */
             shareImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-
-
-
-
-
                     Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                             "://" + getResources().getResourcePackageName(coverImageView.getId())
                             + '/' + "drawable" + '/' + getResources().getResourceEntryName((int)coverImageView.getTag()));
-
-
                     Intent shareIntent = new Intent();
                     shareIntent.setAction(Intent.ACTION_SEND);
                     shareIntent.putExtra(Intent.EXTRA_STREAM,imageUri);
                     shareIntent.setType("image/jpeg");
                     startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
-
-
-
                 }
             });
-
-
-
         }
     }
 
     public void initializeList() {
         listitems.clear();
-
         for(int i =0;i<5;i++){
-
-
             WonderModel item = new WonderModel();
             item.setCardName(Wonders[i]);
             item.setImageResourceId(Images[i]);
             item.setIsfav(0);
             item.setIsturned(0);
             listitems.add(item);
-
         }
-
-
-
-
     }
 }

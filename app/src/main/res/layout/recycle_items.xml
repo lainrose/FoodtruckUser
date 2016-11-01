@@ -1,5 +1,6 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -58,12 +59,16 @@
             android:gravity="center|right"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/likeImageView"
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_height"
-                android:padding="@dimen/icon_padding"
-                android:src="@drawable/ic_like" />
+
+            <com.sackcentury.shinebuttonlib.ShineButton
+                android:layout_width="30dip"
+                android:layout_height="30dip"
+                android:layout_centerInParent="true"
+                android:id="@+id/po_image"
+                app:btn_color="@android:color/darker_gray"
+                app:btn_fill_color="#F44336"
+                app:enable_flashing="true"
+                app:siShape="@raw/heart" />
 
             <ImageView
                 android:id="@+id/shareImageView"
