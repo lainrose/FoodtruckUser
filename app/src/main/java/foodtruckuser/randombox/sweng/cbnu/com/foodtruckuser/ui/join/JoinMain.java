@@ -27,7 +27,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroA
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SigninActivity;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SignupActivity;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.mypage.User;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import me.relex.circleindicator.CircleIndicator;
 
 public class JoinMain extends FragmentActivity implements View.OnClickListener{
@@ -101,12 +101,12 @@ public class JoinMain extends FragmentActivity implements View.OnClickListener{
                                 @Override
                                 public void run() {
                                     profile = Profile.getCurrentProfile();
-                                    User.getInstance().setUserId(profile.getId());
-                                    User.getInstance().setUserName(profile.getName());
-                                    PrefHelper.getInstance(context).setPrefUserId(User.getInstance().getUserId());
-                                    PrefHelper.getInstance(context).setPrefUserName(User.getInstance().getUserName());
-                                    Log.d("FaceBook :::", "id : " + User.getInstance().getUserId());
-                                    Log.d("FaceBook :::", "name : " + User.getInstance().getUserName());
+                                    UserModel.getInstance().setUserId(profile.getId());
+                                    UserModel.getInstance().setUserName(profile.getName());
+                                    PrefHelper.getInstance(context).setPrefUserId(UserModel.getInstance().getUserId());
+                                    PrefHelper.getInstance(context).setPrefUserName(UserModel.getInstance().getUserName());
+                                    Log.d("FaceBook :::", "id : " + UserModel.getInstance().getUserId());
+                                    Log.d("FaceBook :::", "name : " + UserModel.getInstance().getUserName());
 
                                     Intent mainIntent = new Intent(JoinMain.this, FragmentMain.class);
                                     startActivity(mainIntent);

@@ -1,6 +1,5 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,7 +16,7 @@ import com.dd.processbutton.iml.ActionProcessButton;
 import java.util.regex.Pattern;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.mypage.User;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 
 public class SignupActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
 
@@ -122,9 +120,9 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
 
 
     private void getSignUpRequest() {
-        User.getInstance().setUserId(this.et_signup_email.getText().toString());
-        User.getInstance().setUserPassword(this.et_signup_pw.getText().toString());
-        User.getInstance().setUserName(this.et_signup_nick.getText().toString());
+        UserModel.getInstance().setUserId(this.et_signup_email.getText().toString());
+        UserModel.getInstance().setUserPassword(this.et_signup_pw.getText().toString());
+        UserModel.getInstance().setUserName(this.et_signup_nick.getText().toString());
     }
 
     @Override

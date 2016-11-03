@@ -60,6 +60,14 @@
             android:orientation="horizontal">
 
 
+            <TextView
+                android:id="@+id/paytextView"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"/>
+
             <com.sackcentury.shinebuttonlib.ShineButton
                 android:layout_width="30dip"
                 android:layout_height="30dip"
@@ -76,6 +84,7 @@
                 android:layout_height="@dimen/icon_height"
                 android:padding="@dimen/icon_padding"
                 android:src="@drawable/ic_share" />
+
         </LinearLayout>
 
     </LinearLayout>

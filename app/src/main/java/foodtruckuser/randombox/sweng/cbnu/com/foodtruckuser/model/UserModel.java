@@ -1,8 +1,8 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.mypage;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
-    public class User {
+    public class UserModel {
 
-        private static User user = null;
+        private static UserModel user = null;
         private static String USER_NAME;
         private static String USER_ID;
         private static String USER_PASSWORD;
@@ -10,18 +10,19 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.mypage;
         private static double USER_Y;
         private static String FIRST_FACEBOOK_LOGIN;
         private static String FACEBOOK_LOGIN;
+        private static String USER_PHONE;
 
-        public User()
+        public UserModel()
         {
 
         }
 
-        public static synchronized User getInstance()
+        public static synchronized UserModel getInstance()
         {
             if(user == null){}
             try{
                 if(user==null)
-                    user = new User();
+                    user = new UserModel();
                 return user;
             }
             finally {}
@@ -95,5 +96,13 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.mypage;
         public static void setFirstFacebookLogin(String firstFacebookLogin)
         {
             FIRST_FACEBOOK_LOGIN = firstFacebookLogin;
+        }
+
+        public static String getUserPhone() {
+            return USER_PHONE;
+        }
+
+        public static void setUserPhone(String userPhone) {
+            USER_PHONE = userPhone;
         }
     }
