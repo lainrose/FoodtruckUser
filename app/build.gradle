@@ -38,5 +38,6 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.sackcentury:shinebutton:0.1.6'
     compile 'com.nightonke:boommenu:1.0.9'
-
+    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.4'
 }

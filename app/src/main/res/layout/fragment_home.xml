@@ -8,21 +8,27 @@
     android:paddingRight="@dimen/activity_right_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshType="ring">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-        <com.nightonke.boommenu.BoomMenuButton
-            android:id="@+id/boom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="20dp"
-            app:boom_inActionBar="false"
-            app:boom_button_color="@color/colorAccent"
-            app:boom_button_pressed_color="@color/colorAccent"
-            />
+    </com.baoyz.widget.PullRefreshLayout>
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/boom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        app:boom_inActionBar="false"
+        app:boom_button_color="@color/colorAccent"
+        app:boom_button_pressed_color="@color/colorAccent"
+        />
 
     </RelativeLayout>
