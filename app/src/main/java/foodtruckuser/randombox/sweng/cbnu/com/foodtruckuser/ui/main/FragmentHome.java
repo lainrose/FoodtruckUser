@@ -9,12 +9,9 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.*;
 import android.view.animation.OvershootInterpolator;
-
 import com.baoyz.widget.PullRefreshLayout;
-import com.facebook.FacebookRequestError;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Eases.EaseType;
 import com.nightonke.boommenu.Types.BoomType;
@@ -48,8 +45,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
             R.drawable.truck4,R.drawable.truck5};
 
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -66,7 +61,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         //리스트 리프레쉬
         layout = (PullRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
-        layout.setColorSchemeColors(Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor());
+        layout.setColorSchemeColors(Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor(),
+                                        Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor());
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -82,8 +78,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         //플로팅 아이콘
         boomMenuButton = (BoomMenuButton)view.findViewById(R.id.boom);
-        initBoom();
-
         viewTreeObserver = view.getViewTreeObserver();
         viewTreeObserver.addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
             @Override
@@ -93,6 +87,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 initBoom();
             }
         });
+        initBoom();
+
 
         //리사이클뷰(카드뷰)
         myRecyclerView = (RecyclerView)view.findViewById(R.id.cardView);
@@ -100,12 +96,12 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
         MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myRecyclerView.setLayoutManager(MyLayoutManager);
-
         showCardViewList(listitems);
 
         return view;
     }
 
+    //툴바검색
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
@@ -134,16 +130,15 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String newText) {
-
         ArrayList<FoodTruckModel> filteredModelList = new ArrayList<>();
         filteredModelList = filter(categoryFilteredModelList, newText);
         showCardViewList(filteredModelList);
         return true;
     }
-    // 카드뷰에 들어갈 목록 초기화 부분
+
+    // 리사이클뷰 아이템에 들어갈 목록 초기화 부분
     public void initFT() {
         listitems.clear();
         for(int i =0;i<5;i++){
@@ -206,9 +201,10 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                  });
     }
 
+    //리스트 변경될때마다 재출력 모듈화
     private void showCardViewList(ArrayList<FoodTruckModel> filteredModelList){
         // TODO: 2016-11-05  카드뷰 애니메이션 부분 나중에 수정11.05 https://github.com/wasabeef/recyclerview-animators
-        myAdapter = new MyAdapter(filteredModelList);
+        myAdapter = new MyAdapter(getActivity(), filteredModelList);
         SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(myAdapter);
         alphaAdapter.setFirstOnly(true);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
@@ -217,7 +213,9 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             myRecyclerView.setAdapter(alphaAdapter);
         }
     }
-    //툴바검색기
+    //TODO : 2016.11.06 카테고리 먼저 하고 툴바 가능 반대로는 미구현
+
+    //툴바검색 알고리즘
     private ArrayList<FoodTruckModel> filter(ArrayList<FoodTruckModel> models, String query) {
 
         query = query.toLowerCase();
@@ -230,7 +228,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         }
         return filteredModelList;
     }
-    //카테고리검색기
+    //카테고리검색 알고리즘
     private ArrayList<FoodTruckModel> filter(ArrayList<FoodTruckModel> models, int buttonIndex){
 
         categoryFilteredModelList.clear();
@@ -245,4 +243,5 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         }
         return categoryFilteredModelList;
     }
+
 }

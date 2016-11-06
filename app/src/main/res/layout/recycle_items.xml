@@ -73,6 +73,7 @@
                 android:layout_height="30dip"
                 android:layout_centerInParent="true"
                 android:id="@+id/po_image"
+                android:focusable="false"
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="#F44336"
                 app:enable_flashing="true"
