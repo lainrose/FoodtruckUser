@@ -54,6 +54,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
             holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
             holder.coverImageView.setTag(homeList.get(position).getFtImage());
             holder.payTextView.setText(homeList.get(position).getFtPayment());
+            if(!homeList.get(position).getFtLike() || !myTruckList.get(position).getFtLike()){
+                holder.shineButton.setChecked(false);
+            }
+            else{
+                holder.shineButton.setChecked(true);
+            }
+            holder.shineButton.setChecked(false);
             holder.shineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
