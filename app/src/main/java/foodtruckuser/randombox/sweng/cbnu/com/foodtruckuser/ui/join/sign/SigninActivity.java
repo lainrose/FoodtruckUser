@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.sign;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,9 +15,9 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Service.ApiService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.main.FragmentMain;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;

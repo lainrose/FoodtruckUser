@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.JoinMain;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Preference.PrefHelper;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.JoinMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.main.FragmentMain;
 
 public class SplashActivity extends AppCompatActivity {
 

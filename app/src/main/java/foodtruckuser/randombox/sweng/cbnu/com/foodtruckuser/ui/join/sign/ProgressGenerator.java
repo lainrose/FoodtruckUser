@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.sign;
 
 import com.dd.processbutton.ProcessButton;
 

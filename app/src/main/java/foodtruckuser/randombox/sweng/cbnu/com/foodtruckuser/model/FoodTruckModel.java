@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model;
 
 /**
  * Created by son on 11/1/16.

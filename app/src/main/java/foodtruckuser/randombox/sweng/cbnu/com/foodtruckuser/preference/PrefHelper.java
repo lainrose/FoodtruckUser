@@ -1,8 +1,7 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import java.util.HashSet;
 import java.util.Set;
