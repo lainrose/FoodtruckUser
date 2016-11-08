@@ -11,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.*;
 import android.view.animation.OvershootInterpolator;
 import com.baoyz.widget.PullRefreshLayout;
@@ -28,6 +29,8 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.FoodTruckModel
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
+
+    private boolean CategorySacn = false;
 
     //플로팅아이콘 처리 변수
     private boolean init = false;
@@ -47,8 +50,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
             R.drawable.truck4,R.drawable.truck5};
 
-    FragmentManager mFragmentManager;
-    FragmentTransaction mFragmentTransaction;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,12 +122,25 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                     @Override
                     public boolean onMenuItemActionCollapse(MenuItem item) {
                         // Do something when collapsed 뒤로가기버튼
-                        showCardViewList(categoryFilteredModelList);
+                        if(CategorySacn){
+                            showCardViewList(categoryFilteredModelList);
+                        }
+                        else{
+                            showCardViewList(listitems);
+                        }
                         return true; // Return true to collapse action view
                     }
                     @Override
                     public boolean onMenuItemActionExpand(MenuItem item) {
                         // Do something when expanded 서치버튼
+                        if(CategorySacn){
+                            showCardViewList(categoryFilteredModelList);
+                            Log.d("TAG", "!NULL");
+                        }
+                        else{
+                            showCardViewList(listitems);
+                            Log.d("TAG", "NULL");
+                        }
                         return true; // Return true to expand action view
                     }
                 }
@@ -139,8 +153,14 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     @Override
     public boolean onQueryTextChange(String newText) {
         ArrayList<FoodTruckModel> filteredModelList = new ArrayList<>();
-        filteredModelList = filter(categoryFilteredModelList, newText);
-        showCardViewList(filteredModelList);
+        if(CategorySacn){
+            filteredModelList = filter(categoryFilteredModelList, newText);
+            showCardViewList(filteredModelList);
+        }
+        else{
+            filteredModelList = filter(listitems, newText);
+            showCardViewList(filteredModelList);
+        }
         return true;
     }
 
@@ -236,7 +256,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     }
     //카테고리검색 알고리즘
     private ArrayList<FoodTruckModel> filter(ArrayList<FoodTruckModel> models, int buttonIndex){
-
+        CategorySacn = true;
         categoryFilteredModelList.clear();
         for (FoodTruckModel model : models) {
             if(buttonIndex == 0){

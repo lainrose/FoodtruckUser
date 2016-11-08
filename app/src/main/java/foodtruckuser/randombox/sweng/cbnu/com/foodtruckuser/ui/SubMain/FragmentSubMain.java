@@ -7,15 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import java.util.*;
-
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.main.FragmentMenu;
 
 public class FragmentSubMain extends AppCompatActivity {
 
@@ -61,7 +56,7 @@ public class FragmentSubMain extends AppCompatActivity {
     private void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도혀니트럭");
+        getSupportActionBar().setTitle("도현트럭");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
