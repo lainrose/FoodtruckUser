@@ -18,6 +18,8 @@
         <!-- 액티비티 -->
         <activity android:name=".ui.main.FragmentMain"
             android:theme="@style/MyMaterialTheme"/>
+        <activity android:name=".ui.SubMain.FragmentSubMain"
+            android:theme="@style/MyMaterialTheme"/>
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

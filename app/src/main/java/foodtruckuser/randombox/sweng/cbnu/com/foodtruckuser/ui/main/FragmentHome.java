@@ -1,14 +1,18 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.*;
 import android.view.animation.OvershootInterpolator;
 import com.baoyz.widget.PullRefreshLayout;
@@ -23,6 +27,8 @@ import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.JoinMain;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
@@ -45,12 +51,17 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
             R.drawable.truck4,R.drawable.truck5};
 
+    FragmentManager mFragmentManager;
+    FragmentTransaction mFragmentTransaction;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         initFT();
+
+
     }
 
     @Override
@@ -88,7 +99,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             }
         });
         initBoom();
-
 
         //리사이클뷰(카드뷰)
         myRecyclerView = (RecyclerView)view.findViewById(R.id.cardView);

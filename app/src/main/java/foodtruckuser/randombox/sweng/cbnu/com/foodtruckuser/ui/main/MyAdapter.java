@@ -1,6 +1,7 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.sackcentury.shinebuttonlib.ShineButton;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
 
@@ -54,13 +56,32 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
             holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
             holder.coverImageView.setTag(homeList.get(position).getFtImage());
             holder.payTextView.setText(homeList.get(position).getFtPayment());
-            if(!homeList.get(position).getFtLike() || !myTruckList.get(position).getFtLike()){
-                holder.shineButton.setChecked(false);
+            /*
+            if(homeList != null){
+                if(!homeList.get(position).getFtLike()){
+                    holder.shineButton.setChecked(false);
+                }
+                else{
+                    holder.shineButton.setChecked(true);
+                }
             }
-            else{
-                holder.shineButton.setChecked(true);
+            if(myTruckList != null){
+                if(!myTruckList.get(position).getFtLike()){
+                    holder.shineButton.setChecked(false);
+                }
+                else{
+                    holder.shineButton.setChecked(true);
+                }
             }
-            holder.shineButton.setChecked(false);
+            */
+            holder.coverImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("TAG", "해당 아이템 번호 = "+position);
+                    Intent submain = new Intent(mContext, FragmentSubMain.class);
+                    mContext.startActivity(submain);
+                }
+            });
             holder.shineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

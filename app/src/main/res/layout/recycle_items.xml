@@ -44,7 +44,7 @@
                         android:id="@+id/titleTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
+                        android:padding="8dp"
                         android:textSize="@dimen/text_size"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold" />

@@ -48,7 +48,7 @@ public class FragmentMytruck extends Fragment {
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
         MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myRecyclerView.setLayoutManager(MyLayoutManager);
-        listitems.addAll(MyAdapter.getInstance().getMyTruckList());
+        //listitems.addAll(MyAdapter.getInstance().getMyTruckList());
         myAdapter = new MyAdapter(getActivity(),listitems);
         if (listitems.size() >= 0 & myRecyclerView != null) {
             myRecyclerView.setAdapter(myAdapter);
