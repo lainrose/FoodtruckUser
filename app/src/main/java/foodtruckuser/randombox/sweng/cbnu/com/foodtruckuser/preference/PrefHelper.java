@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Preference;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;

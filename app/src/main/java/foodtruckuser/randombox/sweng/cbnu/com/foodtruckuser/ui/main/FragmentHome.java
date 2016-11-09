@@ -1,17 +1,14 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.main;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.*;
 import android.view.animation.OvershootInterpolator;
 import com.baoyz.widget.PullRefreshLayout;
@@ -25,7 +22,7 @@ import com.nightonke.boommenu.Util;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {

@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
 import com.google.gson.annotations.SerializedName;
 

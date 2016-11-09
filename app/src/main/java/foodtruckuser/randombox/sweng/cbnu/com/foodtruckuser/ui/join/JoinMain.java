@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,12 +22,12 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import java.util.Arrays;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Preference.PrefHelper;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.intro.IntroAdapter;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.sign.SigninActivity;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.sign.SignupActivity;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.main.FragmentMain;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroAdapter;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SigninActivity;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SignupActivity;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import me.relex.circleindicator.CircleIndicator;
 
 public class JoinMain extends FragmentActivity implements View.OnClickListener{

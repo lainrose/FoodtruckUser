@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.main;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,7 @@ import com.baoyz.widget.PullRefreshLayout;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 
 public class FragmentMytruck extends Fragment {
 

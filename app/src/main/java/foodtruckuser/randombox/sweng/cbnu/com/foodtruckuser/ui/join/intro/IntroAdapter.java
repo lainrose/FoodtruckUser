@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.intro;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

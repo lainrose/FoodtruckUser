@@ -16,22 +16,22 @@
         android:theme="@style/AppTheme">
 
         <!-- 액티비티 -->
-        <activity android:name=".Ui.main.FragmentMain"
+        <activity android:name=".ui.main.FragmentMain"
             android:theme="@style/MyMaterialTheme"/>
-        <activity android:name=".Ui.SubMain.FragmentSubMain"
+        <activity android:name=".ui.SubMain.FragmentSubMain"
             android:theme="@style/MyMaterialTheme"
             android:supportsRtl="true"/>
         <activity
-            android:name=".Ui.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ui.join.JoinMain" />
-        <activity android:name=".Ui.join.sign.SigninActivity"/>
-        <activity android:name=".Ui.join.sign.SignupActivity"/>
+        <activity android:name=".ui.join.JoinMain" />
+        <activity android:name=".ui.join.sign.SigninActivity"/>
+        <activity android:name=".ui.join.sign.SignupActivity"/>
 
         <!-- 페이스북 메타 데이터들-->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />

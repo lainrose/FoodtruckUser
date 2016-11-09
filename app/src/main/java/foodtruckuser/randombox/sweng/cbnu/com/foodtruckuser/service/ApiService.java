@@ -1,6 +1,6 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Service;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service;
 
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Query;

@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Ui.join.sign;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +16,7 @@ import com.dd.processbutton.iml.ActionProcessButton;
 import java.util.regex.Pattern;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 
 public class SignupActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
 
