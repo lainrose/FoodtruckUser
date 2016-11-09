@@ -135,11 +135,9 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                         // Do something when expanded 서치버튼
                         if(CategorySacn){
                             showCardViewList(categoryFilteredModelList);
-                            Log.d("TAG", "!NULL");
                         }
                         else{
                             showCardViewList(listitems);
-                            Log.d("TAG", "NULL");
                         }
                         return true; // Return true to expand action view
                     }
