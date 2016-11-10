@@ -24,15 +24,14 @@
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".ui.androidstaggeredgridlayoutmanager_demo.RecyclerView_Activity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+
         <activity android:name=".ui.join.JoinMain" />
         <activity android:name=".ui.join.sign.SigninActivity"/>
         <activity android:name=".ui.join.sign.SignupActivity"/>

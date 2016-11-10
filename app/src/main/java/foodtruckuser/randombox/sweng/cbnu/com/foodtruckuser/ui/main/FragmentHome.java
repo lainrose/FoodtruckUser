@@ -35,7 +35,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     private RecyclerView myRecyclerView;
     private ViewTreeObserver viewTreeObserver;
     private PullRefreshLayout layout;
-    private MyAdapter myAdapter;
+    private TruckAdapter truckAdapter;
 
     // 리스트에 들어갈 항목들
     final ArrayList<FoodTruckModel> listitems = new ArrayList<>();
@@ -212,6 +212,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 .duration(800)
                 .showMoveEase(EaseType.EaseOutBack)
                 .hideMoveEase(EaseType.EaseInOutCubic)
+                .frames(80)
                 .init(boomMenuButton);
                  boomMenuButton.setOnSubButtonClickListener(new BoomMenuButton.OnSubButtonClickListener() {
                      @Override
@@ -225,8 +226,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     //리스트 변경될때마다 재출력 모듈화
     private void showCardViewList(ArrayList<FoodTruckModel> filteredModelList){
         // TODO: 2016-11-05  카드뷰 애니메이션 부분 나중에 수정11.05 https://github.com/wasabeef/recyclerview-animators
-        myAdapter = new MyAdapter(getActivity(), filteredModelList);
-        SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(myAdapter);
+        truckAdapter = new TruckAdapter(getActivity(), filteredModelList);
+        SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(truckAdapter);
         alphaAdapter.setFirstOnly(true);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);

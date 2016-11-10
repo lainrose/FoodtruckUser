@@ -16,42 +16,42 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
+public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHolder>  {
 
         private ArrayList<FoodTruckModel> homeList;
         private static ArrayList<FoodTruckModel> myTruckList;
         private Context mContext = null;
-        private static MyAdapter myAdapter = null;
+        private static TruckAdapter truckAdapter = null;
 
 
-        public MyAdapter() {}
+        public TruckAdapter() {}
 
-        public static synchronized MyAdapter getInstance()
+        public static synchronized TruckAdapter getInstance()
         {
-            if(myAdapter == null){}
+            if(truckAdapter == null){}
             try{
-                if(myAdapter==null)
-                    myAdapter = new MyAdapter();
-                return myAdapter;
+                if(truckAdapter ==null)
+                    truckAdapter = new TruckAdapter();
+                return truckAdapter;
             }
             finally {}
         }
 
-        public MyAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
+        public TruckAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
             this.mContext = c;
             this.homeList = listitems;
             myTruckList = new ArrayList<>();
         }
 
         @Override
-            public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public TruckViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 // create a new view
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_items, parent, false);
-                return new MyViewHolder(v);
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.truck_item, parent, false);
+                return new TruckViewHolder(v);
             }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        public void onBindViewHolder(final TruckViewHolder holder, final int position) {
             holder.titleTextView.setText(homeList.get(position).getFtName());
             holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
             holder.coverImageView.setTag(homeList.get(position).getFtImage());
@@ -109,7 +109,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
         }
 
 
-        public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public static class TruckViewHolder extends RecyclerView.ViewHolder {
 
             public TextView titleTextView;
             public ImageView coverImageView;
@@ -117,7 +117,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
             public ShineButton shineButton;
             public TextView payTextView;
 
-            public MyViewHolder(View v) {
+            public TruckViewHolder(View v) {
                 super(v);
                 titleTextView = (TextView) v.findViewById(R.id.titleTextView);
                 coverImageView = (ImageView) v.findViewById(R.id.coverImageView);

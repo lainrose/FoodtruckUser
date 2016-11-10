@@ -1,8 +1,6 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
-/**
- * Created by SONU on 25/09/15.
- */
+
 public class MenuModel {
 
     // Getter and Setter model for recycler view items

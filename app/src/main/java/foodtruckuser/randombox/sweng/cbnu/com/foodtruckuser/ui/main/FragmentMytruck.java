@@ -18,7 +18,7 @@ public class FragmentMytruck extends Fragment {
     private RecyclerView myRecyclerView;
     private PullRefreshLayout layout;
     final ArrayList<FoodTruckModel> listitems = new ArrayList<>();
-    private MyAdapter myAdapter;
+    private TruckAdapter truckAdapter;
 
 
 
@@ -48,10 +48,9 @@ public class FragmentMytruck extends Fragment {
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
         MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myRecyclerView.setLayoutManager(MyLayoutManager);
-        //listitems.addAll(MyAdapter.getInstance().getMyTruckList());
-        myAdapter = new MyAdapter(getActivity(),listitems);
+        truckAdapter = new TruckAdapter(getActivity(),listitems);
         if (listitems.size() >= 0 & myRecyclerView != null) {
-            myRecyclerView.setAdapter(myAdapter);
+            myRecyclerView.setAdapter(truckAdapter);
         }
 
         return view;
