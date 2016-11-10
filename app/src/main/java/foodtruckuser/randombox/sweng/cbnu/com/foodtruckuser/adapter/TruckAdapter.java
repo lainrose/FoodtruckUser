@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter;
 
 import android.content.Context;
 import android.content.Intent;

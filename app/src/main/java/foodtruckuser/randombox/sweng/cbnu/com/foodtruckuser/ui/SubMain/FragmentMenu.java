@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 
 public class FragmentMenu extends Fragment {

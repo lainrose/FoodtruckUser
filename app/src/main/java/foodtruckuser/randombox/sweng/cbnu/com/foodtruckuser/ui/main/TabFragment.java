@@ -69,7 +69,7 @@ public class TabFragment extends Fragment {
         {
           switch (position){
               case 0 : return new FragmentHome();
-              case 1 : return new FragmentMapsearch();
+              case 1 : return new FragmentMap();
               case 2 : return new FragmentMytruck();
           }
         return null;
