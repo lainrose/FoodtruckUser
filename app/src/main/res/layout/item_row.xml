@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
-    >
+ >
 
     <!--   Recycler View Item Row   -->
     <LinearLayout
