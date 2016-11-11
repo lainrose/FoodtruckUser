@@ -52,6 +52,7 @@ public class FragmentMytruck extends Fragment {
         truckAdapter = new TruckAdapter(getActivity(),listitems);
         if (listitems.size() >= 0 & myRecyclerView != null) {
             myRecyclerView.setAdapter(truckAdapter);
+
         }
 
         return view;

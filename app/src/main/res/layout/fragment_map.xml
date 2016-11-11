@@ -9,7 +9,31 @@
         android:layout_width="fill_parent"
         android:layout_height="0.0dip"
         android:layout_weight="8"
-        android:name="com.google.android.gms.maps.MapFragment" />
+        android:name="com.google.android.gms.maps.MapFragment" >
+
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="30dp"
+            android:background="#FFFFFF">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/board_image"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FF000000"
+                        android:src="@drawable/computer" />
+        </LinearLayout>
+
+    </com.google.android.gms.maps.MapView>
 
 
 </LinearLayout>

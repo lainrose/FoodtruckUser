@@ -13,9 +13,6 @@ import android.view.ViewGroup;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 
-/**
- * Created by Ratan on 7/27/2015.
- */
 public class TabFragment extends Fragment {
 
     public static TabLayout tabLayout;
@@ -32,16 +29,8 @@ public class TabFragment extends Fragment {
             tabLayout = (TabLayout) x.findViewById(R.id.tabs);
             viewPager = (ViewPager) x.findViewById(R.id.viewpager);
 
-        /**
-         *Set an Apater for the View Pager
-         */
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
-        /**
-         * Now , this is a workaround ,
-         * The setupWithViewPager dose't works without the runnable .
-         * Maybe a Support Library Bug .
-         */
+        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
         tabLayout.post(new Runnable() {
             @Override
@@ -60,10 +49,6 @@ public class TabFragment extends Fragment {
             super(fm);
         }
 
-        /**
-         * Return fragment with respect to Position .
-         */
-
         @Override
         public Fragment getItem(int position)
         {
@@ -81,10 +66,6 @@ public class TabFragment extends Fragment {
             return int_items;
 
         }
-
-        /**
-         * This method returns the title of the tab according to the position.
-         */
 
         @Override
         public CharSequence getPageTitle(int position) {
