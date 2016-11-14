@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 
 public class GpsService extends Service implements LocationListener {
     private final Context mContext;
@@ -55,8 +56,10 @@ public class GpsService extends Service implements LocationListener {
   
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // GPS 와 네트워크사용이 가능하지 않을때 소스 구현
+                Log.d("구글맵", "GPS사용불가" + this.isGetLocation);
             } else {
                 this.isGetLocation = true;
+                Log.d("구글맵", "GPS사용가능" + this.isGetLocation);
                 // 네트워크 정보로 부터 위치값 가져오기 
                 if (isNetworkEnabled) {
                     locationManager.requestLocationUpdates(
@@ -142,8 +145,9 @@ public class GpsService extends Service implements LocationListener {
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
  
-        alertDialog.setTitle("GPS 사용유무셋팅");
-        alertDialog.setMessage("GPS 셋팅이 되지 않았을수도 있습니다.\n 설정창으로 가시겠습니까?");
+        alertDialog.setTitle("위치 서비스 설정");
+        alertDialog.setMessage("무선 네트워크 사용, gps 위성 사용을 모두 체크하셔야 정확한 위치서비스가 가능합니다.\n" +
+                "위치서비스 기능을 설정하시겠습니까?");
    
         // OK 를 누르게 되면 설정창으로 이동합니다. 
         alertDialog.setPositiveButton("Settings", 

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 
@@ -19,6 +20,7 @@ public class FragmentMain extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     private Toolbar toolbar;
+    private long lastItemBackPress;
 
 
     @Override
@@ -73,5 +75,15 @@ public class FragmentMain extends AppCompatActivity {
                 R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
+    }
+    @Override
+    public void onBackPressed(){
+        if(System.currentTimeMillis() - lastItemBackPress > 1500){
+            finish();
+            return;
+        }
+        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_LONG).show();
+        lastItemBackPress = System.currentTimeMillis();
+
     }
 }
