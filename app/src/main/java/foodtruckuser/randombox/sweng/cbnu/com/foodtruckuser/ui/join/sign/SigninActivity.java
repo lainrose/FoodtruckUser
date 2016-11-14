@@ -75,23 +75,23 @@ public class SigninActivity extends AppCompatActivity {
 
         ApiService service = retrofit.create(ApiService.class);
         Call<UserModel> call = service.request_login(et_signin_email.getText().toString(), et_signin_pw.getText().toString());
-        call.enqueue(new Callback<UserModel>() {
-            @Override
-            public void onResponse(Response<UserModel> response, Retrofit retrofit) {
-                Log.d("Response status code: ", String.valueOf(response.code()));
+                call.enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Response<UserModel> response, Retrofit retrofit) {
+                        Log.d("Response status code: ", String.valueOf(response.code()));
 
-                // isSuccess is true if response code => 200 and <= 300
-                if (!response.isSuccess()) {
-                    // print response body if unsuccessful
-                    try {
-                        Log.d("response unsuccessful: ", response.errorBody().string());
-                    } catch (IOException e) {
-                        // do nothing
-                    }
-                    return;
-                }
-                // if parsing the JSON body failed, `response.body()` returns null
-                UserModel decodedResponse = response.body();
+                        // isSuccess is true if response code => 200 and <= 300
+                        if (!response.isSuccess()) {
+                            // print response body if unsuccessful
+                            try {
+                                Log.d("response unsuccessful: ", response.errorBody().string());
+                            } catch (IOException e) {
+                                // do nothing
+                            }
+                            return;
+                        }
+                        // if parsing the JSON body failed, `response.body()` returns null
+                        UserModel decodedResponse = response.body();
                 if (decodedResponse == null) {
                     return;
                 }
