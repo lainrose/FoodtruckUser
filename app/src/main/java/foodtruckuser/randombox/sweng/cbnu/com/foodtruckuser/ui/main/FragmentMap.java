@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +32,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroFive;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroFour;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroOne;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroThree;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.intro.IntroTwo;
 
 public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback, LocationListener{
@@ -44,6 +54,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     private static final String DIALOG_ERROR = "dialog_error";
     // Bool to track whether the app is already resolving an error
     private boolean mResolvingError = false;
+    private ViewPager pager;
 
     private MapView mapview;
     private LatLng CuttrntLocation;
@@ -52,8 +63,11 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     public GoogleMap map;
     private GpsService gpsService;
     private static FragmentMap fragmentMap;
-    private FrameLayout frameLayout;
-    private LinearLayout linearLayout;
+    public static ViewPager viewPager;
+    private CircleImageView circleImageView;
+
+    private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
+            R.drawable.truck4,R.drawable.truck5};
 
     public FragmentMap() {
 
@@ -71,10 +85,9 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-
         mapview=(MapView)view.findViewById(R.id.map);
-        frameLayout=(FrameLayout)view.findViewById(R.id.item);
-        linearLayout=(LinearLayout)view.findViewById(R.id.item1);
+        viewPager = (ViewPager)view.findViewById(R.id.viewpager);
+        circleImageView = (CircleImageView)view.findViewById(R.id.truck_image);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .addConnectionCallbacks(this)
@@ -88,8 +101,6 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         gpsService = new GpsService(getActivity());
         GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
         map = mapview.getMap();
-        frameLayout.bringChildToFront(mapview);
-        linearLayout.bringToFront();
         return view;
     }
 
@@ -190,6 +201,4 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         }
         this.mGoogleApiClient.disconnect();
     }
-
-
 }

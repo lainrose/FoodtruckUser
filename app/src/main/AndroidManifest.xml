@@ -29,12 +29,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
 
 
-        <activity android:name=".ui.join.JoinMain" />
+<activity android:name=".ui.join.JoinMain" />
         <activity android:name=".ui.join.sign.SigninActivity"/>
         <activity android:name=".ui.join.sign.SignupActivity"/>
 
@@ -54,5 +54,4 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
     </application>
-
 </manifest>
