@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
@@ -11,6 +12,15 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_gravity="top">
     </com.google.android.gms.maps.MapView>
-    <include layout="@layout/fragment_map_item"></include>
-
+    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+        android:id="@+id/map_item_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:clipToPadding="false"/>
 </FrameLayout>

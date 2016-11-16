@@ -21,21 +21,6 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         private ArrayList<FoodTruckModel> homeList;
         private static ArrayList<FoodTruckModel> myTruckList;
         private Context mContext = null;
-        private static TruckAdapter truckAdapter = null;
-
-
-        public TruckAdapter() {}
-
-        public static synchronized TruckAdapter getInstance()
-        {
-            if(truckAdapter == null){}
-            try{
-                if(truckAdapter ==null)
-                    truckAdapter = new TruckAdapter();
-                return truckAdapter;
-            }
-            finally {}
-        }
 
         public TruckAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
             this.mContext = c;
