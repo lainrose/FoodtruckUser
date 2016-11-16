@@ -59,6 +59,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                 }
             }
             */
+            // TODO: 2016-11-17 다른화면 갔다가 오면 좋아요 풀려있으니깐 그거 확인
+
             holder.coverImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
