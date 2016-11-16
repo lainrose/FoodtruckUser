@@ -9,6 +9,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.*;
 import android.view.animation.OvershootInterpolator;
 import com.baoyz.widget.PullRefreshLayout;
@@ -19,12 +20,23 @@ import com.nightonke.boommenu.Types.ButtonType;
 import com.nightonke.boommenu.Types.OrderType;
 import com.nightonke.boommenu.Types.PlaceType;
 import com.nightonke.boommenu.Util;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -163,6 +175,39 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     // 리사이클뷰 아이템에 들어갈 목록 초기화 부분
     public void initFT() {
         listitems.clear();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://server-blackdog11.c9users.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService service = retrofit.create(ApiService.class);
+        Call<List<FoodTruckModel>> convertedContent = service.listFoodTrucks();
+
+        convertedContent.enqueue(new Callback<List<FoodTruckModel>>() {
+            @Override
+            public void onResponse(Response<List<FoodTruckModel>> response, Retrofit retrofit) {
+                List<FoodTruckModel> FoodTruckList = response.body();
+                for (FoodTruckModel foodtruck: FoodTruckList
+                     ) {
+                    Log.d("왜안뜸?",foodtruck.getFtPayment());
+                    if(foodtruck.getFtPayment() == "true") {
+                        foodtruck.setFtPayment("카드가능");
+                    } else {
+                        foodtruck.setFtPayment("현금");
+                    }
+                    listitems.add(foodtruck);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+
+
         for(int i =0;i<5;i++){
             FoodTruckModel item = new FoodTruckModel();
             item.setFtName(FT_NAME[i]);
