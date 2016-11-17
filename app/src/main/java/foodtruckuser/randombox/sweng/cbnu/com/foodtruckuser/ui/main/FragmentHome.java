@@ -201,6 +201,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
                 for (FoodTruckModel foodTruck: foodTruckList
                 ) {
+                    foodTruck.setFtImage(FT_IMAGES[0]);
                     // TODO: 2016-11-17 이거 뷰에서 하는걸로 바꿔주기
                     listItems.add(foodTruck);
                 }
