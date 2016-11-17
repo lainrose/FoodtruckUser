@@ -1,6 +1,7 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -12,8 +13,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,6 +43,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapt
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 
 public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback, LocationListener{
@@ -139,6 +143,37 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                     mRecyclerView.smoothScrollToPosition(4);
 
                 return false;
+            }
+        });
+        final GestureDetector gestureDetector = new GestureDetector(getContext(),new GestureDetector.SimpleOnGestureListener()
+        {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e)
+            {
+                return true;
+            }
+        });
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener()
+        {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e)
+            {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if(child!=null&&gestureDetector.onTouchEvent(e)) {
+                    Intent submain = new Intent(getContext(), FragmentSubMain.class);
+                    getContext().startActivity(submain);
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
             }
         });
         return view;
