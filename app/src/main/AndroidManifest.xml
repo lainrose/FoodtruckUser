@@ -19,7 +19,8 @@
 
         <!-- 액티비티 -->
         <activity android:name=".ui.main.FragmentMain"
-            android:theme="@style/MyMaterialTheme"/>
+            android:theme="@style/MyMaterialTheme"
+            android:hardwareAccelerated="true"/>
         <activity android:name=".ui.SubMain.FragmentSubMain"
             android:theme="@style/MyMaterialTheme"
             android:supportsRtl="true"/>

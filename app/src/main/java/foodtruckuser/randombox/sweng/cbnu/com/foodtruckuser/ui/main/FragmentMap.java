@@ -25,6 +25,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -354,8 +355,9 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         mRecyclerView.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
             @Override
             public void OnPageChanged(int oldPosition, int newPosition) {
-                Log.d("test", "oldPosition:" + oldPosition + " newPosition:" + newPosition);
-                map.moveCamera(CameraUpdateFactory.newLatLng(FragmentMap.getInstance().TruckLatLng[newPosition]));
+                CameraUpdate location = CameraUpdateFactory.newLatLngZoom(TruckLatLng[newPosition], 16);
+                map.animateCamera(location);
+
             }
         });
 
