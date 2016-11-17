@@ -46,6 +46,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 
+// TODO: 2016-11-17 맵이랑 db연동
 public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback, LocationListener{
 

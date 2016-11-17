@@ -24,8 +24,9 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+// TODO: 2016-11-17 안드로이드에서 서버로 로그인 정보 넘어갈 때 암호화하기
 public class SigninActivity extends AppCompatActivity {
-
+    
     private Toolbar toolbar;
     private EditText et_signin_email;
     private EditText et_signin_pw;
@@ -49,10 +50,11 @@ public class SigninActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         //actionBar.setHomeAsUpIndicator(R.drawable.button_back); //뒤로가기 버튼을 본인이 만든 아이콘으로 하기 위해 필요
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
+        switch (item.getItemId()) {
+            case android.R.id.home: {
                 //verridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
                 finish();
                 return true;
@@ -60,13 +62,14 @@ public class SigninActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 
-    public void Onclick_Signin(View v){
+    public void Onclick_Signin(View v) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://server-blackdog11.c9users.io/")
@@ -74,24 +77,27 @@ public class SigninActivity extends AppCompatActivity {
                 .build();
 
         ApiService service = retrofit.create(ApiService.class);
-        Call<UserModel> call = service.request_login(et_signin_email.getText().toString(), et_signin_pw.getText().toString());
-                call.enqueue(new Callback<UserModel>() {
-                    @Override
-                    public void onResponse(Response<UserModel> response, Retrofit retrofit) {
-                        Log.d("Response status code: ", String.valueOf(response.code()));
 
-                        // isSuccess is true if response code => 200 and <= 300
-                        if (!response.isSuccess()) {
-                            // print response body if unsuccessful
-                            try {
-                                Log.d("response unsuccessful: ", response.errorBody().string());
-                            } catch (IOException e) {
-                                // do nothing
-                            }
-                            return;
-                        }
-                        // if parsing the JSON body failed, `response.body()` returns null
-                        UserModel decodedResponse = response.body();
+        Call<UserModel> convertedContent = service.request_login(et_signin_email.getText().toString()/*, et_signin_pw.getText().toString()*/);
+        Log.d("tag", et_signin_email.getText().toString());
+
+        convertedContent.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Response<UserModel> response, Retrofit retrofit) {
+                Log.d("Response status code: ", String.valueOf(response.code()));
+
+                // isSuccess is true if response code => 200 and <= 300
+                if (!response.isSuccess()) {
+                    // print response body if unsuccessful
+                    try {
+                        Log.d("response unsuccessful: ", response.errorBody().string());
+                    } catch (IOException e) {
+                        // do nothing
+                    }
+                    return;
+                }
+                // if parsing the JSON body failed, `response.body()` returns null
+                UserModel decodedResponse = response.body();
                 if (decodedResponse == null) {
                     return;
                 }
