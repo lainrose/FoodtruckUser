@@ -40,7 +40,12 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             holder.titleTextView.setText(homeList.get(position).getFtName());
             holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
             holder.coverImageView.setTag(homeList.get(position).getFtImage());
-            holder.payTextView.setText(homeList.get(position).getFtPayment());
+            if(homeList.get(position).getFtPayment() == "false") {
+                holder.payTextView.setText("카드불가");
+            } else {
+                holder.payTextView.setText("카드가능");
+            }
+            //holder.payTextView.setText(homeList.get(position).getFtPayment());
             /*
             if(homeList != null){
                 if(!homeList.get(position).getFtLike()){

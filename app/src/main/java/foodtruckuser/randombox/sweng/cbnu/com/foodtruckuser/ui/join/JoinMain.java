@@ -131,7 +131,6 @@ public class JoinMain extends FragmentActivity implements View.OnClickListener{
     };
 
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         switch (v.getId())
         {
             case R.id.bt_email_login:

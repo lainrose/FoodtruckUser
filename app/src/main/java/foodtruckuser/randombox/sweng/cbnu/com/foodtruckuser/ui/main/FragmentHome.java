@@ -11,8 +11,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
+
 import com.baoyz.widget.PullRefreshLayout;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Eases.EaseType;
@@ -23,7 +30,6 @@ import com.nightonke.boommenu.Types.PlaceType;
 import com.nightonke.boommenu.Util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
@@ -65,7 +71,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
+        initFT();
     }
 
     @Override
@@ -104,30 +110,19 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         });
         initBoom();
 
-        initFT();
-
+        //리사이클뷰(카드뷰)
         myRecyclerView = (RecyclerView)view.findViewById(R.id.cardView);
-        // TODO: 2016-11-17 핸들러 포함 범위 어케할지
+        myRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
+        MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        myRecyclerView.setLayoutManager(MyLayoutManager);
+
         new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
             @Override
             public void run() {
-                // 실행할 동작 코딩
-                myRecyclerView.setHasFixedSize(true);
-                LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
-                MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                myRecyclerView.setLayoutManager(MyLayoutManager);
-                showCardViewList(listItems);
-                Log.d("tag3", "제발");
+                showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
             }
-        }, 1500);
-        //리사이클뷰(카드뷰)
-//        myRecyclerView = (RecyclerView)view.findViewById(R.id.cardView);
-//        myRecyclerView.setHasFixedSize(true);
-//        LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
-//        MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        myRecyclerView.setLayoutManager(MyLayoutManager);
-//        showCardViewList(listItems);
-        //Log.d("tag2", listItems.get(0).getFtName());
+        }, 500);
 
         return view;
     }
@@ -203,27 +198,12 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             public void onResponse(Response<ArrayList<FoodTruckModel>> response, Retrofit retrofit) {
 
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
-                /*
+
                 for (FoodTruckModel foodTruck: foodTruckList
                 ) {
-                    ///foodTruck.setFtLike(false);
                     // TODO: 2016-11-17 이거 뷰에서 하는걸로 바꿔주기
-
-
-                    if(foodTruck.getFtPayment() == "true") {
-                        foodTruck.setFtPayment("카드가능");
-                    } else {
-                        foodTruck.setFtPayment("카드불가");
-                    }
-
                     listItems.add(foodTruck);
                 }
-                */
-//                listItems.add(foodTruckList.get(0));
-//                Log.d("tag", listItems.get(0).getFtName());
-//                listItems.add(foodTruckList.get(1));
-
-
             }
 
             @Override
@@ -233,18 +213,14 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         });
 
 
-      for(int i =0;i<5;i++){
-           FoodTruckModel item = new FoodTruckModel();
-           item.setFtName(FT_NAME[i]);
-           item.setFtImage(FT_IMAGES[i]);
-           item.setFtCategory(FT_CATEGORY[i]);
-           item.setFtPayment(FT_PAYMENT[i]);
-            listItems.add(item);
-        }
-        for (int i = 0; i< listItems.size(); i++){
-            Log.d("tag", listItems.get(i).getFtName());
-        }
-
+//      for(int i =0;i<5;i++){
+//           FoodTruckModel item = new FoodTruckModel();
+//           item.setFtName(FT_NAME[i]);
+//           item.setFtImage(FT_IMAGES[i]);
+//           item.setFtCategory(FT_CATEGORY[i]);
+//           item.setFtPayment(FT_PAYMENT[i]);
+//            listItems.add(item);
+//        }
     }
 
     //플로팅 아이콘 처리 함수들
