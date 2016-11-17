@@ -28,9 +28,10 @@ public class FoodTruckModel {
     @SerializedName("image")
     private int FT_IMAGE;
     @SerializedName("positionX")
-    private String FT_X;
+    private Double FT_X;
     @SerializedName("positionY")
-    private String FT_Y;
+    private Double FT_Y;
+    private String FT_LOCATIONNAME;
 
     public String getFtOwnerId() {
         return FT_OWNER_ID;
@@ -104,20 +105,28 @@ public class FoodTruckModel {
         FT_IMAGE = ftImage;
     }
 
-    public String getFtX() {
+    public Double getFtX() {
         return FT_X;
     }
 
-    public void setFtX(String ftX) {
+    public void setFtX(Double ftX) {
         FT_X = ftX;
     }
 
-    public String getFtY() {
+    public Double getFtY() {
         return FT_Y;
     }
 
-    public void setFtY(String ftY) {
+    public void setFtY(Double ftY) {
         FT_Y = ftY;
+    }
+
+    public String getFT_LOCATIONNAME() {
+        return FT_LOCATIONNAME;
+    }
+
+    public void setFT_LOCATIONNAME(String FT_LOCATIONNAME) {
+        this.FT_LOCATIONNAME = FT_LOCATIONNAME;
     }
 
 //    public static FoodTruckModel parseJSON(String response) {

@@ -110,7 +110,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                 coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
                 shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
                 shineButton = (ShineButton) v.findViewById(R.id.po_image);
-                payTextView = (TextView) v.findViewById(R.id.paytextView);
+                payTextView = (TextView) v.findViewById(R.id.payTextView);
             }
 
 

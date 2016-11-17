@@ -26,7 +26,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
@@ -60,6 +63,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     private static FragmentMap fragmentMap;
     public static ViewPager viewPager;
 
+
     private LinearLayoutManager MyLayoutManager;
     private RecyclerViewPager mRecyclerView;
     private MapItemAdapter mapItemAdapter;
@@ -70,7 +74,10 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     private String FT_PAYMENT[] = {"카드", "현금", "카드/현금", "현금", "카드"};
     private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
             R.drawable.truck4,R.drawable.truck5};
-
+    private Double FT_X[] = {35.841979,35.840776, 35.840550, 35.841672, 35.842655};
+    private Double FT_Y[] = {127.133218,127.132788 , 127.133936, 127.135846, 127.133335};
+    public static LatLng TruckLatLng[] = new LatLng[5];
+    private MarkerOptions optFirst;
     public FragmentMap() {
 
     }
@@ -96,12 +103,13 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         viewPager = (ViewPager)view.findViewById(R.id.viewpager);
         mRecyclerView = (RecyclerViewPager)view.findViewById(R.id.map_item_viewpager);
 
-        MyLayoutManager = new LinearLayoutManager(getActivity());
-        MyLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        MyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
         mRecyclerView.setLayoutManager(MyLayoutManager);
         mRecyclerView.setAdapter(mapItemAdapter);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLongClickable(true);
+        mRecyclerView.setSinglePageFling(true);
         initViewPager();
 
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
@@ -116,6 +124,23 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         gpsService = new GpsService(getActivity());
         GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
         map = mapview.getMap();
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if(marker.getId().equalsIgnoreCase("m0"))
+                    mRecyclerView.smoothScrollToPosition(0);
+                else if(marker.getId().equalsIgnoreCase("m1"))
+                    mRecyclerView.smoothScrollToPosition(1);
+                else if(marker.getId().equalsIgnoreCase("m2"))
+                    mRecyclerView.smoothScrollToPosition(2);
+                else if(marker.getId().equalsIgnoreCase("m3"))
+                    mRecyclerView.smoothScrollToPosition(3);
+                else if(marker.getId().equalsIgnoreCase("m4"))
+                    mRecyclerView.smoothScrollToPosition(4);
+
+                return false;
+            }
+        });
         return view;
     }
 
@@ -153,15 +178,34 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         @Override
         public void onConnected(@Nullable Bundle bundle) {
             Log.d("구글맵", "온커넥티드");
-            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mLastLocation != null) {
-                CuttrntLocation = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-                USER_X = mLastLocation.getLatitude();
-                USER_Y = mLastLocation.getLongitude();
-                Log.d("구글맵", "현재위치 저장했음" + mLastLocation.getLatitude() + "/" + mLastLocation.getLongitude());
-                map.moveCamera(CameraUpdateFactory.newLatLng(CuttrntLocation));
-                // Map 을 zoom 합니다.
-                map.animateCamera(CameraUpdateFactory.zoomTo(15));
+                    Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                    if (mLastLocation != null) {
+                        CuttrntLocation = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+                        USER_X = mLastLocation.getLatitude();
+                        USER_Y = mLastLocation.getLongitude();
+                        Log.d("구글맵", "현재위치 저장했음" + mLastLocation.getLatitude() + "/" + mLastLocation.getLongitude());
+                        map.moveCamera(CameraUpdateFactory.newLatLng(CuttrntLocation));
+                        // Map 을 zoom 합니다.
+                        map.animateCamera(CameraUpdateFactory.zoomTo(16));
+                        // 마커 설정.
+                        for(int i=0; i<5; i++){
+                            optFirst = new MarkerOptions();
+                            TruckLatLng[i] = new LatLng(listitems.get(i).getFtX(), listitems.get(i).getFtY());
+                            listitems.get(i).setFT_LOCATIONNAME(gpsService.findAddress(listitems.get(i).getFtX(), listitems.get(i).getFtY()));
+                            optFirst.position(TruckLatLng[i]);// 위도 • 경
+                            if(i==0)
+                                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_1));
+                            else if (i ==1)
+                                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
+                            else if (i ==2)
+                                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_3));
+                            else if (i ==3)
+                                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_4));
+                            else if (i ==4)
+                                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_5));
+                            map.addMarker(optFirst).showInfoWindow();
+                }
+
             }
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -226,6 +270,8 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             item.setFtImage(FT_IMAGES[i]);
             item.setFtCategory(FT_CATEGORY[i]);
             item.setFtPayment(FT_PAYMENT[i]);
+            item.setFtX(FT_X[i]);
+            item.setFtY(FT_Y[i]);
             listitems.add(item);
         }
     }
@@ -233,6 +279,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
+
 //                updateState(scrollState);
             }
 
@@ -241,13 +288,14 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 //                mPositionText.setText("First: " + mRecyclerViewPager.getFirstVisiblePosition());
                 int childCount = mRecyclerView.getChildCount();
                 int width = mRecyclerView.getChildAt(0).getWidth();
-                int padding = (mRecyclerView.getWidth() - width) / 4;
+                int padding = (mRecyclerView.getWidth() - width) / 2;
 //                mCountText.setText("Count: " + childCount);
 
                 for (int j = 0; j < childCount; j++) {
                     View v = recyclerView.getChildAt(j);
                     //往左 从 padding 到 -(v.getWidth()-padding) 的过程中，由大到小
                     float rate = 0;
+                    ;
                     if (v.getLeft() <= padding) {
                         if (v.getLeft() >= padding - v.getWidth()) {
                             rate = (padding - v.getLeft()) * 1f / v.getWidth();
@@ -272,6 +320,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             @Override
             public void OnPageChanged(int oldPosition, int newPosition) {
                 Log.d("test", "oldPosition:" + oldPosition + " newPosition:" + newPosition);
+                map.moveCamera(CameraUpdateFactory.newLatLng(FragmentMap.getInstance().TruckLatLng[newPosition]));
             }
         });
 

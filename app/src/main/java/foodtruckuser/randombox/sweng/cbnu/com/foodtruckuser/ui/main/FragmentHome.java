@@ -203,19 +203,22 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             public void onResponse(Response<ArrayList<FoodTruckModel>> response, Retrofit retrofit) {
 
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
-
+                /*
                 for (FoodTruckModel foodTruck: foodTruckList
-                     ) {
-                    foodTruck.setFtLike(false);
+                ) {
+                    ///foodTruck.setFtLike(false);
                     // TODO: 2016-11-17 이거 뷰에서 하는걸로 바꿔주기
+
+
                     if(foodTruck.getFtPayment() == "true") {
                         foodTruck.setFtPayment("카드가능");
                     } else {
                         foodTruck.setFtPayment("카드불가");
                     }
+
                     listItems.add(foodTruck);
                 }
-
+                */
 //                listItems.add(foodTruckList.get(0));
 //                Log.d("tag", listItems.get(0).getFtName());
 //                listItems.add(foodTruckList.get(1));
@@ -230,14 +233,14 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         });
 
 
-//        for(int i =0;i<5;i++){
-//            FoodTruckModel item = new FoodTruckModel();
-//            item.setFtName(FT_NAME[i]);
-//            item.setFtImage(FT_IMAGES[i]);
-//            item.setFtCategory(FT_CATEGORY[i]);
-//            item.setFtPayment(FT_PAYMENT[i]);
-//            listItems.add(item);
-//        }
+      for(int i =0;i<5;i++){
+           FoodTruckModel item = new FoodTruckModel();
+           item.setFtName(FT_NAME[i]);
+           item.setFtImage(FT_IMAGES[i]);
+           item.setFtCategory(FT_CATEGORY[i]);
+           item.setFtPayment(FT_PAYMENT[i]);
+            listItems.add(item);
+        }
         for (int i = 0; i< listItems.size(); i++){
             Log.d("tag", listItems.get(i).getFtName());
         }

@@ -61,7 +61,7 @@
 
 
             <TextView
-                android:id="@+id/paytextView"
+                android:id="@+id/payTextView"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size"

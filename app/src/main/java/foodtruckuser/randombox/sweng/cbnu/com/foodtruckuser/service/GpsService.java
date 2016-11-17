@@ -5,6 +5,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,6 +14,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class GpsService extends Service implements LocationListener {
     private final Context mContext;
@@ -167,7 +173,32 @@ public class GpsService extends Service implements LocationListener {
  
         alertDialog.show();
     }
-  
+    public String findAddress(double lat, double lng) {
+        StringBuffer bf = new StringBuffer();
+        Geocoder geocoder = new Geocoder(mContext, Locale.KOREA);
+        String currentLocationAddress = new String();
+        List<Address> address;
+        try {
+            if (geocoder != null) {
+                // 세번째 인수는 최대결과값인데 하나만 리턴받도록 설정했다
+                address = geocoder.getFromLocation(lat, lng, 1);
+                // 설정한 데이터로 주소가 리턴된 데이터가 있으면
+                if (address != null && address.size() > 0) {
+                    // 주소
+                    Address addr = address.get(0);
+                    for (int i = 0; i <= addr.getMaxAddressLineIndex(); i++) {
+                        String addLine = addr.getAddressLine(i);
+                        currentLocationAddress += String.format("%s", addLine);
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            currentLocationAddress = "해당 트럭의 위치를 찾을 수 없습니다.";
+            e.printStackTrace();
+        }
+        return currentLocationAddress;
+    }
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
