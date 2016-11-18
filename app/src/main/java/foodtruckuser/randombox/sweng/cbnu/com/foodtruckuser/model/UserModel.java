@@ -65,11 +65,9 @@ public class UserModel {
             FACEBOOK_LOGIN = facebookLogin;
     }
 
-
-
     public static String getFirstFacebookLogin() {
-
         return FIRST_FACEBOOK_LOGIN;
+
     }
     public static void setFirstFacebookLogin(String firstFacebookLogin) {
         FIRST_FACEBOOK_LOGIN = firstFacebookLogin;

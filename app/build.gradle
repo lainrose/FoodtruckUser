@@ -45,4 +45,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.0.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile'com.lsjwzh:recyclerviewpager:1.0.8'
+    compile 'com.hedgehog.ratingbar:app:1.1.2'
 }

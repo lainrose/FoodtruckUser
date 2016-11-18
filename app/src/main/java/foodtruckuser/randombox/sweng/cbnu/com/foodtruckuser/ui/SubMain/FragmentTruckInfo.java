@@ -12,12 +12,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -32,14 +34,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.hedgehog.ratingbar.RatingBar;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMap;
 
@@ -49,7 +54,6 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMap;
 public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback {
 
-    private LatLng CuttrntLocation;
     public GoogleMap map;
     private GpsService gpsService;
     private ArrayList<FoodTruckModel> listitems = new ArrayList<>();
@@ -64,16 +68,17 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
     public static LatLng TruckLatLng;
     private MarkerOptions optFirst;
     private MapView mapview;
-    private double USER_X;
-    private double USER_Y;
     private GoogleApiClient mGoogleApiClient;
-    private static final String STATE_RESOLVING_ERROR = "resolving_error";
-    // Request code to use when launching the resolution activity
-    private static final int REQUEST_RESOLVE_ERROR = 1001;
-    // Unique tag for the error dialog fragment
-    private static final String DIALOG_ERROR = "dialog_error";
-    // Bool to track whether the app is already resolving an error
-    private boolean mResolvingError = false;
+    private static RecyclerView myRecyclerView;
+    private MenuAdapter menuAdapter;
+
+    //String and Integer array for Recycler View Items
+    public static final String[] TITLES= {"디저트 5000원","피자 3000원","박도현 0원","1000원"
+            ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","1000원"
+            ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","박도현 0원","박도현 0원","박도현 0원"};
+    public static final Integer[] IMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,
+            R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.intro_pic1,
+            R.drawable.intro_pic2,R.drawable.intro_pic3,R.drawable.intro_pic4,R.drawable.intro_pic5,0,0,0};
 
 
     @Override
@@ -113,6 +118,36 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         // Map 을 zoom 합니다.
         map.animateCamera(CameraUpdateFactory.zoomTo(14));
 
+        RatingBar mRatingBar = (RatingBar)view.findViewById(R.id.ratingbar);
+        mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.drawable.ic_star_empty));
+        mRatingBar.setStarFillDrawable(getResources().getDrawable(R.drawable.ic_star_fill));
+        mRatingBar.setStarCount(5);
+        mRatingBar.setStar(5.0f);
+        mRatingBar.halfStar(false);
+        mRatingBar.setmClickable(false);
+        mRatingBar.setStarImageWidth(120f);
+        mRatingBar.setStarImageHeight(60f);
+        mRatingBar.setImagePadding(35);
+        /*
+        mRatingBar.setOnRatingChangeListener(
+                new RatingBar.OnRatingChangeListener() {
+                    @Override
+                    public void onRatingChange(float RatingCount) {
+                        Toast.makeText(getActivity(), "the fill star is" + RatingCount, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        */
+        //리사이클뷰(카드뷰)
+        myRecyclerView = (RecyclerView)view.findViewById(R.id.menu_view);
+        // Here 2 is no. of columns to be displayed
+        //StaggeredGridLayoutManager MyLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        //MyLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+        myRecyclerView.setHasFixedSize(true);
+        myRecyclerView.setLayoutManager(MyLayoutManager);
+        showViewList();
+
         return view;
     }
     public void initFT() {
@@ -127,6 +162,16 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
             item.setFtY(FT_Y[i]);
             listitems.add(item);
         }
+
+    }
+    private void showViewList() {
+        ArrayList<MenuModel> listitems = new ArrayList<>();
+        for (int i = 0; i < TITLES.length; i++) {
+            listitems.add(new MenuModel(TITLES[i],IMAGES[i]));
+        }
+        menuAdapter = new MenuAdapter(getContext(), listitems);
+        myRecyclerView.setAdapter(menuAdapter);// set adapter on recyclerview
+        menuAdapter.notifyDataSetChanged();// Notify the adapter
 
     }
 
