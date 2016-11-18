@@ -21,6 +21,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         private ArrayList<FoodTruckModel> homeList;
         private static ArrayList<FoodTruckModel> myTruckList;
         private Context mContext = null;
+        public static String TruckName;
 
         public TruckAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
             this.mContext = c;
@@ -70,6 +71,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                 @Override
                 public void onClick(View v) {
                     Log.d("TAG", "해당 아이템 번호 = "+position);
+                    TruckName = homeList.get(position).getFtName();
                     Intent submain = new Intent(mContext, FragmentSubMain.class);
                     mContext.startActivity(submain);
                 }
