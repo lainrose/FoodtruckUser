@@ -16,11 +16,10 @@ public interface ApiService {
     //public static final String API_URL = "https://server-blackdog11.c9users.io/";
     //로그인 요청
     @FormUrlEncoded
-    @POST("/client/login_requset")
-    Call<UserModel> request_login(@Field("email") String email/*, @Query("password") String password*/);
+    @POST("/client/login_request")
+    Call<UserModel> request_login(@Field("email") String email, @Field("password") String password);
 
     //FragmentHome에서 푸드트럭 리스트 요청
     @GET("/client/foodtruck_list")
     Call<ArrayList<FoodTruckModel>> listFoodTrucks();
-
 }
