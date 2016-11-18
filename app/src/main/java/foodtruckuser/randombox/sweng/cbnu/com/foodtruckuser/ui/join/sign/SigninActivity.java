@@ -2,6 +2,7 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import retrofit.Retrofit;
 
 // TODO: 2016-11-17 안드로이드에서 서버로 로그인 정보 넘어갈 때 암호화하기
 public class SigninActivity extends AppCompatActivity {
-    
+
     private Toolbar toolbar;
     private EditText et_signin_email;
     private EditText et_signin_pw;
@@ -72,14 +73,13 @@ public class SigninActivity extends AppCompatActivity {
     public void Onclick_Signin(View v) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://server-blackdog11.c9users.io/")
+                .baseUrl("https://server-blackdog11.c9users.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService service = retrofit.create(ApiService.class);
 
-        Call<UserModel> convertedContent = service.request_login(et_signin_email.getText().toString()/*, et_signin_pw.getText().toString()*/);
-        Log.d("tag", et_signin_email.getText().toString());
+        Call<UserModel> convertedContent = service.request_login(et_signin_email.getText().toString(), et_signin_pw.getText().toString());
 
         convertedContent.enqueue(new Callback<UserModel>() {
             @Override
@@ -103,12 +103,12 @@ public class SigninActivity extends AppCompatActivity {
                 }
                 Log.d("TAG", String.valueOf(decodedResponse.getUserId()));
                 Log.d("TAG", decodedResponse.getUserMail());
+
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.d("Failure", "onFailure");
-                Log.d("Failure", t.getMessage());
+                Log.d("실패", t.getMessage().toString());
             }
         });
 

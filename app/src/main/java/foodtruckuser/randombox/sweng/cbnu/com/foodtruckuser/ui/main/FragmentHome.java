@@ -43,6 +43,8 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+// TODO: 2016-11-17 카테고리에 따른 보여주기도 서버 요청으로 바꾸기
+// TODO: 2016-11-17 디비에 이미지도 저장하고 불러오는것으로 보여주기
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
 
     private boolean CategorySacn = false;
@@ -122,7 +124,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             public void run() {
                 showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
             }
-        }, 500);
+        }, 1000);
 
         return view;
     }
@@ -191,6 +193,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 .build();
 
         ApiService service = retrofit.create(ApiService.class);
+
         Call<ArrayList<FoodTruckModel>> convertedContent = service.listFoodTrucks();
 
         convertedContent.enqueue(new Callback<ArrayList<FoodTruckModel>>() {
@@ -202,7 +205,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 for (FoodTruckModel foodTruck: foodTruckList
                 ) {
                     foodTruck.setFtImage(FT_IMAGES[0]);
-                    // TODO: 2016-11-17 이거 뷰에서 하는걸로 바꿔주기
                     listItems.add(foodTruck);
                 }
             }
