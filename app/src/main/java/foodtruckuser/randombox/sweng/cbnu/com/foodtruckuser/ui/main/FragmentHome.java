@@ -186,7 +186,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     // 리사이클뷰 아이템에 들어갈 목록 초기화 부분
     public void initFT() {
         listItems.clear();
-
+        /*
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://server-blackdog11.c9users.io/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -214,16 +214,16 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 Log.d("실패", "onFailure: ");
             }
         });
+        */
 
-
-//      for(int i =0;i<5;i++){
-//           FoodTruckModel item = new FoodTruckModel();
-//           item.setFtName(FT_NAME[i]);
-//           item.setFtImage(FT_IMAGES[i]);
-//           item.setFtCategory(FT_CATEGORY[i]);
-//           item.setFtPayment(FT_PAYMENT[i]);
-//            listItems.add(item);
-//        }
+      for(int i =0;i<5;i++){
+           FoodTruckModel item = new FoodTruckModel();
+           item.setFtName(FT_NAME[i]);
+           item.setFtImage(FT_IMAGES[i]);
+           item.setFtCategory(FT_CATEGORY[i]);
+           item.setFtPayment(FT_PAYMENT[i]);
+            listItems.add(item);
+        }
     }
 
     //플로팅 아이콘 처리 함수들
