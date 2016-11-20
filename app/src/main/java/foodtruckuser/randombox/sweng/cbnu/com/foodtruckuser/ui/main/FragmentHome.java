@@ -124,7 +124,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             public void run() {
                 showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
             }
-        }, 1000);
+        }, 500);
 
         return view;
     }
@@ -134,6 +134,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
 
+        //서치바로 검색해서 아이템 찾기
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(this);
@@ -186,7 +187,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     // 리사이클뷰 아이템에 들어갈 목록 초기화 부분
     public void initFT() {
         listItems.clear();
-        /*
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://server-blackdog11.c9users.io/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -214,7 +215,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 Log.d("실패", "onFailure: ");
             }
         });
-        */
+
 
       for(int i =0;i<5;i++){
            FoodTruckModel item = new FoodTruckModel();

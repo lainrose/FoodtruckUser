@@ -99,11 +99,18 @@ public class SigninActivity extends AppCompatActivity {
                 // if parsing the JSON body failed, `response.body()` returns null
                 UserModel decodedResponse = response.body();
                 if (decodedResponse == null) {
+                    Log.d("TAG", "아이디비번오류");
+                    Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Log.d("TAG", String.valueOf(decodedResponse.getUserId()));
-                Log.d("TAG", decodedResponse.getUserMail());
 
+                if (String.valueOf(decodedResponse.getUserMail()).equals(et_signin_email.getText().toString())) {
+                    Log.d("TAGG", "로그인성공!");
+                    Toast.makeText(getApplicationContext(), "환영합니다. 푸드트럭", Toast.LENGTH_LONG).show();
+                    Intent loginIntent = new Intent(SigninActivity.this, FragmentMain.class);
+                    startActivity(loginIntent);
+                    finish();
+                }
             }
 
             @Override
@@ -112,11 +119,6 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "환영합니다. 푸드트럭", Toast.LENGTH_LONG).show();
-        Intent loginIntent = new Intent(SigninActivity.this, FragmentMain.class);
-        startActivity(loginIntent);
-        finish();
+
     }
-
-
 }
