@@ -20,6 +20,7 @@ public interface ApiService {
     Call<UserModel> request_login(@Field("email") String email, @Field("password") String password);
 
     //FragmentHome에서 푸드트럭 리스트 요청
-    @GET("/client/foodtruck_list")
-    Call<ArrayList<FoodTruckModel>> listFoodTrucks();
+    @FormUrlEncoded
+    @POST("/client/foodtruck_list")
+    Call<ArrayList<FoodTruckModel>> listFoodTrucks(@Field("category") int category);
 }

@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class FoodTruckModel {
-
     @SerializedName("owner_id")
     private String FT_OWNER_ID;
     @SerializedName("name")

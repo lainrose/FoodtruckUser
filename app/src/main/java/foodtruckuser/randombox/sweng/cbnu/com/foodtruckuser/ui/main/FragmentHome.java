@@ -60,12 +60,12 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     // 리스트에 들어갈 항목들
     ArrayList<FoodTruckModel> listItems = new ArrayList<>();
     private ArrayList<FoodTruckModel> categoryFilteredModelList = new ArrayList<>();
-    private String FT_NAME[] = {"도현트럭","의범트럭",
-            "영빈트럭","현표트럭","현정트럭"};
+    private String FT_NAME[] = {"도현트럭", "의범트럭",
+            "영빈트럭", "현표트럭", "현정트럭"};
     private int FT_CATEGORY[] = {1, 2, 3, 3, 5};
     private String FT_PAYMENT[] = {"카드", "현금", "카드/현금", "현금", "카드"};
-    private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
-            R.drawable.truck4,R.drawable.truck5};
+    private int FT_IMAGES[] = {R.drawable.truck1, R.drawable.truck2, R.drawable.truck3,
+            R.drawable.truck4, R.drawable.truck5};
 
 
     @Override
@@ -83,9 +83,9 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         //리스트 리프레쉬
-        layout = (PullRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
-        layout.setColorSchemeColors(Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor(),
-                                        Utill.getInstance().getRandomColor(),Utill.getInstance().getRandomColor());
+        layout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        layout.setColorSchemeColors(Utill.getInstance().getRandomColor(), Utill.getInstance().getRandomColor(),
+                Utill.getInstance().getRandomColor(), Utill.getInstance().getRandomColor());
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -100,7 +100,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         layout.setRefreshing(false);
 
         //플로팅 아이콘
-        boomMenuButton = (BoomMenuButton)view.findViewById(R.id.boom);
+        boomMenuButton = (BoomMenuButton) view.findViewById(R.id.boom);
         viewTreeObserver = view.getViewTreeObserver();
         viewTreeObserver.addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
             @Override
@@ -113,7 +113,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         initBoom();
 
         //리사이클뷰(카드뷰)
-        myRecyclerView = (RecyclerView)view.findViewById(R.id.cardView);
+        myRecyclerView = (RecyclerView) view.findViewById(R.id.cardView);
         myRecyclerView.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
         MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -124,7 +124,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             public void run() {
                 showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
             }
-        }, 500);
+        }, 700);
 
         return view;
     }
@@ -144,21 +144,20 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                     @Override
                     public boolean onMenuItemActionCollapse(MenuItem item) {
                         // Do something when collapsed 뒤로가기버튼
-                        if(CategorySacn){
+                        if (CategorySacn) {
                             showCardViewList(categoryFilteredModelList);
-                        }
-                        else{
+                        } else {
                             showCardViewList(listItems);
                         }
                         return true; // Return true to collapse action view
                     }
+
                     @Override
                     public boolean onMenuItemActionExpand(MenuItem item) {
                         // Do something when expanded 서치버튼
-                        if(CategorySacn){
+                        if (CategorySacn) {
                             showCardViewList(categoryFilteredModelList);
-                        }
-                        else{
+                        } else {
                             showCardViewList(listItems);
                         }
                         return true; // Return true to expand action view
@@ -166,28 +165,29 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 }
         );
     }
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String newText) {
         ArrayList<FoodTruckModel> filteredModelList = new ArrayList<>();
-        if(CategorySacn){
+        if (CategorySacn) {
             filteredModelList = filter(categoryFilteredModelList, newText);
             showCardViewList(filteredModelList);
-        }
-        else{
+        } else {
             filteredModelList = filter(listItems, newText);
             showCardViewList(filteredModelList);
         }
         return true;
     }
 
-    // 리사이클뷰 아이템에 들어갈 목록 초기화 부분
-    public void initFT() {
+    public void requestFoodtruckList(int num) {
         listItems.clear();
 
+        Log.d("TAG", String.valueOf(num));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://server-blackdog11.c9users.io/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -195,7 +195,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         ApiService service = retrofit.create(ApiService.class);
 
-        Call<ArrayList<FoodTruckModel>> convertedContent = service.listFoodTrucks();
+        Call<ArrayList<FoodTruckModel>> convertedContent = service.listFoodTrucks(num);
 
         convertedContent.enqueue(new Callback<ArrayList<FoodTruckModel>>() {
             @Override
@@ -203,8 +203,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
 
-                for (FoodTruckModel foodTruck: foodTruckList
-                ) {
+                for (FoodTruckModel foodTruck : foodTruckList
+                        ) {
                     foodTruck.setFtImage(FT_IMAGES[0]);
                     listItems.add(foodTruck);
                 }
@@ -215,21 +215,28 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 Log.d("실패", "onFailure: ");
             }
         });
+    }
+
+    // 리사이클뷰 아이템에 들어갈 목록 초기화 부분
+    public void initFT() {
+        listItems.clear();
+
+        requestFoodtruckList(0); //0이 all category를 의미한다.
 
 
-      for(int i =0;i<5;i++){
-           FoodTruckModel item = new FoodTruckModel();
-           item.setFtName(FT_NAME[i]);
-           item.setFtImage(FT_IMAGES[i]);
-           item.setFtCategory(FT_CATEGORY[i]);
-           item.setFtPayment(FT_PAYMENT[i]);
-            listItems.add(item);
-        }
+//      for(int i =0;i<5;i++){
+//           FoodTruckModel item = new FoodTruckModel();
+//           item.setFtName(FT_NAME[i]);
+//           item.setFtImage(FT_IMAGES[i]);
+//           item.setFtCategory(FT_CATEGORY[i]);
+//           item.setFtPayment(FT_PAYMENT[i]);
+//            listItems.add(item);
+//        }
     }
 
     //플로팅 아이콘 처리 함수들
     private void initBoom() {
-        int number  = 8;
+        int number = 8;
         ///int number = buttonNumberSeek.getProgress() + 3;
 
         Drawable[] drawables = new Drawable[number];
@@ -269,17 +276,25 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 .hideMoveEase(EaseType.EaseInOutCubic)
                 .frames(80)
                 .init(boomMenuButton);
-                 boomMenuButton.setOnSubButtonClickListener(new BoomMenuButton.OnSubButtonClickListener() {
-                     @Override
-                     public void onClick(int buttonIndex){
-                         categoryFilteredModelList = filter(listItems, buttonIndex);
-                         showCardViewList(categoryFilteredModelList);
-                     }
-                 });
+        boomMenuButton.setOnSubButtonClickListener(new BoomMenuButton.OnSubButtonClickListener() {
+            @Override
+            public void onClick(int buttonIndex) {
+                //categoryFilteredModelList = filter(listItems, buttonIndex);
+                requestFoodtruckList(buttonIndex); //버튼 인덱스를 받아서 그 카테고리를 서버에요청, listItem에 저장 & 갱신
+
+                new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+                    @Override
+                    public void run() {
+                        showCardViewList(listItems); //갱신된 listItem 다시 보여줌
+                    }
+                }, 700);
+                //showCardViewList(categoryFilteredModelList);
+            }
+        });
     }
 
     //리스트 변경될때마다 재출력 모듈화
-    private void showCardViewList(ArrayList<FoodTruckModel> filteredModelList){
+    private void showCardViewList(ArrayList<FoodTruckModel> filteredModelList) {
         // TODO: 2016-11-05  카드뷰 애니메이션 부분 나중에 수정11.05 https://github.com/wasabeef/recyclerview-animators
         truckAdapter = new TruckAdapter(getActivity(), filteredModelList);
         SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(truckAdapter);
@@ -305,20 +320,20 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         }
         return filteredModelList;
     }
-    //카테고리검색 알고리즘
-    private ArrayList<FoodTruckModel> filter(ArrayList<FoodTruckModel> models, int buttonIndex){
-        CategorySacn = true;
-        categoryFilteredModelList.clear();
-        for (FoodTruckModel model : models) {
-            if(buttonIndex == 0){
-                categoryFilteredModelList.addAll(models);
-                return categoryFilteredModelList;
-            }
-            else if(model.getFtCategory() == buttonIndex){
-                categoryFilteredModelList.add(model);
-            }
-        }
-        return categoryFilteredModelList;
-    }
+
+//    //카테고리검색 알고리즘
+//    private ArrayList<FoodTruckModel> filter(ArrayList<FoodTruckModel> models, int buttonIndex) {
+//        CategorySacn = true;
+//        categoryFilteredModelList.clear();
+//        for (FoodTruckModel model : models) {
+//            if (buttonIndex == 0) {
+//                categoryFilteredModelList.addAll(models);
+//                return categoryFilteredModelList;
+//            } else if (model.getFtCategory() == buttonIndex) {
+//                categoryFilteredModelList.add(model);
+//            }
+//        }
+//        return categoryFilteredModelList;
+//    }
 
 }
