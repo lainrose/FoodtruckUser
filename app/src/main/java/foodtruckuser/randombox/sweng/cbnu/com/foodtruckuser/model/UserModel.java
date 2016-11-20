@@ -150,7 +150,7 @@ public class UserModel {
 //    public static void setUserPassword(String userPassword) {
 //        USER_PASSWORD = userPassword;
 //    }
-
+//
     public  String getUserMail() {
         return USER_MAIL;
     }
