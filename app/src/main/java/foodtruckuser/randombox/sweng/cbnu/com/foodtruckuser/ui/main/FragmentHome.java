@@ -73,7 +73,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        initFT();
     }
 
     @Override
@@ -118,13 +117,15 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
         MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myRecyclerView.setLayoutManager(MyLayoutManager);
+        initFT();
 
-        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-            @Override
-            public void run() {
-                showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
-            }
-        }, 700);
+        //onResponse에 카드뷰 그려주는 부분 넣어서 해결
+//        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+//            @Override
+//            public void run() {
+//                showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
+//            }
+//        }, 1000);
 
         return view;
     }
@@ -208,6 +209,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                     foodTruck.setFtImage(FT_IMAGES[0]);
                     listItems.add(foodTruck);
                 }
+                showCardViewList(listItems); //서버에서 받아오면 카드뷰 그려주게하기
             }
 
             @Override
@@ -282,12 +284,13 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 //categoryFilteredModelList = filter(listItems, buttonIndex);
                 requestFoodtruckList(buttonIndex); //버튼 인덱스를 받아서 그 카테고리를 서버에요청, listItem에 저장 & 갱신
 
-                new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-                    @Override
-                    public void run() {
-                        showCardViewList(listItems); //갱신된 listItem 다시 보여줌
-                    }
-                }, 700);
+                //onResponse에 카드뷰 그려주는 부분 넣어서 해결
+//                new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+//                    @Override
+//                    public void run() {
+//                        showCardViewList(listItems); //갱신된 listItem 다시 보여줌
+//                    }
+//                }, 1000);
                 //showCardViewList(categoryFilteredModelList);
             }
         });
