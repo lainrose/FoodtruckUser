@@ -70,6 +70,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
             float px = dp * (metrics.densityDpi/160f);
             return px;
         }
+
         public class MenuViewHolder extends RecyclerView.ViewHolder {
             // View holder for griddview recycler view as we used in listview
             public TextView title;
