@@ -4,7 +4,8 @@
     xmlns:hedgehog="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#D5D5D5">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_height="match_parent"
@@ -14,235 +15,248 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false"
-            android:background="@color/colorPrimary">
-            <com.sackcentury.shinebuttonlib.ShineButton
-                android:layout_width="30dip"
-                android:layout_height="30dip"
-                android:id="@+id/po_image"
-                android:layout_alignParentRight="true"
-                android:focusable="false"
-                app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="#FFFFFF"
-                app:enable_flashing="true"
-                app:siShape="@raw/heart" />
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="스테이크 하우스"
-                android:textColor="#FFFFFF"
-                android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:textSize="23sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="#목살스테이크 #샐러드 #목살"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_size"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_account_24dp" />
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textColor="#FFFFFF"
-                android:text="999"
-                android:gravity="bottom"/>
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_review_create_24dp" />
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textColor="#FFFFFF"
-                android:text="999"
-                android:gravity="bottom"/>
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_thumb_up_nor_16dp" />
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textColor="#FFFFFF"
-                android:text="999"
-                android:gravity="bottom"/>
+                android:background="#FFA7A7"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+                    <com.sackcentury.shinebuttonlib.ShineButton
+                        android:layout_width="30dip"
+                        android:layout_height="30dip"
+                        android:id="@+id/po_image"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:focusable="false"
+                        app:btn_color="@android:color/darker_gray"
+                        app:btn_fill_color="#FFFFFF"
+                        app:enable_flashing="true"
+                        app:siShape="@raw/heart" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="스테이크 하우스"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/titleTextView"/>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="#목살스테이크 #샐러드 #목살"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size"
+                    android:id="@+id/hashTextView"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_account_24dp" />
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:textSize="10sp"
+                        android:textColor="#FFFFFF"
+                        android:text="999"
+                        android:gravity="bottom"
+                        android:id="@+id/userTextView"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_review_create_24dp" />
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:textSize="10sp"
+                        android:textColor="#FFFFFF"
+                        android:text="999"
+                        android:gravity="bottom"
+                        android:id="@+id/reviewTextView"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_thumb_up_nor_16dp" />
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:textSize="10sp"
+                        android:textColor="#FFFFFF"
+                        android:text="999"
+                        android:gravity="bottom"
+                        android:id="@+id/likeTextView"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:paddingRight="10dp">
+                        <com.hedgehog.ratingbar.RatingBar
+                            android:id="@+id/ratingbar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            hedgehog:clickable="false"
+                            hedgehog:halfstart="false"
+                            hedgehog:starCount="5"
+                            hedgehog:starEmpty="@drawable/ic_star_empty"
+                            hedgehog:starFill="@drawable/ic_star_fill"
+                            hedgehog:starImageHeight="24dp"
+                            hedgehog:starImageWidth="24dp"
+                            hedgehog:starImagePadding="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size"
+                            android:textColor="#FFFFFF"
+                            android:text="평점 "
+                            android:gravity="bottom"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size"
+                            android:textColor="#FFFFFF"
+                            android:text="4.5"
+                            android:gravity="bottom"
+                            android:id="@+id/ratingTextView"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center">
-                <com.hedgehog.ratingbar.RatingBar
-                    android:id="@+id/ratingbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    hedgehog:clickable="false"
-                    hedgehog:halfstart="false"
-                    hedgehog:starCount="5"
-                    hedgehog:starEmpty="@drawable/ic_star_empty"
-                    hedgehog:starFill="@drawable/ic_star_fill"
-                    hedgehog:starImageHeight="24dp"
-                    hedgehog:starImageWidth="24dp"
-                    hedgehog:starImagePadding="20dp"/>
-                <TextView
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size"
-                    android:textColor="#FFFFFF"
-                    android:text="평점 4.5"
-                    android:gravity="bottom"/>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+                    <ImageButton
+                        android:src="@drawable/ic_pen_off"
+                        android:scaleType ="centerCrop"
+                        android:padding="0sp"
+                        android:background="#ffffff"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp">
+                    </ImageButton>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="평가하기"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:alpha="1.12"
+                    android:background="#FFA7A7" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+
+                    <ImageButton
+                        android:src="@drawable/ico_kakao"
+                        android:scaleType ="centerCrop"
+                        android:padding="0sp"
+                        android:background="#ffffff"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp">
+                    </ImageButton>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="카톡공유"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:alpha="1.12"
+                    android:background="#FFA7A7" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+                    <ImageButton
+                        android:src="@drawable/ico_facebook"
+                        android:scaleType ="centerCrop"
+                        android:padding="0sp"
+                        android:background="#ffffff"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp">
+                        </ImageButton>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="페북공유"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_height="2dp"
+                    android:alpha="1.12"
+                    android:background="#FFA7A7" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:paddingTop="10dp"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:gravity="center"
-            android:layout_marginBottom="5dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:text="평가하기"
-                android:textColor="#FFFFFF"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_shape"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:textColor="#FFFFFF"
-                android:text="카톡공유"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_shape"
-                android:id="@+id/button2" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textColor="#FFFFFF"
-                android:text="SNS 공유"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_shape"/>
-        </LinearLayout>
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_height">
+        android:layout_height="170dp"
+        android:layout_marginTop="10dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/menu_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:scrollbarAlwaysDrawHorizontalTrack="false"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="170dp">
         <com.google.android.gms.maps.MapView
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ffffff"
             android:name="com.google.android.gms.maps.MapFragment">
         </com.google.android.gms.maps.MapView>
     </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="56dp"
-                android:paddingStart="56dp">
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Headline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dandelion Chocolate" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        style="@style/Widget.AppCompat.RatingBar.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4.7 (51)" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:alpha="0.12"
-                    android:background="@android:color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:text="12 min away"
-                    android:textColor="?attr/colorPrimary" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:alpha="0.12"
-                    android:background="@android:color/black" />
-
-            </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="#ffffff"
                 android:padding="@dimen/activity_horizontal_margin">
 
                 <ImageButton
@@ -256,8 +270,40 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:text="740, Valencia St, San Francisco, CA"
-                    android:textColor="@android:color/primary_text_light" />
+                    android:text="전라북도 전주시 덕진구 덕진동1가 664-14"
+                    android:textColor="@android:color/primary_text_light"
+                    android:id="@+id/addressTextView"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#ffffff"
+                android:paddingLeft="56dp"
+                android:paddingStart="56dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:alpha="0.12"
+                    android:background="@android:color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="현위치 기준 약 12분 거리"
+                    android:textColor="?attr/colorPrimary"
+                    android:id="@+id/timerTextView"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:alpha="0.12"
+                    android:background="@android:color/black" />
 
             </LinearLayout>
 
@@ -265,6 +311,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp"
                 android:padding="@dimen/activity_horizontal_margin">
 
                 <ImageButton
@@ -278,8 +326,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:text="(415) 349-0942"
-                    android:textColor="@android:color/primary_text_light" />
+                    android:text="(063) 270-4545"
+                    android:textColor="@android:color/primary_text_light"
+                    android:id="@+id/phoneTextView"/>
 
             </LinearLayout>
 
@@ -287,6 +336,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp"
                 android:padding="@dimen/activity_horizontal_margin">
 
                 <ImageButton
@@ -300,8 +351,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:text="Wed, 10 AM - 9 PM"
-                    android:textColor="@android:color/primary_text_light" />
+                    android:text="평일 10 AM - 9 PM"
+                    android:textColor="@android:color/primary_text_light"
+                    android:id="@+id/operateTextView"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/menu_view"
+                    android:background="#FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:scrollbarAlwaysDrawHorizontalTrack="false"/>
 
             </LinearLayout>
         </LinearLayout>

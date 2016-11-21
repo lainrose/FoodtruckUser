@@ -77,8 +77,8 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
             ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","1000원"
             ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","박도현 0원","박도현 0원","박도현 0원"};
     public static final Integer[] IMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,
-            R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.intro_pic1,
-            R.drawable.intro_pic2,R.drawable.intro_pic3,R.drawable.intro_pic4,R.drawable.intro_pic5,0,0,0};
+            R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.menuitem,
+            R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,0,0,0};
 
 
     @Override
@@ -148,6 +148,46 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         myRecyclerView.setLayoutManager(MyLayoutManager);
         showViewList();
 
+
+        final GestureDetector gestureDetector = new GestureDetector(getContext(),new GestureDetector.SimpleOnGestureListener()
+        {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e)
+            {
+                return true;
+            }
+        });
+
+        myRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener()
+        {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e)
+            {
+                Log.d("tag","onInterceptTouchEvent");
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if(child!=null&&gestureDetector.onTouchEvent(e))
+                {
+                    //if(listitems.get(rv.getChildLayoutPosition(child)) == 6){
+
+                    //}
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e)
+            {
+                Log.d("tag","onTouchEvent");
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept)
+            {
+                Log.d("tag","onRequestDisallowInterceptTouchEvent");
+            }
+        });
+
         return view;
     }
     public void initFT() {
@@ -166,7 +206,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
     }
     private void showViewList() {
         ArrayList<MenuModel> listitems = new ArrayList<>();
-        for (int i = 0; i < TITLES.length; i++) {
+        for (int i = 0; i < 7; i++) {
             listitems.add(new MenuModel(TITLES[i],IMAGES[i]));
         }
         menuAdapter = new MenuAdapter(getContext(), listitems);
