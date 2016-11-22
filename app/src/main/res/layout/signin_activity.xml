@@ -16,7 +16,6 @@
     <EditText android:textColor="#ff333333"
         android:textColorHint="#ffaaaaaa"
         android:id="@+id/et_signin_email"
-        android:text="test@naver.com"
         android:background="#ffffffff"
         android:paddingLeft="20.0dip"
         android:layout_width="fill_parent"

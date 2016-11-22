@@ -44,7 +44,7 @@ public class FragmentSubMain extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
 
-    };
+    }
     private void setupViewPager() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -54,10 +54,10 @@ public class FragmentSubMain extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도현트럭");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle("도현트럭");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setupViewPager(ViewPager viewPager) {

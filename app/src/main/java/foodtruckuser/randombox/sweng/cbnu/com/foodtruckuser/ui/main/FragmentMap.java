@@ -43,7 +43,6 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 import retrofit.Call;
@@ -176,6 +175,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 if(child!=null&&gestureDetector.onTouchEvent(e)) {
                     //트럭 세부정보로 가는데 지울예정
+                    //mRecyclerView.getChildPosition(child)
                     Intent submain = new Intent(getContext(), FragmentSubMain.class);
                     getContext().startActivity(submain);
                 }
@@ -186,10 +186,12 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             public void onTouchEvent(RecyclerView rv, MotionEvent e) {
 
             }
+
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
+
         });
         return view;
     }

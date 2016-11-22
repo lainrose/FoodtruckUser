@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 
 public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHolder>  {
@@ -72,13 +73,12 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             }
             */
             // TODO: 2016-11-17 다른화면 갔다가 오면 좋아요 풀려있으니깐 그거 확인
-
             holder.coverImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("TAG", "해당 아이템 번호 = "+position);
-                    TruckName = homeList.get(position).getFtName();
-                    Intent submain = new Intent(mContext, FragmentSubMain.class);
+                    //TruckName = homeList.get(position).getFtName();
+                    Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
                     mContext.startActivity(submain);
                 }
             });
@@ -95,7 +95,6 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                         homeList.get(position).setFtLike(false);
                         myTruckList.remove(homeList.get(position));
                     }
-
                 }
             });
         }
@@ -111,21 +110,18 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
 
         public static class TruckViewHolder extends RecyclerView.ViewHolder {
 
-            public TextView titleTextView;
-            public ImageView coverImageView;
-            public ImageView shareImageView;
-            public ShineButton shineButton;
-            public TextView payTextView;
-
-            public TruckViewHolder(View v) {
-                super(v);
-                titleTextView = (TextView) v.findViewById(R.id.titleTextView);
-                coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
-                shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
-                shineButton = (ShineButton) v.findViewById(R.id.po_image);
-                payTextView = (TextView) v.findViewById(R.id.payTextView);
-            }
-
-
+        public TextView titleTextView;
+        public ImageView coverImageView;
+        public ImageView shareImageView;
+        public ShineButton shineButton;
+        public TextView payTextView;
+        public TruckViewHolder(View v) {
+            super(v);
+            titleTextView = (TextView) v.findViewById(R.id.titleTextView);
+            coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
+            shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
+            shineButton = (ShineButton) v.findViewById(R.id.po_image);
+            payTextView = (TextView) v.findViewById(R.id.payTextView);
         }
+    }
 }

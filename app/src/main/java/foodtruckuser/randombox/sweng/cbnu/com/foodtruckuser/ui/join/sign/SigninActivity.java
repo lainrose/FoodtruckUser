@@ -56,8 +56,9 @@ public class SigninActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                //verridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+                //overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
                 finish();
+                overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
                 return true;
             }
         }
