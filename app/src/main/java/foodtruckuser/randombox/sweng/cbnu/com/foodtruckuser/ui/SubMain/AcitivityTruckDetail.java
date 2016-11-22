@@ -1,27 +1,18 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -31,33 +22,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hedgehog.ratingbar.RatingBar;
-import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMap;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.SentFragment;
 
-/**
- * Created by Ratan on 7/29/2015.
- */
-public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
+public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback {
 
+    private Toolbar toolbar;
     public GoogleMap map;
     private GpsService gpsService;
     private ArrayList<FoodTruckModel> listitems = new ArrayList<>();
@@ -75,7 +57,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
     private GoogleApiClient mGoogleApiClient;
     private static RecyclerView myRecyclerView;
     private MenuAdapter menuAdapter;
-    FragmentManager mFragmentManager;
+    private Context mContext;
 
     //String and Integer array for Recycler View Items
     public static final String[] TITLES= {"디저트 5000원","피자 3000원","박도현 0원","1000원"
@@ -85,21 +67,19 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
             R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.menuitem,
             R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,0,0,0};
 
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_truck_detail);
+
+        mContext = this;
+        setupToolbar();
+        setupCollapsingToolbar();
         initFT();
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        mapview=(MapView)findViewById(R.id.map);
 
-        View view = inflater.inflate(R.layout.fragment_truckinfo, container, false);
-
-        mapview=(MapView)view.findViewById(R.id.map);
-
-        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -110,8 +90,8 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
 
         mapview.getMapAsync(this);
 
-        gpsService = new GpsService(getActivity());
-        GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
+        gpsService = new GpsService(this);
+        GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         map = mapview.getMap();
         TruckLatLng = new LatLng(listitems.get(0).getFtX(), listitems.get(0).getFtY());
         optFirst = new MarkerOptions();
@@ -123,7 +103,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         // Map 을 zoom 합니다.
         map.animateCamera(CameraUpdateFactory.zoomTo(14));
 
-        RatingBar mRatingBar = (RatingBar)view.findViewById(R.id.ratingbar);
+        RatingBar mRatingBar = (RatingBar)findViewById(R.id.ratingbar);
         mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.drawable.ic_star_empty));
         mRatingBar.setStarFillDrawable(getResources().getDrawable(R.drawable.ic_star_fill));
         mRatingBar.setStarCount(5);
@@ -144,27 +124,52 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         );
         */
         //리사이클뷰(카드뷰)
-        myRecyclerView = (RecyclerView)view.findViewById(R.id.menu_view);
+        myRecyclerView = (RecyclerView)findViewById(R.id.menu_view);
         // Here 2 is no. of columns to be displayed
         //StaggeredGridLayoutManager MyLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager MyLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         //MyLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setLayoutManager(MyLayoutManager);
         showViewList();
         myRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getContext(), myRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(this, myRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.subcontainerView, new FragmentMenu()).commit();
+                        if(position==6){
+                            Intent intent = new Intent(mContext, AcitivityTruckMenu.class);
+                            startActivity(intent);
+                        }
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
                     }
                 })
         );
-        return view;
     }
+    private void setupCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(
+                R.id.collapse_toolbar);
+
+        collapsingToolbar.setTitleEnabled(false);
+    }
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // NavUtils.navigateUpFromSameTask(this);
+                finish();
+                overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+    private void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("스테이크 하우스");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     public void initFT() {
         listitems.clear();
         for (int i = 0; i < 5; i++) {
@@ -177,23 +182,19 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
             item.setFtY(FT_Y[i]);
             listitems.add(item);
         }
-
     }
     private void showViewList() {
         ArrayList<MenuModel> listitems = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             listitems.add(new MenuModel(TITLES[i],IMAGES[i]));
         }
-        menuAdapter = new MenuAdapter(getContext(), listitems, "");
-        myRecyclerView.setAdapter(menuAdapter);// set adapter on recyclerview
-        menuAdapter.notifyDataSetChanged();// Notify the adapter
-
+        menuAdapter = new MenuAdapter(this, listitems, "AcitivityTruckDetail");
+        myRecyclerView.setAdapter(menuAdapter); // set adapter on recyclerview
+        menuAdapter.notifyDataSetChanged(); // Notify the adapter
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
-
 
     }
 

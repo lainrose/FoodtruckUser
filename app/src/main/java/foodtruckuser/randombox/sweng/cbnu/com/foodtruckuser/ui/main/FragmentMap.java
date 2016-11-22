@@ -163,6 +163,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             {
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 if(child!=null&&gestureDetector.onTouchEvent(e)) {
+                    //mRecyclerView.getChildPosition(child)
                     Intent submain = new Intent(getContext(), FragmentSubMain.class);
                     getContext().startActivity(submain);
                 }
@@ -173,10 +174,12 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             public void onTouchEvent(RecyclerView rv, MotionEvent e) {
 
             }
+
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
+
         });
         return view;
     }
