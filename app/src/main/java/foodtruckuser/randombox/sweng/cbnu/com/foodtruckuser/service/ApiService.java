@@ -11,6 +11,8 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
+import retrofit2.http.Multipart;
+import retrofit2.http.Part;
 
 public interface ApiService {
     //public static final String API_URL = "https://server-blackdog11.c9users.io/";
@@ -23,4 +25,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/client/foodtruck_list")
     Call<ArrayList<FoodTruckModel>> listFoodTrucks(@Field("category") int category);
+    //@GET("/client/foodtruck_list")
+    //Call<ArrayList<FoodTruckModel>> listFoodTrucks(@Query("category") int category);
 }
