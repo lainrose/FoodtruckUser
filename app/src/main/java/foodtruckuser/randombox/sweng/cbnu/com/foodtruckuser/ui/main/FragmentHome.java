@@ -21,6 +21,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
 
 import com.baoyz.widget.PullRefreshLayout;
+import com.google.gson.JsonObject;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Eases.EaseType;
 import com.nightonke.boommenu.Types.BoomType;
@@ -204,10 +205,15 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
 
+                //Log.d("TAG", "바디: " + response.body().toString());
+
                 for (FoodTruckModel foodTruck : foodTruckList
                         ) {
-                    foodTruck.setFtImage(FT_IMAGES[0]);
+                    //foodTruck.setFtImage(FT_IMAGES[0]);
                     listItems.add(foodTruck);
+
+                    Log.d("TAG", "트럭이름" + foodTruck.getFtName());
+                    Log.d("TAG", "트럭이미지" + foodTruck.getFT_IMAGE_URL().getUrl());
                 }
                 showCardViewList(listItems); //서버에서 받아오면 카드뷰 그려주게하기
             }

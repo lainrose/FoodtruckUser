@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.sackcentury.shinebuttonlib.ShineButton;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
@@ -22,6 +24,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         private static ArrayList<FoodTruckModel> myTruckList;
         private Context mContext = null;
         public static String TruckName;
+        String Url="https://server-blackdog11.c9users.io/";
 
         public TruckAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
             this.mContext = c;
@@ -39,8 +42,11 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         @Override
         public void onBindViewHolder(final TruckViewHolder holder, final int position) {
             holder.titleTextView.setText(homeList.get(position).getFtName());
-            holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
-            holder.coverImageView.setTag(homeList.get(position).getFtImage());
+            //holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
+            //holder.coverImageView.setTag(homeList.get(position).getFtImage());
+
+            Picasso.with(mContext).load(Url + homeList.get(position).getFT_IMAGE_URL().getUrl()).into(holder.coverImageView);
+
             if(homeList.get(position).getFtPayment() == "false") {
                 holder.payTextView.setText("카드불가");
             } else {

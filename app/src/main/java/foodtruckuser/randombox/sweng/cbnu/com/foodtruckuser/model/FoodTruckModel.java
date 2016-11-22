@@ -1,6 +1,11 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.net.URL;
 
 /**
  * Created by son on 11/1/16.
@@ -24,13 +29,16 @@ public class FoodTruckModel {
     private String FT_START;
     @SerializedName("payment_card")
     private String FT_PAYMENT;
-    @SerializedName("image")
-    private int FT_IMAGE;
+    @SerializedName("truck_image")
+    private FoodTruckUrlModel FT_IMAGE_URL;
     @SerializedName("positionX")
     private Double FT_X;
     @SerializedName("positionY")
     private Double FT_Y;
+
     private String FT_LOCATIONNAME;
+    private int FT_IMAGE;
+
 
     public String getFtOwnerId() {
         return FT_OWNER_ID;
@@ -128,7 +136,16 @@ public class FoodTruckModel {
         this.FT_LOCATIONNAME = FT_LOCATIONNAME;
     }
 
-//    public static FoodTruckModel parseJSON(String response) {
+    public FoodTruckUrlModel getFT_IMAGE_URL() {
+        return FT_IMAGE_URL;
+    }
+
+    public void setFT_IMAGE_URL(FoodTruckUrlModel FT_IMAGE_URL) {
+        this.FT_IMAGE_URL = FT_IMAGE_URL;
+    }
+
+
+    //    public static FoodTruckModel parseJSON(String response) {
 //        GsonBuilder gsonBuilder = new GsonBuilder();
 //        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
 //        Type collectionType = new TypeToken<List<FoodTruckModel>>(){}.getType();
@@ -136,6 +153,17 @@ public class FoodTruckModel {
 //        FoodTruckModel foodTruckModel = gson.fromJson(response, FoodTruckModel.class);
 //        return foodTruckModel;
 //    }
+    public class FoodTruckUrlModel {
+        @SerializedName("url")
+        private String url;
 
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
 }
 
