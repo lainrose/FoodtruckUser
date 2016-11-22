@@ -44,8 +44,6 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-// TODO: 2016-11-17 카테고리에 따른 보여주기도 서버 요청으로 바꾸기
-// TODO: 2016-11-17 디비에 이미지도 저장하고 불러오는것으로 보여주기
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
 
     private boolean CategorySacn = false;

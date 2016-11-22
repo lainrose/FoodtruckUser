@@ -43,8 +43,14 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 // TODO: 2016-11-17 맵이랑 db연동
 public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
@@ -74,6 +80,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     private RecyclerViewPager mRecyclerView;
     private MapItemAdapter mapItemAdapter;
     private ArrayList<FoodTruckModel> listitems = new ArrayList<>();
+
     private String FT_NAME[] = {"도현트럭","의범트럭",
             "영빈트럭","현표트럭","현정트럭"};
     private int FT_CATEGORY[] = {1, 2, 3, 3, 5};
@@ -82,8 +89,10 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             R.drawable.truck4,R.drawable.truck5};
     private Double FT_X[] = {35.841979,35.840776, 35.840550, 35.841672, 35.842655};
     private Double FT_Y[] = {127.133218,127.132788 , 127.133936, 127.135846, 127.133335};
+
     public static LatLng TruckLatLng[] = new LatLng[5];
     private MarkerOptions optFirst;
+
     public FragmentMap() {
 
     }
@@ -110,6 +119,9 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         mRecyclerView = (RecyclerViewPager)view.findViewById(R.id.map_item_viewpager);
 
         MyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+
+
         mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
         mRecyclerView.setLayoutManager(MyLayoutManager);
         mRecyclerView.setAdapter(mapItemAdapter);
@@ -163,6 +175,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             {
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 if(child!=null&&gestureDetector.onTouchEvent(e)) {
+                    //트럭 세부정보로 가는데 지울예정
                     Intent submain = new Intent(getContext(), FragmentSubMain.class);
                     getContext().startActivity(submain);
                 }
@@ -217,9 +230,12 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             Log.d("구글맵", "온커넥티드");
                     Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                     if (mLastLocation != null) {
-                        CuttrntLocation = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-                        USER_X = mLastLocation.getLatitude();
-                        USER_Y = mLastLocation.getLongitude();
+                        //CuttrntLocation = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+                        CuttrntLocation = new LatLng(35.841979,127.133218);
+//                        USER_X = mLastLocation.getLatitude();
+                        USER_X = 35.841979;
+//                        USER_Y = mLastLocation.getLongitude();
+                        USER_Y = 127.133218;
                         Log.d("구글맵", "현재위치 저장했음" + mLastLocation.getLatitude() + "/" + mLastLocation.getLongitude());
                         map.moveCamera(CameraUpdateFactory.newLatLng(CuttrntLocation));
                         // Map 을 zoom 합니다.
@@ -227,8 +243,8 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                         // 마커 설정.
                         for(int i=0; i<5; i++){
                             optFirst = new MarkerOptions();
-                            TruckLatLng[i] = new LatLng(listitems.get(i).getFtX(), listitems.get(i).getFtY());
-                            listitems.get(i).setFT_LOCATIONNAME(gpsService.findAddress(listitems.get(i).getFtX(), listitems.get(i).getFtY()));
+                            TruckLatLng[i] = new LatLng(listitems.get(i).getFT_LNG(), listitems.get(i).getFT_LAT());
+                            listitems.get(i).setFT_LOCATIONNAME(gpsService.findAddress(listitems.get(i).getFT_LNG(), listitems.get(i).getFT_LAT()));
                             optFirst.position(TruckLatLng[i]);// 위도 • 경
                             if(i==0)
                                 optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_1));
@@ -299,18 +315,56 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         }
         this.mGoogleApiClient.disconnect();
     }
-    public void initFT() {
+
+    public void requestFoodtruckList(int num) {
         listitems.clear();
-        for(int i =0;i<5;i++){
-            FoodTruckModel item = new FoodTruckModel();
-            item.setFtName(FT_NAME[i]);
-            item.setFtImage(FT_IMAGES[i]);
-            item.setFtCategory(FT_CATEGORY[i]);
-            item.setFtPayment(FT_PAYMENT[i]);
-            item.setFtX(FT_X[i]);
-            item.setFtY(FT_Y[i]);
-            listitems.add(item);
-        }
+
+        Log.d("TAG", String.valueOf(num));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://server-blackdog11.c9users.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService service = retrofit.create(ApiService.class);
+
+        Call<ArrayList<FoodTruckModel>> convertedContent = service.listFoodTrucks(num);
+
+        convertedContent.enqueue(new Callback<ArrayList<FoodTruckModel>>() {
+            @Override
+            public void onResponse(Response<ArrayList<FoodTruckModel>> response, Retrofit retrofit) {
+
+                ArrayList<FoodTruckModel> foodTruckList = response.body();
+
+                //Log.d("TAG", "바디: " + response.body().toString());
+
+                for (FoodTruckModel foodTruck : foodTruckList
+                        ) {
+                    listitems.add(foodTruck);
+                    Log.d("TAG", "맵트럭 : " + foodTruck.getFtName());
+                }
+                //showCardViewList(listItems); //서버에서 받아오면 카드뷰 그려주게하기
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("실패", "onFailure: ");
+            }
+        });
+    }
+
+    public void initFT() {
+        requestFoodtruckList(0); //0은 전체 푸드트럭 리스트 받아오기
+
+//        for(int i =0;i<5;i++){
+//            FoodTruckModel item = new FoodTruckModel();
+//            item.setFtName(FT_NAME[i]);
+//            item.setFtImage(FT_IMAGES[i]);
+//            item.setFtCategory(FT_CATEGORY[i]);
+//            item.setFtPayment(FT_PAYMENT[i]);
+//            item.setFtX(FT_X[i]);
+//            item.setFtY(FT_Y[i]);
+//            listitems.add(item);
+//        }
     }
     private void initViewPager() {
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

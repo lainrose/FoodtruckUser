@@ -1,16 +1,10 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.net.URL;
 
 /**
  * Created by son on 11/1/16.
  */
-
 
 public class FoodTruckModel {
     @SerializedName("owner_id")
@@ -31,10 +25,10 @@ public class FoodTruckModel {
     private String FT_PAYMENT;
     @SerializedName("truck_image")
     private FoodTruckUrlModel FT_IMAGE_URL;
-    @SerializedName("positionX")
-    private Double FT_X;
-    @SerializedName("positionY")
-    private Double FT_Y;
+    @SerializedName("lat")
+    private Double FT_LAT; //위도 Y축
+    @SerializedName("lng")
+    private Double FT_LNG; //경도 X축
 
     private String FT_LOCATIONNAME;
     private int FT_IMAGE;
@@ -112,22 +106,6 @@ public class FoodTruckModel {
         FT_IMAGE = ftImage;
     }
 
-    public Double getFtX() {
-        return FT_X;
-    }
-
-    public void setFtX(Double ftX) {
-        FT_X = ftX;
-    }
-
-    public Double getFtY() {
-        return FT_Y;
-    }
-
-    public void setFtY(Double ftY) {
-        FT_Y = ftY;
-    }
-
     public String getFT_LOCATIONNAME() {
         return FT_LOCATIONNAME;
     }
@@ -142,6 +120,22 @@ public class FoodTruckModel {
 
     public void setFT_IMAGE_URL(FoodTruckUrlModel FT_IMAGE_URL) {
         this.FT_IMAGE_URL = FT_IMAGE_URL;
+    }
+
+    public Double getFT_LAT() {
+        return FT_LAT;
+    }
+
+    public void setFT_LAT(Double FT_LAT) {
+        this.FT_LAT = FT_LAT;
+    }
+
+    public Double getFT_LNG() {
+        return FT_LNG;
+    }
+
+    public void setFT_LNG(Double FT_LNG) {
+        this.FT_LNG = FT_LNG;
     }
 
 
