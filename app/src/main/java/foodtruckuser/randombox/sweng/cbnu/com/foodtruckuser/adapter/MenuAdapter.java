@@ -94,7 +94,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                             imageHeight = imageWidth;
 
 
-               // holder.imageview.setImageBitmap(Bitmap.createScaledBitmap(image, (int)imageWidth, (int)imageHeight,false));
+               holder.imageview.setImageBitmap(Bitmap.createScaledBitmap(image, (int)imageWidth, (int)imageHeight,false));
             }
             else{
                 holder.imageview.setImageBitmap(image);

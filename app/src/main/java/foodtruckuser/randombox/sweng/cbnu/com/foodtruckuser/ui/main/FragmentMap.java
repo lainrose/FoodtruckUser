@@ -47,6 +47,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
 import retrofit.Call;
 import retrofit.Callback;
@@ -178,7 +179,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                 if (child != null && gestureDetector.onTouchEvent(e)) {
                     //트럭 세부정보로 가는데 지울예정
                     //mRecyclerView.getChildPosition(child)
-                    Intent submain = new Intent(getContext(), FragmentSubMain.class);
+                    Intent submain = new Intent(getContext(), AcitivityTruckDetail.class);
                     getContext().startActivity(submain);
                 }
                 return false;

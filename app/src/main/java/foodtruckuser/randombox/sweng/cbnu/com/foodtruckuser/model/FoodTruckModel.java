@@ -114,22 +114,6 @@ public class FoodTruckModel {
         FT_IMAGE = ftImage;
     }
 
-    public Double getFtX() {
-        return FT_X;
-    }
-
-    public void setFtX(Double ftX) {
-        FT_X = ftX;
-    }
-
-    public Double getFtY() {
-        return FT_Y;
-    }
-
-    public void setFtY(Double ftY) {
-        FT_Y = ftY;
-    }
-
     public String getFT_LOCATIONNAME() {
         return FT_LOCATIONNAME;
     }
