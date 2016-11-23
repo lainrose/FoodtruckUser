@@ -45,6 +45,7 @@ public class TabFragment extends Fragment {
             @Override
             public void onPageSelected(int state) {
                 if(state == fragmentMap && !gpsService.isGetLocation()) {
+
                     gpsService.showSettingsAlert();
                     if(gpsService.isGetLocation()){
                         Log.d("tag", ""+FragmentMap.getInstance());

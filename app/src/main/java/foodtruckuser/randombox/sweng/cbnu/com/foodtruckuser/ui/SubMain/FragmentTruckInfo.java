@@ -113,7 +113,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         gpsService = new GpsService(getActivity());
         GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
         map = mapview.getMap();
-        TruckLatLng = new LatLng(listitems.get(0).getFtX(), listitems.get(0).getFtY());
+        TruckLatLng = new LatLng(listitems.get(0).getFT_LNG(), listitems.get(0).getFT_LAT());
         optFirst = new MarkerOptions();
         optFirst.position(TruckLatLng);// 위도 • 경
         optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
@@ -173,8 +173,8 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
             item.setFtImage(FT_IMAGES[i]);
             item.setFtCategory(FT_CATEGORY[i]);
             item.setFtPayment(FT_PAYMENT[i]);
-            item.setFtX(FT_X[i]);
-            item.setFtY(FT_Y[i]);
+            item.setFT_LNG(FT_X[i]);
+            item.setFT_LAT(FT_Y[i]);
             listitems.add(item);
         }
 

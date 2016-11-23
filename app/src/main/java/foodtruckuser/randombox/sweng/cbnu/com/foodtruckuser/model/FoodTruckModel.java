@@ -17,7 +17,7 @@ public class FoodTruckModel {
     private String FT_TAG;
     @SerializedName("rating")
     private String FT_RATING;
-    @SerializedName("like")
+//    @SerializedName("like")
     private Boolean FT_LIKE = false;
     @SerializedName("open")
     private String FT_START;
@@ -26,8 +26,10 @@ public class FoodTruckModel {
     @SerializedName("truck_image")
     private FoodTruckUrlModel FT_IMAGE_URL;
     @SerializedName("lat")
+//    @SerializedName("Position_Y")
     private Double FT_LAT; //위도 Y축
     @SerializedName("lng")
+//    @SerializedName("Position_X")
     private Double FT_LNG; //경도 X축
 
     private String FT_LOCATIONNAME;

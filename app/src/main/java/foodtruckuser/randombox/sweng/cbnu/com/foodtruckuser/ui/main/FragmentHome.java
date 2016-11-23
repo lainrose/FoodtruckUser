@@ -187,7 +187,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     public void requestFoodtruckList(int num) {
         listItems.clear();
 
-        Log.d("TAG", String.valueOf(num));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://server-blackdog11.c9users.io/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -203,7 +202,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
 
-                //Log.d("TAG", "바디: " + response.body().toString());
+                Log.d("TAG", "바디: " + response.body().toString());
 
                 for (FoodTruckModel foodTruck : foodTruckList
                         ) {
@@ -219,7 +218,9 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             @Override
             public void onFailure(Throwable t) {
                 Log.d("실패", "onFailure: ");
+                Log.d("TAG", t.getMessage());
             }
+
         });
     }
 

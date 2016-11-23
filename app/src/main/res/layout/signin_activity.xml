@@ -24,6 +24,7 @@
         android:layout_marginTop="72.0dip"
         android:layout_marginRight="20.0dip"
         android:layout_marginBottom="2.0dip"
+        android:text="test@naver.com"
         android:hint="이메일 주소"
         android:singleLine="true"
         android:layout_centerHorizontal="true"
