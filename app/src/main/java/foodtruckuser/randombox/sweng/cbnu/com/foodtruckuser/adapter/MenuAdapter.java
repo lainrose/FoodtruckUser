@@ -28,7 +28,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         private float imageWidth;
         private float imageHeight;
         private MenuViewHolder holder;
-        FragmentManager mFragmentManager;
         private String call;
 
         public MenuAdapter(Context context, ArrayList<MenuModel> listitems, String Call) {

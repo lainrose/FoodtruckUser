@@ -1,10 +1,16 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.net.URL;
 
 /**
  * Created by son on 11/1/16.
  */
+
 
 public class FoodTruckModel {
     @SerializedName("owner_id")
@@ -106,6 +112,22 @@ public class FoodTruckModel {
 
     public void setFtImage(int ftImage) {
         FT_IMAGE = ftImage;
+    }
+
+    public Double getFtX() {
+        return FT_X;
+    }
+
+    public void setFtX(Double ftX) {
+        FT_X = ftX;
+    }
+
+    public Double getFtY() {
+        return FT_Y;
+    }
+
+    public void setFtY(Double ftY) {
+        FT_Y = ftY;
     }
 
     public String getFT_LOCATIONNAME() {

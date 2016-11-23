@@ -2,11 +2,13 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,15 +31,20 @@ import com.hedgehog.ratingbar.RatingBar;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.FeedContextMenu;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.FeedContextMenuManager;
 
 public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
-        OnMapReadyCallback {
+        OnMapReadyCallback{
 
     private Toolbar toolbar;
     public GoogleMap map;
@@ -59,6 +66,22 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     private MenuAdapter menuAdapter;
     private Context mContext;
 
+    public static final String ACTION_SHOW_LOADING_ITEM = "action_show_loading_item";
+
+    private static final int ANIM_DURATION_TOOLBAR = 300;
+    private static final int ANIM_DURATION_FAB = 400;
+
+    @BindView(R.id.btnCreate)
+    FloatingActionButton fabCreate;
+    @BindView(R.id.content)
+    CoordinatorLayout clContent;
+
+    RecyclerView review_view;
+
+    private boolean pendingIntroAnimation;
+
+
+
     //String and Integer array for Recycler View Items
     public static final String[] TITLES= {"디저트 5000원","피자 3000원","박도현 0원","1000원"
             ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","1000원"
@@ -66,6 +89,19 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     public static final Integer[] IMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,
             R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.menuitem,
             R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,0,0,0};
+
+    private ArrayList<ReviewModel> reviewitems = new ArrayList<>();
+    public static final Integer[] CenterIMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,
+            R.drawable.menuitem4,R.drawable.menuitem5};
+
+    public static final Integer[] BottomIMAGES= {R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,
+            R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,R.drawable.img_feed_bottom_1};
+
+    public static final Integer[] UserIMAGES= {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
+            R.drawable.truck4,R.drawable.truck5};
+    public static final String[] UserNames= {"도혀니", "으버미", "현펴", "횬죵이", "영비니"};
+
+    private ReviewItemAdapter reviewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,11 +176,26 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                             startActivity(intent);
                         }
                     }
-
                     @Override public void onLongItemClick(View view, int position) {
                     }
                 })
         );
+        review_view = (RecyclerView)findViewById(R.id.review_view);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return 300;
+            }
+        };
+        review_view.setHasFixedSize(true);
+        review_view.setLayoutManager(linearLayoutManager);
+        reviewAdapter = new ReviewItemAdapter(this, reviewitems);
+        review_view.setAdapter(reviewAdapter); // set adapter on recyclerview
+        reviewAdapter.notifyDataSetChanged(); // Notify the adapter
+        //reviewAdapter = new ReviewAdapter(this);
+        //reviewAdapter.setOnFeedItemClickListener(this);
+        //review_view.setAdapter(reviewAdapter); // set adapter on recyclerview
+
     }
     private void setupCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(
@@ -172,6 +223,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
     public void initFT() {
         listitems.clear();
+        reviewitems.clear();
         for (int i = 0; i < 5; i++) {
             FoodTruckModel item = new FoodTruckModel();
             item.setFtName(FT_NAME[i]);
@@ -181,6 +233,13 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             item.setFT_LNG(FT_X[i]);
             item.setFT_LAT(FT_Y[i]);
             listitems.add(item);
+
+            ReviewModel item1 = new ReviewModel();
+            item1.setCenterimage(CenterIMAGES[i]);
+            item1.setBottomimage(BottomIMAGES[i]);
+            item1.setUserImage(UserIMAGES[i]);
+            item1.setUserText(UserNames[i]);
+            reviewitems.add(item1);
         }
     }
     private void showViewList() {
@@ -192,6 +251,26 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         myRecyclerView.setAdapter(menuAdapter); // set adapter on recyclerview
         menuAdapter.notifyDataSetChanged(); // Notify the adapter
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (ACTION_SHOW_LOADING_ITEM.equals(intent.getAction())) {
+            showFeedLoadingItemDelayed();
+        }
+    }
+
+    private void showFeedLoadingItemDelayed() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                review_view.smoothScrollToPosition(0);
+                //reviewAdapter.showLoadingView();
+            }
+        }, 500);
+    }
+
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -212,4 +291,9 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     public void onMapReady(GoogleMap googleMap) {
 
     }
+
+    public void showLikedSnackbar() {
+        Snackbar.make(clContent, "Liked!", Snackbar.LENGTH_SHORT).show();
+    }
+
 }

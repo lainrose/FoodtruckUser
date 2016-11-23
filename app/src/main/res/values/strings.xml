@@ -2,7 +2,10 @@
     <string name="app_name">FoodtruckUser</string>
     <string name="facebook_app_id">1758413267779561</string>
     <string name="send_to">Share</string>
-
+    <plurals name="likes_count">
+        <item quantity="one">%d like</item>
+        <item quantity="other">%d likes</item>
+    </plurals>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

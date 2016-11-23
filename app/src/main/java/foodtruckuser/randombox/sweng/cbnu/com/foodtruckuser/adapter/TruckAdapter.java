@@ -46,7 +46,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             //holder.coverImageView.setImageResource(homeList.get(position).getFtImage());
             //holder.coverImageView.setTag(homeList.get(position).getFtImage());
 
-            Picasso.with(mContext).load(Url + homeList.get(position).getFT_IMAGE_URL().getUrl()).into(holder.coverImageView);
+            //Picasso.with(mContext).load(Url + homeList.get(position).getFT_IMAGE_URL().getUrl()).into(holder.coverImageView);
 
             if(homeList.get(position).getFtPayment() == "false") {
                 holder.payTextView.setText("카드불가");
@@ -80,6 +80,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                     //TruckName = homeList.get(position).getFtName();
                     Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
                     mContext.startActivity(submain);
+                    //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
                 }
             });
             holder.shineButton.setOnClickListener(new View.OnClickListener() {

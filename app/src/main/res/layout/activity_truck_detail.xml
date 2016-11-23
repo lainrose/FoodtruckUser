@@ -8,8 +8,8 @@
     android:orientation="vertical"
     android:background="#D5D5D5">
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
@@ -52,6 +52,18 @@
                     app:layout_collapseMode="parallax"/>
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_instagram_white"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
         <android.support.v4.widget.NestedScrollView
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -415,8 +427,20 @@
                         android:scrollbarAlwaysDrawHorizontalTrack="false"/>
 
                 </LinearLayout>
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/review_view"
+                        android:background="#FFFFFF"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:scrollbarAlwaysDrawHorizontalTrack="false"/>
+                </LinearLayout>
 
+            </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

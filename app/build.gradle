@@ -54,4 +54,5 @@ dependencies {
     compile 'com.hedgehog.ratingbar:app:1.1.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:multidex:1.0.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
 }
