@@ -433,7 +433,7 @@
                     android:layout_marginTop="10dp">
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/review_view"
-                        android:background="#FFFFFF"
+                        android:background="#D5D5D5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
