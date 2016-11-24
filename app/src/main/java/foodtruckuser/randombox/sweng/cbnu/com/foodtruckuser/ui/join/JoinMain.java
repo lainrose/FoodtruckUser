@@ -56,6 +56,10 @@ public class JoinMain extends FragmentActivity implements View.OnClickListener{
 
         bt_email_login = (Button)findViewById(R.id.bt_email_login);
         bt_email_login.setOnClickListener(this);
+
+        bt_email_signup = (Button)findViewById(R.id.bt_email_signup);
+        bt_email_signup.setOnClickListener(this);
+
         facebookbtn = (Button) findViewById(R.id.bt_faceebook_login);
         facebookbtn.setOnClickListener(facebookLoginListener);
 

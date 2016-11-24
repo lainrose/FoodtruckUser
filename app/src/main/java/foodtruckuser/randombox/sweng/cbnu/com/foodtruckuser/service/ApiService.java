@@ -1,5 +1,7 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service;
 
+import com.squareup.okhttp.ResponseBody;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +23,15 @@ public interface ApiService {
     @POST("/client/login_request")
     Call<UserModel> request_login(@Field("email") String email, @Field("password") String password);
 
+    @GET("/client/client_join")
+    Call<Integer> client_join(@Query("email") String email, @Query("password") String password, @Query("nickName") String nickname);
+
     //FragmentHome에서 푸드트럭 리스트 요청
     @FormUrlEncoded
     @POST("/client/foodtruck_list")
     Call<ArrayList<FoodTruckModel>> listFoodTrucks(@Field("category") int category);
     //@GET("/client/foodtruck_list")
     //Call<ArrayList<FoodTruckModel>> listFoodTrucks(@Query("category") int category);
+
+
 }

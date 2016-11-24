@@ -6,17 +6,27 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.squareup.okhttp.ResponseBody;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class SignupActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
 
@@ -25,6 +35,7 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
     private EditText et_signup_nick;
     private EditText et_signup_pw;
     private static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
+    private int signupStatus = 2; //1은 성공, 2는 실패, 3은 중복
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +71,7 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
                 if (StartSingUp())
                 {
                     progressGenerator.start(bt_singup_fragment_login);
-                    bt_singup_fragment_login.setEnabled(false);
+                    //bt_singup_fragment_login.setEnabled(false);
                     et_signup_email.setEnabled(false);
                     et_signup_pw.setEnabled(false);
                 }
@@ -120,16 +131,66 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
 
 
     private void getSignUpRequest() {
-        UserModel.getInstance().setUserId(this.et_signup_email.getText().toString());
-        UserModel.getInstance().setUserPassword(this.et_signup_pw.getText().toString());
-        UserModel.getInstance().setUserName(this.et_signup_nick.getText().toString());
+//        UserModel.getInstance().setUserId(this.et_signup_email.getText().toString());
+//        UserModel.getInstance().setUserPassword(this.et_signup_pw.getText().toString());
+//        UserModel.getInstance().setUserName(this.et_signup_nick.getText().toString());
+
+
+        //얘네는 UserModel객체 안받고 그냥 plain text 받을거라 다름
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://server-blackdog11.c9users.io")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService service = retrofit.create(ApiService.class);
+
+        Call<Integer> convertedContent = service.client_join(et_signup_email.getText().toString(), et_signup_pw.getText().toString(), et_signup_nick.getText().toString());
+
+        convertedContent.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Response<Integer> response, Retrofit retrofit) {
+                Log.d("회원가입" , "회원가입 : " + response.body().toString());
+
+                if(response.body().toString() == "1") {
+                    signupStatus = 1;
+                } else if(response.body().toString() == "2") {
+                    signupStatus = 2;
+                } else {
+                    signupStatus = 3;
+                }
+
+                // isSuccess is true if response code => 200 and <= 300
+                if (!response.isSuccess()) {
+                    // print response body if unsuccessful
+                    try {
+                        Log.d("response unsuccessful: ", response.errorBody().string());
+                    } catch (IOException e) {
+                        // do nothing
+                    }
+                    return;
+                }
+                // if parsing the JSON body failed, `response.body()` returns null
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("실패", t.getMessage().toString());
+            }
+        });
     }
 
     @Override
     public void onComplete() {
-        Toast.makeText(this, "Loading Complete, button is disabled", Toast.LENGTH_LONG).show();
-        Intent loginIntent = new Intent(SignupActivity.this, SigninActivity.class);
-        SignupActivity.this.startActivity(loginIntent);
-        SignupActivity.this.finish();
+        if(signupStatus == 1) {
+            Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
+            Intent loginIntent = new Intent(SignupActivity.this, SigninActivity.class);
+            SignupActivity.this.startActivity(loginIntent);
+            SignupActivity.this.finish();
+        } else if (signupStatus == 2) {
+            Toast.makeText(this, "회원가입에 실패하였습니다.\n잠시 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            Toast.makeText(this, "중복된 이메일이 있습니다.", Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -71,8 +71,6 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
     private MapView mapview;
     private LatLng CuttrntLocation;
-    private double USER_X;
-    private double USER_Y;
     public GoogleMap map;
     private GpsService gpsService;
     private static FragmentMap fragmentMap;
@@ -84,16 +82,17 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     private MapItemAdapter mapItemAdapter;
     private ArrayList<FoodTruckModel> listitems = new ArrayList<>();
 
-    private String FT_NAME[] = {"도현트럭", "의범트럭",
-            "영빈트럭", "현표트럭", "현정트럭"};
-    private int FT_CATEGORY[] = {1, 2, 3, 3, 5};
-    private String FT_PAYMENT[] = {"카드", "현금", "카드/현금", "현금", "카드"};
-    private int FT_IMAGES[] = {R.drawable.truck1, R.drawable.truck2, R.drawable.truck3,
-            R.drawable.truck4, R.drawable.truck5};
-    private Double FT_X[] = {35.841979, 35.840776, 35.840550, 35.841672, 35.842655}; //이게 Lat
-    private Double FT_Y[] = {127.133218, 127.132788, 127.133936, 127.135846, 127.133335}; //이게 Lng
+//    private String FT_NAME[] = {"도현트럭", "의범트럭",
+//            "영빈트럭", "현표트럭", "현정트럭"};
+//    private int FT_CATEGORY[] = {1, 2, 3, 3, 5};
+//    private String FT_PAYMENT[] = {"카드", "현금", "카드/현금", "현금", "카드"};
+//    private int FT_IMAGES[] = {R.drawable.truck1, R.drawable.truck2, R.drawable.truck3,
+//            R.drawable.truck4, R.drawable.truck5};
+//    private Double FT_X[] = {35.841979, 35.840776, 35.840550, 35.841672, 35.842655}; //이게 Lat
+//    private Double FT_Y[] = {127.133218, 127.132788, 127.133936, 127.135846, 127.133335}; //이게 Lng
 
-    public static LatLng TruckLatLng[] = new LatLng[5];
+    //public LatLng TruckLatLng[] = new LatLng[];
+    public ArrayList<LatLng> TruckLatLng = new ArrayList<>();
     private MarkerOptions optFirst;
 
     public FragmentMap() {
@@ -147,21 +146,16 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
         gpsService = new GpsService(getActivity());
         GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
+
         map = mapview.getMap();
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if (marker.getId().equalsIgnoreCase("m0"))
-                    mRecyclerView.smoothScrollToPosition(0);
-                else if (marker.getId().equalsIgnoreCase("m1"))
-                    mRecyclerView.smoothScrollToPosition(1);
-                else if (marker.getId().equalsIgnoreCase("m2"))
-                    mRecyclerView.smoothScrollToPosition(2);
-                else if (marker.getId().equalsIgnoreCase("m3"))
-                    mRecyclerView.smoothScrollToPosition(3);
-                else if (marker.getId().equalsIgnoreCase("m4"))
-                    mRecyclerView.smoothScrollToPosition(4);
-
+                for (int i = 0; i < TruckLatLng.size(); i++) {
+                    if (marker.getPosition() == TruckLatLng.get(i)) {
+                        mRecyclerView.smoothScrollToPosition(i);
+                    }
+                }
                 return false;
             }
         });
@@ -228,8 +222,8 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         //안드 6.0 달라진 퍼미션
         int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION )) {
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
 
             } else {
                 ActivityCompat.requestPermissions(getActivity(),
@@ -254,11 +248,6 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             CuttrntLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            //CuttrntLocation = new LatLng(35.841979,127.133218);
-//                        USER_X = mLastLocation.getLatitude();
-            USER_X = 35.841979;
-//                        USER_Y = mLastLocation.getLongitude();
-            USER_Y = 127.133218;
             Log.d("구글맵", "현재위치 저장했음" + mLastLocation.getLatitude() + "/" + mLastLocation.getLongitude());
             map.moveCamera(CameraUpdateFactory.newLatLng(CuttrntLocation));
             // Map 을 zoom 합니다.
@@ -266,51 +255,24 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             // 마커 설정.
 
             int i = 0;
-            for(FoodTruckModel item : listitems) {
+            for (FoodTruckModel item : listitems) {
                 Log.d("item", "i : " + String.valueOf(i));
                 optFirst = new MarkerOptions();
-//                TruckLatLng[i] = new LatLng(item.getFT_LAT(), item.getFT_LNG());
-                // TODO: 2016-11-24 db내의 lat, lng 정보 뒤바꿔주기, 함수 LATLNG순서로 맞춰서 바꿔쓰기
                 // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
-                TruckLatLng[i] = new LatLng(item.getFT_LNG(), item.getFT_LAT());
-//                item.setFT_LOCATIONNAME(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
-                item.setFT_LOCATIONNAME(gpsService.findAddress(item.getFT_LNG(), item.getFT_LAT()));
-                optFirst.position(TruckLatLng[i++]);
+                TruckLatLng.add(new LatLng(item.getFT_LAT(), item.getFT_LNG()));//[i] = new LatLng(item.getFT_LAT(), item.getFT_LNG());
+                item.setFT_LOCATIONNAME(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
+                optFirst.position(TruckLatLng.get(i));
                 optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
                 map.addMarker(optFirst).showInfoWindow();
-
+                i++;
                 // TODO: 2016-11-24 이미지에 변수명 넣어서 호출하기, 가장 가까운 트럭부터 계산해서 1번으로 보여주기
 //                if (i == 0)
 //                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
 //            else if (i == 1)
 //                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
 //            else if (i == 2)
-//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_3));
-//            else if (i == 3)
-//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_4));
-//            else if (i == 4)
-//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_5));
 //            map.addMarker(optFirst).showInfoWindow();
-        }
-
-
-//            for (int i = 0; i < 2; i++) {
-//                optFirst = new MarkerOptions();
-//                TruckLatLng[i] = new LatLng(listitems.get(i).getFT_LNG(), listitems.get(i).getFT_LAT());
-//                listitems.get(i).setFT_LOCATIONNAME(gpsService.findAddress(listitems.get(i).getFT_LNG(), listitems.get(i).getFT_LAT()));
-//                optFirst.position(TruckLatLng[i]);// 위도 • 경
-//                if (i == 0)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_1));
-//                else if (i == 1)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
-//                else if (i == 2)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_3));
-//                else if (i == 3)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_4));
-//                else if (i == 4)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_5));
-//                map.addMarker(optFirst).showInfoWindow();
-//            }
+            }
 
         }
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -462,9 +424,9 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         mRecyclerView.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
             @Override
             public void OnPageChanged(int oldPosition, int newPosition) {
-                CameraUpdate location = CameraUpdateFactory.newLatLngZoom(TruckLatLng[newPosition], 16);
-                Log.d("맵", "TruckLatLng " + TruckLatLng[newPosition]);
-               // Log.d("맵", "newPosition : " + String.valueOf(newPosition));
+                CameraUpdate location = CameraUpdateFactory.newLatLngZoom(TruckLatLng.get(newPosition), 16);
+                Log.d("맵", "TruckLatLng " + TruckLatLng.get(newPosition));
+                // Log.d("맵", "newPosition : " + String.valueOf(newPosition));
                 map.animateCamera(location);
             }
         });
