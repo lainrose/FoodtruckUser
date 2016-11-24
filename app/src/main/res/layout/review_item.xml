@@ -61,38 +61,60 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"/>
-            <View
-                android:id="@+id/vBgLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_like_circle_background"
-                android:visibility="invisible" />
+
             <ImageView
                 android:id="@+id/ivLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="center"
                 android:src="@drawable/ic_heart_outline_white"
                 android:visibility="invisible" />
+
+            <View
+                android:id="@+id/vBgLike"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_like_circle_background"
+                android:visibility="invisible" />
         </foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SquaredFrameLayout>
 
-        <ImageView
+        <TextView
             android:id="@+id/ivFeedBottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp">
+            android:paddingRight="8dp"
+            android:layout_marginTop="10dp">
 
-            <ImageButton
-                android:id="@+id/btnLike"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_heart_outline_grey" />
+            <com.sackcentury.shinebuttonlib.ShineButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@android:color/darker_gray"
+                android:id="@+id/po_image"
+                app:btn_color="@android:color/darker_gray"
+                app:btn_fill_color="#FF6666"
+                android:layout_marginTop="10dp"
+                app:allow_random_color="false"
+                app:enable_flashing="false"
+                app:big_shine_color="#FF6666"
+                app:click_animation_duration="200"
+                app:shine_animation_duration="1500"
+                app:shine_turn_angle="10"
+                app:small_shine_offset_angle="20"
+                app:shine_distance_multiple="1.5f"
+                app:small_shine_color="#CC9999"
+                app:shine_count="8"
+                app:siShape="@raw/like"/>
 
             <ImageButton
                 android:id="@+id/btnComments"
@@ -133,7 +155,6 @@
                         android:layout_height="wrap_content"
                         android:text="123 likes"
                         android:textColor="@color/text_like_counter" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

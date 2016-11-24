@@ -8,6 +8,9 @@ public class ReviewModel {
     private int bottomimage;
     private int userImage;
     private String userText;
+    private int likesCount=0 ;
+    private boolean isLiked=false;
+    private String reviewText;
 
 
     public int getCenterimage() {
@@ -40,5 +43,29 @@ public class ReviewModel {
 
     public void setUserText(String userText) {
         this.userText = userText;
+    }
+
+    public int getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
+
+    public String getReviewText() {
+        return reviewText;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 }

@@ -36,12 +36,11 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAnimator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.FeedContextMenu;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.FeedContextMenuManager;
 
 public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback{
@@ -73,12 +72,9 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
     @BindView(R.id.btnCreate)
     FloatingActionButton fabCreate;
-    @BindView(R.id.content)
-    CoordinatorLayout clContent;
-
     RecyclerView review_view;
 
-    private boolean pendingIntroAnimation;
+    private CoordinatorLayout clContent;
 
 
 
@@ -90,16 +86,34 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.menuitem,
             R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,0,0,0};
 
+
+
     private ArrayList<ReviewModel> reviewitems = new ArrayList<>();
-    public static final Integer[] CenterIMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,
+    private static final Integer[] CenterIMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,
             R.drawable.menuitem4,R.drawable.menuitem5};
 
-    public static final Integer[] BottomIMAGES= {R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,
+    private static final Integer[] BottomIMAGES= {R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,
             R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,R.drawable.img_feed_bottom_1};
 
-    public static final Integer[] UserIMAGES= {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
+    private static final Integer[] UserIMAGES= {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
             R.drawable.truck4,R.drawable.truck5};
-    public static final String[] UserNames= {"도혀니", "으버미", "현펴", "횬죵이", "영비니"};
+    private static final Integer[] LikeConunts= {33,112,63,235,100533};
+    private static final String[] UserNames= {"도혀니", "으버미", "현펴", "횬죵이", "영비니"};
+    private static final String[] WriteText = {"가나다라마바사아자차카타파하", "안녕하세요! \n" +
+            "지난 주말 좋은 체험했던 맛집 리뷰에 \n" +
+            "악플로 괴롭힘을 받아서 맛집 리뷰는 \n" +
+            "공감만 열어놓습니다.\n" +
+            "제가 느낀점을 솔직하게 쓴 후기에 \n" +
+            "악플로 상처받는 일은 \n" +
+            "앞으로 없었으면 합니다. ", "늘 소통해주시고 자주 와주시는 \n" +
+            "이웃분들께 양해부탁드립니다.", "공감은 열어두니 공감버튼 눌러주시면\n" +
+            "댓글 주시는것과 같은걸로 생각할게요. \n" +
+            "편안하게 글을 봐주셨으면해요. ", "아울러 악플러는 많은 시간을 들여 \n" +
+            "맛집을 다녀오고\n" +
+            "포스팅을 하고 블로그를 꾸며온 사람에게 \n" +
+            "본인기분 상한 것을 \n" +
+            "화풀이 하지 않았으면합니다.", "악플러는 본인글 읽어보고 망신인거 알고\n" +
+            "반성하고 미안한 마음좀 갖길바랍니다."};
 
     private ReviewItemAdapter reviewAdapter;
 
@@ -112,7 +126,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         setupToolbar();
         setupCollapsingToolbar();
         initFT();
-
+        clContent = (CoordinatorLayout)findViewById(R.id.content);
         mapview=(MapView)findViewById(R.id.map);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -190,11 +204,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         review_view.setHasFixedSize(true);
         review_view.setLayoutManager(linearLayoutManager);
         reviewAdapter = new ReviewItemAdapter(this, reviewitems);
-        review_view.setAdapter(reviewAdapter); // set adapter on recyclerview
-        reviewAdapter.notifyDataSetChanged(); // Notify the adapter
-        //reviewAdapter = new ReviewAdapter(this);
-        //reviewAdapter.setOnFeedItemClickListener(this);
-        //review_view.setAdapter(reviewAdapter); // set adapter on recyclerview
+        review_view.setAdapter(reviewAdapter);
+        review_view.setItemAnimator(new ReviewItemAnimator());
 
     }
     private void setupCollapsingToolbar() {
@@ -239,6 +250,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             item1.setBottomimage(BottomIMAGES[i]);
             item1.setUserImage(UserIMAGES[i]);
             item1.setUserText(UserNames[i]);
+            item1.setReviewText(WriteText[i]);
+            item1.setLikesCount(LikeConunts[i]);
             reviewitems.add(item1);
         }
     }
@@ -251,26 +264,6 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         myRecyclerView.setAdapter(menuAdapter); // set adapter on recyclerview
         menuAdapter.notifyDataSetChanged(); // Notify the adapter
     }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (ACTION_SHOW_LOADING_ITEM.equals(intent.getAction())) {
-            showFeedLoadingItemDelayed();
-        }
-    }
-
-    private void showFeedLoadingItemDelayed() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                review_view.smoothScrollToPosition(0);
-                //reviewAdapter.showLoadingView();
-            }
-        }, 500);
-    }
-
-
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -291,9 +284,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     public void onMapReady(GoogleMap googleMap) {
 
     }
-
     public void showLikedSnackbar() {
         Snackbar.make(clContent, "Liked!", Snackbar.LENGTH_SHORT).show();
     }
-
 }
