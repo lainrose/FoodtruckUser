@@ -45,6 +45,7 @@ public class SigninActivity extends AppCompatActivity {
         toolbar.setTitle("이메일로 로그인");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
         actionBar.setDisplayShowTitleEnabled(false);

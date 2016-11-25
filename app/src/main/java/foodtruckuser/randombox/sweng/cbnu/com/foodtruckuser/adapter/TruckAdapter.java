@@ -47,6 +47,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             //holder.coverImageView.setTag(homeList.get(position).getFtImage());
 
             Picasso.with(mContext).load(Url + homeList.get(position).getFT_IMAGE_URL().getUrl()).into(holder.coverImageView);
+//            Log.d("트럭사진", homeList.get(position).getFT_IMAGE_URL().getUrl());
 
             if(homeList.get(position).getFtPayment() == "false") {
                 holder.payTextView.setText("카드불가");

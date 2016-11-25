@@ -13,9 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.google.gson.JsonObject;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
@@ -131,12 +134,15 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
 
 
     private void getSignUpRequest() {
-//        UserModel.getInstance().setUserId(this.et_signup_email.getText().toString());
-//        UserModel.getInstance().setUserPassword(this.et_signup_pw.getText().toString());
-//        UserModel.getInstance().setUserName(this.et_signup_nick.getText().toString());
+
+        JsonObject client_info = new JsonObject();
+        client_info.addProperty("email", et_signup_email.getText().toString());
+        client_info.addProperty("password", et_signup_pw.getText().toString());
+        client_info.addProperty("nickName", et_signup_nick.getText().toString());
+
+        Log.d("회원가입", client_info.toString());
 
 
-        //얘네는 UserModel객체 안받고 그냥 plain text 받을거라 다름
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://server-blackdog11.c9users.io")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -144,13 +150,11 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
 
         ApiService service = retrofit.create(ApiService.class);
 
-        Call<Integer> convertedContent = service.client_join(et_signup_email.getText().toString(), et_signup_pw.getText().toString(), et_signup_nick.getText().toString());
+        Call<Integer> convertedContent = service.client_join(client_info);
 
         convertedContent.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Response<Integer> response, Retrofit retrofit) {
-                Log.d("회원가입" , "회원가입 : " + response.body().toString());
-
                 if(response.body().toString() == "1") {
                     signupStatus = 1;
                 } else if(response.body().toString() == "2") {
