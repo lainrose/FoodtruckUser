@@ -219,6 +219,8 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+
+        // TODO: 2016-11-25 6.0이상에서 최초로 앱 설치 후 실행 시 퍼미션 물어봄, 그러고 종료. 그 뒤론 잘 작동함 이거 해결해야함
         //안드 6.0 달라진 퍼미션
         int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -336,7 +338,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
         Log.d("TAG", String.valueOf(num));
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://server-blackdog11.c9users.io/")
+                .baseUrl("https://server-blackdog11.c9users.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
