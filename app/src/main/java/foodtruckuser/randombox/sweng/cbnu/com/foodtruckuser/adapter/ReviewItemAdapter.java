@@ -32,7 +32,6 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
         public static final String ACTION_LIKE_BUTTON_CLICKED = "action_like_button_button";
         public static final String ACTION_LIKE_IMAGE_CLICKED = "action_like_image_button";
 
-
         public ReviewItemAdapter(Context c, ArrayList<ReviewModel> listitems) {
             this.mContext = c;
             this.reviewitems = listitems;
@@ -50,15 +49,14 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
         @Override
         public void onBindViewHolder(final ReviewViewHolder holder, final int position) {
 
-                holder.ivFeedCenter.setImageResource(reviewitems.get(position).getCenterimage());
-                holder.ivFeedBottom.setText(reviewitems.get(position).getReviewText());
-                holder.userImageView.setImageResource(reviewitems.get(position).getUserImage());
-                holder.userImageView.setTag(reviewitems.get(position).getUserImage());
-                holder.userTextView.setText(reviewitems.get(position).getUserText());
-                holder.tsLikesCounter.setCurrentText(holder.vImageRoot.getResources().getQuantityString(
+            holder.ivFeedCenter.setImageResource(reviewitems.get(position).getCenterimage());
+            holder.ivFeedBottom.setText(reviewitems.get(position).getReviewText());
+            holder.userImageView.setImageResource(reviewitems.get(position).getUserImage());
+            holder.userImageView.setTag(reviewitems.get(position).getUserImage());
+            holder.userTextView.setText(reviewitems.get(position).getUserText());
+            holder.tsLikesCounter.setCurrentText(holder.vImageRoot.getResources().getQuantityString(
                         R.plurals.likes_count, reviewitems.get(position).getLikesCount(), reviewitems.get(position).getLikesCount()
                 ));
-
             holder.btnComments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,25 +81,22 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                         else if(mContext instanceof AcitivityTruckReview){
                             ((AcitivityTruckReview) mContext).showLikedSnackbar();
                         }
+                     }
+                }
+            });
+            holder.likebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {reviewitems.get(position).setLikesCount(reviewitems.get(position).isLiked() ?
+                        reviewitems.get(position).getLikesCount()-1 : reviewitems.get(position).getLikesCount()+1);
+                    reviewitems.get(position).setLiked(reviewitems.get(position).isLiked() ? false : true);
+                    if(!reviewitems.get(position).isLiked()){
+                        if (mContext instanceof AcitivityTruckDetail) {
+                            ((AcitivityTruckDetail) mContext).showLikedSnackbar();
+                        }
+                        else if(mContext instanceof AcitivityTruckReview){
+                            ((AcitivityTruckReview) mContext).showLikedSnackbar();
+                        }
                     }
-                    }
-                });
-                holder.likebutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        reviewitems.get(position).setLikesCount(reviewitems.get(position).isLiked() ?
-                                reviewitems.get(position).getLikesCount()-1 : reviewitems.get(position).getLikesCount()+1);
-                        reviewitems.get(position).setLiked(reviewitems.get(position).isLiked() ? false : true);
-                        //notifyItemChanged(position, ACTION_LIKE_BUTTON_CLICKED);
-                        if(!reviewitems.get(position).isLiked()){
-                            if (mContext instanceof AcitivityTruckDetail) {
-                                ((AcitivityTruckDetail) mContext).showLikedSnackbar();
-                            }
-                            else if(mContext instanceof AcitivityTruckReview){
-                                ((AcitivityTruckReview) mContext).showLikedSnackbar();
-                            }
-                    }
-
                 }
             });
             holder.btnComments.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +117,6 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                 }
             });
         }
-
         @Override
         public int getItemCount() {
             return reviewitems.size();

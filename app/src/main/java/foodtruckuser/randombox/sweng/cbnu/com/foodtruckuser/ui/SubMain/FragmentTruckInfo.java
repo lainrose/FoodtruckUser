@@ -151,7 +151,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         //MyLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setLayoutManager(MyLayoutManager);
-        showViewList();
+        //showViewList();
         myRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext(), myRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
@@ -179,6 +179,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         }
 
     }
+    /*
     private void showViewList() {
         ArrayList<MenuModel> listitems = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
@@ -189,7 +190,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         menuAdapter.notifyDataSetChanged();// Notify the adapter
 
     }
-
+    */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 

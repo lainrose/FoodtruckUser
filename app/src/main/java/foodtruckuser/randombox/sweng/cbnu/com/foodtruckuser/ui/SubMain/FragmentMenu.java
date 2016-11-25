@@ -35,10 +35,11 @@ public class FragmentMenu extends Fragment {
         MyLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setLayoutManager(MyLayoutManager);
-        showViewList();
+        //showViewList();
         return view;
     }
     // populate the list view by adding data to arraylist
+    /*
     private void showViewList() {
         ArrayList<MenuModel> listitems = new ArrayList<>();
         for (int i = 0; i < TITLES.length; i++) {
@@ -49,4 +50,5 @@ public class FragmentMenu extends Fragment {
         menuAdapter.notifyDataSetChanged();// Notify the adapter
 
     }
+    */
 }
