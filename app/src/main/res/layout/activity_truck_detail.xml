@@ -76,7 +76,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFBA85"
+                    android:background="#FFFFFF"
                     android:orientation="vertical">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                             android:layout_marginTop="10dp"
                             android:focusable="false"
                             app:btn_color="@android:color/darker_gray"
-                            app:btn_fill_color="#FFFFFF"
+                            app:btn_fill_color="@color/colorPrimary"
                             app:enable_flashing="true"
                             app:siShape="@raw/heart" />
                         <TextView
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
                             android:text="스테이크 하우스"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/colorPrimary"
                             android:layout_marginLeft="10dp"
                             android:textStyle="bold"
                             android:textSize="23sp"
@@ -114,7 +114,7 @@
                         android:text="#목살스테이크 #샐러드 #목살"
                         android:layout_marginLeft="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size"
                         android:id="@+id/hashTextView"/>
                     <LinearLayout
@@ -129,7 +129,7 @@
                             android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:textSize="10sp"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/colorPrimary"
                             android:text="999"
                             android:gravity="bottom"
                             android:id="@+id/userTextView"/>
@@ -141,7 +141,7 @@
                             android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:textSize="10sp"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/colorPrimary"
                             android:text="999"
                             android:gravity="bottom"
                             android:id="@+id/reviewTextView"/>
@@ -153,7 +153,7 @@
                             android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:textSize="10sp"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/colorPrimary"
                             android:text="999"
                             android:gravity="bottom"
                             android:id="@+id/likeTextView"/>
@@ -162,6 +162,7 @@
                             android:layout_height="match_parent"
                             android:gravity="right"
                             android:paddingRight="10dp">
+
                             <com.hedgehog.ratingbar.RatingBar
                                 android:id="@+id/ratingbar"
                                 android:layout_width="wrap_content"
@@ -175,18 +176,19 @@
                                 hedgehog:starImageHeight="24dp"
                                 hedgehog:starImageWidth="24dp"
                                 hedgehog:starImagePadding="20dp"/>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/text_size"
-                                android:textColor="#FFFFFF"
+                                android:textColor="@color/colorPrimary"
                                 android:text="평점 "
                                 android:gravity="bottom"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/text_size"
-                                android:textColor="#FFFFFF"
+                                android:textColor="@color/colorPrimary"
                                 android:text="4.5"
                                 android:gravity="bottom"
                                 android:id="@+id/ratingTextView"/>
@@ -197,108 +199,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    android:background="#D5D5D5"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-                        <ImageButton
-                            android:src="@drawable/ic_pen_off"
-                            android:scaleType ="centerCrop"
-                            android:padding="0sp"
-                            android:background="#ffffff"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp">
-                        </ImageButton>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="평가하기"
-                            android:gravity="center"
-                            android:paddingBottom="3dp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10dp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:alpha="1.12"
-                        android:background="#FFBA85" />
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-
-                        <ImageButton
-                            android:src="@drawable/ico_kakao"
-                            android:scaleType ="centerCrop"
-                            android:padding="0sp"
-                            android:background="#ffffff"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp">
-                        </ImageButton>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="카톡공유"
-                            android:gravity="center"
-                            android:paddingBottom="3dp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10dp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:alpha="1.12"
-                        android:background="#FFBA85" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-                        <ImageButton
-                            android:src="@drawable/ico_facebook"
-                            android:scaleType ="centerCrop"
-                            android:padding="0sp"
-                            android:background="#ffffff"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp">
-                        </ImageButton>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="페북공유"
-                            android:gravity="center"
-                            android:paddingBottom="3dp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10dp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
+                        android:text="이 트럭의 현재 위치"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center" />
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_gravity="bottom"
-                    android:layout_height="2dp"
-                    android:alpha="1.12"
-                    android:background="#FFBA85" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="170dp">
 
                     <com.google.android.gms.maps.MapView
                         android:id="@+id/map"
@@ -308,12 +225,83 @@
                         android:name="com.google.android.gms.maps.MapFragment">
                     </com.google.android.gms.maps.MapView>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_check_off"
+                            android:layout_gravity="left"
+                            android:id="@+id/imageView2" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="영업 전"
+                            android:layout_gravity="center"
+                            android:textAlignment="textEnd"
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="영업정보"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:textColor="#000000"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="영업종료 : "
+                                android:textStyle="bold"
+                                android:textColor="@color/darkness"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="11월 24일 오후 19시 20분"
+                                android:textStyle="bold"
+                                android:textColor="@color/darkness"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(9시간 22분 경과)"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:textColor="@color/darkness"/>
+                    </LinearLayout>
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:background="#ffffff"
+                    android:layout_marginTop="1dp"
                     android:padding="@dimen/activity_horizontal_margin">
 
                     <ImageButton
@@ -415,6 +403,22 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#D5D5D5"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="맛있는 메뉴"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
 
@@ -423,14 +427,128 @@
                         android:background="#FFFFFF"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:paddingTop="10dp"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         android:scrollbarAlwaysDrawHorizontalTrack="false"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#D5D5D5"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="맛깔나는 리뷰"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/view_shape"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+                        <ImageButton
+                            android:src="@drawable/ico_emoticon_4"
+                            android:scaleType ="centerCrop"
+                            android:padding="0sp"
+                            android:background="#ffffff"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp">
+                        </ImageButton>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="맛있다!"
+                            android:gravity="center"
+                            android:paddingBottom="3dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10dp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.52"
+                        android:background="@color/darkness" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+
+                        <ImageButton
+                            android:src="@drawable/ico_emoticon_3"
+                            android:scaleType ="centerCrop"
+                            android:padding="0sp"
+                            android:background="#ffffff"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp">
+                        </ImageButton>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="괜찮다"
+                            android:gravity="center"
+                            android:paddingBottom="3dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10dp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.52"
+                        android:background="@color/darkness" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+                        <ImageButton
+                            android:src="@drawable/ico_emoticon_2"
+                            android:scaleType ="centerCrop"
+                            android:padding="0sp"
+                            android:background="#ffffff"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp">
+                        </ImageButton>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="별로"
+                            android:gravity="center"
+                            android:paddingBottom="3dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10dp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/review_view"
@@ -440,6 +558,52 @@
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         android:scrollbarAlwaysDrawHorizontalTrack="false"
                         android:scrollbars="vertical"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#D5D5D5"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/btn_review_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="리뷰 더 보기   >"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="right"
+                        android:onClick="onClick"
+                        android:paddingBottom="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="이 트럭의 홈페이지를 방문하고 싶으신가요?"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"/>
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_shape"
+                        android:text="홈페이지 방문하기"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#000000"
+                        android:gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

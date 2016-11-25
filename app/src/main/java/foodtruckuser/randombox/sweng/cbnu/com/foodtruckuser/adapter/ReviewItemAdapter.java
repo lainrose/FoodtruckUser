@@ -3,6 +3,7 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,14 @@ import android.widget.TextView;
 
 import com.google.android.gms.vision.text.Text;
 import com.sackcentury.shinebuttonlib.ShineButton;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckReview;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.CommentsActivity;
 
 public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.ReviewViewHolder>  {
@@ -27,9 +31,6 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
         private Context mContext = null;
         public static final String ACTION_LIKE_BUTTON_CLICKED = "action_like_button_button";
         public static final String ACTION_LIKE_IMAGE_CLICKED = "action_like_image_button";
-        public static final int VIEW_TYPE_DEFAULT = 1;
-        public static final int VIEW_TYPE_LOADER = 2;
-        public static int likecount;
 
 
         public ReviewItemAdapter(Context c, ArrayList<ReviewModel> listitems) {
@@ -48,14 +49,15 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
 
         @Override
         public void onBindViewHolder(final ReviewViewHolder holder, final int position) {
-            holder.ivFeedCenter.setImageResource(reviewitems.get(position).getCenterimage());
-            holder.ivFeedBottom.setText(reviewitems.get(position).getReviewText());
-            holder.userImageView.setImageResource(reviewitems.get(position).getUserImage());
-            holder.userImageView.setTag(reviewitems.get(position).getUserImage());
-            holder.userTextView.setText(reviewitems.get(position).getUserText());
-            holder.tsLikesCounter.setCurrentText(holder.vImageRoot.getResources().getQuantityString(
-                    R.plurals.likes_count, reviewitems.get(position).getLikesCount(), reviewitems.get(position).getLikesCount()
-            ));
+
+                holder.ivFeedCenter.setImageResource(reviewitems.get(position).getCenterimage());
+                holder.ivFeedBottom.setText(reviewitems.get(position).getReviewText());
+                holder.userImageView.setImageResource(reviewitems.get(position).getUserImage());
+                holder.userImageView.setTag(reviewitems.get(position).getUserImage());
+                holder.userTextView.setText(reviewitems.get(position).getUserText());
+                holder.tsLikesCounter.setCurrentText(holder.vImageRoot.getResources().getQuantityString(
+                        R.plurals.likes_count, reviewitems.get(position).getLikesCount(), reviewitems.get(position).getLikesCount()
+                ));
 
             holder.btnComments.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,6 +80,9 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                         if (mContext instanceof AcitivityTruckDetail) {
                             ((AcitivityTruckDetail) mContext).showLikedSnackbar();
                         }
+                        else if(mContext instanceof AcitivityTruckReview){
+                            ((AcitivityTruckReview) mContext).showLikedSnackbar();
+                        }
                     }
                     }
                 });
@@ -91,6 +96,9 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                         if(!reviewitems.get(position).isLiked()){
                             if (mContext instanceof AcitivityTruckDetail) {
                                 ((AcitivityTruckDetail) mContext).showLikedSnackbar();
+                            }
+                            else if(mContext instanceof AcitivityTruckReview){
+                                ((AcitivityTruckReview) mContext).showLikedSnackbar();
                             }
                     }
 

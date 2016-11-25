@@ -43,7 +43,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 
 public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,
-        OnMapReadyCallback{
+        OnMapReadyCallback, View.OnClickListener{
 
     private Toolbar toolbar;
     public GoogleMap map;
@@ -86,11 +86,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.menuitem,
             R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,0,0,0};
 
-
-
     private ArrayList<ReviewModel> reviewitems = new ArrayList<>();
-    private static final Integer[] CenterIMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,
-            R.drawable.menuitem4,R.drawable.menuitem5};
+    private static final Integer[] CenterIMAGES= {0, 0, 0, R.drawable.menuitem2,R.drawable.menuitem3};
 
     private static final Integer[] BottomIMAGES= {R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,
             R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,R.drawable.img_feed_bottom_1};
@@ -286,5 +283,13 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     }
     public void showLikedSnackbar() {
         Snackbar.make(clContent, "Liked!", Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.btn_review_more){
+            Intent intent = new Intent(this, AcitivityTruckReview.class);
+            this.startActivity(intent);
+        }
     }
 }

@@ -29,7 +29,7 @@ public class FoodTruckModel {
     private String FT_START;
     @SerializedName("payment_card")
     private String FT_PAYMENT;
-    @SerializedName("truck_image")
+    @SerializedName("image")
     private FoodTruckUrlModel FT_IMAGE_URL;
     @SerializedName("lat")
 //    @SerializedName("Position_Y")
