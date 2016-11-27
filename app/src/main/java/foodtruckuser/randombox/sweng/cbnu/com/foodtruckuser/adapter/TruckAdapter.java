@@ -16,8 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
 
 public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHolder>  {
 

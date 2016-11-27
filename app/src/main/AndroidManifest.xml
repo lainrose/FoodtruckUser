@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -21,7 +23,7 @@
             android:hardwareAccelerated="true"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name=".ui.SubMain.FragmentSubMain"
+            android:name=".ui.SubMain.Fragment.FragmentSubMain"
             android:supportsRtl="true"
             android:theme="@style/MyMaterialTheme" />
         <activity
@@ -36,8 +38,10 @@
         <activity android:name=".ui.join.JoinMain" />
         <activity android:name=".ui.join.sign.SigninActivity" />
         <activity android:name=".ui.join.sign.SignupActivity" />
-        <activity android:name=".ui.SubMain.CommentsActivity"/>
-        <activity android:name=".ui.SubMain.AcitivityTruckReview"/>
+        <activity android:name=".ui.SubMain.Acitivity.ActivityComments"/>
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckReview"/>
+        <activity android:name=".ui.SubMain.Acitivity.ActivityMap"/>
+        <activity android:name=".ui.SubMain.Acitivity.ActivityWebView"/>
 
         <!-- 페이스북 메타 데이터들 -->
         <meta-data
@@ -60,8 +64,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ui.SubMain.AcitivityTruckDetail" />
-        <activity android:name=".ui.SubMain.AcitivityTruckMenu"></activity>
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail" />
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckMenu"></activity>
     </application>
 
 </manifest>

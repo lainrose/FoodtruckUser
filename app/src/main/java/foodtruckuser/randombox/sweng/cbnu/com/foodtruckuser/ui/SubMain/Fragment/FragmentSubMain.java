@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;

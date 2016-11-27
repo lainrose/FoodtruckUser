@@ -15,12 +15,14 @@ import android.widget.Toast;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 
 public class FragmentMain extends AppCompatActivity {
-    DrawerLayout mDrawerLayout;
-    NavigationView mNavigationView;
-    FragmentManager mFragmentManager;
-    FragmentTransaction mFragmentTransaction;
+
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
     private Toolbar toolbar;
-    private long lastItemBackPress;
+    private long backKeyPressedTime = 0;
+    private Toast toast;
 
 
     @Override
@@ -76,13 +78,22 @@ public class FragmentMain extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
     }
+
     @Override
     public void onBackPressed(){
-        if(System.currentTimeMillis() - lastItemBackPress > 1500){
-            finish();
+
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            showGuide();
             return;
         }
-        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_LONG).show();
-        lastItemBackPress = System.currentTimeMillis();
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            finish();
+            toast.cancel();
+        }
+    }
+    public void showGuide() {
+        toast = Toast.makeText(getApplication(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

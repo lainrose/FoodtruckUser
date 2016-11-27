@@ -1,5 +1,6 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,7 @@ public class AcitivityTruckReview extends AppCompatActivity {
     private RecyclerView review_view;
     private Toolbar toolbar;
     private LinearLayout clContent;
+    private String btnName;
 
     private ArrayList<ReviewModel> reviewitems = new ArrayList<>();
 
@@ -51,9 +53,10 @@ public class AcitivityTruckReview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_review);
         clContent = (LinearLayout) findViewById(R.id.content);
-
+        Intent intent = getIntent();
+        btnName  = intent.getExtras().getString("Key");
         setupToolbar();
-        initFT();
+        initView();
         initReviewView();
     }
 
@@ -90,7 +93,7 @@ public class AcitivityTruckReview extends AppCompatActivity {
         review_view.setItemAnimator(new ReviewItemAnimator());
     }
 
-    private void initFT() {
+    private void initFT(){
         reviewitems.clear();
         for (int i = 0; i < 5; i++) {
             ReviewModel item1 = new ReviewModel();
@@ -103,8 +106,27 @@ public class AcitivityTruckReview extends AppCompatActivity {
             reviewitems.add(item1);
         }
     }
+    private void initView() {
+        if(btnName.equals("btn_review_more")){
+            initFT();
+        }
+        else if(btnName.equals("emoticonBtn1")){
+            initFT();
+        }
+        else if(btnName.equals("emoticonBtn2")){
+            initFT();
+        }
+        else if(btnName.equals("emoticonBtn3")){
+            initFT();
+        }
+    }
 
     public void showLikedSnackbar() {
         Snackbar.make(clContent, "Liked!", Snackbar.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 }

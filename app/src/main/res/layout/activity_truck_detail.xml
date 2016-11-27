@@ -75,15 +75,17 @@
                         <com.sackcentury.shinebuttonlib.ShineButton
                             android:layout_width="30dip"
                             android:layout_height="30dip"
-                            android:id="@+id/po_image"
+                            android:id="@+id/likebtn"
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="10dp"
                             android:focusable="false"
                             app:btn_color="@android:color/darker_gray"
                             app:btn_fill_color="@color/colorPrimary"
                             app:enable_flashing="true"
-                            app:siShape="@raw/heart" />
+                            app:siShape="@raw/heart"
+                            android:onClick="onClick"/>
                         <TextView
+                            android:id="@+id/titleTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
@@ -93,8 +95,7 @@
                             android:textStyle="bold"
                             android:textSize="23sp"
                             android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:id="@+id/titleTextView"/>
+                            android:layout_alignParentEnd="true" />
                     </RelativeLayout>
                     <TextView
                         android:layout_width="match_parent"
@@ -105,7 +106,7 @@
                         android:layout_marginBottom="10dp"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size"
-                        android:id="@+id/hashTextView"/>
+                        android:id="@+id/hashTextView" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,7 +122,7 @@
                             android:textColor="@color/colorPrimary"
                             android:text="999"
                             android:gravity="bottom"
-                            android:id="@+id/reviewTextView"/>
+                            android:id="@+id/reviewCountTextView" />
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -141,7 +142,7 @@
                             android:paddingRight="10dp">
 
                             <com.hedgehog.ratingbar.RatingBar
-                                android:id="@+id/ratingbar"
+                                android:id="@+id/Ratingbar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
@@ -195,7 +196,7 @@
                     android:layout_height="170dp">
 
                     <com.google.android.gms.maps.MapView
-                        android:id="@+id/map"
+                        android:id="@+id/truck_detail_map"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#ffffff"
@@ -209,26 +210,26 @@
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="5dp">
                         <ImageView
-                            android:layout_marginLeft="10dp"
-                            android:gravity="center_vertical"
+                            android:layout_gravity="center"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:src="@drawable/ic_check_off"
-                            android:layout_gravity="left"
-                            android:id="@+id/imageView2" />
+                            android:src="@drawable/ic_check_on"
+                            android:id="@+id/openImage" />
                         <TextView
+                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="영업 전"
-                            android:layout_gravity="center"
-                            android:textAlignment="textEnd"
                             android:textColor="#000000"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:id="@+id/openText" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -253,13 +254,15 @@
                                 android:layout_height="wrap_content"
                                 android:text="영업종료 : "
                                 android:textStyle="bold"
-                                android:textColor="@color/darkness"/>
+                                android:textColor="@color/darkness"
+                                android:id="@+id/openingText" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="11월 24일 오후 19시 20분"
                                 android:textStyle="bold"
-                                android:textColor="@color/darkness"/>
+                                android:textColor="@color/darkness"
+                                android:id="@+id/openingText1"/>
 
                         </LinearLayout>
 
@@ -268,8 +271,8 @@
                             android:layout_height="wrap_content"
                             android:text="(9시간 22분 경과)"
                             android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="@color/darkness"/>
+                            android:textColor="@color/darkness"
+                            android:id="@+id/openingText2"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -294,7 +297,8 @@
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:text="전라북도 전주시 덕진구 덕진동1가 664-14"
                         android:textColor="@android:color/primary_text_light"
-                        android:id="@+id/addressTextView"/>
+                        android:id="@+id/addressTextView"
+                        android:onClick="onClick"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -330,6 +334,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:onClick="onClick"
+                    android:id="@+id/phoneTextLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -375,7 +381,7 @@
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:text="평일 10 AM - 9 PM"
                         android:textColor="@android:color/primary_text_light"
-                        android:id="@+id/operateTextView"/>
+                        android:id="@+id/opentileTextView"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -405,8 +411,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="10dp"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        android:scrollbarAlwaysDrawHorizontalTrack="false"/>
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -447,7 +452,9 @@
                             android:padding="0sp"
                             android:background="#ffffff"
                             android:layout_width="48dp"
-                            android:layout_height="48dp">
+                            android:layout_height="48dp"
+                            android:id="@+id/emoticonBtn1"
+                            android:onClick="onClick">
                         </ImageButton>
                         <TextView
                             android:layout_width="match_parent"
@@ -457,7 +464,8 @@
                             android:paddingBottom="3dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="10dp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:id="@+id/emoticonText1"/>
                     </LinearLayout>
                     <View
                         android:layout_width="1dp"
@@ -478,7 +486,9 @@
                             android:padding="0sp"
                             android:background="#ffffff"
                             android:layout_width="48dp"
-                            android:layout_height="48dp">
+                            android:layout_height="48dp"
+                            android:id="@+id/emoticonBtn2"
+                            android:onClick="onClick">
                         </ImageButton>
 
                         <TextView
@@ -489,7 +499,8 @@
                             android:paddingBottom="3dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="10dp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:id="@+id/emoticonText2"/>
                     </LinearLayout>
                     <View
                         android:layout_width="1dp"
@@ -510,7 +521,9 @@
                             android:padding="0sp"
                             android:background="#ffffff"
                             android:layout_width="48dp"
-                            android:layout_height="48dp">
+                            android:layout_height="48dp"
+                            android:id="@+id/emoticonBtn3"
+                            android:onClick="onClick">
                         </ImageButton>
                         <TextView
                             android:layout_width="match_parent"
@@ -520,7 +533,8 @@
                             android:paddingBottom="3dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="10dp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:id="@+id/emoticonText3"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -532,9 +546,7 @@
                         android:background="#D5D5D5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        android:scrollbarAlwaysDrawHorizontalTrack="false"
-                        android:scrollbars="vertical"/>
+                        android:scrollbarAlwaysDrawHorizontalTrack="false" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -580,7 +592,9 @@
                         android:textSize="10dp"
                         android:layout_gravity="center_horizontal"
                         android:textColor="#000000"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:id="@+id/visitHomepage"
+                        android:onClick="onClick"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

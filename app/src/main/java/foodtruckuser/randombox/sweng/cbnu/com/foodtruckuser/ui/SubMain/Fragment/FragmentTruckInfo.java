@@ -1,27 +1,16 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Fragment;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -31,26 +20,18 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hedgehog.ratingbar.RatingBar;
-import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMap;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.SentFragment;
 
 /**
  * Created by Ratan on 7/29/2015.
@@ -123,7 +104,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         // Map 을 zoom 합니다.
         map.animateCamera(CameraUpdateFactory.zoomTo(14));
 
-        RatingBar mRatingBar = (RatingBar)view.findViewById(R.id.ratingbar);
+        RatingBar mRatingBar = (RatingBar)view.findViewById(R.id.Ratingbar);
         mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.drawable.ic_star_empty));
         mRatingBar.setStarFillDrawable(getResources().getDrawable(R.drawable.ic_star_fill));
         mRatingBar.setStarCount(5);

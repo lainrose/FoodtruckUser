@@ -2,14 +2,11 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckMenu;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 

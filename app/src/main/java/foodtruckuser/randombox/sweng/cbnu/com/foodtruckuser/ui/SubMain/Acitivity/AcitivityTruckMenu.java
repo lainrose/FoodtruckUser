@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,5 +74,10 @@ public class AcitivityTruckMenu extends AppCompatActivity {
             item2.setTitle(TITLES[i]);
             menuitems.add(item2);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 }

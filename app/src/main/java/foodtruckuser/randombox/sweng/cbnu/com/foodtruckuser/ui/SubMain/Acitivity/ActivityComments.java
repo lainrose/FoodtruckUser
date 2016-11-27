@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -28,7 +28,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.CommentsAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.CommentsModel;
 
-public class CommentsActivity extends AppCompatActivity {
+public class ActivityComments extends AppCompatActivity {
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
 
     private RecyclerView commentsView;
@@ -94,7 +94,16 @@ public class CommentsActivity extends AppCompatActivity {
         });
         widthAnimation.start();
     }
-
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // NavUtils.navigateUpFromSameTask(this);
+                finish();
+                overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,5 +119,10 @@ public class CommentsActivity extends AppCompatActivity {
             item.setImage(FT_IMAGES[i]);
             commentslist.add(item);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 }

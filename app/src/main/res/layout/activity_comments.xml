@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
 
     <android.support.v7.widget.Toolbar
@@ -25,23 +26,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
-        <FrameLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvComments"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/shadow_top" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvComments"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none" />
-        </FrameLayout>
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:layout_weight="1"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow_top" />
 
         <LinearLayout
             android:id="@+id/llAddComment"
@@ -56,10 +51,10 @@
             android:paddingTop="8dp">
 
             <EditText
-            android:id="@+id/etComment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+                android:id="@+id/etComment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:singleLine="false"
                 android:selectAllOnFocus="false"
                 android:visibility="visible" />
@@ -76,4 +71,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

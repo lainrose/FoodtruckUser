@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,17 +37,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;

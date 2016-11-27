@@ -1,19 +1,12 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.nightonke.boommenu.CircleButton;
-import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,8 +15,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.FragmentSubMain;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMap;
 
 public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckViewHolder> {
 

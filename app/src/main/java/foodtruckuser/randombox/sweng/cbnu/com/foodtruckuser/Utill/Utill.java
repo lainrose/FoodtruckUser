@@ -1,18 +1,20 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Random;
 
-/**
- * Created by son on 2016-11-05.
- */
 public class Utill {
 
     private static Utill utill = null;
@@ -66,9 +68,37 @@ public class Utill {
     public static boolean isAndroid5() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
+    public static boolean isAndroid4(){
+        return android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB;
+    }
     public static int getRandomColor() {
         Random random = new Random();
         int p = random.nextInt(Colors.length);
         return Color.parseColor(Colors[p]);
+    }
+    public void MoveAcitivity(Context context, final Class<? extends Activity> ActivityToOpen, String parm) {
+        Intent intent = new Intent(context, ActivityToOpen);
+        intent.putExtra("Key", parm);
+        context.startActivity(intent);
+    }
+    public void MoveAcitivity(Context context, final Class<? extends Activity> ActivityToOpen, int parm) {
+        Intent intent = new Intent(context, ActivityToOpen);
+        intent.putExtra("Key", parm);
+        context.startActivity(intent);
+    }
+    public void MoveAcitivity(Context context, final Class<? extends Activity> ActivityToOpen, Double parm, Double parm1) {
+        Intent intent = new Intent(context, ActivityToOpen);
+        intent.putExtra("Key", parm);
+        intent.putExtra("Key1", parm1);
+        context.startActivity(intent);
+    }
+    public void MoveAcitivity(Context context, final Class<? extends Activity> ActivityToOpen) {
+        Intent intent = new Intent(context, ActivityToOpen);
+        context.startActivity(intent);
+    }
+    public void MoveAcitivity(Context context, String phoneText) {
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:"+phoneText));
+        context.startActivity(callIntent);
     }
 }

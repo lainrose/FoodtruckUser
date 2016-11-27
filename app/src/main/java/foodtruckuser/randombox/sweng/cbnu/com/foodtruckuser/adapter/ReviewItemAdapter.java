@@ -13,17 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
-import com.google.android.gms.vision.text.Text;
 import com.sackcentury.shinebuttonlib.ShineButton;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckDetail;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.AcitivityTruckReview;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.CommentsActivity;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckReview;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.ActivityComments;
 
 public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.ReviewViewHolder>  {
 
@@ -84,12 +82,14 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                      }
                 }
             });
-            holder.likebutton.setOnClickListener(new View.OnClickListener() {
+
+            holder.reviewlikebutton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {reviewitems.get(position).setLikesCount(reviewitems.get(position).isLiked() ?
+                public void onClick(View view) {
+                    reviewitems.get(position).setLikesCount(reviewitems.get(position).isLiked() ?
                         reviewitems.get(position).getLikesCount()-1 : reviewitems.get(position).getLikesCount()+1);
                     reviewitems.get(position).setLiked(reviewitems.get(position).isLiked() ? false : true);
-                    if(!reviewitems.get(position).isLiked()){
+                    if(reviewitems.get(position).isLiked()){
                         if (mContext instanceof AcitivityTruckDetail) {
                             ((AcitivityTruckDetail) mContext).showLikedSnackbar();
                         }
@@ -102,10 +102,10 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
             holder.btnComments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final Intent intent = new Intent(mContext, CommentsActivity.class);
+                    final Intent intent = new Intent(mContext, ActivityComments.class);
                     int[] startingLocation = new int[2];
                     view.getLocationOnScreen(startingLocation);
-                    intent.putExtra(CommentsActivity.ARG_DRAWING_START_LOCATION, startingLocation[1]);
+                    intent.putExtra(ActivityComments.ARG_DRAWING_START_LOCATION, startingLocation[1]);
                     mContext.startActivity(intent);
 
                 }
@@ -134,7 +134,7 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
             public ImageView ivLike;
             public TextSwitcher tsLikesCounter;
             public FrameLayout vImageRoot;
-            public ShineButton likebutton;
+            public ShineButton reviewlikebutton;
 
             public ReviewViewHolder(View v) {
                 super(v);
@@ -148,7 +148,7 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                 ivLike = (ImageView)v.findViewById(R.id.ivLike);
                 tsLikesCounter = (TextSwitcher)v.findViewById(R.id.tsLikesCounter);
                 vImageRoot = (FrameLayout)v.findViewById(R.id.vImageRoot);
-                likebutton = (ShineButton)v.findViewById(R.id.po_image);
+                reviewlikebutton = (ShineButton)v.findViewById(R.id.po_image2);
 
             }
         }
