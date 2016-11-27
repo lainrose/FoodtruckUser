@@ -256,7 +256,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                 Log.d("item", "i : " + String.valueOf(i));
                 optFirst = new MarkerOptions();
                 // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
-                TruckLatLng.add(new LatLng(item.getFT_LAT(), item.getFT_LNG()));//[i] = new LatLng(item.getFT_LAT(), item.getFT_LNG());
+                TruckLatLng.add(new LatLng(item.getFT_LAT(), item.getFT_LNG()));
                 item.setFT_LOCATIONNAME(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
                 optFirst.position(TruckLatLng.get(i));
                 optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));

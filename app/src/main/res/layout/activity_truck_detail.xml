@@ -30,7 +30,6 @@
                     android:id="@+id/header"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_height"
-                    android:background="@drawable/truck1"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"/>
@@ -89,7 +88,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
-                            android:text="스테이크 하우스"
                             android:textColor="@color/colorPrimary"
                             android:layout_marginLeft="10dp"
                             android:textStyle="bold"
@@ -256,23 +254,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/darkness"
                                 android:id="@+id/openingText" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="11월 24일 오후 19시 20분"
-                                android:textStyle="bold"
-                                android:textColor="@color/darkness"
-                                android:id="@+id/openingText1"/>
-
                         </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="(9시간 22분 경과)"
-                            android:textStyle="bold"
-                            android:textColor="@color/darkness"
-                            android:id="@+id/openingText2"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -295,7 +277,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="전라북도 전주시 덕진구 덕진동1가 664-14"
+                        android:text=""
                         android:textColor="@android:color/primary_text_light"
                         android:id="@+id/addressTextView"
                         android:onClick="onClick"/>

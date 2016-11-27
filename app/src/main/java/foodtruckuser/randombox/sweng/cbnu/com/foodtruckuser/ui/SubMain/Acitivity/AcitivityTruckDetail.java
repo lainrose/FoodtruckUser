@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,8 +29,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hedgehog.ratingbar.RatingBar;
-import com.nightonke.boommenu.Util;
 import com.sackcentury.shinebuttonlib.ShineButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
@@ -57,6 +56,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
     private CoordinatorLayout clContent;
+    private ImageView ivHeaderImage;
     private RecyclerView menu_view;
     private RecyclerView review_view;
     private MenuAdapter menuAdapter;
@@ -68,6 +68,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     private ArrayList<ReviewModel> reviewitems = new ArrayList<>();
     private ArrayList<MenuModel> menuitems = new ArrayList<>();
     private FoodTruckModel item;
+
+    String Url="https://server-blackdog11.c9users.io/";
 
     private String FT_NAME[] = {"도현트럭","의범트럭",
             "영빈트럭","현표트럭","현정트럭"};
@@ -127,13 +129,17 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         mContext = this;
         this.savedInstanceState = savedInstanceState;
 
-        item = new FoodTruckModel();
-        initId();
-        initToolbar();
+        item = (FoodTruckModel)getIntent().getSerializableExtra("clickedFoodTruck");
+        Log.d("TAG", "클릭된 푸드트럭 이름 : " + item.getFtName());
+
+
+        //item = new FoodTruckModel();
+        initId(item);
+        initToolbar(item);
         initCollapsingToolbar();
         initFT();
         initMap();
-        initRatingBar();
+        initRatingBar(item);
         initMenuView();
         initReviewView();
         likebtn.setOnClickListener(new View.OnClickListener() {
@@ -174,10 +180,10 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         return super.onOptionsItemSelected(item);
     }
     // 툴바 설정
-    private void initToolbar() {
+    private void initToolbar(FoodTruckModel item) {
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("스테이크 하우스");
+        getSupportActionBar().setTitle(item.getFtName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     // 리사이클러_리뷰 설정
@@ -219,14 +225,14 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         );
     }
     // 평점 설정
-    private void initRatingBar(){
+    private void initRatingBar(FoodTruckModel item){
         RatingBar mRatingBar = (RatingBar)findViewById(R.id.Ratingbar);
         mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.drawable.ic_star_empty));
         mRatingBar.setStarFillDrawable(getResources().getDrawable(R.drawable.ic_star_fill));
-        FoodTruckModel item = new FoodTruckModel();
+        mRatingBar.setStarHalfDrawable(getResources().getDrawable(R.drawable.ic_star_half));
         mRatingBar.setStarCount(5);
-        mRatingBar.setStar(item.getRatingTextView());
-        mRatingBar.halfStar(false);
+        mRatingBar.setStar((float)item.getFtRating());
+        mRatingBar.halfStar(true);
         mRatingBar.setmClickable(false);
         mRatingBar.setStarImageWidth(120f);
         mRatingBar.setStarImageHeight(60f);
@@ -263,7 +269,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         reviewitems.clear();
         for (int i = 0; i < 5; i++) {
             FoodTruckModel item = new FoodTruckModel();
-            item.setFtName(FT_NAME[i]);
+            //item.setFtName(FT_NAME[i]);
             item.setFtImage(FT_IMAGES[i]);
             item.setFtCategory(FT_CATEGORY[i]);
             item.setFtPayment(FT_PAYMENT[i]);
@@ -287,7 +293,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         }
     }
     // 화면에 뿌려질 id 연결 및 설정
-    private void initId(){
+    private void initId(FoodTruckModel item){
         setContentView(R.layout.activity_truck_detail);
 
         gpsService = new GpsService(this);
@@ -295,6 +301,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
         likebtn = (ShineButton)findViewById(R.id.likebtn);
+        ivHeaderImage = (ImageView)findViewById(R.id.header);
+
         TextView titleTextView = (TextView)findViewById(R.id.titleTextView);
         TextView hashTextView = (TextView)findViewById(R.id.hashTextView);
         TextView reviewCountTextView = (TextView)findViewById(R.id.reviewCountTextView);
@@ -303,8 +311,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         ImageView openImage = (ImageView)findViewById(R.id.openImage);
         TextView openText = (TextView)findViewById(R.id.openText);
         TextView openingText = (TextView)findViewById(R.id.openingText);
-        TextView openingText1 = (TextView)findViewById(R.id.openingText1);
-        TextView openingText2 = (TextView)findViewById(R.id.openingText2);
+//        TextView openingText1 = (TextView)findViewById(R.id.openingText1);
+//        TextView openingText2 = (TextView)findViewById(R.id.openingText2);
         TextView addressTextView = (TextView)findViewById(R.id.addressTextView);
         TextView timerTextView = (TextView)findViewById(R.id.timerTextView);
         TextView phoneTextView = (TextView)findViewById(R.id.phoneTextView);
@@ -313,24 +321,40 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         TextView emoticonText2 = (TextView)findViewById(R.id.emoticonText2);
         TextView emoticonText3 = (TextView)findViewById(R.id.emoticonText3);
 
-        FoodTruckModel item = new FoodTruckModel();
+        //FoodTruckModel item = new FoodTruckModel();
         Drawable ic_check_on = getResources().getDrawable(R.drawable.ic_check_on);
         Drawable ic_check_off = getResources().getDrawable(R.drawable.ic_check_off);
 
-        titleTextView.setText(item.getTitleTextView());
-        hashTextView.setText(item.getHashTextView());
-        reviewCountTextView.setText(""+item.getReviewTextView());
-        likeTextView.setText(""+item.getLikeTextView());
-        ratingTextView.setText(""+item.getRatingTextView());
-        openImage.setImageDrawable(item.getOpenText() ? ic_check_on : ic_check_off);
-        openText.setText(item.getOpenText() ? "영업 중" : "영업 전");
-        openingText.setText(item.getOpenText() ? "영업 중" : "영업 종료");
-        openingText1.setText(item.getOpeningText1());
-        openingText2.setText(item.getOpeningText2());
-        addressTextView.setText(gpsService.findAddress(FT_X[0], FT_Y[0]));
+        //이미지 : 완료
+        Picasso.with(mContext).load(Url + item.getFT_IMAGE_URL().getUrl()).into(ivHeaderImage);
+        titleTextView.setText(item.getFtName());
+        //태그 : 완료
+        hashTextView.setText(item.getFtTag());
+        //리뷰 카운트 수 : 완료
+        reviewCountTextView.setText(""+item.getFT_REVIEW_NUM());
+        //좋아요 카운트 수 : 완료
+        likeTextView.setText(""+item.getFT_LIKE_NUM());
+        //평점 : 완료
+        ratingTextView.setText(""+item.getFtRating());
+        //영업중 이미지 : 완료
+        openImage.setImageDrawable(item.isFT_isOPEN() ? ic_check_on : ic_check_off);
+        //영업중 이미지 아래 텍스트 : 완료
+        openText.setText(item.isFT_isOPEN() ? "영업 중" : "영업 전");
+        //영업중 이미지 옆 텍스트. : 완료
+        openingText.setText(item.isFT_isOPEN() ? "영업 중" : "영업 종료");
+//        //영업중이면 null, 영업 종료면 몇시에 영업종료 했는지
+//        openingText1.setText(item.getOpeningText1());
+//        //영업중이면 영업 시작부터 지금까지 시간, 영업 종료면 영업 종료부터 지금까지 시간.
+//        openingText2.setText(item.getOpeningText2());
+        //주소
+        addressTextView.setText(gpsService.findAddress(item.getFT_LAT(),item.getFT_LNG()));
+        //현 위치로부터 트럭이 몇분 거리에 떨어져있는지
         timerTextView.setText(item.getTimerTextView());
+        //핸드폰 번호
         phoneTextView.setText(item.getPhoneTextView());
-        opentileTextView.setText(item.getOpentileTextView());
+        //아마 영업시간 텍스트뷰
+        opentileTextView.setText(item.getOpentimeTextView());
+        //이건 안고쳐도 될듯
         emoticonText1.setText("맛있다! (" + item.getEmoticonText1() + ")");
         emoticonText2.setText("괜찮다 (" + item.getEmoticonText2() + ")");
         emoticonText3.setText("별로 (" +item.getEmoticonText3() + ")");
@@ -374,10 +398,10 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         else if(view.getId() == R.id.addressTextView){
             if(Utill.isAndroid4()) {
                 android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboard.setText(item.getAddressTextView());
+                clipboard.setText(gpsService.findAddress(item.getFT_LAT(),item.getFT_LNG()));
             } else {
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                android.content.ClipData clip = android.content.ClipData.newPlainText("주소가 복사되었습니다.", item.getAddressTextView());
+                android.content.ClipData clip = android.content.ClipData.newPlainText("주소가 복사되었습니다.", gpsService.findAddress(item.getFT_LAT(),item.getFT_LNG()));
                 clipboard.setPrimaryClip(clip);
             }
         }

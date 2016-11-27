@@ -79,6 +79,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                     Log.d("TAG", "해당 아이템 번호 = "+position);
                     //TruckName = homeList.get(position).getFtName();
                     Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
+                    submain.putExtra("clickedFoodTruck", homeList.get(position));
                     mContext.startActivity(submain);
                     //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
                 }
@@ -86,14 +87,14 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             holder.shineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!homeList.get(position).getFtLike()){
+                    if(!homeList.get(position).isFT_LIKE()){
                         Toast.makeText(mContext, holder.titleTextView.getText()+"을"+ " 좋아요!", Toast.LENGTH_SHORT).show();
-                        homeList.get(position).setFtLike(true);
+                        homeList.get(position).setFT_LIKE(true);
                         myTruckList.add(homeList.get(position));
                     }
                     else{
                         Toast.makeText(mContext, holder.titleTextView.getText()+"을"+ " 싫어요!", Toast.LENGTH_SHORT).show();
-                        homeList.get(position).setFtLike(false);
+                        homeList.get(position).setFT_LIKE(false);
                         myTruckList.remove(homeList.get(position));
                     }
                 }
