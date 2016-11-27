@@ -97,19 +97,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         });
         layout.setRefreshing(false);
 
-        //플로팅 아이콘
-        boomMenuButton = (BoomMenuButton) view.findViewById(R.id.boom);
-        viewTreeObserver = view.getViewTreeObserver();
-        viewTreeObserver.addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
-            @Override
-            public void onWindowFocusChanged(final boolean hasFocus) {
-                if (init) return;
-                init = true;
-                initBoom();
-            }
-        });
-        initBoom();
-
         //리사이클뷰(카드뷰)
         myRecyclerView = (RecyclerView) view.findViewById(R.id.cardView);
         myRecyclerView.setHasFixedSize(true);
@@ -125,6 +112,19 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 //                showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
 //            }
 //        }, 1000);
+
+        //플로팅 아이콘
+        boomMenuButton = (BoomMenuButton) view.findViewById(R.id.boom);
+        viewTreeObserver = view.getViewTreeObserver();
+        viewTreeObserver.addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
+            @Override
+            public void onWindowFocusChanged(final boolean hasFocus) {
+                if (init) return;
+                init = true;
+                initBoom();
+            }
+        });
+        initBoom();
 
         return view;
     }
@@ -251,8 +251,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 R.drawable.mark, R.drawable.refresh, R.drawable.copy, R.drawable.heart,
                 R.drawable.info, R.drawable.like, R.drawable.record, R.drawable.search, R.drawable.settings
         };
-        for (int i = 0; i < number; i++)
-            drawables[i] = ContextCompat.getDrawable(getContext(), drawablesResource[i]);
 
         String[] STRINGS = new String[]{
                 "전체", "한식", "일식", "양식", "중식", "분식", "디저트", "음료", "셋팅"
@@ -266,7 +264,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             colors[i][1] = Utill.getInstance().getRandomColor();
             colors[i][0] = Util.getInstance().getPressedColor(colors[i][1]);
         }
-
+        for (int i = 0; i < number; i++)
+            drawables[i] = ContextCompat.getDrawable(getContext(), drawablesResource[i]);
         // Now with Builder, you can init BMB more convenient
         new BoomMenuButton.Builder()
                 .subButtons(drawables, colors, strings)

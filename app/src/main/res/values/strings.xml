@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">FoodtruckUser</string>
     <string name="facebook_app_id">1758413267779561</string>
+    <string name="kakao_app_key">13460e24099c79a63a52fb27f048a86a</string>
+    <string name="kakao_scheme">kakao13460e24099c79a63a52fb27f048a86a</string>
+    <string name="kakaolink_host">kakaolink</string>
+
+
     <string name="send_to">Share</string>
     <plurals name="likes_count">
         <item quantity="one">%d like</item>
@@ -10,4 +15,24 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
+
+    <string name="order_id_mock" translatable="false">행사 정보</string>
+    <string name="price_mock" translatable="false">접기</string>
+    <string name="requests_count_mock" translatable="false">5</string>
+    <string name="requests_count_badge" translatable="false">입점 신청</string>
+    <string name="weight_badge" translatable="false">상세 정보</string>
+    <string name="sender_badge" translatable="false">행사 내용</string>
+    <string name="client_name_mock" translatable="false">Edward Norton</string>
+    <string name="from_badge" translatable="false">모집트럭 수 </string>
+    <string name="to_badge" translatable="false">신청트럭 수</string>
+    <string name="delivery_date_badge" translatable="false">지원 종류</string>
+    <string name="delivery_time_mock" translatable="false">무관</string>
+    <string name="delivery_date_mock" translatable="false">May 16, 2016</string>
+    <string name="deadline_badge" translatable="false">REQUEST DEADLINE</string>
+    <string name="deadline_time_mock" translatable="false">24 minutes</string>
+    <string name="request_btn_text" translatable="false">입점 신청하기</string>
+    <string name="btn_annotation_mock" translatable="false">이 행사에 참가신청을 원하면 버튼을 눌러주세요</string>
+    <string name="content_from1_mock">20대</string>
+    <string name="content_to1_mock">7대</string>
 </resources>

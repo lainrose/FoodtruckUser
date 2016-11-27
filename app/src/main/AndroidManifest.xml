@@ -12,7 +12,6 @@
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -42,6 +41,18 @@
         <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckReview"/>
         <activity android:name=".ui.SubMain.Acitivity.ActivityMap"/>
         <activity android:name=".ui.SubMain.Acitivity.ActivityWebView"/>
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail" >
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="@string/kakao_scheme"
+                android:host="@string/kakaolink_host" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckMenu"></activity>
+        <activity android:name=".ui.NaviagtionMain.AcitivityMyReview"/>
 
         <!-- 페이스북 메타 데이터들 -->
         <meta-data
@@ -63,9 +74,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!-- 카카오 메타 데이터들 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
-        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail" />
-        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckMenu"></activity>
     </application>
 
 </manifest>

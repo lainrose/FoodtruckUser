@@ -94,6 +94,7 @@ public class Utill {
     }
     public void MoveAcitivity(Context context, final Class<? extends Activity> ActivityToOpen) {
         Intent intent = new Intent(context, ActivityToOpen);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
     public void MoveAcitivity(Context context, String phoneText) {

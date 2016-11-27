@@ -13,6 +13,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.AcitivityMyReview;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.FragmentFestive;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.FragmentMyReview;
 
 public class FragmentMain extends AppCompatActivity {
 
@@ -49,15 +53,23 @@ public class FragmentMain extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
-                if (menuItem.getItemId() == R.id.nav_item_sent) {
+                if (menuItem.getItemId() == R.id.menu_home) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new SentFragment()).commit();
-
+                    fragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
                 }
-
-                if (menuItem.getItemId() == R.id.nav_item_inbox) {
+                else if (menuItem.getItemId() == R.id.menu_festival) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new FragmentFestive()).commit();
+                }
+                else if (menuItem.getItemId() == R.id.menu_review) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView, new FragmentMyReview()).commit();
+                }
+                else if (menuItem.getItemId() == R.id.menu_settings) {
+                    //
+                }
+                else if (menuItem.getItemId() == R.id.menu_about) {
+                    //
                 }
 
                 return false;

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -29,6 +32,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hedgehog.ratingbar.RatingBar;
+import com.kakao.kakaolink.KakaoLink;
+import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
+import com.kakao.util.KakaoParameterException;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
@@ -120,6 +126,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             "본인기분 상한 것을 \n" +
             "화풀이 하지 않았으면합니다.", "악플러는 본인글 읽어보고 망신인거 알고\n" +
             "반성하고 미안한 마음좀 갖길바랍니다."};
+        private KakaoLink kakaoLink;
+    private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
 
 
     @Override
@@ -136,6 +144,39 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         //item = new FoodTruckModel();
         initId(item);
         initToolbar(item);
+        item = new FoodTruckModel();
+        //카톡공유
+        try {
+            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+        } catch (KakaoParameterException e) {
+            alert(e.getMessage());
+        }
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendKakaoTalkLink();
+                kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+            }
+        });
+        //페북공유
+        FloatingActionButton actionB = (FloatingActionButton) findViewById(R.id.action_b);
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("패브","클릭");
+            }
+        });
+        //리뷰쓰기
+        FloatingActionButton actionC = (FloatingActionButton) findViewById(R.id.action_c);
+        actionC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("패브","클릭");            }
+        });
+
         initCollapsingToolbar();
         initFT();
         initMap();
@@ -410,5 +451,38 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+    }
+    private void sendKakaoTalkLink() {
+        try {
+            //텍스트띄움
+            kakaoTalkLinkMessageBuilder.addText("맜있는 푸드트럭!!!!!");
+
+            //이미지띄움 (아이콘 이미지)
+            kakaoTalkLinkMessageBuilder.addImage("http://ilyo.co.kr/contents/article/images/2016/0909/1473355983769129.jpg", 300, 200);
+            kakaoTalkLinkMessageBuilder.addWebLink("겟잇트렁 다운받기", "http://www.naver.com");
+            /*
+            kakaoTalkLinkMessageBuilder.addAppLink("http://www.naver.com"),
+                    new AppActionBuilder()
+                            .addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder().setExecuteParam("execparamkey1=1111").setMarketParam("referrer=kakaotalklink").build())
+                            .addActionInfo(AppActionInfoBuilder.createiOSActionInfoBuilder(AppActionBuilder.DEVICE_TYPE.PHONE).setExecuteParam("execparamkey1=1111").build()).build()
+            );
+            */
+            //버튼글씨
+            kakaoTalkLinkMessageBuilder.addAppButton("해당 앱 실행하기");
+            kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, this);
+            //보내라 메시지
+        } catch (KakaoParameterException e) {
+            alert(e.getMessage());
+        }
+    }
+
+    //대화상자띄우기
+    private void alert(String message) {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.app_name)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .create().show();
     }
 }

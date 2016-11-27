@@ -1,4 +1,4 @@
-package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
+package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
