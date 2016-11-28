@@ -542,9 +542,14 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
                 Log.d("TAG", "바디: " + response.body().toString());
 
-                //트럭 디테일에서는 일부분만 보여줘용
-                for(int i = 0; i < 5; i++) {
-                    menuitems.add(menuList.get(i));
+                if(menuitems.size() >= 5) {
+                    for(int i = 0; i < 5; i++) {
+                        menuitems.add(menuList.get(i));
+                    }
+                } else {
+                    for (MenuModel menu: menuList) {
+                        menuitems.add(menu);
+                    }
                 }
                 showMenuCardViewList(menuitems); //서버에서 받아오면 카드뷰 그려주게하기
             }
