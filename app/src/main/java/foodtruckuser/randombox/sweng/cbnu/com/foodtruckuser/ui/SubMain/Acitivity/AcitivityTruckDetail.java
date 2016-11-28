@@ -185,7 +185,9 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         actionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("패브","클릭");            }
+                Utill.getInstance().MoveAcitivity(getApplicationContext(), AcitivityWriting.class);
+                overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+            }
         });
 
         initCollapsingToolbar();

@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -37,22 +36,24 @@
         <activity android:name=".ui.join.JoinMain" />
         <activity android:name=".ui.join.sign.SigninActivity" />
         <activity android:name=".ui.join.sign.SignupActivity" />
-        <activity android:name=".ui.SubMain.Acitivity.ActivityComments"/>
-        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckReview"/>
-        <activity android:name=".ui.SubMain.Acitivity.ActivityMap"/>
-        <activity android:name=".ui.SubMain.Acitivity.ActivityWebView"/>
-        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail" >
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+        <activity android:name=".ui.SubMain.Acitivity.ActivityComments" />
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckReview" />
+        <activity android:name=".ui.SubMain.Acitivity.ActivityMap" />
+        <activity android:name=".ui.SubMain.Acitivity.ActivityWebView" />
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <data android:scheme="@string/kakao_scheme"
-                android:host="@string/kakaolink_host" />
-        </intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
+            </intent-filter>
         </activity>
-        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckMenu"></activity>
-        <activity android:name=".ui.NaviagtionMain.AcitivityMyReview"/>
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckMenu" />
+        <activity android:name=".ui.NaviagtionMain.AcitivityMyReview" />
 
         <!-- 페이스북 메타 데이터들 -->
         <meta-data
@@ -79,6 +80,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
+        <activity android:name=".ui.SubMain.Acitivity.AcitivityWriting"></activity>
     </application>
 
 </manifest>
