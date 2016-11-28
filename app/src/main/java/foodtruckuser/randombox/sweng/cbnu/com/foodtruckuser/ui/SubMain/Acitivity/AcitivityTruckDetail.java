@@ -1,7 +1,10 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -18,6 +21,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.common.ConnectionResult;
@@ -74,6 +83,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     private ArrayList<ReviewModel> reviewitems = new ArrayList<>();
     private ArrayList<MenuModel> menuitems = new ArrayList<>();
     private FoodTruckModel item;
+    private ShareDialog shareDialog;
+    private CallbackManager callbackManager;
 
     String Url="https://server-blackdog11.c9users.io/";
 
@@ -166,7 +177,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         actionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("패브","클릭");
+                sendFcebookLink();
             }
         });
         //리뷰쓰기
@@ -343,6 +354,9 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
         likebtn = (ShineButton)findViewById(R.id.likebtn);
         ivHeaderImage = (ImageView)findViewById(R.id.header);
+        FacebookSdk.sdkInitialize(getApplicationContext()); //페이스북SDK 초기화
+        callbackManager = CallbackManager.Factory.create(); //콜백메소드 생성
+        shareDialog = new ShareDialog(this);
 
         TextView titleTextView = (TextView)findViewById(R.id.titleTextView);
         TextView hashTextView = (TextView)findViewById(R.id.hashTextView);
@@ -452,25 +466,37 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
+    private void sendFcebookLink(){
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle("푸드트럭 발전여부")
+                    .setContentDescription("푸드트럭 놀러오세요~")
+                    .setImageUrl(Uri.parse("http://ilyo.co.kr/contents/article/images/2016/0909/1473355983769129.jpg"))
+                    .setContentUrl(Uri.parse("http://software.jbnu.ac.kr"))
+                    .build();
+            shareDialog.show(linkContent);
+        }
+        /*
+        ShareLinkContent shareLinkContent = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .build();
+        int imageid = R.drawable.truck5;
+        Bitmap image = BitmapFactory.decodeResource(this.getResources(), imageid);
+                 SharePhoto sharePhoto = new SharePhoto.Builder()
+                .setBitmap(image)
+                .build();
+        SharePhotoContent photoContent = new SharePhotoContent.Builder()
+                .addPhoto(sharePhoto)
+                .build();
+                */
+    }
     private void sendKakaoTalkLink() {
         try {
-            //텍스트띄움
             kakaoTalkLinkMessageBuilder.addText("맜있는 푸드트럭!!!!!");
-
-            //이미지띄움 (아이콘 이미지)
-            kakaoTalkLinkMessageBuilder.addImage("http://ilyo.co.kr/contents/article/images/2016/0909/1473355983769129.jpg", 300, 200);
-            kakaoTalkLinkMessageBuilder.addWebLink("겟잇트렁 다운받기", "http://www.naver.com");
-            /*
-            kakaoTalkLinkMessageBuilder.addAppLink("http://www.naver.com"),
-                    new AppActionBuilder()
-                            .addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder().setExecuteParam("execparamkey1=1111").setMarketParam("referrer=kakaotalklink").build())
-                            .addActionInfo(AppActionInfoBuilder.createiOSActionInfoBuilder(AppActionBuilder.DEVICE_TYPE.PHONE).setExecuteParam("execparamkey1=1111").build()).build()
-            );
-            */
-            //버튼글씨
-            kakaoTalkLinkMessageBuilder.addAppButton("해당 앱 실행하기");
+            kakaoTalkLinkMessageBuilder.addImage("https://pbs.twimg.com/profile_images/662419409600811009/lRH4GDHK.jpg", 300, 200);
+            kakaoTalkLinkMessageBuilder.addWebLink("겟잇트렁 다운받기", "http://software.jbnu.ac.kr");
+            kakaoTalkLinkMessageBuilder.addWebButton("해당 앱 실행하기","http://software.jbnu.ac.kr" );
             kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, this);
-            //보내라 메시지
         } catch (KakaoParameterException e) {
             alert(e.getMessage());
         }

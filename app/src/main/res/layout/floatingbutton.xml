@@ -12,7 +12,7 @@
         android:layout_alignParentEnd="true"
         fab:fab_addButtonColorNormal="@color/colorPrimary"
         fab:fab_addButtonColorPressed="@color/colorPrimary"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_addButtonPlusIconColor="#FFFFFF"
         fab:fab_labelStyle="@style/menu_labels_style"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
