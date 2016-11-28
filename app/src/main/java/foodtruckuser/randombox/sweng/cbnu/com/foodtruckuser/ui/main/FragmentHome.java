@@ -2,7 +2,6 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -19,9 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
-
 import com.baoyz.widget.PullRefreshLayout;
-import com.google.gson.JsonObject;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Eases.EaseType;
 import com.nightonke.boommenu.Types.BoomType;
@@ -29,9 +26,7 @@ import com.nightonke.boommenu.Types.ButtonType;
 import com.nightonke.boommenu.Types.OrderType;
 import com.nightonke.boommenu.Types.PlaceType;
 import com.nightonke.boommenu.Util;
-
 import java.util.ArrayList;
-
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;

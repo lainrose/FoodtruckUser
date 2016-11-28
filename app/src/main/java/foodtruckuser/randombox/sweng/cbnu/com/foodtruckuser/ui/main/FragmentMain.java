@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.AcitivityMyReview;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.FragmentFestive;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.FragmentMyReview;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.SettingsFragment;
 
 public class FragmentMain extends AppCompatActivity {
 
@@ -66,7 +66,8 @@ public class FragmentMain extends AppCompatActivity {
                     xfragmentTransaction.replace(R.id.containerView, new FragmentMyReview()).commit();
                 }
                 else if (menuItem.getItemId() == R.id.menu_settings) {
-                    //
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView, new SettingsFragment()).commit();
                 }
                 else if (menuItem.getItemId() == R.id.menu_about) {
                     //
