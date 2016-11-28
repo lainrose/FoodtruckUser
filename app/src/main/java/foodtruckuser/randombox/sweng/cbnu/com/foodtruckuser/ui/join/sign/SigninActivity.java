@@ -19,11 +19,11 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 // TODO: 2016-11-17 안드로이드에서 서버로 로그인 정보 넘어갈 때 암호화하기
 public class SigninActivity extends AppCompatActivity {
@@ -82,22 +82,11 @@ public class SigninActivity extends AppCompatActivity {
         ApiService service = retrofit.create(ApiService.class);
 
         Call<UserModel> convertedContent = service.request_login(et_signin_email.getText().toString(), et_signin_pw.getText().toString());
-
         convertedContent.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Response<UserModel> response, Retrofit retrofit) {
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 Log.d("Response status code: ", String.valueOf(response.code()));
 
-                // isSuccess is true if response code => 200 and <= 300
-                if (!response.isSuccess()) {
-                    // print response body if unsuccessful
-                    try {
-                        Log.d("response unsuccessful: ", response.errorBody().string());
-                    } catch (IOException e) {
-                        // do nothing
-                    }
-                    return;
-                }
                 // if parsing the JSON body failed, `response.body()` returns null
                 UserModel decodedResponse = response.body();
                 if (decodedResponse == null) {
@@ -116,11 +105,9 @@ public class SigninActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
                 Log.d("실패", t.getMessage().toString());
             }
         });
-
-
     }
 }

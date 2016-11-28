@@ -25,11 +25,11 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
 
@@ -154,7 +154,7 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
 
         convertedContent.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Response<Integer> response, Retrofit retrofit) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if(response.body().toString() == "1") {
                     signupStatus = 1;
                 } else if(response.body().toString() == "2") {
@@ -162,22 +162,10 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
                 } else {
                     signupStatus = 3;
                 }
-
-                // isSuccess is true if response code => 200 and <= 300
-                if (!response.isSuccess()) {
-                    // print response body if unsuccessful
-                    try {
-                        Log.d("response unsuccessful: ", response.errorBody().string());
-                    } catch (IOException e) {
-                        // do nothing
-                    }
-                    return;
-                }
-                // if parsing the JSON body failed, `response.body()` returns null
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 Log.d("실패", t.getMessage().toString());
             }
         });
