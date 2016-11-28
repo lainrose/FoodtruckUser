@@ -41,7 +41,7 @@ public class FoodTruckModel implements Serializable {
     private String FT_PHONE_NUMBER;
 
     private String FT_LOCATIONNAME;
-    private int FT_IMAGE;
+    //private int FT_IMAGE;
 
     private String   titleTextView = "스테이크 하우스"; //스테이크 하우스
     private String   hashTextView = "#목살 스테이크 #샐러드 #목살"; //해쉬태그
@@ -160,13 +160,13 @@ public class FoodTruckModel implements Serializable {
         FT_PAYMENT = ftPayment;
     }
 
-    public int getFtImage() {
-        return FT_IMAGE;
-    }
-
-    public void setFtImage(int ftImage) {
-        FT_IMAGE = ftImage;
-    }
+//    public int getFtImage() {
+//        return FT_IMAGE;
+//    }
+//
+//    public void setFtImage(int ftImage) {
+//        FT_IMAGE = ftImage;
+//    }
 
     public String getFT_LOCATIONNAME() {
         return FT_LOCATIONNAME;
