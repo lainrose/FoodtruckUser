@@ -541,8 +541,9 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                 ArrayList<MenuModel> menuList = response.body();
 
                 Log.d("TAG", "바디: " + response.body().toString());
+                Log.d("TAG", "메뉴리스트 사이즈 : " + menuitems.size());
 
-                if(menuitems.size() >= 5) {
+                if(menuList.size() >= 5) {
                     for(int i = 0; i < 5; i++) {
                         menuitems.add(menuList.get(i));
                     }
