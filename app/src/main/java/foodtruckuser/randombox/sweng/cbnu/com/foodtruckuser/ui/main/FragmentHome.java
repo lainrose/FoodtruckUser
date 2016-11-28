@@ -38,11 +38,11 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -194,12 +194,10 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         ApiService service = retrofit.create(ApiService.class);
 
-        Call<ArrayList<FoodTruckModel>> convertedContent = service.listFoodTrucks(num);
-
+        Call<ArrayList<FoodTruckModel>> convertedContent = service.foodtruck_list(num);
         convertedContent.enqueue(new Callback<ArrayList<FoodTruckModel>>() {
             @Override
-            public void onResponse(Response<ArrayList<FoodTruckModel>> response, Retrofit retrofit) {
-
+            public void onResponse(Call<ArrayList<FoodTruckModel>> call, Response<ArrayList<FoodTruckModel>> response) {
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
 
                 Log.d("TAG", "바디: " + response.body().toString());
@@ -216,11 +214,10 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<ArrayList<FoodTruckModel>> call, Throwable t) {
                 Log.d("실패", "onFailure: ");
                 Log.d("TAG", t.getMessage());
             }
-
         });
     }
 
