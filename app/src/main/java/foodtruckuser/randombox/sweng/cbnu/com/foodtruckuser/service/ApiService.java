@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
     //public static final String API_URL = "https://server-blackdog11.c9users.io/";
@@ -31,6 +34,9 @@ public interface ApiService {
     Call<ArrayList<FoodTruckModel>> foodtruck_list(@Field("category") int category);
     //@GET("/client/foodtruck_list")
     //Call<ArrayList<FoodTruckModel>> listFoodTrucks(@Query("category") int category);
+
+    @GET("/common/truck_menus")
+    Call<ArrayList<MenuModel>> truck_menus(@Query("foodtruck_id") String id);
 
 
 

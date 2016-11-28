@@ -1,25 +1,40 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
 public class MenuModel {
 
     // Getter and Setter model for recycler view items
+    @SerializedName("name")
     private String title;
-    private int image;
+    @SerializedName("price")
+    private int price;
+    @SerializedName("image")
+    private MenuUrlModel image;
 
-    public String getTitle() {
-        return title;
-    }
+    public MenuModel(String title,int price, MenuUrlModel image) {
 
-    public void setTitle(String title) {
         this.title = title;
+        this.price = price;
+        this.image = image;
     }
 
-    public int getImage() {
+    public int getPrice(){return price;}
+    public String getTitle() {return title;}
+    public MenuUrlModel getImage() {
         return image;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public class MenuUrlModel {
+        @SerializedName("url")
+        private String url;
+
+        public String getUrl() {
+            return url;
+        }
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 }

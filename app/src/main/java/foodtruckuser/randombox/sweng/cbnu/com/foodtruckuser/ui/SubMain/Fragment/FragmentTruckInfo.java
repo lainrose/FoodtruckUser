@@ -151,7 +151,7 @@ public class FragmentTruckInfo extends Fragment implements GoogleApiClient.OnCon
         for (int i = 0; i < 5; i++) {
             FoodTruckModel item = new FoodTruckModel();
             item.setFtName(FT_NAME[i]);
-            item.setFtImage(FT_IMAGES[i]);
+            //item.setFtImage(FT_IMAGES[i]);
             item.setFtCategory(FT_CATEGORY[i]);
             item.setFtPayment(FT_PAYMENT[i]);
             item.setFT_LNG(FT_X[i]);

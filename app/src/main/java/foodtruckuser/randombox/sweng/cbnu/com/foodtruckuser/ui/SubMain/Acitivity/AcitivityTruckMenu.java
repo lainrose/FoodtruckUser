@@ -68,12 +68,12 @@ public class AcitivityTruckMenu extends AppCompatActivity {
 
     private void initFT() {
         menuitems.clear();
-        for (int i = 0; i < IMAGES.length; i++) {
-            MenuModel item2 = new MenuModel();
-            item2.setImage(IMAGES[i]);
-            item2.setTitle(TITLES[i]);
-            menuitems.add(item2);
-        }
+//        for (int i = 0; i < IMAGES.length; i++) {
+//            MenuModel item2 = new MenuModel();
+//            item2.setImage(IMAGES[i]);
+//            item2.setTitle(TITLES[i]);
+//            menuitems.add(item2);
+//        }
     }
     @Override
     public void onBackPressed() {

@@ -57,7 +57,13 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAn
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, OnMapReadyCallback, View.OnClickListener{
@@ -152,10 +158,15 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         Log.d("TAG", "클릭된 푸드트럭 이름 : " + item.getFtName());
 
 
-        //item = new FoodTruckModel();
         initId(item);
         initToolbar(item);
-        item = new FoodTruckModel();
+        initCollapsingToolbar();
+        initFT();
+        initMap();
+        initRatingBar(item);
+        initMenuView();
+        initReviewView();
+
         //카톡공유
         try {
             kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
@@ -190,12 +201,6 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             }
         });
 
-        initCollapsingToolbar();
-        initFT();
-        initMap();
-        initRatingBar(item);
-        initMenuView();
-        initReviewView();
         likebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -263,6 +268,10 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         menu_view.setHasFixedSize(true);
         menu_view.setLayoutManager(MyLayoutManager);
+
+        requestFoodtruckMenu(item.getFT_ID());
+    }
+    private void showMenuCardViewList(ArrayList<MenuModel> menuitems) {
         menuAdapter = new MenuAdapter(this, menuitems, "AcitivityTruckDetail");
         menu_view.setAdapter(menuAdapter); // set adapter on recyclerview
         menuAdapter.notifyDataSetChanged(); // Notify the adapter
@@ -278,6 +287,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                 })
         );
     }
+
     // 평점 설정
     private void initRatingBar(FoodTruckModel item){
         RatingBar mRatingBar = (RatingBar)findViewById(R.id.Ratingbar);
@@ -324,7 +334,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         for (int i = 0; i < 5; i++) {
             FoodTruckModel item = new FoodTruckModel();
             //item.setFtName(FT_NAME[i]);
-            item.setFtImage(FT_IMAGES[i]);
+            //item.setFtImage(FT_IMAGES[i]);
             item.setFtCategory(FT_CATEGORY[i]);
             item.setFtPayment(FT_PAYMENT[i]);
             item.setFT_LNG(FT_X[i]);
@@ -340,10 +350,10 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             item1.setLikesCount(LikeConunts[i]);
             reviewitems.add(item1);
 
-            MenuModel item2 = new MenuModel();
-            item2.setImage(IMAGES[i]);
-            item2.setTitle(TITLES[i]);
-            menuitems.add(item2);
+//            MenuModel item2 = new MenuModel();
+//            item2.setImage(IMAGES[i]);
+//            item2.setTitle(TITLES[i]);
+//            menuitems.add(item2);
         }
     }
     // 화면에 뿌려질 id 연결 및 설정
@@ -512,5 +522,43 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
                 .create().show();
+    }
+
+    public void requestFoodtruckMenu(String id) {
+        menuitems.clear();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://server-blackdog11.c9users.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService service = retrofit.create(ApiService.class);
+
+        Call<ArrayList<MenuModel>> convertedContent = service.truck_menus(id);
+        convertedContent.enqueue(new Callback<ArrayList<MenuModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<MenuModel>> call, Response<ArrayList<MenuModel>> response) {
+                ArrayList<MenuModel> menuList = response.body();
+
+                Log.d("TAG", "바디: " + response.body().toString());
+
+                if(menuitems.size() >= 5) {
+                    for(int i = 0; i < 5; i++) {
+                        menuitems.add(menuList.get(i));
+                    }
+                } else {
+                    for (MenuModel menu: menuList) {
+                        menuitems.add(menu);
+                    }
+                }
+                showMenuCardViewList(menuitems); //서버에서 받아오면 카드뷰 그려주게하기
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<MenuModel>> call, Throwable t) {
+                Log.d("실패", "onFailure: ");
+                Log.d("TAG", t.getMessage());
+            }
+        });
     }
 }
