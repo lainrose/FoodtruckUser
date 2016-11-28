@@ -65,16 +65,19 @@
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true" />
                     </RelativeLayout>
-                    <ImageView
-                        android:id="@+id/emoticon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ico_emoticon_4"
-                        android:textColor="#222222"
-                        android:layout_gravity="end"/>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/emoticon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ico_emoticon_4"
+                            android:textColor="#222222"
+                            android:paddingTop="10dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true" />
 
                         <EditText
                             android:layout_width="match_parent"
