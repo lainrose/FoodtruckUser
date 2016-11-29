@@ -9,6 +9,7 @@ import java.util.Map;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -37,6 +38,9 @@ public interface ApiService {
 
     @GET("/common/truck_menus")
     Call<ArrayList<MenuModel>> truck_menus(@Query("foodtruck_id") String id);
+
+    @GET("common/foodtruck_reviews")
+    Call<ArrayList<ReviewModel>> foodtruck_reviews(@Query("foodtruck_id") String id);
 
 
 

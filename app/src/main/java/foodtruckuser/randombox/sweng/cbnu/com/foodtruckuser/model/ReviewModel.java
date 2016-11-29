@@ -1,70 +1,77 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Created by hyunjung on 2016-11-01.
+ */
 
 public class ReviewModel {
 
-    // Getter and Setter model for recycler view items
-    private int centerimage;
-    private int bottomimage;
-    private int userImage;
-    private String userText;
-    private int likesCount=0 ;
-    private boolean isLiked=false;
-    private String reviewText;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("content")
+    private String content;
+    @SerializedName("rating")
+    private float rating;
+    @SerializedName("image")
+    private Image image;
+    @SerializedName("client")
+    private Client client;
 
-    public int getCenterimage() {
-        return centerimage;
+    public void setId(int id) { this.id = id; }
+    public void setTitle(String title) { this.title = title; }
+    public void setContent(String content) { this.content = content; }
+    public void setRating(float rating) { this.rating = rating; }
+    public void setImage(Image image) { this.image = image; }
+    public void setClient(Client client) { this.client = client; }
+
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public String getContent() { return content; }
+    public float getRating() { return rating; }
+    public String getImage() { return image.getUrl(); }
+    public Client getClient() { return client; }
+
+    public String getClientNickname() { return (getClient().getNickName()); }
+    public String getClientImage() { return (getClient().getImage().getUrl()); }
+
+    private class Client {
+        @SerializedName("nickName")
+        private String nickName;
+        @SerializedName("image")
+        private Image image;
+
+        public Client(String nickName, Image image) {
+            this.nickName = nickName;
+            this.image = image;
+        }
+
+        public void setNickName(String nickName) { this.nickName = nickName; }
+        public void setImage(Image image) { this.image = image; }
+
+        public String getNickName() { return nickName; }
+        public Image getImage() { return image; }
     }
 
-    public void setCenterimage(int centerimage) {
-        this.centerimage = centerimage;
+}
+
+class Image{
+    @SerializedName("url")
+    private String url;
+
+    public Image(String url){
+        this.url = url;
     }
 
-    public int getBottomimage() {
-        return bottomimage;
+    public void setUrl(String url){
+        this.url = url;
     }
 
-    public void setBottomimage(int bottomimage) {
-        this.bottomimage = bottomimage;
-    }
-
-    public int getUserImage() {
-        return userImage;
-    }
-
-    public void setUserImage(int userImage) {
-        this.userImage = userImage;
-    }
-
-    public String getUserText() {
-        return userText;
-    }
-
-    public void setUserText(String userText) {
-        this.userText = userText;
-    }
-
-    public int getLikesCount() {
-        return likesCount;
-    }
-
-    public void setLikesCount(int likesCount) {
-        this.likesCount = likesCount;
-    }
-
-    public boolean isLiked() {
-        return isLiked;
-    }
-
-    public void setLiked(boolean liked) {
-        isLiked = liked;
-    }
-
-    public String getReviewText() {
-        return reviewText;
-    }
-
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
+    public String getUrl(){
+        return url;
     }
 }
+

@@ -1,8 +1,6 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -24,8 +22,6 @@ import android.widget.TextView;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -48,6 +44,7 @@ import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
@@ -63,11 +60,9 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks, OnMapReadyCallback, View.OnClickListener{
+        GoogleApiClient.ConnectionCallbacks, OnMapReadyCallback, View.OnClickListener {
 
     private Toolbar toolbar;
     public GoogleMap map;
@@ -93,41 +88,41 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     private ShareDialog shareDialog;
     private CallbackManager callbackManager;
 
-    String Url="https://server-blackdog11.c9users.io/";
+    String Url = ServiceGenerator.API_BASE_URL;
 
-    private String FT_NAME[] = {"도현트럭","의범트럭",
-            "영빈트럭","현표트럭","현정트럭"};
+    private String FT_NAME[] = {"도현트럭", "의범트럭",
+            "영빈트럭", "현표트럭", "현정트럭"};
 
     private int FT_CATEGORY[] = {1, 2, 3, 3, 5};
 
     private String FT_PAYMENT[] = {"카드", "현금", "카드/현금", "현금", "카드"};
 
-    private int FT_IMAGES[] = {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
-            R.drawable.truck4,R.drawable.truck5};
+    private int FT_IMAGES[] = {R.drawable.truck1, R.drawable.truck2, R.drawable.truck3,
+            R.drawable.truck4, R.drawable.truck5};
 
-    private Double FT_X[] = {35.841979,35.840776, 35.840550, 35.841672, 35.842655};
+    private Double FT_X[] = {35.841979, 35.840776, 35.840550, 35.841672, 35.842655};
 
-    private Double FT_Y[] = {127.133218,127.132788 , 127.133936, 127.135846, 127.133335};
+    private Double FT_Y[] = {127.133218, 127.132788, 127.133936, 127.135846, 127.133335};
 
-    public static final String[] TITLES= {"디저트 5000원","피자 3000원","박도현 0원","1000원"
-            ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","1000원"
-            ,"2000원","6000원","디저트 5000원","피자 3000원","박도현 0원","박도현 0원","박도현 0원","박도현 0원"};
+    public static final String[] TITLES = {"디저트 5000원", "피자 3000원", "박도현 0원", "1000원"
+            , "2000원", "6000원", "디저트 5000원", "피자 3000원", "박도현 0원", "1000원"
+            , "2000원", "6000원", "디저트 5000원", "피자 3000원", "박도현 0원", "박도현 0원", "박도현 0원", "박도현 0원"};
 
-    public static final Integer[] IMAGES= {R.drawable.menuitem,R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,
-            R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10,R.drawable.menuitem,
-            R.drawable.menuitem2,R.drawable.menuitem3,R.drawable.menuitem4,R.drawable.menuitem5,0,0,0};
+    public static final Integer[] IMAGES = {R.drawable.menuitem, R.drawable.menuitem2, R.drawable.menuitem3, R.drawable.menuitem4, R.drawable.menuitem5,
+            R.drawable.ic_6, R.drawable.ic_7, R.drawable.ic_8, R.drawable.ic_9, R.drawable.ic_10, R.drawable.menuitem,
+            R.drawable.menuitem2, R.drawable.menuitem3, R.drawable.menuitem4, R.drawable.menuitem5, 0, 0, 0};
 
-    private static final Integer[] CenterIMAGES= {0, 0, 0, R.drawable.menuitem2,R.drawable.menuitem3};
+    private static final Integer[] CenterIMAGES = {0, 0, 0, R.drawable.menuitem2, R.drawable.menuitem3};
 
-    private static final Integer[] BottomIMAGES= {R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,
-            R.drawable.img_feed_bottom_1,R.drawable.img_feed_bottom_2,R.drawable.img_feed_bottom_1};
+    private static final Integer[] BottomIMAGES = {R.drawable.img_feed_bottom_1, R.drawable.img_feed_bottom_2,
+            R.drawable.img_feed_bottom_1, R.drawable.img_feed_bottom_2, R.drawable.img_feed_bottom_1};
 
-    private static final Integer[] UserIMAGES= {R.drawable.truck1,R.drawable.truck2,R.drawable.truck3,
-            R.drawable.truck4,R.drawable.truck5};
+    private static final Integer[] UserIMAGES = {R.drawable.truck1, R.drawable.truck2, R.drawable.truck3,
+            R.drawable.truck4, R.drawable.truck5};
 
-    private static final Integer[] LikeConunts= {33,112,63,235,100533};
+    private static final Integer[] LikeConunts = {33, 112, 63, 235, 100533};
 
-    private static final String[] UserNames= {"도혀니", "으버미", "현펴", "횬죵이", "영비니"};
+    private static final String[] UserNames = {"도혀니", "으버미", "현펴", "횬죵이", "영비니"};
 
     private static final String[] WriteText = {"가나다라마바사아자차카타파하", "안녕하세요! \n" +
             "지난 주말 좋은 체험했던 맛집 리뷰에 \n" +
@@ -155,7 +150,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         mContext = this;
         this.savedInstanceState = savedInstanceState;
 
-        item = (FoodTruckModel)getIntent().getSerializableExtra("clickedFoodTruck");
+        item = (FoodTruckModel) getIntent().getSerializableExtra("clickedFoodTruck");
         Log.d("TAG", "클릭된 푸드트럭 이름 : " + item.getFtName());
 
         FoodTruckModel.TRUCK_INFO = item; //싱글톤 테스트
@@ -191,7 +186,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         actionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendFcebookLink();
+                sendFacebookLink();
             }
         });
         //리뷰쓰기
@@ -226,10 +221,12 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         });
 
     }
+
     // 사라지는 상단 이미지 설정
     private void initCollapsingToolbar() {
         collapsingToolbar.setTitleEnabled(false);
     }
+
     // 툴바 백버튼 설정
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -241,6 +238,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         }
         return super.onOptionsItemSelected(item);
     }
+
     // 툴바 설정
     private void initToolbar(FoodTruckModel item) {
 
@@ -248,9 +246,10 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         getSupportActionBar().setTitle(item.getFtName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     // 리사이클러_리뷰 설정
-    private void initReviewView(){
-        review_view = (RecyclerView)findViewById(R.id.review_view);
+    private void initReviewView() {
+        review_view = (RecyclerView) findViewById(R.id.review_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
@@ -260,54 +259,93 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         review_view.setHasFixedSize(true);
         review_view.setNestedScrollingEnabled(false);
         review_view.setLayoutManager(linearLayoutManager);
+
+        requestReview(item.getFT_ID());
+    }
+
+    public void showReviewList(ArrayList<ReviewModel> reviewitems) {
         reviewAdapter = new ReviewItemAdapter(this, reviewitems);
         review_view.setAdapter(reviewAdapter);
         review_view.setItemAnimator(new ReviewItemAnimator());
-
     }
+
+
+    public void requestReview(String foodtruck_id) {
+        reviewitems.clear();
+
+        ApiService service = ServiceGenerator.createService(ApiService.class);
+        Call<ArrayList<ReviewModel>> convertedContent = service.foodtruck_reviews(foodtruck_id);
+
+        convertedContent.enqueue(new Callback<ArrayList<ReviewModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ReviewModel>> call, Response<ArrayList<ReviewModel>> response) {
+                ArrayList<ReviewModel> ReviewList = response.body();
+
+                Log.d("TAG", "바디: " + response.body().toString());
+
+                for (ReviewModel review : ReviewList
+                        ) {
+                    reviewitems.add(review);
+                }
+                showReviewList(reviewitems);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ReviewModel>> call, Throwable t) {
+                Log.d("실패", "onFailure: ");
+                Log.d("TAG", t.getMessage());
+            }
+        });
+    }
+
     // 리사이클러_메뉴 설정
-    private void initMenuView(){
-        menu_view = (RecyclerView)findViewById(R.id.menu_view);
+    private void initMenuView() {
+        menu_view = (RecyclerView) findViewById(R.id.menu_view);
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         menu_view.setHasFixedSize(true);
         menu_view.setLayoutManager(MyLayoutManager);
 
         requestFoodtruckMenu(item.getFT_ID());
     }
+
     private void showMenuCardViewList(ArrayList<MenuModel> menuitems) {
         menuAdapter = new MenuAdapter(this, menuitems, "AcitivityTruckDetail");
         menu_view.setAdapter(menuAdapter); // set adapter on recyclerview
         menuAdapter.notifyDataSetChanged(); // Notify the adapter
         menu_view.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, menu_view,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        if(position==4){
+                new RecyclerItemClickListener(this, menu_view, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        if (position == 4) {
                             Utill.getInstance().MoveAcitivity(mContext, AcitivityTruckMenu.class);
                         }
                     }
-                    @Override public void onLongItemClick(View view, int position) {
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
                     }
                 })
         );
     }
 
     // 평점 설정
-    private void initRatingBar(FoodTruckModel item){
-        RatingBar mRatingBar = (RatingBar)findViewById(R.id.Ratingbar);
+    private void initRatingBar(FoodTruckModel item) {
+        RatingBar mRatingBar = (RatingBar) findViewById(R.id.Ratingbar);
         mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.drawable.ic_star_empty));
         mRatingBar.setStarFillDrawable(getResources().getDrawable(R.drawable.ic_star_fill));
         mRatingBar.setStarHalfDrawable(getResources().getDrawable(R.drawable.ic_star_half));
         mRatingBar.setStarCount(5);
-        mRatingBar.setStar((float)item.getFtRating());
+        mRatingBar.setStar((float) item.getFtRating());
         mRatingBar.halfStar(true);
         mRatingBar.setmClickable(false);
         mRatingBar.setStarImageWidth(120f);
         mRatingBar.setStarImageHeight(60f);
         mRatingBar.setImagePadding(35);
     }
+
     // 맵 설정
-    private void initMap(){
-        mapview=(MapView)findViewById(R.id.truck_detail_map);
+    private void initMap() {
+        mapview = (MapView) findViewById(R.id.truck_detail_map);
         mapview.onCreate(savedInstanceState);
         mapview.onResume();
         mapview.getMapAsync(this);
@@ -330,6 +368,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         map.getUiSettings().setAllGesturesEnabled(false);
         map.animateCamera(CameraUpdateFactory.zoomTo(14));
     }
+
     // TODO: 2016-11-26 트럭 이미지 및 리뷰 설정 -> DB연동 바람
     private void initFT() {
         listitems.clear();
@@ -344,14 +383,14 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             item.setFT_LAT(FT_Y[i]);
             listitems.add(item);
 
-            ReviewModel item1 = new ReviewModel();
-            item1.setCenterimage(CenterIMAGES[i]);
-            item1.setBottomimage(BottomIMAGES[i]);
-            item1.setUserImage(UserIMAGES[i]);
-            item1.setUserText(UserNames[i]);
-            item1.setReviewText(WriteText[i]);
-            item1.setLikesCount(LikeConunts[i]);
-            reviewitems.add(item1);
+//            ReviewModel item1 = new ReviewModel();
+//            item1.setCenterimage(CenterIMAGES[i]);
+//            item1.setBottomimage(BottomIMAGES[i]);
+//            item1.setUserImage(UserIMAGES[i]);
+//            item1.setUserText(UserNames[i]);
+//            item1.setReviewText(WriteText[i]);
+//            item1.setLikesCount(LikeConunts[i]);
+//            reviewitems.add(item1);
 
 //            MenuModel item2 = new MenuModel();
 //            item2.setImage(IMAGES[i]);
@@ -359,37 +398,38 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 //            menuitems.add(item2);
         }
     }
+
     // 화면에 뿌려질 id 연결 및 설정
-    private void initId(FoodTruckModel item){
+    private void initId(FoodTruckModel item) {
         setContentView(R.layout.activity_truck_detail);
 
         gpsService = new GpsService(this);
-        clContent = (CoordinatorLayout)findViewById(R.id.content);
+        clContent = (CoordinatorLayout) findViewById(R.id.content);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-        likebtn = (ShineButton)findViewById(R.id.likebtn);
-        ivHeaderImage = (ImageView)findViewById(R.id.header);
+        likebtn = (ShineButton) findViewById(R.id.likebtn);
+        ivHeaderImage = (ImageView) findViewById(R.id.header);
         FacebookSdk.sdkInitialize(getApplicationContext()); //페이스북SDK 초기화
         callbackManager = CallbackManager.Factory.create(); //콜백메소드 생성
         shareDialog = new ShareDialog(this);
 
-        TextView titleTextView = (TextView)findViewById(R.id.titleTextView);
-        TextView hashTextView = (TextView)findViewById(R.id.hashTextView);
-        TextView reviewCountTextView = (TextView)findViewById(R.id.reviewCountTextView);
-        TextView likeTextView = (TextView)findViewById(R.id.likeTextView);
-        TextView ratingTextView = (TextView)findViewById(R.id.ratingTextView);
-        ImageView openImage = (ImageView)findViewById(R.id.openImage);
-        TextView openText = (TextView)findViewById(R.id.openText);
-        TextView openingText = (TextView)findViewById(R.id.openingText);
+        TextView titleTextView = (TextView) findViewById(R.id.titleTextView);
+        TextView hashTextView = (TextView) findViewById(R.id.hashTextView);
+        TextView reviewCountTextView = (TextView) findViewById(R.id.reviewCountTextView);
+        TextView likeTextView = (TextView) findViewById(R.id.likeTextView);
+        TextView ratingTextView = (TextView) findViewById(R.id.ratingTextView);
+        ImageView openImage = (ImageView) findViewById(R.id.openImage);
+        TextView openText = (TextView) findViewById(R.id.openText);
+        TextView openingText = (TextView) findViewById(R.id.openingText);
 //        TextView openingText1 = (TextView)findViewById(R.id.openingText1);
 //        TextView openingText2 = (TextView)findViewById(R.id.openingText2);
-        TextView addressTextView = (TextView)findViewById(R.id.addressTextView);
-        TextView timerTextView = (TextView)findViewById(R.id.timerTextView);
-        TextView phoneTextView = (TextView)findViewById(R.id.phoneTextView);
-        TextView opentileTextView = (TextView)findViewById(R.id.opentileTextView);
-        TextView emoticonText1 = (TextView)findViewById(R.id.emoticonText1);
-        TextView emoticonText2 = (TextView)findViewById(R.id.emoticonText2);
-        TextView emoticonText3 = (TextView)findViewById(R.id.emoticonText3);
+        TextView addressTextView = (TextView) findViewById(R.id.addressTextView);
+        TextView timerTextView = (TextView) findViewById(R.id.timerTextView);
+        TextView phoneTextView = (TextView) findViewById(R.id.phoneTextView);
+        TextView opentileTextView = (TextView) findViewById(R.id.opentileTextView);
+        TextView emoticonText1 = (TextView) findViewById(R.id.emoticonText1);
+        TextView emoticonText2 = (TextView) findViewById(R.id.emoticonText2);
+        TextView emoticonText3 = (TextView) findViewById(R.id.emoticonText3);
 
         //FoodTruckModel item = new FoodTruckModel();
         Drawable ic_check_on = getResources().getDrawable(R.drawable.ic_check_on);
@@ -401,11 +441,11 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         //태그 : 완료
         hashTextView.setText(item.getFtTag());
         //리뷰 카운트 수 : 완료
-        reviewCountTextView.setText(""+item.getFT_REVIEW_NUM());
+        reviewCountTextView.setText("" + item.getFT_REVIEW_NUM());
         //좋아요 카운트 수 : 완료
-        likeTextView.setText(""+item.getFT_LIKE_NUM());
+        likeTextView.setText("" + item.getFT_LIKE_NUM());
         //평점 : 완료
-        ratingTextView.setText(""+item.getFtRating());
+        ratingTextView.setText("" + item.getFtRating());
         //영업중 이미지 : 완료
         openImage.setImageDrawable(item.isFT_isOPEN() ? ic_check_on : ic_check_off);
         //영업중 이미지 아래 텍스트 : 완료
@@ -417,7 +457,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 //        //영업중이면 영업 시작부터 지금까지 시간, 영업 종료면 영업 종료부터 지금까지 시간.
 //        openingText2.setText(item.getOpeningText2());
         //주소
-        addressTextView.setText(gpsService.findAddress(item.getFT_LAT(),item.getFT_LNG()));
+        addressTextView.setText(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
         //현 위치로부터 트럭이 몇분 거리에 떨어져있는지
         timerTextView.setText(item.getTimerTextView());
         //핸드폰 번호
@@ -427,61 +467,67 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         //이건 안고쳐도 될듯
         emoticonText1.setText("맛있다! (" + item.getEmoticonText1() + ")");
         emoticonText2.setText("괜찮다 (" + item.getEmoticonText2() + ")");
-        emoticonText3.setText("별로 (" +item.getEmoticonText3() + ")");
+        emoticonText3.setText("별로 (" + item.getEmoticonText3() + ")");
 
     }
+
     // 맵 관련 처리
     @Override
-    public void onConnected(@Nullable Bundle bundle) {}
+    public void onConnected(@Nullable Bundle bundle) {
+    }
+
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
+
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {}
+    public void onMapReady(GoogleMap googleMap) {
+    }
+
     // 하단의 스내바(알림창)
     public void showLikedSnackbar() {
         Snackbar.make(clContent, "Liked!", Snackbar.LENGTH_SHORT).show();
     }
+
     // 화면에 들어가는 모든 버튼 설정
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.btn_review_more){
+        if (view.getId() == R.id.btn_review_more) {
             Utill.getInstance().MoveAcitivity(this, AcitivityTruckReview.class, "btn_review_more");
-        }
-        else if(view.getId() == R.id.emoticonBtn1){
+        } else if (view.getId() == R.id.emoticonBtn1) {
             Utill.getInstance().MoveAcitivity(this, AcitivityTruckReview.class, "emoticonBtn1");
-        }
-        else if(view.getId() == R.id.emoticonBtn2){
+        } else if (view.getId() == R.id.emoticonBtn2) {
             Utill.getInstance().MoveAcitivity(this, AcitivityTruckReview.class, "emoticonBtn2");
-        }
-        else if(view.getId() == R.id.emoticonBtn3){
+        } else if (view.getId() == R.id.emoticonBtn3) {
             Utill.getInstance().MoveAcitivity(this, AcitivityTruckReview.class, "emoticonBtn3");
-        }
-        else if(view.getId() == R.id.visitHomepage){
+        } else if (view.getId() == R.id.visitHomepage) {
             FoodTruckModel item = new FoodTruckModel();
             Utill.getInstance().MoveAcitivity(this, ActivityWebView.class, item.getVisitHomepage());
-        }
-        else if(view.getId() == R.id.phoneTextLayout){
+        } else if (view.getId() == R.id.phoneTextLayout) {
             Utill.getInstance().MoveAcitivity(this, item.getPhoneTextView());
-        }
-        else if(view.getId() == R.id.addressTextView){
-            if(Utill.isAndroid4()) {
+        } else if (view.getId() == R.id.addressTextView) {
+            if (Utill.isAndroid4()) {
                 android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboard.setText(gpsService.findAddress(item.getFT_LAT(),item.getFT_LNG()));
+                clipboard.setText(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
             } else {
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                android.content.ClipData clip = android.content.ClipData.newPlainText("주소가 복사되었습니다.", gpsService.findAddress(item.getFT_LAT(),item.getFT_LNG()));
+                android.content.ClipData clip = android.content.ClipData.newPlainText("주소가 복사되었습니다.", gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
                 clipboard.setPrimaryClip(clip);
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
-    private void sendFcebookLink(){
+
+    private void sendFacebookLink() {
         if (ShareDialog.canShow(ShareLinkContent.class)) {
             ShareLinkContent linkContent = new ShareLinkContent.Builder()
                     .setContentTitle("푸드트럭 발전여부")
@@ -505,12 +551,13 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                 .build();
                 */
     }
+
     private void sendKakaoTalkLink() {
         try {
             kakaoTalkLinkMessageBuilder.addText("맜있는 푸드트럭!!!!!");
             kakaoTalkLinkMessageBuilder.addImage("https://pbs.twimg.com/profile_images/662419409600811009/lRH4GDHK.jpg", 300, 200);
             kakaoTalkLinkMessageBuilder.addWebLink("겟잇트렁 다운받기", "http://software.jbnu.ac.kr");
-            kakaoTalkLinkMessageBuilder.addWebButton("해당 앱 실행하기","http://software.jbnu.ac.kr" );
+            kakaoTalkLinkMessageBuilder.addWebButton("해당 앱 실행하기", "http://software.jbnu.ac.kr");
             kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, this);
         } catch (KakaoParameterException e) {
             alert(e.getMessage());
@@ -540,12 +587,12 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                 Log.d("TAG", "바디: " + response.body().toString());
                 Log.d("TAG", "메뉴리스트 사이즈 : " + menuitems.size());
 
-                if(menuList.size() >= 5) {
-                    for(int i = 0; i < 5; i++) {
+                if (menuList.size() >= 5) {
+                    for (int i = 0; i < 5; i++) {
                         menuitems.add(menuList.get(i));
                     }
                 } else {
-                    for (MenuModel menu: menuList) {
+                    for (MenuModel menu : menuList) {
                         menuitems.add(menu);
                     }
                 }

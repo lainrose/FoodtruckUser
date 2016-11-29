@@ -95,16 +95,16 @@ public class AcitivityTruckReview extends AppCompatActivity {
 
     private void initFT(){
         reviewitems.clear();
-        for (int i = 0; i < 5; i++) {
-            ReviewModel item1 = new ReviewModel();
-            item1.setCenterimage(CenterIMAGES[i]);
-            item1.setBottomimage(BottomIMAGES[i]);
-            item1.setUserImage(UserIMAGES[i]);
-            item1.setUserText(UserNames[i]);
-            item1.setReviewText(WriteText[i]);
-            item1.setLikesCount(LikeConunts[i]);
-            reviewitems.add(item1);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            ReviewModel item1 = new ReviewModel();
+//            item1.setCenterimage(CenterIMAGES[i]);
+//            item1.setBottomimage(BottomIMAGES[i]);
+//            item1.setUserImage(UserIMAGES[i]);
+//            item1.setUserText(UserNames[i]);
+//            item1.setReviewText(WriteText[i]);
+//            item1.setLikesCount(LikeConunts[i]);
+//            reviewitems.add(item1);
+//        }
     }
     private void initView() {
         if(btnName.equals("btn_review_more")){
