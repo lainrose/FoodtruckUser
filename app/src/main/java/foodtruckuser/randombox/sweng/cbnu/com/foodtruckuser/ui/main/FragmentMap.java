@@ -39,6 +39,7 @@ import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MapItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
@@ -331,14 +332,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     public void requestFoodtruckList(int num) {
         listitems.clear();
 
-        Log.d("TAG", String.valueOf(num));
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://server-blackdog11.c9users.io")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService service = retrofit.create(ApiService.class);
-
+        ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<ArrayList<FoodTruckModel>> convertedContent = service.foodtruck_list(num);
         convertedContent.enqueue(new Callback<ArrayList<FoodTruckModel>>() {
             @Override

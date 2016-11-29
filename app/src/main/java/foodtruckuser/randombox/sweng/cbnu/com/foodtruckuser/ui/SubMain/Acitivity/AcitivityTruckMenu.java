@@ -61,7 +61,7 @@ public class AcitivityTruckMenu extends AppCompatActivity {
         MyLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         menu_view.setHasFixedSize(true);
         menu_view.setLayoutManager(MyLayoutManager);
-        menuAdapter = new MenuAdapter(this, menuitems, "AcitivityTruckMenu");
+        menuAdapter = new MenuAdapter(this, MenuModel.getInstanceList(), "AcitivityTruckMenu");
         menu_view.setAdapter(menuAdapter);// set adapter on recyclerview
         menuAdapter.notifyDataSetChanged();// Notify the adapter
     }

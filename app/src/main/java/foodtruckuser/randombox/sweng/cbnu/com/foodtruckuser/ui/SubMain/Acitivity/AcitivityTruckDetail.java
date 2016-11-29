@@ -50,6 +50,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
@@ -143,7 +144,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             "본인기분 상한 것을 \n" +
             "화풀이 하지 않았으면합니다.", "악플러는 본인글 읽어보고 망신인거 알고\n" +
             "반성하고 미안한 마음좀 갖길바랍니다."};
-        private KakaoLink kakaoLink;
+    private KakaoLink kakaoLink;
     private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
 
 
@@ -156,6 +157,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
         item = (FoodTruckModel)getIntent().getSerializableExtra("clickedFoodTruck");
         Log.d("TAG", "클릭된 푸드트럭 이름 : " + item.getFtName());
+
+        FoodTruckModel.TRUCK_INFO = item; //싱글톤 테스트
 
 
         initId(item);
@@ -527,13 +530,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     public void requestFoodtruckMenu(String id) {
         menuitems.clear();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://server-blackdog11.c9users.io/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService service = retrofit.create(ApiService.class);
-
+        ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<ArrayList<MenuModel>> convertedContent = service.truck_menus(id);
         convertedContent.enqueue(new Callback<ArrayList<MenuModel>>() {
             @Override
@@ -552,6 +549,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                         menuitems.add(menu);
                     }
                 }
+                MenuModel.MENU_INFO_LIST = menuitems; //싱글톤(메뉴)
                 showMenuCardViewList(menuitems); //서버에서 받아오면 카드뷰 그려주게하기
             }
 

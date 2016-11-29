@@ -12,7 +12,6 @@ public class ReviewModel {
     private boolean isLiked=false;
     private String reviewText;
 
-
     public int getCenterimage() {
         return centerimage;
     }

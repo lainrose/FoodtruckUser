@@ -3,6 +3,8 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 import com.google.gson.annotations.SerializedName;
 
 public class UserModel {
+    //싱글톤
+    public static UserModel USER_INFO;
 
     @SerializedName("id")
     private String USER_ID;
@@ -25,30 +27,14 @@ public class UserModel {
     @SerializedName("created_at")
     private String created_at = "";
 
-//    @SerializedName("id")
-//    private static String USER_ID;
-//    @SerializedName("email")
-//    private static String USER_MAIL;
-//    @SerializedName("memberShipGrade")
-//    private String memberShip_grade;
-//    @SerializedName("nickName")
-//    private static String USER_NAME;
-//    @SerializedName("positionX")
-//    private static double USER_X;
-//    @SerializedName("positionY")
-//    private static double USER_Y;
-//    @SerializedName("phone_number")
-//    private static String USER_PHONE;
-//    @SerializedName("password")
-//    private static String USER_PASSWORD;
-//    @SerializedName("updated_at")
-//    private String updated_at = "";
-//    @SerializedName("created_at")
-//    private String created_at = "";
-
     private static UserModel user = null;
     private static String FIRST_FACEBOOK_LOGIN;
     private static String FACEBOOK_LOGIN;
+
+
+    public UserModel() {
+
+    }
 
     public UserModel(String id, String email, String memberShip_grade, String nickName, double positionX, double positionY, String phone_number, String password_digest, String updated_at, String created_at) {
         this.setUserId(id);
@@ -63,19 +49,11 @@ public class UserModel {
         this.setCreated_at(created_at);
     }
 
-    public UserModel() {
-
-    }
-
     public static synchronized UserModel getInstance() {
-        if (getUser() == null) {
+        if (USER_INFO == null) {
+            USER_INFO  = new UserModel();
         }
-        try {
-            if (getUser() == null)
-                setUser(new UserModel());
-            return getUser();
-        } finally {
-        }
+        return USER_INFO;
     }
 
     public static String getFacebookLogin() {
@@ -88,69 +66,12 @@ public class UserModel {
 
     public static String getFirstFacebookLogin() {
         return FIRST_FACEBOOK_LOGIN;
-
     }
 
     public static void setFirstFacebookLogin(String firstFacebookLogin) {
         FIRST_FACEBOOK_LOGIN = firstFacebookLogin;
     }
 
-//    public static String getUserMail() {
-//        return USER_MAIL;
-//    }
-//
-//    public static void setUserMail(String userMail) {
-//        USER_MAIL = userMail;
-//    }
-//
-//    public static String getUserId() {
-//        return USER_ID;
-//    }
-//
-//    public static void setUserId(String userId) {
-//        USER_ID = userId;
-//    }
-//
-//    public static String getUserName() {
-//        return USER_NAME;
-//    }
-//
-//    public static void setUserName(String userName) {
-//        USER_NAME = userName;
-//    }
-//
-//    public static double getUserX() {
-//        return USER_X;
-//    }
-//
-//    public static void setUserX(double userX) {
-//        USER_X = userX;
-//    }
-//
-//    public static double getUserY() {
-//        return USER_Y;
-//    }
-//
-//    public static void setUserY(double userY) {
-//        USER_Y = userY;
-//    }
-//
-//    public static String getUserPhone() {
-//        return USER_PHONE;
-//    }
-//
-//    public static void setUserPhone(String userPhone) {
-//        USER_PHONE = userPhone;
-//    }
-//
-//    public static String getUserPassword() {
-//        return USER_PASSWORD;
-//    }
-//
-//    public static void setUserPassword(String userPassword) {
-//        USER_PASSWORD = userPassword;
-//    }
-//
     public  String getUserMail() {
         return USER_MAIL;
     }

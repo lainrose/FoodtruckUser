@@ -10,6 +10,8 @@ import java.io.Serializable;
 
 
 public class FoodTruckModel implements Serializable {
+    public static FoodTruckModel TRUCK_INFO;
+
     @SerializedName("id")
     private String FT_ID;
     @SerializedName("owner_id")
@@ -47,7 +49,7 @@ public class FoodTruckModel implements Serializable {
     private String   hashTextView = "#목살 스테이크 #샐러드 #목살"; //해쉬태그
     private int   reviewTextView = 123; //리뷰 갯수
     private int   likeTextView = 321; //좋아요 갯수
-//    private Float   ratingTextView = 2.0f; //평점 수
+    //    private Float   ratingTextView = 2.0f; //평점 수
 //    private Boolean  openText = false; //영업여부 텍스트
 //    private String   openingText = "영업 중"; //영업중 표시
 //    private String   openingText1 = "11월 24일 오후 19시 20분"; //영업중 표시
@@ -62,6 +64,13 @@ public class FoodTruckModel implements Serializable {
     private int   emoticonText3 = 3; //별로 텍스트
     private String   btn_review_more; //리뷰 더보기
     private String   visitHomepage = "http://www.naver.com"; //홈페이지 방문
+
+    public static synchronized FoodTruckModel getInstance() {
+        if (TRUCK_INFO == null) {
+            TRUCK_INFO  = new FoodTruckModel();
+        }
+        return TRUCK_INFO;
+    }
 
     //눌렸나 안눌렸나에 쓰는거. 곧 없애버린ㄴ다.
     public boolean isFT_LIKE() {

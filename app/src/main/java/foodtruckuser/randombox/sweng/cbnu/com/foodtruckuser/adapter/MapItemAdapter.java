@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 
@@ -21,7 +22,7 @@ public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckVie
     private ArrayList<FoodTruckModel> homeList;
     private Context mContext = null;
     private GpsService gpsService = new GpsService(mContext);
-    String Url = "https://server-blackdog11.c9users.io/";
+    String Url = ServiceGenerator.API_BASE_URL;
 
 
     public MapItemAdapter(Context c, ArrayList<FoodTruckModel> listitems) {

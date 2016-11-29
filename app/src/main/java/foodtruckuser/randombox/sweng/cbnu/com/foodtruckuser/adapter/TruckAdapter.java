@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
 
@@ -24,7 +25,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         private static ArrayList<FoodTruckModel> myTruckList;
         private Context mContext = null;
         public static String TruckName;
-        String Url="https://server-blackdog11.c9users.io/";
+        String Url= ServiceGenerator.API_BASE_URL;
 
         public TruckAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
             this.mContext = c;

@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
@@ -29,7 +30,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     private float imageHeight;
     private MenuViewHolder holder;
     private String call;
-    String Url = "https://server-blackdog11.c9users.io/";
+    String Url = ServiceGenerator.API_BASE_URL;
 
 
     public MenuAdapter(Context context, ArrayList<MenuModel> listitems, String Call) {
@@ -49,6 +50,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(final MenuViewHolder holder, final int position) {
+
+        //이미지 리사이징
+        float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
+        float margin = (int) convertDpToPixel(10f, (Activity) context);
+        imageWidth = ((width - (margin)) / 2);
+        imageHeight = imageWidth;
+
         final MenuModel model = listitems.get(position);
         this.holder = holder;
 //            Bitmap image = BitmapFactory.decodeResource(context.getResources(), model.getImage());
@@ -56,6 +64,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         Picasso.with(context)
                 .load(Url + listitems.get(position).getImage().getUrl())
                 .placeholder(R.drawable.menuitem)
+                .resize((int)imageWidth,(int)imageHeight)
                 .into(holder.imageview);
         holder.title.setText(model.getTitle());
 
@@ -73,22 +82,30 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return (null != listitems ? listitems.size() : 0);
     }
 
-    private void setBitmapImage(Bitmap image) {
+    private void calculateDeviceSize() {
         float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
         float margin = (int) convertDpToPixel(10f, (Activity) context);
-        // two images, three margins of 10dips
         imageWidth = ((width - (margin)) / 2);
-        if (image != null) {
-            float i = ((float) imageWidth) / ((float) image.getWidth());
-            if (call.equals("AcitivityTruckMenu"))
-                imageHeight = i * (image.getHeight());
-            else if (call.equals("AcitivityTruckDetail"))
-                imageHeight = imageWidth;
-            holder.imageview.setImageBitmap(Bitmap.createScaledBitmap(image, (int) imageWidth, (int) imageHeight, false));
-        } else {
-            holder.imageview.setImageBitmap(image);
-        }
+        imageHeight = imageWidth;
+
     }
+
+//    private void setBitmapImage(Bitmap image) {
+//        float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
+//        float margin = (int) convertDpToPixel(10f, (Activity) context);
+//        // two images, three margins of 10dips
+//        imageWidth = ((width - (margin)) / 2);
+//        if (image != null) {
+//            float i = ((float) imageWidth) / ((float) image.getWidth());
+//            if (call.equals("AcitivityTruckMenu"))
+//                imageHeight = i * (image.getHeight());
+//            else if (call.equals("AcitivityTruckDetail"))
+//                imageHeight = imageWidth;
+//            holder.imageview.setImageBitmap(Bitmap.createScaledBitmap(image, (int) imageWidth, (int) imageHeight, false));
+//        } else {
+//            holder.imageview.setImageBitmap(image);
+//        }
+//    }
 
     private float convertDpToPixel(float dp, Context context) {
         Resources resources = context.getResources();
