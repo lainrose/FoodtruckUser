@@ -73,7 +73,6 @@ public class FoodTruckModel implements Serializable {
         return TRUCK_INFO;
     }
 
-    //눌렸나 안눌렸나에 쓰는거. 곧 없애버린ㄴ다.
     public boolean isFT_LIKE() {
         return FT_LIKE;
     }

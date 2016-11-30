@@ -3,6 +3,7 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ public final class PrefHelper {
   private static final String PREF_USER_NAME = "user_name";    //유저 y좌표
   private static final String PREF_USER_X= "x";    //유저 x좌표
   private static final String PREF_USER_Y = "y";    //유저 y좌표
+  private static final String PREF_LIKED_TRUCK_ID = "liked_truck_id"; //좋아요 누른 푸드트럭
 
 
   private PrefHelper(Context context)
@@ -77,6 +79,9 @@ public final class PrefHelper {
   public void setPrefUserY(String paramString) {
     setString(PREF_USER_Y, paramString);
   }
+
+  public Set<String> getLikedTruckId() {return getStringSet(PREF_LIKED_TRUCK_ID);}
+  public void setLikedTruckid(Set<String> paramStringSet) {setStringSet(PREF_LIKED_TRUCK_ID, paramStringSet);}
 
 
 
@@ -176,6 +181,5 @@ public final class PrefHelper {
     localEditor.putStringSet(paramString, paramSet);
     return localEditor.commit();
   }
-
 
 }

@@ -65,7 +65,8 @@ public class FragmentMytruck extends Fragment {
     }
 
     public void showMenuCardViewList(ArrayList<FoodTruckModel> listitems) {
-        truckAdapter = new TruckAdapter(getActivity(),listitems);
+        truckAdapter = new TruckAdapter(getActivity(),listitems, "FragmentMytruck");
+        truckAdapter.notifyDataSetChanged();
         if (listitems.size() >= 0 & myRecyclerView != null) {
             myRecyclerView.setAdapter(truckAdapter);
         }
