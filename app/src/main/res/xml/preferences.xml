@@ -1,64 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto"
     android:key="first_level"
     android:title="Setting">
 
-    <PreferenceCategory android:title="Safe world">
-        <CheckBoxPreference
+    <PreferenceCategory android:title="로그인 정보">
+        <PreferenceScreen
+            android:summary="로그인 상태입니다."
+            android:title="로그인 여부"
+            android:key="loginout">
+        </PreferenceScreen>
+        <SwitchPreferenceCompat
             android:defaultValue="true"
-            android:key="example_checkbox"
-            android:summary="Worth trying..."
-            android:title="I want chocolate" />
+            android:key="autoLogin"
+            android:switchTextOff="OFF"
+            android:switchTextOn="ON"
+            android:title="자동 로그인 설정"
+            android:summaryOn="자동로그인이 돼있습니다."
+            android:summaryOff="자동로그인이 해제 돼있습니다."/>
+        <PreferenceScreen
+            android:summary="패스워드를 변경합니다."
+            android:title="패스워드 변경"
+            android:key="password">
+        </PreferenceScreen>
     </PreferenceCategory>
 
-    <PreferenceScreen
-        android:key="second_level_screen"
-        android:title="Second level">
-        <PreferenceCategory android:title="Switch preference">
-            <CheckBoxPreference
-                android:widgetLayout="@layout/mp_preference_switch"
-                android:defaultValue="true"
-                android:key="second_example"
-                android:summary="This switch needs some work on pre-Lollipop."
-                android:title="Destroy the galaxy" />
-        </PreferenceCategory>
-
+    <PreferenceCategory android:title="위치 및 알림 정보">
         <PreferenceScreen
-            android:key="third_level_screen"
-            android:title="Third level">
-            <PreferenceCategory android:title="Dark forces">
-                <PreferenceScreen
-                    android:key="fourth_level_screen"
-                    android:title="Fourth level">
-                    <PreferenceCategory android:title="Test">
-                        <CheckBoxPreference
-                            android:defaultValue="true"
-                            android:key="fourth_example"
-                            android:summary="Write something useful here."
-                            android:title="Really, be careful!" />
-                    </PreferenceCategory>
-                </PreferenceScreen>
-            </PreferenceCategory>
+            android:summary="알림받을 위치를 설정합니다."
+            android:title="알림 위치 설정"
+            android:key="alarm">
         </PreferenceScreen>
+        <!--https://github.com/MrBIMC/MaterialSeekBarPreference!-->
+        <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:key="distance"
+        android:title="위치 거리 설정 "
+        android:summary="선택한 위치를 기준으로"
+        android:enabled="true"
+        android:defaultValue="500"
+        sample:msbp_minValue="100"
+        sample:msbp_maxValue="5000"
+        sample:msbp_interval="500"
+        sample:msbp_measurementUnit="m"
+        sample:msbp_dialogEnabled="false"/>
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="neartruck"
+            android:summary="근처에 푸드트럭이 오면 알립니다."
+            android:switchTextOff="OFF"
+            android:switchTextOn="ON"
+            android:title="알림 사용" />
+    </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="appVersion_S"
+        android:title="앱 버전" >
+        <Preference
+            android:key="appVersion_N"
+            android:title="1.0.0" />
+    </PreferenceCategory>
 
-        <PreferenceScreen
-            android:key="third_level_screen_2"
-            android:title="Third level 2">
-            <PreferenceCategory android:title="Where am I?">
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:key="third_example_2"
-                    android:title="Are you lost?"
-                    android:summary="Go back!"/>
-            </PreferenceCategory>
-        </PreferenceScreen>
-    </PreferenceScreen>
+    <Preference
+        android:key="agree"
+        android:title="약관 및 취급방침" />
 
-    <PreferenceScreen
-        android:summary="Click to open the about activity"
-        android:title="About"
-        android:key="another_activity">
-        <intent android:action="android.intent.action.ABOUT_ACTIVITY"/>
-    </PreferenceScreen>
+    <PreferenceCategory
+        android:key="question"
+        android:title="문의하기" >
+        <Preference
+            android:key="help"
+            android:title="도움말" />
+        <Preference
+            android:key="customerService"
+            android:title="문의메일"
+            android:summary="문의메일을 보냅니다.">
+        <intent
+            android:action="android.intent.action.SENDTO"
+            android:data="mailto:lainrose@naver.com" />
+        </Preference>
+    </PreferenceCategory>
 </PreferenceScreen>

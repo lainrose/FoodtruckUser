@@ -8,16 +8,18 @@ import java.util.Set;
 
 public final class PrefHelper {
 
-  private static final String PREF_NAME = "PrefName";
+  private  final String PREF_NAME = "PrefName";
+
   private static PrefHelper mInstance = null;
   private SharedPreferences mSharedPreference;
 
-  private static final String PREF_FACEBOOK_LOGIN = "facebook_login";   //페이스북 로그인
-  private static final String PREF_USER_ID = "user_id"; //유저 아이디
-  private static final String PREF_USER_PASSWORD = "user_password" ; //유저 패스워드
-  private static final String PREF_USER_NAME = "user_name";    //유저 y좌표
-  private static final String PREF_USER_X= "x";    //유저 x좌표
-  private static final String PREF_USER_Y = "y";    //유저 y좌표
+  private  final String PREF_EMAIL_LOGIN = "email_login";
+  private  final String PREF_FACEBOOK_LOGIN = "facebook_login";   //페이스북 로그인
+  private  final String PREF_USER_ID = "user_id"; //유저 아이디
+  private  final String PREF_USER_PASSWORD = "user_password" ; //유저 패스워드
+  private  final String PREF_USER_NAME = "user_name";    //유저 y좌표
+  private  final String PREF_USER_X= "x";    //유저 x좌표
+  private  final String PREF_USER_Y = "y";    //유저 y좌표
 
 
   private PrefHelper(Context context)
@@ -41,6 +43,13 @@ public final class PrefHelper {
   }
   public void setPrefFacebookLogin(String paramString) {
     setString(PREF_FACEBOOK_LOGIN, paramString);
+  }
+
+  public String getPrefEmailLogin() {
+    return getString(PREF_EMAIL_LOGIN,"LOGOUT");
+  }
+  public void setPrefEmailLogin(String paramString) {
+    setString(PREF_EMAIL_LOGIN, paramString);
   }
 
   public String getPrefUserId() {

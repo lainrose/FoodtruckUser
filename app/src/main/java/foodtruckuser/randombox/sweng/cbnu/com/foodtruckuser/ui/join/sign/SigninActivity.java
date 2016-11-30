@@ -2,7 +2,6 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
 import retrofit2.Call;
@@ -31,6 +30,7 @@ public class SigninActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText et_signin_email;
     private EditText et_signin_pw;
+    private CheckBox bt_auto_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,9 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.signin_activity);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        et_signin_email = ((EditText) findViewById(R.id.et_signin_email));
-        et_signin_pw = ((EditText) findViewById(R.id.et_signin_pw));
+        et_signin_email = ((EditText) findViewById(R.id.et_pw_input));
+        et_signin_pw = ((EditText) findViewById(R.id.et_pw_reinput));
+        bt_auto_login = (CheckBox)findViewById(R.id.bt_auto_login);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setTitle("이메일로 로그인");
@@ -97,7 +98,10 @@ public class SigninActivity extends AppCompatActivity {
 
                 if (String.valueOf(decodedResponse.getUserMail()).equals(et_signin_email.getText().toString())) {
                     Log.d("TAGG", "로그인성공!");
-                    Toast.makeText(getApplicationContext(), "환영합니다. 푸드트럭", Toast.LENGTH_LONG).show();
+                    if(bt_auto_login.isChecked()){
+                        PrefHelper.getInstance(getApplication()).setPrefEmailLogin("LOGIN");
+                    }
+                    Toast.makeText(getApplicationContext(), "환영합니다. 겟잇트럭", Toast.LENGTH_LONG).show();
                     Intent loginIntent = new Intent(SigninActivity.this, FragmentMain.class);
                     startActivity(loginIntent);
                     finish();
