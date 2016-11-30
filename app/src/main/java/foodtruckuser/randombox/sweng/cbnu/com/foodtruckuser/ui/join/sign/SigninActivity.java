@@ -89,14 +89,11 @@ public class SigninActivity extends AppCompatActivity {
                 Log.d("Response status code: ", String.valueOf(response.code()));
 
                 // if parsing the JSON body failed, `response.body()` returns null
-                UserModel decodedResponse = response.body();
-                if (decodedResponse == null) {
+                UserModel.USER_INFO = response.body();
+                if (UserModel.getInstance() == null) {
                     Log.d("TAG", "아이디비번오류");
                     Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                if (String.valueOf(decodedResponse.getUserMail()).equals(et_signin_email.getText().toString())) {
+                } else if(String.valueOf(UserModel.getInstance().getUserMail()).equals(et_signin_email.getText().toString())) {
                     Log.d("TAGG", "로그인성공!");
                     if(bt_auto_login.isChecked()){
                         PrefHelper.getInstance(getApplication()).setPrefEmailLogin("LOGIN");

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.ArrayList;
 
@@ -47,24 +48,33 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return new MenuViewHolder(v);
     }
 
-
+    // TODO: 2016-11-30 플레이스 홀더도 원하는 사이즈대로 맞춰야함.
     @Override
     public void onBindViewHolder(final MenuViewHolder holder, final int position) {
+        final MenuModel model = listitems.get(position);
+        this.holder = holder;
 
         //이미지 리사이징
         float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
         float margin = (int) convertDpToPixel(10f, (Activity) context);
         imageWidth = ((width - (margin)) / 2);
-        imageHeight = imageWidth;
 
-        final MenuModel model = listitems.get(position);
-        this.holder = holder;
+        if (call.equals("AcitivityTruckMenu")) {
+            //float i = ((float) imageWidth) / ((float) image.getWidth());
+//            imageHeight = i * (image.getHeight());
+            // TODO: 2016-11-30  높이도 리사이징 해줘야함 http://stackoverflow.com/questions/25799967/android-get-drawable-image-after-picasso-loaded
+            imageHeight = (float) (imageWidth * 1.1); //나중에..
+        } else if (call.equals("AcitivityTruckDetail")) {
+            imageHeight = imageWidth;
+        }
+
 //            Bitmap image = BitmapFactory.decodeResource(context.getResources(), model.getImage());
 //            setBitmapImage(image);
+
         Picasso.with(context)
                 .load(Url + listitems.get(position).getImage().getUrl())
+                .resize((int) imageWidth, (int) imageHeight)
                 .placeholder(R.drawable.menuitem)
-                .resize((int)imageWidth,(int)imageHeight)
                 .into(holder.imageview);
         holder.title.setText(model.getTitle());
 
@@ -80,14 +90,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     @Override
     public int getItemCount() {
         return (null != listitems ? listitems.size() : 0);
-    }
-
-    private void calculateDeviceSize() {
-        float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
-        float margin = (int) convertDpToPixel(10f, (Activity) context);
-        imageWidth = ((width - (margin)) / 2);
-        imageHeight = imageWidth;
-
     }
 
 //    private void setBitmapImage(Bitmap image) {

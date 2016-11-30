@@ -42,6 +42,14 @@ public interface ApiService {
     @GET("common/foodtruck_reviews")
     Call<ArrayList<ReviewModel>> foodtruck_reviews(@Query("foodtruck_id") String id);
 
+    @GET("/client/add_like_truck")
+    Call<Boolean> add_like_truck(@Query("client_id") String client_id, @Query("foodtruck_id") String foodtruck_id);
 
+    @GET("/client/delete_like_truck")
+    Call<Boolean> delete_like_truck(@Query("client_id") String client_id, @Query("foodtruck_id") String foodtruck_id);
+
+    @FormUrlEncoded
+    @POST("/client/like_truck_list")
+    Call<ArrayList<FoodTruckModel>> like_truck_list(@Field("client_id") String id);
 
 }

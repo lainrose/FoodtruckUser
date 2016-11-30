@@ -2,11 +2,14 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by hyunjung on 2016-11-01.
  */
 
 public class ReviewModel {
+    public static ArrayList<ReviewModel> REVIEW_LIST;
 
     @SerializedName("id")
     private int id;
@@ -20,6 +23,13 @@ public class ReviewModel {
     private Image image;
     @SerializedName("client")
     private Client client;
+
+    public static synchronized ArrayList<ReviewModel> getInstanceList() {
+        if (REVIEW_LIST == null) {
+            REVIEW_LIST  = new ArrayList<ReviewModel>();
+        }
+        return REVIEW_LIST;
+    }
 
     public void setId(int id) { this.id = id; }
     public void setTitle(String title) { this.title = title; }

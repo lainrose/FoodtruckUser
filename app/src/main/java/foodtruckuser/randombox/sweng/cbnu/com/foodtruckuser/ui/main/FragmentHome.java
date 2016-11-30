@@ -290,7 +290,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     //리스트 변경될때마다 재출력 모듈화
     private void showCardViewList(ArrayList<FoodTruckModel> filteredModelList) {
         // TODO: 2016-11-05  카드뷰 애니메이션 부분 나중에 수정11.05 https://github.com/wasabeef/recyclerview-animators
-        truckAdapter = new TruckAdapter(getActivity(), filteredModelList);
+        truckAdapter = new TruckAdapter(getActivity(), filteredModelList, "FragmentHome");
         SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(truckAdapter);
         alphaAdapter.setFirstOnly(true);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
