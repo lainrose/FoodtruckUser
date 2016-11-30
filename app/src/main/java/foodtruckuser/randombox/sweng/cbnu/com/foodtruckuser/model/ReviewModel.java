@@ -24,7 +24,7 @@ public class ReviewModel {
     @SerializedName("client")
     private Client client;
 
-    public static synchronized ArrayList<ReviewModel> getInstance() {
+    public static synchronized ArrayList<ReviewModel> getInstanceList() {
         if (REVIEW_LIST == null) {
             REVIEW_LIST  = new ArrayList<ReviewModel>();
         }

@@ -51,6 +51,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     // TODO: 2016-11-30 플레이스 홀더도 원하는 사이즈대로 맞춰야함.
     @Override
     public void onBindViewHolder(final MenuViewHolder holder, final int position) {
+        final MenuModel model = listitems.get(position);
+        this.holder = holder;
 
         //이미지 리사이징
         float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
@@ -66,8 +68,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             imageHeight = imageWidth;
         }
 
-        final MenuModel model = listitems.get(position);
-        this.holder = holder;
 //            Bitmap image = BitmapFactory.decodeResource(context.getResources(), model.getImage());
 //            setBitmapImage(image);
 

@@ -3,6 +3,7 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by son on 11/1/16.

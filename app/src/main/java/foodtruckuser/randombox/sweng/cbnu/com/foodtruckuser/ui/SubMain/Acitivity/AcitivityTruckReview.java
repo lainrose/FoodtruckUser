@@ -2,23 +2,18 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivit
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAnimator;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 
 public class AcitivityTruckReview extends AppCompatActivity {
@@ -88,7 +83,7 @@ public class AcitivityTruckReview extends AppCompatActivity {
         };
         review_view.setHasFixedSize(true);
         review_view.setLayoutManager(linearLayoutManager);
-        reviewAdapter = new ReviewItemAdapter(this, ReviewModel.getInstance());
+        reviewAdapter = new ReviewItemAdapter(this, ReviewModel.getInstanceList());
         review_view.setAdapter(reviewAdapter);
         review_view.setItemAnimator(new ReviewItemAnimator());
     }

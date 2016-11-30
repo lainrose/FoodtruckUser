@@ -17,12 +17,17 @@ import java.util.ArrayList;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHolder>  {
 
         private ArrayList<FoodTruckModel> homeList;
-        private static ArrayList<FoodTruckModel> myTruckList;
+//        private static ArrayList<FoodTruckModel> myTruckList;
         private Context mContext = null;
         public static String TruckName;
         String Url= ServiceGenerator.API_BASE_URL;
@@ -30,7 +35,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         public TruckAdapter(Context c, ArrayList<FoodTruckModel> listitems) {
             this.mContext = c;
             this.homeList = listitems;
-            myTruckList = new ArrayList<>();
+//            myTruckList = new ArrayList<>();
         }
 
         @Override
@@ -54,8 +59,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             } else {
                 holder.payTextView.setText("카드가능");
             }
-            //holder.payTextView.setText(homeList.get(position).getFtPayment());
-            /*
+
+            /* 일단은 필요없음.
             if(homeList != null){
                 if(!homeList.get(position).getFtLike()){
                     holder.shineButton.setChecked(false);
@@ -73,36 +78,61 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
                 }
             }
             */
+
             // TODO: 2016-11-17 다른화면 갔다가 오면 좋아요 풀려있으니깐 그거 확인
+            //트럭 클릭하면 Activity Detail로 이동하는 온클릭 리스너.
             holder.coverImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("TAG", "해당 아이템 번호 = "+position);
-                    //TruckName = homeList.get(position).getFtName();
                     Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
                     submain.putExtra("clickedFoodTruck", homeList.get(position));
                     mContext.startActivity(submain);
                     //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
                 }
             });
+            //좋아요
             holder.shineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(!homeList.get(position).isFT_LIKE()){
+                        ApiService service = ServiceGenerator.createService(ApiService.class);
+                        Call<Boolean> convertedContent = service.add_like_truck(UserModel.USER_INFO.getUserId(), homeList.get(position).getFT_ID());
+                        convertedContent.enqueue(new Callback<Boolean>() {
+                            @Override
+                            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                Log.d("TAG", "좋아요 푸드트럭" + response.body().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Boolean> call, Throwable t) {
+
+                            }
+                        });
                         Toast.makeText(mContext, holder.titleTextView.getText()+"을"+ " 좋아요!", Toast.LENGTH_SHORT).show();
                         homeList.get(position).setFT_LIKE(true);
-                        myTruckList.add(homeList.get(position));
+//                        myTruckList.add(homeList.get(position));
                     }
                     else{
-                        Toast.makeText(mContext, holder.titleTextView.getText()+"을"+ " 싫어요!", Toast.LENGTH_SHORT).show();
+                        ApiService service = ServiceGenerator.createService(ApiService.class);
+                        Call<Boolean> convertedContent = service.delete_like_truck(UserModel.USER_INFO.getUserId(), homeList.get(position).getFT_ID());
+                        convertedContent.enqueue(new Callback<Boolean>() {
+                            @Override
+                            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                Log.d("TAG", "좋아요 취소 푸드트럭" + response.body().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Boolean> call, Throwable t) {
+
+                            }
+                        });
+                        Toast.makeText(mContext, holder.titleTextView.getText()+"을"+ " 좋아요 취소!", Toast.LENGTH_SHORT).show();
                         homeList.get(position).setFT_LIKE(false);
-                        myTruckList.remove(homeList.get(position));
+//                        myTruckList.remove(homeList.get(position));
                     }
                 }
             });
-        }
-        public static ArrayList<FoodTruckModel> getMyTruckList(){
-            return myTruckList;
         }
 
         @Override
