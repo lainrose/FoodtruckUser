@@ -88,7 +88,7 @@ public class AcitivityTruckReview extends AppCompatActivity {
         };
         review_view.setHasFixedSize(true);
         review_view.setLayoutManager(linearLayoutManager);
-        reviewAdapter = new ReviewItemAdapter(this, reviewitems);
+        reviewAdapter = new ReviewItemAdapter(this, ReviewModel.getInstance());
         review_view.setAdapter(reviewAdapter);
         review_view.setItemAnimator(new ReviewItemAnimator());
     }

@@ -288,6 +288,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                     reviewitems.add(review);
                 }
                 showReviewList(reviewitems);
+                ReviewModel.REVIEW_LIST = reviewitems;
             }
 
             @Override

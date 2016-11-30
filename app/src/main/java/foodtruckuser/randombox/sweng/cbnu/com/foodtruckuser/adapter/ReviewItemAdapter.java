@@ -52,7 +52,9 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
             Picasso.with(mContext).load(ServiceGenerator.API_BASE_URL + reviewitems.get(position).getImage())
                     .resize(holder.ivFeedCenter.getMaxWidth(), holder.ivFeedCenter.getMaxHeight())
                     .into(holder.ivFeedCenter);
-            Picasso.with(mContext).load(ServiceGenerator.API_BASE_URL + reviewitems.get(position).getClientImage()).into(holder.userImageView);
+            Picasso.with(mContext).load(ServiceGenerator.API_BASE_URL + reviewitems.get(position).getClientImage())
+                    .fit()
+                    .into(holder.userImageView);
             holder.ivFeedBottom.setText(reviewitems.get(position).getContent());
             holder.userImageView.setTag(reviewitems.get(position).getClientImage());
             holder.userTextView.setText(reviewitems.get(position).getClientNickname());
