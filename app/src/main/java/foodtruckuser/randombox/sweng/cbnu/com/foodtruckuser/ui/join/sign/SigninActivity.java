@@ -96,7 +96,10 @@ public class SigninActivity extends AppCompatActivity {
                 } else if(String.valueOf(UserModel.getInstance().getUserMail()).equals(et_signin_email.getText().toString())) {
                     Log.d("TAGG", "로그인성공!");
                     if(bt_auto_login.isChecked()){
-                        PrefHelper.getInstance(getApplication()).setPrefEmailLogin("LOGIN");
+                        PrefHelper.getInstance(getApplication()).setPrefEmailAutoLogin(false);
+                    }
+                    else{
+                        PrefHelper.getInstance(getApplication()).setPrefEmailAutoLogin(false);
                     }
                     Toast.makeText(getApplicationContext(), "환영합니다. 겟잇트럭", Toast.LENGTH_LONG).show();
                     Intent loginIntent = new Intent(SigninActivity.this, FragmentMain.class);

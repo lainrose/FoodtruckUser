@@ -21,8 +21,7 @@ public final class PrefHelper {
   private static final String PREF_USER_X= "x";    //유저 x좌표
   private static final String PREF_USER_Y = "y";    //유저 y좌표
   private static final String PREF_LIKED_TRUCK_ID = "liked_truck_id"; //좋아요 누른 푸드트럭
-  private  final String PREF_EMAIL_LOGIN = "email_login";
-  private  final String PREF_FACEBOOK_LOGIN = "facebook_login";   //페이스북 로그인
+  private  final String PREF_EMAIL_AUTO_LOGIN = "emailAutoLogin";
 
 
   private PrefHelper(Context context)
@@ -48,11 +47,11 @@ public final class PrefHelper {
     setString(PREF_FACEBOOK_LOGIN, paramString);
   }
 
-  public String getPrefEmailLogin() {
-    return getString(PREF_EMAIL_LOGIN,"LOGOUT");
+  public Boolean getPrefEmailAutoLogin() {
+    return getBoolean(PREF_EMAIL_AUTO_LOGIN, false);
   }
-  public void setPrefEmailLogin(String paramString) {
-    setString(PREF_EMAIL_LOGIN, paramString);
+  public void setPrefEmailAutoLogin(Boolean paramBoolean) {
+    setBoolean(PREF_EMAIL_AUTO_LOGIN, paramBoolean);
   }
 
   public String getPrefUserId() {

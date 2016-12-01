@@ -11,10 +11,8 @@
             android:key="loginout">
         </PreferenceScreen>
         <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="autoLogin"
-            android:switchTextOff="OFF"
-            android:switchTextOn="ON"
+            android:defaultValue="false"
+            android:key="emailAutoLogin"
             android:title="자동 로그인 설정"
             android:summaryOn="자동로그인이 돼있습니다."
             android:summaryOff="자동로그인이 해제 돼있습니다."/>

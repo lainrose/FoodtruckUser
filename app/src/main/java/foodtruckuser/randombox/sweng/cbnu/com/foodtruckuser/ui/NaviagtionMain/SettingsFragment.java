@@ -5,31 +5,25 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.widget.Toast;
+import android.support.v7.preference.SwitchPreferenceCompat;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.JoinMain;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.PwChangeActivity;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign.SigninActivity;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     Preference autoLogin;
 
     @Override
-    public void onCreatePreferences(Bundle bundle, String s) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         addPreferencesFromResource(R.xml.preferences);
         Preference logInOut = (Preference)findPreference("loginout");
-        autoLogin = (Preference)findPreference("autoLogin");
-        if(PrefHelper.getInstance(getContext()).getPrefFacebookLogin().equals("LOGIN") ||
-                PrefHelper.getInstance(getContext()).getPrefEmailLogin().equals("LOGIN")){
-            autoLogin.setSelectable(true);
-        }
-        else{
-            autoLogin.
-        }
+        autoLogin = (Preference)findPreference("emailAutoLogin");
         Preference password = (Preference)findPreference("password");
         Preference alarm = (Preference)findPreference("alarm");
         Preference distance = (Preference)findPreference("distance");
@@ -47,8 +41,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 PrefHelper.getInstance(getContext()).setPrefFacebookLogin("LOGOUT");
-                                PrefHelper.getInstance(getContext()).setPrefEmailLogin("LOGOUT");
-                                autoLogin.setSelectable(false);
+                                PrefHelper.getInstance(getContext()).setPrefEmailAutoLogin(false);
                                 Intent intent = new Intent(getContext(), JoinMain.class);
                                 startActivity(intent);
                             }
@@ -70,11 +63,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             {
                 if(autoLogin.isEnabled() == true){
                     PrefHelper.getInstance(getContext()).setPrefFacebookLogin("LOGOUT");
-                    PrefHelper.getInstance(getContext()).setPrefEmailLogin("LOGOUT");
+                    PrefHelper.getInstance(getContext()).setPrefEmailAutoLogin(false);
                 }
                 else{
                     PrefHelper.getInstance(getContext()).setPrefFacebookLogin("LOGIN");
-                    PrefHelper.getInstance(getContext()).setPrefEmailLogin("LOGIN");
+                    PrefHelper.getInstance(getContext()).setPrefEmailAutoLogin(true);
                 }
                 return true;
             }
@@ -120,6 +113,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle bundle, String s) {
+
     }
 
     @Override
