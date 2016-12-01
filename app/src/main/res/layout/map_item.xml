@@ -1,53 +1,150 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/mapitem_shape">
+
     <LinearLayout
-        android:layout_width="0dip"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_marginRight="10dp"
         android:gravity="center|left"
         android:orientation="horizontal">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/coverImageView"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:civ_border_width="2dp"
+            android:layout_gravity="center_vertical"
             app:civ_border_color="#FF000000"
-            android:layout_gravity="center_vertical">
-        </de.hdodenhof.circleimageview.CircleImageView>
+            app:civ_border_width="2dp"></de.hdodenhof.circleimageview.CircleImageView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:gravity="center"
+        android:gravity="left"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="100dip"
-        android:layout_height="wrap_content"
-        android:text = "트럭이름'"
-        android:textSize="10sp"
-        android:textColor="#000000"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/categoryTextView"
-        android:layout_width="100dip"
-        android:layout_height="wrap_content"
-        android:text = "카테고리"
-        android:textSize="8sp"
-        android:textColor="#000000"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/payTextView"
-        android:layout_width="100dip"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:text = "결제여부"
-        android:textColor="#000000"
-        android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:text="트럭이름'"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카테고리'"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right|top"
+                    >
+                    <Button
+                        android:id="@+id/isOpenTextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="60dp"
+                        android:clickable="false"
+                        android:text="영업여부"
+                        android:textSize="12sp"
+                        android:textColor="#FFFFFF"/>
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소"
+            android:textColor="#000000"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"/>
+
+        <TextView
+            android:id="@+id/payTextView"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:text="결제여부"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_review_create_24dp"
+                android:layout_marginRight="4dp"/>
+
+            <TextView
+                android:id="@+id/reviewCountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:text="999"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_thumb_up_nor_16dp" />
+
+            <TextView
+                android:id="@+id/likeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:text="999"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="평점 "
+                android:textColor="#000000"
+                android:textSize="11sp"
+                android:layout_marginRight="2dp"/>
+
+            <TextView
+                android:id="@+id/ratingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="4.5"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

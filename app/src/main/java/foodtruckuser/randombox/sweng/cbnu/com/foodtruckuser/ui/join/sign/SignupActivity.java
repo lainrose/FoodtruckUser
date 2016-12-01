@@ -135,6 +135,7 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
 
     private void getSignUpRequest() {
 
+        // TODO: 2016-12-02 이거 모델 안에서 바꿔주기
         JsonObject client_info = new JsonObject();
         client_info.addProperty("email", et_signup_email.getText().toString());
         client_info.addProperty("password", et_signup_pw.getText().toString());

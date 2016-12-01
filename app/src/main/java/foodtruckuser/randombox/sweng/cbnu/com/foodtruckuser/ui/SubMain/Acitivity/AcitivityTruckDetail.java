@@ -159,11 +159,11 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
         likedTruckIdSet = PrefHelper.getInstance(mContext).getLikedTruckId();
 
-        item = (FoodTruckModel) getIntent().getSerializableExtra("clickedFoodTruck");
+//        item = (FoodTruckModel) getIntent().getSerializableExtra("clickedFoodTruck");
+        item = FoodTruckModel.getInstance();
         Log.d("TAG", "클릭된 푸드트럭 이름 : " + item.getFtName());
 
-        FoodTruckModel.TRUCK_INFO = item; //싱글톤 테스트
-
+        //FoodTruckModel.TRUCK_INFO = item; //싱글톤 테스트
 
         initId(item);
         initToolbar(item);

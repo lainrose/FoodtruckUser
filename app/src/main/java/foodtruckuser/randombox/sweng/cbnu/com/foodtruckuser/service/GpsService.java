@@ -197,7 +197,8 @@ public class GpsService extends Service implements LocationListener {
             currentLocationAddress = "해당 트럭의 위치를 찾을 수 없습니다.";
             e.printStackTrace();
         }
-        return currentLocationAddress;
+        //대한민국 없애주기
+        return currentLocationAddress.substring(5);
     }
     @Override
     public IBinder onBind(Intent arg0) {

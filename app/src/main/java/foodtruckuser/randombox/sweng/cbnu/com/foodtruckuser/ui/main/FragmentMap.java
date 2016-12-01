@@ -48,8 +48,6 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 // TODO: 2016-11-17 맵이랑 db연동
 public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
@@ -118,14 +116,14 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
         mapview = (MapView) view.findViewById(R.id.map);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.map_item_viewpager);
 
         MyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-        mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.map_item_viewpager);
         mRecyclerView.setLayoutManager(MyLayoutManager);
-        mRecyclerView.setAdapter(mapItemAdapter);
+//        mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+//        mRecyclerView.setAdapter(mapItemAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
         mRecyclerView.setSinglePageFling(true);
@@ -162,30 +160,31 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             }
         });
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-                if (child != null && gestureDetector.onTouchEvent(e)) {
-                    //트럭 세부정보로 가는데 지울예정
-                    //mRecyclerView.getChildPosition(child)
-                    Intent submain = new Intent(getContext(), AcitivityTruckDetail.class);
-                    getContext().startActivity(submain);
-                }
-                return false;
-            }
+//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+//            @Override
+//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+//                View child = rv.findChildViewUnder(e.getX(), e.getY());
+//                if (child != null && gestureDetector.onTouchEvent(e)) {
+//                    //트럭 세부정보로 가는데 지울예정
+//                    //mRecyclerView.getChildPosition(child)
+//                    Intent submain = new Intent(getContext(), AcitivityTruckDetail.class);
+//                    getContext().startActivity(submain);
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//
+//        });
 
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-
-        });
         return view;
     }
 
@@ -238,6 +237,28 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         }
     }
 
+    public void setMarkerImage() {
+        int i = 0;
+        for (FoodTruckModel item : listitems) {
+            Log.d("item", "i : " + String.valueOf(i));
+            optFirst = new MarkerOptions();
+            // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
+            // TODO: 2016-12-02 여기 코드 리팩토링좀...
+            optFirst.position(TruckLatLng.get(i));
+            optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
+            map.addMarker(optFirst).showInfoWindow();
+            i++;
+            // TODO: 2016-11-24 이미지에 변수명 넣어서 호출하기, 가장 가까운 트럭부터 계산해서 1번으로 보여주기
+//                if (i == 0)
+//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
+//            else if (i == 1)
+//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
+//            else if (i == 2)
+//            map.addMarker(optFirst).showInfoWindow();
+        }
+    }
+
+
     //최초 한번만 현위치 잡음
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -250,26 +271,6 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             // Map 을 zoom 합니다.
             map.animateCamera(CameraUpdateFactory.zoomTo(16));
             // 마커 설정.
-
-            int i = 0;
-            for (FoodTruckModel item : listitems) {
-                Log.d("item", "i : " + String.valueOf(i));
-                optFirst = new MarkerOptions();
-                // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
-                TruckLatLng.add(new LatLng(item.getFT_LAT(), item.getFT_LNG()));
-                item.setFT_LOCATIONNAME(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
-                optFirst.position(TruckLatLng.get(i));
-                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
-                map.addMarker(optFirst).showInfoWindow();
-                i++;
-                // TODO: 2016-11-24 이미지에 변수명 넣어서 호출하기, 가장 가까운 트럭부터 계산해서 1번으로 보여주기
-//                if (i == 0)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
-//            else if (i == 1)
-//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
-//            else if (i == 2)
-//            map.addMarker(optFirst).showInfoWindow();
-            }
 
         }
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -328,6 +329,11 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         this.mGoogleApiClient.disconnect();
     }
 
+    public void showViewPagerList() {
+        mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+        mRecyclerView.setAdapter(mapItemAdapter);
+    }
+
     public void requestFoodtruckList(int num) {
         listitems.clear();
 
@@ -340,9 +346,14 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
                 for (FoodTruckModel foodTruck : foodTruckList
                         ) {
+                    TruckLatLng.add(new LatLng(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
+                    foodTruck.setFT_LOCATIONNAME(gpsService.findAddress(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
                     listitems.add(foodTruck);
+
                     Log.d("TAG", "맵트럭 : " + foodTruck.getFtName());
                 }
+                setMarkerImage();
+                showViewPagerList();
             }
 
             @Override

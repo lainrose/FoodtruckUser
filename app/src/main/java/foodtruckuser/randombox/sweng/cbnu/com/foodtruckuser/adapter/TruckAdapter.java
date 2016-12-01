@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,15 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             holder.payTextView.setText("카드가능");
         }
 
+        //영업여부
+        if (homeList.get(position).isFT_isOPEN() == true) {
+            holder.isOpenTextButton.setText("영업중");
+            holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_green_main);
+        } else {
+            holder.isOpenTextButton.setText("영업종료");
+            holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_red_main);
+        }
+
         // TODO: 2016-12-01 어플 껐다 켰을 때 체크 안됨
         //Set에 푸드트럭 ID있나 검사해서 있으면 체크 해준다. 없는애들은 다 해제
         if (call.equals("FragmentHome")) {
@@ -88,7 +98,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             public void onClick(View v) {
                 Log.d("TAG", "해당 아이템 번호 = " + position);
                 Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
-                submain.putExtra("clickedFoodTruck", homeList.get(position));
+//                submain.putExtra("clickedFoodTruck", homeList.get(position));
+                FoodTruckModel.TRUCK_INFO = homeList.get(position);
                 mContext.startActivity(submain);
                 //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
             }
@@ -161,6 +172,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         public ImageView shareImageView;
         public ShineButton shineButton;
         public TextView payTextView;
+        public TextView isOpenTextButton;
+
 
         public TruckViewHolder(View v) {
             super(v);
@@ -169,6 +182,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
             shineButton = (ShineButton) v.findViewById(R.id.po_image);
             payTextView = (TextView) v.findViewById(R.id.payTextView);
+            isOpenTextButton = (Button) v.findViewById(R.id.isOpenTextButton);
+
         }
     }
 }
