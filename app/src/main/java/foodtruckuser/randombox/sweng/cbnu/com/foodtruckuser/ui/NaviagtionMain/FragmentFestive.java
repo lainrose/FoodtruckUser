@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.FoldingCellListAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FestiveModel;
 
@@ -23,7 +24,7 @@ public class FragmentFestive extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_festive, null);
 
         ListView theListView = (ListView) view.findViewById(R.id.mainListView);
@@ -45,21 +46,20 @@ public class FragmentFestive extends Fragment {
                         //확인버튼 text
                         .setConfirmText("확인")
                         .showCancelButton(true)
+                        // 확인버튼 리스너
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                Utill.getInstance().MoveAcitivity(getContext(), AcitivityFestiveWriting.class);
+                            }
+                        })
                         //취소버튼 리스너
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
 
                             }
-                        })
-                        // 확인버튼 리스너
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-
-                            }
-                        })
-                        .show();
+                        }).show();
             }
         });
 
@@ -70,7 +70,7 @@ public class FragmentFestive extends Fragment {
         adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "DEFAULT HANDLER FOR ALL BUTTONS", Toast.LENGTH_SHORT).show();
+
             }
         });
 
