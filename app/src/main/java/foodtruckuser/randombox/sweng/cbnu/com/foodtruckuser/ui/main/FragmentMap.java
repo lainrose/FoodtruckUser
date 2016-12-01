@@ -184,6 +184,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 //            }
 //
 //        });
+
         return view;
     }
 
@@ -237,6 +238,28 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         }
     }
 
+    public void setMarkerImage() {
+        int i = 0;
+        for (FoodTruckModel item : listitems) {
+            Log.d("item", "i : " + String.valueOf(i));
+            optFirst = new MarkerOptions();
+            // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
+            // TODO: 2016-12-02 여기 코드 리팩토링좀...
+            optFirst.position(TruckLatLng.get(i));
+            optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
+            map.addMarker(optFirst).showInfoWindow();
+            i++;
+            // TODO: 2016-11-24 이미지에 변수명 넣어서 호출하기, 가장 가까운 트럭부터 계산해서 1번으로 보여주기
+//                if (i == 0)
+//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
+//            else if (i == 1)
+//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
+//            else if (i == 2)
+//            map.addMarker(optFirst).showInfoWindow();
+        }
+    }
+
+
     //최초 한번만 현위치 잡음
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -249,25 +272,6 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             // Map 을 zoom 합니다.
             map.animateCamera(CameraUpdateFactory.zoomTo(16));
             // 마커 설정.
-
-            int i = 0;
-            for (FoodTruckModel item : listitems) {
-                Log.d("item", "i : " + String.valueOf(i));
-                optFirst = new MarkerOptions();
-                // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
-                // TODO: 2016-12-02 여기 코드 리팩토링좀...
-                optFirst.position(TruckLatLng.get(i));
-                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
-                map.addMarker(optFirst).showInfoWindow();
-                i++;
-                // TODO: 2016-11-24 이미지에 변수명 넣어서 호출하기, 가장 가까운 트럭부터 계산해서 1번으로 보여주기
-//                if (i == 0)
-//                    optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
-//            else if (i == 1)
-//                optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select_2));
-//            else if (i == 2)
-//            map.addMarker(optFirst).showInfoWindow();
-            }
 
         }
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -349,6 +353,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
                     Log.d("TAG", "맵트럭 : " + foodTruck.getFtName());
                 }
+                setMarkerImage();
                 showViewPagerList();
             }
 

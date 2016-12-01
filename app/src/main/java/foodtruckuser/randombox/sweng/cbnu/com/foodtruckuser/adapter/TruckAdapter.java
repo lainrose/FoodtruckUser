@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,15 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             holder.payTextView.setText("카드불가");
         } else {
             holder.payTextView.setText("카드가능");
+        }
+
+        //영업여부
+        if (homeList.get(position).isFT_isOPEN() == true) {
+            holder.isOpenTextButton.setText("영업중");
+            holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_green_main);
+        } else {
+            holder.isOpenTextButton.setText("영업종료");
+            holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_red_main);
         }
 
         // TODO: 2016-12-01 어플 껐다 켰을 때 체크 안됨
@@ -162,6 +172,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         public ImageView shareImageView;
         public ShineButton shineButton;
         public TextView payTextView;
+        public TextView isOpenTextButton;
+
 
         public TruckViewHolder(View v) {
             super(v);
@@ -170,6 +182,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
             shineButton = (ShineButton) v.findViewById(R.id.po_image);
             payTextView = (TextView) v.findViewById(R.id.payTextView);
+            isOpenTextButton = (Button) v.findViewById(R.id.isOpenTextButton);
+
         }
     }
 }

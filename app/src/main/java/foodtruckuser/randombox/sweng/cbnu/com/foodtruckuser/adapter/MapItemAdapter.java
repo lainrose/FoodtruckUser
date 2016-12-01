@@ -98,13 +98,9 @@ public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckVie
         //영업여부
         if (homeList.get(position).isFT_isOPEN() == true) {
             holder.isOpenTextButton.setText("영업중");
-            //String strColor = "#28c908";
-            //holder.isOpenTextButton.setBackgroundColor(Color.parseColor(strColor));
             holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_green);
         } else {
             holder.isOpenTextButton.setText("영업종료");
-            //String strColor = "#dd0606";
-            //holder.isOpenTextButton.setBackgroundColor(Color.parseColor(strColor));
             holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_red);
         }
 
@@ -151,7 +147,6 @@ public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckVie
             reviewCountTextView = (TextView) v.findViewById(R.id.reviewCountTextView);
             likeTextView = (TextView) v.findViewById(R.id.likeTextView);
             ratingTextView = (TextView) v.findViewById(R.id.ratingTextView);
-            //isOpenTextView = (TextView) v.findViewById(R.id.isOpenTextView);
             isOpenTextButton = (Button) v.findViewById(R.id.isOpenTextButton);
 
         }
