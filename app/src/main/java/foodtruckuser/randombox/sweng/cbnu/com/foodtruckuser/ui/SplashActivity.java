@@ -32,14 +32,15 @@ public class SplashActivity extends AppCompatActivity {
                 Log.d("FACEBOOK_LOGIN::::::", facebook_login);
                 /** 환경 변수 중 로그인 부분을 체킹하여 Activity 전환 */
                 // 페이스북 로그인
-                if(facebook_login.equals("LOGIN"))
+                Log.d("자동 로그인", ""+PrefHelper.getInstance(context).getPrefEmailAutoLogin());
+                if(facebook_login.equals("LOGIN") || PrefHelper.getInstance(context).getPrefEmailAutoLogin() == true)
                 {
                     Intent loginIntent = new Intent(SplashActivity.this, FragmentMain.class);
                     SplashActivity.this.startActivity(loginIntent);
                     SplashActivity.this.finish();
                 }
                 // 페이스북 로그아웃
-                else if(facebook_login.equals("LOGOUT"))
+                else if(facebook_login.equals("LOGOUT") || PrefHelper.getInstance(context).getPrefEmailAutoLogin() == false)
                 {
                     Intent loginIntent = new Intent(SplashActivity.this, JoinMain.class);
                     SplashActivity.this.startActivity(loginIntent);

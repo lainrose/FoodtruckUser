@@ -41,7 +41,7 @@
         android:layout_marginLeft="20.0dip"
         android:layout_marginRight="20.0dip"
         android:layout_marginBottom="10.0dip"
-        android:hint="패스워드 재확인"
+        android:hint="패스워드 확인"
         android:password="true"
         android:singleLine="true"
         android:layout_below="@id/et_pw_input"

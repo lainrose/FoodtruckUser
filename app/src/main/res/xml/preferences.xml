@@ -23,7 +23,9 @@
         </PreferenceScreen>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="위치 및 알림 정보">
+    <PreferenceCategory
+        android:key="category"
+        android:title="위치 및 알림 정보">
         <PreferenceScreen
             android:summary="알림받을 위치를 설정합니다."
             android:title="알림 위치 설정"
@@ -31,22 +33,21 @@
         </PreferenceScreen>
         <!--https://github.com/MrBIMC/MaterialSeekBarPreference!-->
         <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
-        android:key="distance"
-        android:title="위치 거리 설정 "
-        android:summary="선택한 위치를 기준으로"
-        android:enabled="true"
-        android:defaultValue="500"
-        sample:msbp_minValue="100"
-        sample:msbp_maxValue="5000"
-        sample:msbp_interval="500"
-        sample:msbp_measurementUnit="m"
-        sample:msbp_dialogEnabled="false"/>
+            android:id="@+id/preSeekbar"
+            android:key="distance"
+            android:title="위치 거리 설정 "
+            android:summary="선택한 위치를 기준으로"
+            android:enabled="true"
+            android:defaultValue="500"
+            sample:msbp_minValue="100"
+            sample:msbp_maxValue="5000"
+            sample:msbp_interval="500"
+            sample:msbp_measurementUnit="m"
+            sample:msbp_dialogEnabled="false"/>
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="neartruck"
             android:summary="근처에 푸드트럭이 오면 알립니다."
-            android:switchTextOff="OFF"
-            android:switchTextOn="ON"
             android:title="알림 사용" />
     </PreferenceCategory>
 

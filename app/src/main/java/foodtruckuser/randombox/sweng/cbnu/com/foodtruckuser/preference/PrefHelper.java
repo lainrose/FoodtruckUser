@@ -2,8 +2,8 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,11 +22,14 @@ public final class PrefHelper {
   private static final String PREF_USER_Y = "y";    //유저 y좌표
   private static final String PREF_LIKED_TRUCK_ID = "liked_truck_id"; //좋아요 누른 푸드트럭
   private  final String PREF_EMAIL_AUTO_LOGIN = "emailAutoLogin";
+  private final String PREF_DISTANCE = "distance";
 
 
   private PrefHelper(Context context)
   {
-    this.mSharedPreference= context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    this.mSharedPreference= PreferenceManager.getDefaultSharedPreferences(context);
+
+    //this.mSharedPreference= context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
   }
 
   public static synchronized PrefHelper getInstance(Context context)
@@ -40,6 +43,11 @@ public final class PrefHelper {
     finally {}
   }
 
+
+  public static String getPrefLikedTruckId() {
+    return PREF_LIKED_TRUCK_ID;
+  }
+
   public String getPrefFacebookLogin() {
      return getString(PREF_FACEBOOK_LOGIN,"LOGOUT");
   }
@@ -48,10 +56,18 @@ public final class PrefHelper {
   }
 
   public Boolean getPrefEmailAutoLogin() {
-    return getBoolean(PREF_EMAIL_AUTO_LOGIN, false);
-  }
+      return getBoolean(getPREF_EMAIL_AUTO_LOGIN(), false);
+    }
   public void setPrefEmailAutoLogin(Boolean paramBoolean) {
-    setBoolean(PREF_EMAIL_AUTO_LOGIN, paramBoolean);
+    setBoolean(getPREF_EMAIL_AUTO_LOGIN(), paramBoolean);
+  }
+
+
+  public int getPrefDistance() {
+    return getInt(PREF_DISTANCE);
+  }
+  public void setPrefDistance(int paramInt) {
+    setInt(PREF_DISTANCE, paramInt);
   }
 
   public String getPrefUserId() {
@@ -89,8 +105,8 @@ public final class PrefHelper {
     setString(PREF_USER_Y, paramString);
   }
 
-  public Set<String> getLikedTruckId() {return getStringSet(PREF_LIKED_TRUCK_ID);}
-  public void setLikedTruckid(Set<String> paramStringSet) {setStringSet(PREF_LIKED_TRUCK_ID, paramStringSet);}
+  public Set<String> getLikedTruckId() {return getStringSet(getPrefLikedTruckId());}
+  public void setLikedTruckid(Set<String> paramStringSet) {setStringSet(getPrefLikedTruckId(), paramStringSet);}
 
 
 
@@ -191,4 +207,7 @@ public final class PrefHelper {
     return localEditor.commit();
   }
 
+  public String getPREF_EMAIL_AUTO_LOGIN() {
+    return PREF_EMAIL_AUTO_LOGIN;
+  }
 }

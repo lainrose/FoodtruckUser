@@ -42,6 +42,9 @@
         <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckReview" />
         <activity android:name=".ui.SubMain.Acitivity.ActivityMap" />
         <activity android:name=".ui.SubMain.Acitivity.ActivityWebView" />
+        <activity android:name=".ui.join.sign.PwChangeActivity"/>
+        <activity android:name=".ui.NaviagtionMain.ActivitySetLocationMap"/>
+
         <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

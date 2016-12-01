@@ -1,7 +1,10 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +34,9 @@ public class SigninActivity extends AppCompatActivity {
     private EditText et_signin_email;
     private EditText et_signin_pw;
     private CheckBox bt_auto_login;
+    private SharedPreferences mPref;
+    private SharedPreferences.Editor editor;
+    private Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.signin_activity);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
+        mPref = PreferenceManager.getDefaultSharedPreferences(this);
         et_signin_email = ((EditText) findViewById(R.id.et_pw_input));
         et_signin_pw = ((EditText) findViewById(R.id.et_pw_reinput));
         bt_auto_login = (CheckBox)findViewById(R.id.bt_auto_login);
@@ -96,10 +103,10 @@ public class SigninActivity extends AppCompatActivity {
                 } else if(String.valueOf(UserModel.getInstance().getUserMail()).equals(et_signin_email.getText().toString())) {
                     Log.d("TAGG", "로그인성공!");
                     if(bt_auto_login.isChecked()){
-                        PrefHelper.getInstance(getApplication()).setPrefEmailAutoLogin(false);
+                        PrefHelper.getInstance(mContext).setPrefEmailAutoLogin(true);
                     }
                     else{
-                        PrefHelper.getInstance(getApplication()).setPrefEmailAutoLogin(false);
+                        PrefHelper.getInstance(mContext).setPrefEmailAutoLogin(false);
                     }
                     Toast.makeText(getApplicationContext(), "환영합니다. 겟잇트럭", Toast.LENGTH_LONG).show();
                     Intent loginIntent = new Intent(SigninActivity.this, FragmentMain.class);

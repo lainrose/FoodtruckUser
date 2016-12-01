@@ -101,7 +101,9 @@ public class FragmentMain extends AppCompatActivity {
             return;
         }
         if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            moveTaskToBack(true);
             finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
             toast.cancel();
         }
     }

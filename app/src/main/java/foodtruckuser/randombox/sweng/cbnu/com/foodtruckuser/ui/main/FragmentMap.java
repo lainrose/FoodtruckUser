@@ -215,26 +215,25 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-
         // TODO: 2016-11-25 6.0이상에서 최초로 앱 설치 후 실행 시 퍼미션 물어봄, 그러고 종료. 그 뒤론 잘 작동함 이거 해결해야함
-        //안드 6.0 달라진 퍼미션
-        int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
+            //안드 6.0 달라진 퍼미션
+            int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-            } else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                }
             }
-        }
 
-        Log.d("구글맵", "온맵레디");
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            map.setMyLocationEnabled(true);
-        } else {
-            Log.d("안되나", "onMapReady: ");
+            Log.d("구글맵", "온맵레디");
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                map.setMyLocationEnabled(true);
+            } else {
+                Log.d("안되나", "onMapReady: ");
             // Show rationale and request permission.
         }
     }
