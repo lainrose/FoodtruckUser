@@ -75,6 +75,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         setHasOptionsMenu(true);
         //프리퍼런스
         likedTruckIdSet = PrefHelper.getInstance(getContext()).getLikedTruckId();
+        initFT();
+
 
     }
 
@@ -107,7 +109,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getActivity());
         MyLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myRecyclerView.setLayoutManager(MyLayoutManager);
-        initFT();
 
         //onResponse에 카드뷰 그려주는 부분 넣어서 해결
 //        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행

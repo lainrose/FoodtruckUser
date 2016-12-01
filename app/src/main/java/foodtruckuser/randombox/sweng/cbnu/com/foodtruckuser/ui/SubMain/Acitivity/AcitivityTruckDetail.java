@@ -165,7 +165,6 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
         //FoodTruckModel.TRUCK_INFO = item; //싱글톤 테스트
 
-
         initId(item);
         initToolbar(item);
         initCollapsingToolbar();

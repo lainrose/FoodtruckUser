@@ -48,8 +48,6 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 // TODO: 2016-11-17 맵이랑 db연동
 public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
@@ -162,30 +160,30 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             }
         });
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-                if (child != null && gestureDetector.onTouchEvent(e)) {
-                    //트럭 세부정보로 가는데 지울예정
-                    //mRecyclerView.getChildPosition(child)
-                    Intent submain = new Intent(getContext(), AcitivityTruckDetail.class);
-                    getContext().startActivity(submain);
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-
-        });
+//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+//            @Override
+//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+//                View child = rv.findChildViewUnder(e.getX(), e.getY());
+//                if (child != null && gestureDetector.onTouchEvent(e)) {
+//                    //트럭 세부정보로 가는데 지울예정
+//                    //mRecyclerView.getChildPosition(child)
+//                    Intent submain = new Intent(getContext(), AcitivityTruckDetail.class);
+//                    getContext().startActivity(submain);
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//
+//        });
         return view;
     }
 
@@ -257,8 +255,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                 Log.d("item", "i : " + String.valueOf(i));
                 optFirst = new MarkerOptions();
                 // TODO: 2016-11-24 Iterator패턴으로 바꿔보기. 근데 큰차이 없는듯
-                TruckLatLng.add(new LatLng(item.getFT_LAT(), item.getFT_LNG()));
-                item.setFT_LOCATIONNAME(gpsService.findAddress(item.getFT_LAT(), item.getFT_LNG()));
+                // TODO: 2016-12-02 여기 코드 리팩토링좀...
                 optFirst.position(TruckLatLng.get(i));
                 optFirst.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
                 map.addMarker(optFirst).showInfoWindow();
@@ -329,6 +326,11 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         this.mGoogleApiClient.disconnect();
     }
 
+    public void showViewPagerList() {
+        mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+        mRecyclerView.setAdapter(mapItemAdapter);
+    }
+
     public void requestFoodtruckList(int num) {
         listitems.clear();
 
@@ -341,11 +343,13 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
                 for (FoodTruckModel foodTruck : foodTruckList
                         ) {
+                    TruckLatLng.add(new LatLng(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
+                    foodTruck.setFT_LOCATIONNAME(gpsService.findAddress(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
                     listitems.add(foodTruck);
+
                     Log.d("TAG", "맵트럭 : " + foodTruck.getFtName());
                 }
-                mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
-                mRecyclerView.setAdapter(mapItemAdapter);
+                showViewPagerList();
             }
 
             @Override
