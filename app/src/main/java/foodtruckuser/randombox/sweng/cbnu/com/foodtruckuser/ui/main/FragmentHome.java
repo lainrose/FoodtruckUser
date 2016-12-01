@@ -75,7 +75,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         setHasOptionsMenu(true);
         //프리퍼런스
         likedTruckIdSet = PrefHelper.getInstance(getContext()).getLikedTruckId();
-        initFT();
 
 
     }
@@ -130,6 +129,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             }
         });
         initBoom();
+        initFT();
+
 
         return view;
     }

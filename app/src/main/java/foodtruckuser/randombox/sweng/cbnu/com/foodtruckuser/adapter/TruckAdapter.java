@@ -126,7 +126,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
 
     public void requestAddLikeTruck(final TruckViewHolder holder, final int position) {
         ApiService service = ServiceGenerator.createService(ApiService.class);
-        Call<Boolean> convertedContent = service.add_like_truck(UserModel.USER_INFO.getUserId(), homeList.get(position).getFT_ID());
+        Call<Boolean> convertedContent = service.add_like_truck(UserModel.getInstance().getUserId(), homeList.get(position).getFT_ID());
         convertedContent.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -144,7 +144,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
 
     public void requestRemoveLikeTruck(final TruckViewHolder holder, final int position) {
         ApiService service = ServiceGenerator.createService(ApiService.class);
-        Call<Boolean> convertedContent = service.delete_like_truck(UserModel.USER_INFO.getUserId(), homeList.get(position).getFT_ID());
+        Call<Boolean> convertedContent = service.delete_like_truck(UserModel.getInstance().getUserId(), homeList.get(position).getFT_ID());
         convertedContent.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {

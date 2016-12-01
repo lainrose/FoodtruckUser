@@ -82,7 +82,7 @@ public class FragmentMytruck extends Fragment {
             public void onResponse(Call<ArrayList<FoodTruckModel>> call, Response<ArrayList<FoodTruckModel>> response) {
                 ArrayList<FoodTruckModel> myTruckList = response.body();
 
-                Log.d("TAG", "바디: " + response.body().toString());
+//                Log.d("TAG", "바디: " + response.body().toString());
 
                 for (FoodTruckModel myTruck: myTruckList) {
                     listitems.add(myTruck);
