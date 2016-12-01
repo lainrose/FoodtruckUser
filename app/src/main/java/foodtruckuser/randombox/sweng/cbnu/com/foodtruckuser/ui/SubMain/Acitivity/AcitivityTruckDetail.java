@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -44,6 +45,7 @@ import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.RecyclerItemClickListener;
@@ -52,9 +54,12 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.MenuAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.ReviewItemAnimator;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import retrofit2.Call;
@@ -87,6 +92,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
     private FoodTruckModel item;
     private ShareDialog shareDialog;
     private CallbackManager callbackManager;
+    private Set<String> likedTruckIdSet;
+
 
     String Url = ServiceGenerator.API_BASE_URL;
 
@@ -150,6 +157,8 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         mContext = this;
         this.savedInstanceState = savedInstanceState;
 
+        likedTruckIdSet = PrefHelper.getInstance(mContext).getLikedTruckId();
+
         item = (FoodTruckModel) getIntent().getSerializableExtra("clickedFoodTruck");
         Log.d("TAG", "클릭된 푸드트럭 이름 : " + item.getFtName());
 
@@ -199,11 +208,21 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
             }
         });
 
+        // TODO: 2016-12-01 껐다켰을 때 지랄나는거
+        // TODO: 2016-12-01 액티비티 디테일에서 눌렀을 때 프레그먼트로 나와서 리프레시
         likebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : if문으로 좋아요 되있을 때 안되있을때 체크값 받아서 설정바람
-                // TODO : 또한 기본 홈화면에서 좋아요 체크 했던 아이템이면 이화면에도 색칠되있어야함
+                if(!item.isFT_LIKE()) {
+                    requestAddLikeTruck(); //좋아요 상태 true 해주는건 이 함수에
+                    likedTruckIdSet.add(item.getFT_ID());
+                    PrefHelper.getInstance(mContext).setLikedTruckid(likedTruckIdSet);
+                } else {
+                    requestRemoveLikeTruck(); //좋아요 상태 false 해주는건 이 함수에
+                    likedTruckIdSet.remove(item.getFT_ID());
+                    PrefHelper.getInstance(mContext).setLikedTruckid(likedTruckIdSet);
+                }
+
                 showLikedSnackbar();
             }
         });
@@ -470,6 +489,12 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
         emoticonText2.setText("괜찮다 (" + item.getEmoticonText2() + ")");
         emoticonText3.setText("별로 (" + item.getEmoticonText3() + ")");
 
+        if(item.isFT_LIKE()) {
+            likebtn.setChecked(true);
+        } else {
+            likebtn.setChecked(false);
+        }
+
     }
 
     // 맵 관련 처리
@@ -573,6 +598,41 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
                 .create().show();
+    }
+    public void requestAddLikeTruck() {
+        ApiService service = ServiceGenerator.createService(ApiService.class);
+        Call<Boolean> convertedContent = service.add_like_truck(UserModel.USER_INFO.getUserId(), item.getFT_ID());
+        convertedContent.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("TAG", "좋아요 푸드트럭" + response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+        Toast.makeText(mContext, item.getFtName() + "을" + " 좋아요!", Toast.LENGTH_SHORT).show();
+        item.setFT_LIKE(true);
+    }
+
+    public void requestRemoveLikeTruck() {
+        ApiService service = ServiceGenerator.createService(ApiService.class);
+        Call<Boolean> convertedContent = service.delete_like_truck(UserModel.USER_INFO.getUserId(), item.getFT_ID());
+        convertedContent.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("TAG", "좋아요 취소 푸드트럭" + response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+        Toast.makeText(mContext, item.getFtName() + "을" + " 좋아요 취소!", Toast.LENGTH_SHORT).show();
+        item.setFT_LIKE(false);
     }
 
     public void requestFoodtruckMenu(String id) {

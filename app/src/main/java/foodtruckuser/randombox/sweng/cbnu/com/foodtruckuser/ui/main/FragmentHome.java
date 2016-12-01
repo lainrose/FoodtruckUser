@@ -27,11 +27,14 @@ import com.nightonke.boommenu.Types.OrderType;
 import com.nightonke.boommenu.Types.PlaceType;
 import com.nightonke.boommenu.Util;
 import java.util.ArrayList;
+import java.util.Set;
+
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import retrofit2.Call;
@@ -51,6 +54,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     private ViewTreeObserver viewTreeObserver;
     private PullRefreshLayout layout;
     private TruckAdapter truckAdapter;
+    private Set<String> likedTruckIdSet;
+
 
     // 리스트에 들어갈 항목들
     ArrayList<FoodTruckModel> listItems = new ArrayList<>();
@@ -68,6 +73,9 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        //프리퍼런스
+        likedTruckIdSet = PrefHelper.getInstance(getContext()).getLikedTruckId();
+
     }
 
     @Override
@@ -195,6 +203,12 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 for (FoodTruckModel foodTruck : foodTruckList
                         ) {
                     //foodTruck.setFtImage(FT_IMAGES[0]);
+                    if(likedTruckIdSet.contains(foodTruck.getFT_ID())) {
+                        foodTruck.setFT_LIKE(true);
+                        Log.d("TEST", "꺄륵" + foodTruck.getFtName());
+                    } else {
+                        foodTruck.setFT_LIKE(false);
+                    }
                     listItems.add(foodTruck);
 
                     Log.d("TAG", "트럭이름" + foodTruck.getFtName());
@@ -330,4 +344,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 //        return categoryFilteredModelList;
 //    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

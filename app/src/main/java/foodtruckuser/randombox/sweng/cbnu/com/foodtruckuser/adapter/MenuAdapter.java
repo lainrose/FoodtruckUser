@@ -64,6 +64,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 //            imageHeight = i * (image.getHeight());
             // TODO: 2016-11-30  높이도 리사이징 해줘야함 http://stackoverflow.com/questions/25799967/android-get-drawable-image-after-picasso-loaded
             imageHeight = (float) (imageWidth * 1.1); //나중에..
+//            imageHeight = imageWidth;
         } else if (call.equals("AcitivityTruckDetail")) {
             imageHeight = imageWidth;
         }
