@@ -5,27 +5,39 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.google.gson.JsonObject;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AcitivityWriting extends AppCompatActivity implements View.OnClickListener {
 
     private String writingText;
     private EditText writingTextView;
-    private ImageView uproadPhotoImage;
-    private ImageView uproadPhoto;
+    private ImageView uploadPhotoImage;
+    private ImageView uploadPhoto;
     private Toolbar toolbar;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -39,8 +51,8 @@ public class AcitivityWriting extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_writing);
         setupToolbar();
         writingTextView = (EditText)findViewById(R.id.writingText);
-        uproadPhoto = (ImageView)findViewById(R.id.uproadPhoto);
-        uproadPhotoImage = (ImageView)findViewById(R.id.uproadPhotoImage);
+        uploadPhoto = (ImageView)findViewById(R.id.uploadPhoto);
+        uploadPhotoImage = (ImageView)findViewById(R.id.uploadPhotoImage);
 
     }
     private void setupToolbar() {
@@ -50,13 +62,36 @@ public class AcitivityWriting extends AppCompatActivity implements View.OnClickL
     }
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.uproadWritingBtn) {
+        if (view.getId() == R.id.uploadWritingBtn) {
             writingText = writingTextView.getText().toString();
+
+            ReviewModel reviewModel = new ReviewModel();
+            JsonObject jsonObject = reviewModel.parseToJsonObject(UserModel.getInstance().getUserId()
+                    , FoodTruckModel.getInstance().getFT_ID()
+                    , "타이틀", writingTextView.getText().toString()
+                    , 3.4f
+            );
+
+            ApiService service = ServiceGenerator.createService(ApiService.class);
+            Call<FoodTruckModel> convertedContent = service.save_review(jsonObject);
+            convertedContent.enqueue(new Callback<FoodTruckModel>() {
+                @Override
+                public void onResponse(Call<FoodTruckModel> call, Response<FoodTruckModel> response) {
+                    FoodTruckModel item = response.body();
+                    Log.d("TAG", "푸드트럭 리뷰 추가 :  " + item.getFtName());
+                }
+
+                @Override
+                public void onFailure(Call<FoodTruckModel> call, Throwable t) {
+
+                }
+            });
+
             Log.d("쓴 글", writingText);
             finish();
             overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         }
-        else if (view.getId() == R.id.uproadPhotoBtn) {
+        else if (view.getId() == R.id.uploadPhotoBtn) {
             DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -157,10 +192,10 @@ public class AcitivityWriting extends AppCompatActivity implements View.OnClickL
 
                 if(extras != null)
                 {
-                    //uproadPhoto.bringToFront();
+                    //uploadPhoto.bringToFront();
                     Bitmap photo = extras.getParcelable("data"); // CROP된 BITMAP
-                    uproadPhotoImage.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-                    uproadPhotoImage.bringToFront();
+                    uploadPhotoImage.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+                    uploadPhotoImage.bringToFront();
                     storeCropImage(photo, filePath); // CROP된 이미지를 외부저장소, 앨범에 저장한다.
                     absoultePath = filePath;
                     break;

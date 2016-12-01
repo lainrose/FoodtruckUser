@@ -44,7 +44,7 @@
                     android:background="#FFFFFF">
 
                     <RelativeLayout
-                        android:id="@+id/uproadPhotoBtn"
+                        android:id="@+id/uploadPhotoBtn"
                         android:layout_width="300dp"
                         android:layout_height="300dp"
                         android:orientation="horizontal"
@@ -52,11 +52,11 @@
                         android:background="#cccccc"
                         android:onClick="onClick">
                         <ImageView
-                            android:id="@+id/uproadPhotoImage"
+                            android:id="@+id/uploadPhotoImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                         <ImageView
-                            android:id="@+id/uproadPhoto"
+                            android:id="@+id/uploadPhoto"
                             android:layout_width="48dp"
                             android:layout_height="match_parent"
                             android:background="#cccccc"
@@ -111,7 +111,7 @@
             android:layout_marginRight="10dp"
             android:textStyle="bold"
             android:background="@drawable/button_shape"
-            android:id="@+id/uproadWritingBtn"
+            android:id="@+id/uploadWritingBtn"
             android:onClick="onClick"/>
     </LinearLayout>
 

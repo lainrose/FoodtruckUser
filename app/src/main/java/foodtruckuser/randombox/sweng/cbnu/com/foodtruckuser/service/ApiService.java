@@ -52,4 +52,8 @@ public interface ApiService {
     @POST("/client/like_truck_list")
     Call<ArrayList<FoodTruckModel>> like_truck_list(@Field("client_id") String id);
 
+    @FormUrlEncoded
+    @POST("/client/save_review")
+    Call<FoodTruckModel> save_review(@Field("review_info") JsonObject review_info);
+
 }

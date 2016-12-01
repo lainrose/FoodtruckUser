@@ -154,7 +154,8 @@ public class FoodTruckModel implements Serializable {
     }
 
     public double getFtRating() {
-        return FT_RATING;
+        //소수점 첫번째자리로 보여주기
+        return Math.round(FT_RATING * 10)/10.0;
     }
 
     public void setFtRating(double ftRating) {

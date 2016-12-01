@@ -1,5 +1,6 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -30,6 +31,18 @@ public class ReviewModel {
         }
         return REVIEW_LIST;
     }
+
+    public JsonObject parseToJsonObject(String client_id, String foodtruck_id, String title, String content, float rating/*, Image image*/) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("client_id", client_id);
+        jsonObject.addProperty("foodtruck_id", foodtruck_id);
+        jsonObject.addProperty("title", title);
+        jsonObject.addProperty("content", content);
+        jsonObject.addProperty("rating", rating);
+        //jsonObject.addProperty("image", image);
+        return jsonObject;
+    }
+
 
     public void setId(int id) { this.id = id; }
     public void setTitle(String title) { this.title = title; }
