@@ -88,7 +88,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             public void onClick(View v) {
                 Log.d("TAG", "해당 아이템 번호 = " + position);
                 Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
-                submain.putExtra("clickedFoodTruck", homeList.get(position));
+//                submain.putExtra("clickedFoodTruck", homeList.get(position));
+                FoodTruckModel.TRUCK_INFO = homeList.get(position);
                 mContext.startActivity(submain);
                 //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
             }

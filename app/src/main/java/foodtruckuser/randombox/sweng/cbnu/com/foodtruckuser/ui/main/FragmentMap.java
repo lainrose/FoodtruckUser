@@ -118,14 +118,14 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
         mapview = (MapView) view.findViewById(R.id.map);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.map_item_viewpager);
 
         MyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-        mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.map_item_viewpager);
         mRecyclerView.setLayoutManager(MyLayoutManager);
-        mRecyclerView.setAdapter(mapItemAdapter);
+//        mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+//        mRecyclerView.setAdapter(mapItemAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
         mRecyclerView.setSinglePageFling(true);
@@ -344,6 +344,8 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                     listitems.add(foodTruck);
                     Log.d("TAG", "맵트럭 : " + foodTruck.getFtName());
                 }
+                mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+                mRecyclerView.setAdapter(mapItemAdapter);
             }
 
             @Override

@@ -1,7 +1,9 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
 
 public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckViewHolder> {
 
@@ -54,6 +57,17 @@ public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckVie
 
         holder.categoryTextView.setText(homeList.get(position).getFT_LOCATIONNAME());
         System.out.println("주소 : " + homeList.get(position).getFT_LOCATIONNAME());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TAG", "해당 아이템 번호 = " + position);
+                Intent submain = new Intent(mContext, AcitivityTruckDetail.class);
+//                submain.putExtra("clickedFoodTruck", homeList.get(position));
+                FoodTruckModel.TRUCK_INFO = homeList.get(position);
+                mContext.startActivity(submain);
+            }
+        });
 
     }
 
