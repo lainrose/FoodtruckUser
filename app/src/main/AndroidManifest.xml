@@ -44,6 +44,7 @@
         <activity android:name=".ui.SubMain.Acitivity.ActivityWebView" />
         <activity android:name=".ui.join.sign.PwChangeActivity"/>
         <activity android:name=".ui.NaviagtionMain.ActivitySetLocationMap"/>
+        <activity android:name=".ui.NaviagtionMain.AcitivityFestiveWriting"/>
 
         <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail">
             <intent-filter>
