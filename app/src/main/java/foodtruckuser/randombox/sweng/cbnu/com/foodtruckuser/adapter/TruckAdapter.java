@@ -65,16 +65,19 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             holder.payTextView.setText("카드가능");
         }
 
-        //Set에 푸드트럭 ID있나 검사해서 있으면 체크 해준다.
+        // TODO: 2016-12-01 어플 껐다 켰을 때 체크 안됨
+        //Set에 푸드트럭 ID있나 검사해서 있으면 체크 해준다. 없는애들은 다 해제
         if (call.equals("FragmentHome")) {
-            if(likedTruckIdSet.contains(homeList.get(position).getFT_ID())) {
-                Log.d("TAG", "갖고있냐?" + homeList.get(position).getFT_ID());
+            if (likedTruckIdSet.contains(homeList.get(position).getFT_ID())) {
+                Log.d("TEST", "좋아요 푸드트럭" + homeList.get(position).getFtName());
                 holder.shineButton.setChecked(true);
                 homeList.get(position).setFT_LIKE(true);
+            } else {
+                holder.shineButton.setChecked(false);
+                homeList.get(position).setFT_LIKE(false);
             }
-        //내 푸드트럭 리스트는 무조건 좋아요 눌려있어야 하니까 설정
+            //내 푸드트럭 리스트는 무조건 좋아요 눌려있어야 하니까 설정
         } else if (call.equals("FragmentMytruck")) {
-            Log.d("TAG", "갖고있냐?2" + homeList.get(position).getFT_ID());
             holder.shineButton.setChecked(true);
             homeList.get(position).setFT_LIKE(true);
         }
@@ -96,16 +99,16 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             @Override
             public void onClick(View v) {
                 //좋아요 누르면, 서버에 넣어주고 Set에도 넣어서 Pref로 저장
-                    if (!homeList.get(position).isFT_LIKE()) {
-                        requestAddLikeTruck(holder, position); //좋아요 상태 true 해주는건 이 함수에
-                        likedTruckIdSet.add(homeList.get(position).getFT_ID());
-                        PrefHelper.getInstance(mContext).setLikedTruckid(likedTruckIdSet);
-                //좋아요 취소하면, 서버에 넣어주고 Set에도 넣어서 Pref로 저장
-                    } else {
-                        requestRemoveLikeTruck(holder, position); //좋아요 상태 false 해주는건 이 함수에
-                        likedTruckIdSet.remove(homeList.get(position).getFT_ID());
-                        PrefHelper.getInstance(mContext).setLikedTruckid(likedTruckIdSet);
-                    }
+                if (!homeList.get(position).isFT_LIKE()) {
+                    requestAddLikeTruck(holder, position); //좋아요 상태 true 해주는건 이 함수에
+                    likedTruckIdSet.add(homeList.get(position).getFT_ID());
+                    PrefHelper.getInstance(mContext).setLikedTruckid(likedTruckIdSet);
+                    //좋아요 취소하면, 서버에 넣어주고 Set에도 넣어서 Pref로 저장
+                } else {
+                    requestRemoveLikeTruck(holder, position); //좋아요 상태 false 해주는건 이 함수에
+                    likedTruckIdSet.remove(homeList.get(position).getFT_ID());
+                    PrefHelper.getInstance(mContext).setLikedTruckid(likedTruckIdSet);
+                }
             }
         });
     }
