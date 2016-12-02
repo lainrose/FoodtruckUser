@@ -20,33 +20,31 @@
         android:paddingRight="10dp"
         android:paddingTop="20dp">
 
-
         <TextView
             android:id="@+id/title_date_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/title_time_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/title_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/title_time_label"
             android:layout_alignParentStart="true"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/title_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/title_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/title_end_date"
+            android:layout_alignParentStart="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
     </RelativeLayout>
     <!-- RIGHT TITLE PART -->
@@ -62,7 +60,7 @@
 
 
         <TextView
-            android:id="@+id/title_from_address"
+            android:id="@+id/title_festive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
@@ -75,13 +73,13 @@
             android:id="@+id/title_from_to_dots_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/title_from_address"
+            android:layout_below="@id/title_festive"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:src="@color/contentDividerLine" />
 
         <TextView
-            android:id="@+id/title_to_address"
+            android:id="@+id/title_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_from_to_dots_divider"
@@ -108,16 +106,9 @@
             android:text="@string/requests_count_badge" />
 
 
-        <TextView
-            android:id="@+id/title_pledge"
-            style="@style/TitleBadgeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
 
         <TextView
-            android:id="@+id/title_weight"
+            android:id="@+id/title_detail"
             style="@style/TitleBadgeText"
             android:text="@string/weight_badge"
             android:layout_width="100dp"

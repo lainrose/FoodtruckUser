@@ -9,32 +9,27 @@ import java.util.ArrayList;
  */
 public class FestiveModel {
 
-    private String price;
+    private String year;
     private String pledgePrice;
-    private String fromAddress;
-    private String toAddress;
+    private String festive_title;
+    private String place;
     private int requestsCount;
-    private String date;
-    private String time;
+    private String start_date;
+    private String end_date;
+    private String festive_content_view;
+    private int recruitment_truck;
+    private int request_truck;
+    private String food_category;
+    private String deadline;
 
     private View.OnClickListener requestBtnClickListener;
 
-    public FestiveModel(String price, String pledgePrice, String fromAddress, String toAddress, int requestsCount, String date, String time) {
-        this.price = price;
-        this.pledgePrice = pledgePrice;
-        this.fromAddress = fromAddress;
-        this.toAddress = toAddress;
-        this.requestsCount = requestsCount;
-        this.date = date;
-        this.time = time;
+    public String getYear() {
+        return year;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getPledgePrice() {
@@ -45,20 +40,20 @@ public class FestiveModel {
         this.pledgePrice = pledgePrice;
     }
 
-    public String getFromAddress() {
-        return fromAddress;
+    public String getFestive_title() {
+        return festive_title;
     }
 
-    public void setFromAddress(String fromAddress) {
-        this.fromAddress = fromAddress;
+    public void setFestive_title(String festive_title) {
+        this.festive_title = festive_title;
     }
 
-    public String getToAddress() {
-        return toAddress;
+    public String getPlace() {
+        return place;
     }
 
-    public void setToAddress(String toAddress) {
-        this.toAddress = toAddress;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public int getRequestsCount() {
@@ -69,27 +64,60 @@ public class FestiveModel {
         this.requestsCount = requestsCount;
     }
 
-    public String getDate() {
-        return date;
+    public String getStart_date() {
+        return start_date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
     }
 
-    public String getTime() {
-        return time;
-    }
-    public void setTime(String time) {
-        this.time = time;
+    public String getEnd_date() {
+        return end_date;
     }
 
-    public View.OnClickListener getRequestBtnClickListener() {
-        return requestBtnClickListener;
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 
-    public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
-        this.requestBtnClickListener = requestBtnClickListener;
+    public String getFestive_content_view() {
+        return festive_content_view;
+    }
+
+    public void setFestive_content_view(String festive_content_view) {
+        this.festive_content_view = festive_content_view;
+    }
+
+    public int getRecruitment_truck() {
+        return recruitment_truck;
+    }
+
+    public void setRecruitment_truck(int recruitment_truck) {
+        this.recruitment_truck = recruitment_truck;
+    }
+
+    public int getRequest_truck() {
+        return request_truck;
+    }
+
+    public void setRequest_truck(int request_truck) {
+        this.request_truck = request_truck;
+    }
+
+    public String getFood_category() {
+        return food_category;
+    }
+
+    public void setFood_category(String food_category) {
+        this.food_category = food_category;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 
     @Override
@@ -100,42 +128,46 @@ public class FestiveModel {
         FestiveModel item = (FestiveModel) o;
 
         if (requestsCount != item.requestsCount) return false;
-        if (price != null ? !price.equals(item.price) : item.price != null) return false;
+        if (year != null ? !year.equals(item.year) : item.year != null) return false;
         if (pledgePrice != null ? !pledgePrice.equals(item.pledgePrice) : item.pledgePrice != null)
             return false;
-        if (fromAddress != null ? !fromAddress.equals(item.fromAddress) : item.fromAddress != null)
+        if (festive_title != null ? !festive_title.equals(item.festive_title) : item.festive_title != null)
             return false;
-        if (toAddress != null ? !toAddress.equals(item.toAddress) : item.toAddress != null)
+        if (place != null ? !place.equals(item.place) : item.place != null)
             return false;
-        if (date != null ? !date.equals(item.date) : item.date != null) return false;
-        return !(time != null ? !time.equals(item.time) : item.time != null);
+        if (start_date != null ? !start_date.equals(item.start_date) : item.start_date != null)
+            return !(end_date != null ? !end_date.equals(item.end_date) : item.end_date != null);
 
+        if (recruitment_truck != item.recruitment_truck) return false;
+        if (request_truck != item.request_truck) return false;
+        if (festive_content_view != null ? !festive_content_view.equals(item.festive_content_view) : item.festive_content_view != null)
+            return false;
+        if (food_category != null ? !food_category.equals(item.food_category) : item.food_category != null)
+            return false;
+        if (deadline != null ? !deadline.equals(item.deadline) : item.deadline != null)
+            return false;
+
+
+        return false;
     }
 
     @Override
     public int hashCode() {
-        int result = price != null ? price.hashCode() : 0;
+        int result = year != null ? year.hashCode() : 0;
         result = 31 * result + (pledgePrice != null ? pledgePrice.hashCode() : 0);
-        result = 31 * result + (fromAddress != null ? fromAddress.hashCode() : 0);
-        result = 31 * result + (toAddress != null ? toAddress.hashCode() : 0);
+        result = 31 * result + (festive_title != null ? festive_title.hashCode() : 0);
+        result = 31 * result + (place != null ? place.hashCode() : 0);
         result = 31 * result + requestsCount;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (start_date != null ? start_date.hashCode() : 0);
+        result = 31 * result + (end_date != null ? end_date.hashCode() : 0);
+        result = 31 * result + recruitment_truck;
+        result = 31 * result + request_truck;
+        result = 31 * result + (festive_content_view != null ? festive_content_view.hashCode() : 0);
+        result = 31 * result + (food_category != null ? food_category.hashCode() : 0);
+        result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
+
         return result;
     }
 
-    /**
-     * @return List of elements prepared for tests
-     */
-    public static ArrayList<FestiveModel> getTestingList() {
-        ArrayList<FestiveModel> items = new ArrayList<>();
-        items.add(new FestiveModel("$14", "", "서울 밤도깨비 야시장", "서울특별시 한강공원 일대", 3, "TODAY", "05:10 PM"));
-        items.add(new FestiveModel("$23", "", "W 36th St, NY, 10015", "W 114th St, NY, 10037", 10, "TODAY", "11:10 AM"));
-        items.add(new FestiveModel("$63", "", "W 36th St, NY, 10029", "56th Ave, NY, 10041", 0, "TODAY", "07:11 PM"));
-        items.add(new FestiveModel("$19", "", "12th Ave, NY, 10012", "W 57th St, NY, 10048", 8, "TODAY", "4:15 AM"));
-        items.add(new FestiveModel("$5", "", "56th Ave, NY, 10041", "W 36th St, NY, 10029", 0, "TODAY", "06:15 PM"));
-        return items;
-
-    }
 
 }

@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/order_id_mock"
+            android:text="@string/festive_info"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -29,10 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/price_mock"
+            android:text="@string/fold"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-             />
+            />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -49,12 +49,13 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/head_image"
+            android:id="@+id/festive_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/truck4" />
+            android:src="@drawable/festive_img" />
+
 
     </RelativeLayout>
 
@@ -75,13 +76,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/content_avatar_title"
+                android:id="@+id/festive_content"
                 style="@style/ContentMainBadgeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="5dp"
-                android:text="@string/sender_badge" />
+                android:text="@string/festive_content" />
 
 
             <TextView
@@ -90,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:layout_marginStart="10dp"
+                android:layout_below="@+id/festive_content"
                 android:textColor="@color/mainTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -119,19 +121,19 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/content_from_badge"
+                    android:id="@+id/recruitment_truck_num"
                     style="@style/ContentMainBadgeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="@string/from_badge" />
+                    android:text="@string/recruit_num" />
 
                 <TextView
-                    android:id="@+id/content_from_address_1"
+                    android:id="@+id/recruitment_truck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_from_badge"
-                    android:layout_below="@id/content_from_badge"
+                    android:layout_alignStart="@id/recruitment_truck_num"
+                    android:layout_below="@id/recruitment_truck_num"
                     android:text="@string/content_from1_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="18sp"
@@ -146,7 +148,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/content_to_badge"
+                    android:id="@+id/request_truck_num"
                     style="@style/ContentMainBadgeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,11 +156,11 @@
                     android:text="@string/to_badge" />
 
                 <TextView
-                    android:id="@+id/content_to_address_1"
+                    android:id="@+id/request_truck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_to_badge"
-                    android:layout_below="@id/content_to_badge"
+                    android:layout_alignStart="@id/request_truck_num"
+                    android:layout_below="@id/request_truck_num"
                     android:text="@string/content_to1_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="18sp"
@@ -197,7 +199,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/content_delivery_date_badge"
+                    android:id="@+id/application_category"
                     style="@style/ContentMainBadgeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,25 +207,17 @@
                     android:text="@string/delivery_date_badge" />
 
                 <TextView
-                    android:id="@+id/content_delivery_time"
+                    android:id="@+id/food_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_delivery_date_badge"
-                    android:layout_below="@id/content_delivery_date_badge"
+                    android:layout_alignStart="@id/application_category"
+                    android:layout_below="@id/application_category"
                     android:text="@string/delivery_time_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/content_delivery_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_delivery_time"
-                    android:layout_below="@id/content_delivery_time"
-                    android:text="@string/delivery_date_mock"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="14sp" />
+
 
             </RelativeLayout>
 
@@ -233,40 +227,31 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/content_deadline_badge"
+                    android:id="@+id/recruitment_deadline"
                     style="@style/ContentMainBadgeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="@string/deadline_badge" />
+                    android:text="@string/recruitment_deadline" />
 
                 <TextView
-                    android:id="@+id/content_deadline_time"
+                    android:id="@+id/deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_deadline_badge"
-                    android:layout_below="@id/content_deadline_badge"
-                    android:text="@string/deadline_time_mock"
+                    android:layout_alignStart="@id/recruitment_deadline"
+                    android:layout_below="@id/recruitment_deadline"
+                    android:text="@string/deadline"
                     android:textColor="@color/mainTextColor"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/content_deadline_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_deadline_time"
-                    android:layout_below="@id/content_deadline_time"
-                    android:text=""
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="14sp" />
             </RelativeLayout>
 
         </LinearLayout>
 
         <!-- request button -->
         <TextView
-            android:id="@+id/content_request_btn"
+            android:id="@+id/request_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
