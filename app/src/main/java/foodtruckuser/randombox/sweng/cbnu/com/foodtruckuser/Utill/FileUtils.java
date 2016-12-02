@@ -30,7 +30,7 @@ public class FileUtils {
     /** TAG for log messages. */
     static final String TAG = "FileUtils";
     private static final boolean DEBUG = false; // Set to true to enable logging
-
+    //dd
     public static final String MIME_TYPE_AUDIO = "audio/*";
     public static final String MIME_TYPE_TEXT = "text/*";
     public static final String MIME_TYPE_IMAGE = "image/*";
