@@ -15,6 +15,7 @@
         android:id="@+id/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="리뷰 쓰기" />
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -29,26 +30,24 @@
                 android:layout_gravity="center"
                 android:layout_margin="12dp"
                 card_view:cardCornerRadius="4dp">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
                         android:orientation="vertical"
-                        android:background="#FFFFFF">
+                        android:background="#cccccc">
                         <RelativeLayout
                             android:id="@+id/uproadPhotoBtn"
                             android:layout_width="300dp"
                             android:layout_height="300dp"
                             android:orientation="horizontal"
                             android:layout_gravity="center"
-                            android:background="#cccccc"
+                            android:background="#FFFFFF"
                             android:onClick="onClick">
                             <ImageView
                                 android:id="@+id/uproadPhotoImage"
@@ -58,11 +57,28 @@
                                 android:id="@+id/uproadPhoto"
                                 android:layout_width="48dp"
                                 android:layout_height="match_parent"
-                                android:background="#cccccc"
+                                android:background="#FFFFFF"
                                 android:src="@drawable/ico_circle_camera_orange"
                                 android:textColor="#222222"
                                 android:layout_alignParentTop="true"
                                 android:layout_centerHorizontal="true" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:id="@+id/linearLayout3">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="13sp"
+                                    android:textColor="#000000"
+                                    android:text="행사 포스터 이미지"
+                                    android:layout_above="@+id/linearLayout3"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginBottom="90dp"
+                                    android:id="@+id/textView" />
+                            </LinearLayout>
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -70,102 +86,203 @@
                             android:layout_height="wrap_content">
                             <EditText
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:hint=" 행사의 내용을 간략하게 적어주세요."
-                                android:textColorHint="#aaaaaa"
+                                android:layout_height="140dp"
+                                android:hint=" 행사의 간략한 내용"
+                                android:textColorHint="@color/colorPrimary"
                                 android:id="@+id/writingText"
+                                android:gravity="top"
                                 android:textSize="13dp"
                                 android:textColor="#000000"
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentStart="true" />
                         </RelativeLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="3dp"
-                            android:alpha="0.12"
-                            android:background="@android:color/black" />
-                        <EditText android:textColor="#ff333333"
-                            android:textColorHint="#ffaaaaaa"
-                            android:id="@+id/inputDate"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:text="행사 시작일"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
+                        <TextView
+                            android:textColor="#ff333333"
+                            android:id="@+id/inputStartDateAndTime"
                             android:background="#ffffffff"
                             android:paddingLeft="20.0dip"
                             android:layout_width="fill_parent"
                             android:layout_height="48.0dip"
-                            android:hint="행사날짜를 입력해 주세요"
+                            android:textSize="15sp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:hint="행사 시작일"
+                            android:singleLine="true"
+                            android:inputType="text"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_vertical"
+                            android:onClick="onClick"
+                            android:clickable="false">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="행사 종료일"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
+                        <TextView
+                            android:textColor="#ff333333"
+                            android:id="@+id/inputEndDateAndTime"
+                            android:background="#ffffffff"
+                            android:paddingLeft="20.0dip"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48.0dip"
+                            android:textSize="15dp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:hint="행사 종료일"
+                            android:gravity="center_vertical"
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="text"
-                            android:imeOptions="actionNext">
-                            <requestFocus />
-                        </EditText>
+                            android:imeOptions="actionNext"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:onClick="onClick">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="행사 장소"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
                         <EditText android:textColor="#ff333333"
-                            android:textColorHint="#ffaaaaaa"
+                            android:textColorHint="@color/colorPrimary"
                             android:id="@+id/inputLocation"
                             android:background="#ffffffff"
                             android:paddingLeft="20.0dip"
                             android:layout_width="fill_parent"
                             android:layout_height="48.0dip"
-                            android:hint="행사장소를 입력해 주세요"
+                            android:textSize="15sp"
+                            android:hint="행사 장소"
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="text"
-                            android:imeOptions="actionNext">
-                            <requestFocus />
+                            android:imeOptions="actionNext"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp">
                         </EditText>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="푸드트럭 대수"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
                         <EditText android:textColor="#ff333333"
-                            android:textColorHint="#ffaaaaaa"
                             android:id="@+id/numOfTruck"
                             android:background="#ffffffff"
                             android:paddingLeft="20.0dip"
+                            android:textColorHint="@color/colorPrimary"
                             android:layout_width="fill_parent"
                             android:layout_height="48.0dip"
-                            android:hint="원하는 푸드트럭의 대수를  입력해주세요"
+                            android:textSize="15sp"
+                            android:hint="푸드트럭 대수"
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="number"
-                            android:imeOptions="actionNext">
-                            <requestFocus />
+                            android:imeOptions="actionNext"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp">
                         </EditText>
-                        <EditText android:textColor="#ff333333"
-                            android:textColorHint="#ffaaaaaa"
-                            android:id="@+id/rcruitingPeriod"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="모집기간 시작일"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
+                        <TextView android:textColor="#ff333333"
+                            android:id="@+id/startRcruitingPeriod"
                             android:background="#ffffffff"
                             android:paddingLeft="20.0dip"
                             android:layout_width="fill_parent"
                             android:layout_height="48.0dip"
-                            android:hint="모집기간을 입력해 주세요"
+                            android:textSize="15sp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:hint="모집기간 시작일"
+                            android:gravity="center_vertical"
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="date|datetime"
-                            android:imeOptions="actionNext">
-                            <requestFocus />
-                        </EditText>
+                            android:imeOptions="actionNext"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:onClick="onClick">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="모집기간 마감일"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
+                        <TextView android:textColor="#ff333333"
+                            android:id="@+id/endRcruitingPeriod"
+                            android:background="#ffffffff"
+                            android:paddingLeft="20.0dip"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48.0dip"
+                            android:textSize="15sp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:hint="모집기간 마감일"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:layout_centerHorizontal="true"
+                            android:inputType="date|datetime"
+                            android:imeOptions="actionNext"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:onClick="onClick">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="전기 지원 가능여부"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/com_facebook_button_background_color"/>
                         <EditText android:textColor="#ff333333"
-                            android:textColorHint="#ffaaaaaa"
+                            android:textColorHint="@color/colorPrimary"
                             android:id="@+id/isElectric"
                             android:background="#ffffffff"
                             android:paddingLeft="20.0dip"
                             android:layout_width="fill_parent"
                             android:layout_height="48.0dip"
-                            android:hint="전기지원 가능여부를 입력해주세요."
+                            android:textSize="15sp"
+                            android:hint="전기지원 가능여부"
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
-                            android:inputType="date|datetime"
-                            android:imeOptions="actionNext">
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp">
                         </EditText>
                         <Button
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="행사 올리기"
-                            android:textSize="@dimen/text_size"
+                            android:text="완 료"
+                            android:textSize="15sp"
                             android:textColor="@color/colorPrimary"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
                             android:textStyle="bold"
                             android:background="@drawable/button_shape"
                             android:id="@+id/uproadFestiveBtn"
-                            android:onClick="onClick"/>
+                            android:onClick="onClick"
+                            android:layout_marginTop="5dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

@@ -34,4 +34,5 @@
     <string name="btn_annotation_mock" translatable="false">이 행사에 참가신청을 원하면 버튼을 눌러주세요</string>
     <string name="content_from1_mock">20대</string>
     <string name="content_to1_mock">7대</string>
+    <string name="internal_storage">Internal storage</string>
 </resources>

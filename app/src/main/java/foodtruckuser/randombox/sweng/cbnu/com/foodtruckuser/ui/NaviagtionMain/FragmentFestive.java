@@ -43,14 +43,13 @@ public class FragmentFestive extends Fragment {
     private String DEADLINE[] = {"12월 2일","12월 3일","12월 4일","12월 5일","12월 6일"};
 
 
-    private int FT_CATEGORY[] = {1, 2, 3, 3, 5};
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_festive, null);
 
         festiveListView = (ListView) view.findViewById(R.id.mainListView);
+        initFestive();
         festiveAdapter = new FestiveAdapter(getContext(), festiveItems);
         festiveListView.setAdapter(festiveAdapter);
         festiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,8 +66,8 @@ public class FragmentFestive extends Fragment {
                 Utill.getInstance().MoveAcitivity(getContext(), AcitivityFestiveWriting.class);
             }
         });
-        return view;
 
+        return view;
     }
 
     private void initFestive() {

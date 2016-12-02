@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <user-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <user-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -44,7 +46,16 @@
         <activity android:name=".ui.SubMain.Acitivity.ActivityWebView" />
         <activity android:name=".ui.join.sign.PwChangeActivity"/>
         <activity android:name=".ui.NaviagtionMain.ActivitySetLocationMap"/>
-        <activity android:name=".ui.NaviagtionMain.AcitivityFestiveWriting"/>
+        <activity
+            android:name=".ui.NaviagtionMain.AcitivityFestiveWriting"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT"/>
+                <category android:name="android.intent.action.DEFAULT"/>
+                <category android:name="android.intent.action.OPENABLE"/>
+                <data android:mimeType="*/*"/>
+            </intent-filter>
+        </activity>
 
         <activity android:name=".ui.SubMain.Acitivity.AcitivityTruckDetail">
             <intent-filter>

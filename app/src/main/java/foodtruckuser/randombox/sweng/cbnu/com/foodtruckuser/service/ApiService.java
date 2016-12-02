@@ -11,11 +11,14 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.MenuModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -55,5 +58,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/client/save_review")
     Call<FoodTruckModel> save_review(@Field("review_info") JsonObject review_info);
+
+    @Multipart
+    @POST("/client/save_festival")
+    Call<Integer> save_festival(@Part MultipartBody.Part file, @Part("festival_info") JsonObject festival_info);
 
 }

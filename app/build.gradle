@@ -60,5 +60,6 @@ dependencies {
     compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
     compile 'com.fnp:material-preferences:0.1.4'
     compile 'com.pavelsikun:material-seekbar-preference:2.3.0+'
+    compile 'com.wdullaer:materialdatetimepicker:3.0.0'
 
 }

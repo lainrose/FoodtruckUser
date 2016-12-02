@@ -1,13 +1,19 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain;
 
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,16 +21,35 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.JsonObject;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.FileUtils;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class AcitivityFestiveWriting extends AppCompatActivity implements View.OnClickListener {
 
-    private String writingText;
+public class AcitivityFestiveWriting extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
+        View.OnClickListener, TimePickerDialog.OnTimeSetListener {
+
     private EditText writingTextView;
     private ImageView uproadPhotoImage;
     private ImageView uproadPhoto;
@@ -34,6 +59,28 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements View.O
     private static final int CROP_FROM_iMAGE = 2;
     private Uri mImageCaptureUri;
     private String absoultePath;
+    private TextView inputStartDateAndTime;
+    private TextView inputEndDateAndTime;
+    private TextView startRcruitingPeriod;
+    private TextView endRcruitingPeriod;
+    private String temp;
+    private String year;
+    private String monthOfYear;
+    private String dayOfMonth;
+    private String hourOfDay;
+    private String minute;
+    private String Flag;
+    private long backKeyPressedTime = 0;
+    private Toast toast;
+    private String StartDateAndTime;
+    private String EndDateAndTime;
+    private String StartRcruitingPeriod;
+    private String EndRcruitingPeriod;
+    private TextView inputLocation;
+    private TextView numOfTruck;
+    private TextView isElectric;
+    private File image;
+    private MultipartBody.Part imageFileBody;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,52 +89,22 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements View.O
         setupToolbar();
         uproadPhoto = (ImageView)findViewById(R.id.uproadPhoto);
         uproadPhotoImage = (ImageView)findViewById(R.id.uproadPhotoImage);
+        inputStartDateAndTime = (TextView)findViewById(R.id.inputStartDateAndTime);
+        inputEndDateAndTime = (TextView)findViewById(R.id.inputEndDateAndTime);
+        startRcruitingPeriod = (TextView)findViewById(R.id.startRcruitingPeriod);
+        endRcruitingPeriod = (TextView)findViewById(R.id.endRcruitingPeriod);
+        inputLocation = (TextView)findViewById(R.id.inputLocation);
+        numOfTruck = (TextView)findViewById(R.id.numOfTruck);
+        isElectric = (TextView)findViewById(R.id.isElectric);
+        writingTextView = (EditText)findViewById(R.id.writingText);
 
-
+        checkPermission();
     }
+
     private void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.uproadFestiveBtn) {
-            writingText = writingTextView.getText().toString();
-            Log.d("쓴 글", writingText);
-            finish();
-            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        }
-        else if (view.getId() == R.id.uproadPhotoBtn) {
-            DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    doTakePhotoAction();
-                }
-            };
-            DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    doTakeAlbumAction();
-                }
-            };
-
-            DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            };
-            new AlertDialog.Builder(this)
-                    .setTitle("업로드할 이미지 선택")
-                    .setPositiveButton("사진촬영", cameraListener)
-                    .setNeutralButton("앨범선택", albumListener)
-                    .setNegativeButton("취소", cancelListener)
-                    .show();
-        }
-        else if (view.getId() == R.id.emoticon) {
-            Log.d("이모티콘", "설정");
-        }
     }
 
     public void doTakePhotoAction() // 카메라 촬영 후 이미지 가져오기
@@ -123,6 +140,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements View.O
                 // 실제 코드에서는 좀더 합리적인 방법을 선택하시기 바랍니다.
                 mImageCaptureUri = data.getData();
                 Log.d("SmartWheel",mImageCaptureUri.getPath().toString());
+                image = FileUtils.getFile(this, mImageCaptureUri);
             }
 
             case PICK_FROM_CAMERA:
@@ -207,4 +225,269 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements View.O
         }
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.uproadFestiveBtn) {
+            new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
+                    .setTitleText("작성한 행사를 올리시겠습니까?")
+                    //.setContentText("확인 버튼을 누르면 취소할 수 없습니다.")
+                    .setCancelText("취소")
+                    .setConfirmText("확인")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            Log.d("TEST", writingTextView.getText().toString());
+
+                            String writingText = writingTextView.getText().toString();
+                            String inputLocationText = inputLocation.getText().toString();
+                            String numOfTruckText = numOfTruck.getText().toString();
+                            String isElectricText = isElectric.getText().toString();
+                            // TODO: 2016-12-02 서버로 보낼 날짜 및 기타 변수
+                            //StartDateAndTime // 행사 시작일
+                            //EndDateAndTime // 행사 종료일
+                            //StartRcruitingPeriod // 모집기간 시작일
+                            //EndRcruitingPeriod // 모집기간 종료일
+                            //writingText // 작성한 내용
+                            //inputLocationText // 장소설정 내용
+                            //numOfTruckText // 트럭대수
+                            //isElectricText // 전기여부 -> true, false로 반환되게 해줭
+                            JsonObject ob = new JsonObject();
+                            ob.addProperty("title", new String());
+                            ob.addProperty("condition", writingText);
+                            ob.addProperty("place", inputLocationText);
+                            ob.addProperty("start_date", StartDateAndTime);
+                            ob.addProperty("end_date", EndDateAndTime);
+                            ob.addProperty("applicant_start", StartRcruitingPeriod);
+                            ob.addProperty("applicant_end", EndRcruitingPeriod);
+                            ob.addProperty("support_type", true);
+                            ob.addProperty("limit_num_of_application", numOfTruckText);
+                            ob.addProperty("client_id", UserModel.getInstance().getUserId());
+
+                            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), image);
+                            imageFileBody = MultipartBody.Part.createFormData("image", image.getName(), requestBody);
+
+                            ApiService service = ServiceGenerator.createService(ApiService.class);
+                            Call<Integer> call = service.save_festival(imageFileBody, ob);
+                            call.enqueue(new Callback<Integer>() {
+                                @Override
+                                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                                    int activeCheck = response.body();
+                                    switch (activeCheck) {
+                                        case 1: {
+                                            Toast.makeText(getApplicationContext(), "행사 입점 공고 신청완료", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+                                            break;
+                                        }
+                                        case 2: {
+                                            Toast.makeText(getApplicationContext(), "저장 실패", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                        case 3: {
+                                            Toast.makeText(getApplicationContext(), "행사 날짜를 체크하세요.", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                        case 4: {
+                                            Toast.makeText(getApplicationContext(), "잘못된 소비자 아이디", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                        case 5: {
+                                            Toast.makeText(getApplicationContext(), "이름이 똑같은 행사가 입력되어 있습니다.", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Integer> call, Throwable t) {
+                                    Log.d("FESTIVAL", t.toString());
+                                }
+                            });
+                        }
+                    })
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.cancel();
+                        }
+                    }).show();
+
+        } else if (view.getId() == R.id.uproadPhotoBtn) {
+            DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    doTakePhotoAction();
+                }
+            };
+            DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    doTakeAlbumAction();
+                }
+            };
+
+            DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            };
+            new AlertDialog.Builder(this)
+                    .setTitle("업로드할 이미지 선택")
+                    .setPositiveButton("사진촬영", cameraListener)
+                    .setNeutralButton("앨범선택", albumListener)
+                    .setNegativeButton("취소", cancelListener)
+                    .show();
+        } else if (view.getId() == R.id.inputStartDateAndTime) {
+            Flag = "inputStartDateAndTime";
+            CalendarDate();
+        }
+        else if (view.getId() == R.id.inputEndDateAndTime) {
+            Flag = "inputEndDateAndTime";
+            CalendarDate();
+        }
+        else if (view.getId() == R.id.startRcruitingPeriod) {
+            Flag = "startRcruitingPeriod";
+            CalendarDate();
+        }
+        else if (view.getId() == R.id.endRcruitingPeriod) {
+            Flag = "endRcruitingPeriod";
+            CalendarDate();
+        }
+    }
+    public void CalendarDate(){
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                AcitivityFestiveWriting.this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.setThemeDark(false);
+        dpd.vibrate(true);
+        dpd.dismissOnPause(false);
+        dpd.showYearPickerFirst(false);
+        dpd.setVersion(DatePickerDialog.Version.VERSION_2);
+        dpd.setAccentColor(Color.parseColor("#ff5722"));
+        dpd.show(getFragmentManager(), "행사 날짜 설정");
+    }
+    public void CalendarTime(){
+        Calendar now = Calendar.getInstance();
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
+                AcitivityFestiveWriting.this,
+                now.get(Calendar.HOUR_OF_DAY),
+                now.get(Calendar.MINUTE),
+                false
+        );
+        tpd.setThemeDark(false);
+        tpd.vibrate(true);
+        tpd.dismissOnPause(false);
+        tpd.enableSeconds(false);
+        tpd.setVersion(TimePickerDialog.Version.VERSION_2);
+        tpd.setAccentColor(Color.parseColor("#ff5722"));
+        tpd.setTitle("행사 시간 설정");
+        tpd.setTimeInterval(1, 10, 10);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("행사 날짜 설정");
+        if(dpd != null) dpd.setOnDateSetListener(this);
+        TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("행사 시간 설정");
+        if(tpd != null) tpd.setOnTimeSetListener(this);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        this.year = String.valueOf(year);
+        this.monthOfYear = String.valueOf(++monthOfYear);
+        this.dayOfMonth = String.valueOf(dayOfMonth);
+
+        temp = year + "년 " + monthOfYear + "월 " + dayOfMonth + "일 ";
+        if(Flag.equals("inputStartDateAndTime")){
+            StartDateAndTime = year + "-" + monthOfYear + "-" + dayOfMonth;;
+            inputStartDateAndTime.setText(temp);
+        }
+        else if(Flag.equals("inputEndDateAndTime")){
+            EndDateAndTime =year + "-" + monthOfYear + "-" + dayOfMonth;;
+            inputEndDateAndTime.setText(temp);
+        }
+        else if(Flag.equals("startRcruitingPeriod")){
+            StartRcruitingPeriod = year + "-" + monthOfYear + "-" + dayOfMonth;;
+            startRcruitingPeriod.setText(temp);
+        }
+        else if(Flag.equals("endRcruitingPeriod")){
+            EndRcruitingPeriod = year + "-" + monthOfYear + "-" + dayOfMonth;;
+            endRcruitingPeriod.setText(temp);
+        }
+    }
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
+        this.hourOfDay = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
+        this.minute = minute < 10 ? "0"+minute : ""+minute;
+        //String secondString = second < 10 ? "0"+second : ""+second;
+
+        temp += hourOfDay+"시 "+minute+"분 ";
+        if(Flag.equals("inputStartDateAndTime")){
+            inputStartDateAndTime.setText(temp);
+        }
+        else if(Flag.equals("inputEndDateAndTime")){
+            inputEndDateAndTime.setText(temp);
+        }
+        else if(Flag.equals("startRcruitingPeriod")){
+            startRcruitingPeriod.setText(temp);
+        }
+        else if(Flag.equals("endRcruitingPeriod")){
+            endRcruitingPeriod.setText(temp);
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            showGuide();
+            return;
+        }
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            moveTaskToBack(true);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            toast.cancel();
+        }
+    }
+    public void showGuide() {
+        toast = Toast.makeText(getApplication(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void checkPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        1);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
 }

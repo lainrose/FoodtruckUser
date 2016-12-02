@@ -131,7 +131,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         initBoom();
         initFT();
 
-
         return view;
     }
 
