@@ -234,7 +234,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
                     .setConfirmText("확인")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
-                        public void onClick(SweetAlertDialog sDialog) {
+                        public void onClick(final SweetAlertDialog sDialog) {
                             Log.d("TEST", writingTextView.getText().toString());
 
                             String writingText = writingTextView.getText().toString();
@@ -274,6 +274,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
                                     switch (activeCheck) {
                                         case 1: {
                                             Toast.makeText(getApplicationContext(), "행사 입점 공고 신청완료", Toast.LENGTH_SHORT).show();
+                                            sDialog.dismiss();
                                             finish();
                                             overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
                                             break;
@@ -407,6 +408,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
         if(Flag.equals("inputStartDateAndTime")){
             StartDateAndTime = year + "-" + monthOfYear + "-" + dayOfMonth;
             inputStartDateAndTime.setText(temp);
+            Log.d("DATE", StartDateAndTime);
         }
         else if(Flag.equals("inputEndDateAndTime")){
             EndDateAndTime =year + "-" + monthOfYear + "-" + dayOfMonth;

@@ -13,6 +13,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-feature android:name="android.hardware.camera2"/>
 
+    <!--서비스-->
+
+
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"

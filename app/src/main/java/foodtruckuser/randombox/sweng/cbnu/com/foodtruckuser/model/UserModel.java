@@ -4,7 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserModel {
     //싱글톤
-    public static UserModel USER_INFO;
+    public volatile static UserModel USER_INFO;
+    private UserModel() { }
+
+    public static UserModel getInstance(){
+        if(USER_INFO == null){ //있는지 체크 없으면
+            USER_INFO = new UserModel(); //생성한뒤
+        }
+
+        return USER_INFO; //성성자를 넘긴다.
+    }
 
     @SerializedName("id")
     private String USER_ID;
@@ -31,11 +40,6 @@ public class UserModel {
     private static String FIRST_FACEBOOK_LOGIN;
     private static String FACEBOOK_LOGIN;
 
-
-    public UserModel() {
-
-    }
-
     public UserModel(String id, String email, String memberShip_grade, String nickName, double positionX, double positionY, String phone_number, String password_digest, String updated_at, String created_at) {
         this.setUserId(id);
         this.setUserMail(email);
@@ -47,13 +51,6 @@ public class UserModel {
         this.setUserPassword(password_digest);
         this.setUpdated_at(updated_at);
         this.setCreated_at(created_at);
-    }
-
-    public static synchronized UserModel getInstance() {
-        if (USER_INFO == null) {
-            USER_INFO  = new UserModel();
-        }
-        return USER_INFO;
     }
 
     public static String getFacebookLogin() {
