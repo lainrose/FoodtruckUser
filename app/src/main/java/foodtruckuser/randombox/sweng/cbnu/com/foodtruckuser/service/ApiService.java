@@ -59,6 +59,9 @@ public interface ApiService {
     @POST("/client/save_review")
     Call<FoodTruckModel> save_review(@Field("review_info") JsonObject review_info);
 
+    @GET("/client/save_token")
+    Call<Boolean> save_token(@Query("token") String token, @Query("client_id") String id);
+
     @Multipart
     @POST("/client/save_festival")
     Call<Integer> save_festival(@Part MultipartBody.Part file, @Part("festival_info") JsonObject festival_info);

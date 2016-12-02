@@ -18,7 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
+
 import com.baoyz.widget.PullRefreshLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Eases.EaseType;
 import com.nightonke.boommenu.Types.BoomType;
@@ -26,6 +29,7 @@ import com.nightonke.boommenu.Types.ButtonType;
 import com.nightonke.boommenu.Types.OrderType;
 import com.nightonke.boommenu.Types.PlaceType;
 import com.nightonke.boommenu.Util;
+
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -34,6 +38,7 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerat
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.TruckAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
@@ -55,6 +60,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
     private PullRefreshLayout layout;
     private TruckAdapter truckAdapter;
     private Set<String> likedTruckIdSet;
+    private String token;
 
 
     // 리스트에 들어갈 항목들
@@ -75,8 +81,8 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         setHasOptionsMenu(true);
         //프리퍼런스
         likedTruckIdSet = PrefHelper.getInstance(getContext()).getLikedTruckId();
-
-
+        token = FirebaseInstanceId.getInstance().getToken();
+        Log.d("TAG", "token : " + token);
     }
 
     @Override
@@ -130,6 +136,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
         });
         initBoom();
         initFT();
+        sendToken();
 
         return view;
     }
@@ -204,7 +211,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 for (FoodTruckModel foodTruck : foodTruckList
                         ) {
                     //foodTruck.setFtImage(FT_IMAGES[0]);
-                    if(likedTruckIdSet.contains(foodTruck.getFT_ID())) {
+                    if (likedTruckIdSet.contains(foodTruck.getFT_ID())) {
                         foodTruck.setFT_LIKE(true);
                         Log.d("TEST", "꺄륵" + foodTruck.getFtName());
                     } else {
@@ -328,6 +335,22 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             }
         }
         return filteredModelList;
+    }
+
+    public void sendToken() {
+        ApiService service = ServiceGenerator.createService(ApiService.class);
+        Call<Boolean> convertedContent = service.save_token(token, UserModel.getInstance().getUserId());
+        convertedContent.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("TAG", "토큰전송 결과" + response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
     }
 
 //    //카테고리검색 알고리즘

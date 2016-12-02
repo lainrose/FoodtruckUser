@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "362061155747",
+    "firebase_url": "https://capstone-foodtruck.firebaseio.com",
+    "project_id": "capstone-foodtruck",
+    "storage_bucket": "capstone-foodtruck.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362061155747:android:6dc728a1238401ec",
+        "android_client_info": {
+          "package_name": "com.example.jyb.servertest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362061155747-kshshcu6mbu1ej29l27prm63t7og5h7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNzA3vo8gxoKo25ZEbXXLQye2n_8n3-u4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362061155747:android:c378139fbe3e04c2",
+        "android_client_info": {
+          "package_name": "foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362061155747-kshshcu6mbu1ej29l27prm63t7og5h7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNzA3vo8gxoKo25ZEbXXLQye2n_8n3-u4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
