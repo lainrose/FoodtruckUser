@@ -21,12 +21,14 @@
     <string name="fold" translatable="false">접기</string>
     <string name="requests_count_mock" translatable="false">5</string>
     <string name="requests_count_badge" translatable="false">입점 신청</string>
-    <string name="weight_badge" translatable="false">상세 정보</string>
+    <string name="cost" translatable="false">수수료</string>
+    <string name="pledge_badge" translatable="false">PLEDGE</string>
+    <string name="cost_charge" translatable="false">50 oz</string>
     <string name="festive_content" translatable="false">행사 내용</string>
     <string name="client_name_mock" translatable="false">Edward Norton</string>
     <string name="recruit_num" translatable="false">모집트럭 수 </string>
     <string name="to_badge" translatable="false">신청트럭 수</string>
-    <string name="delivery_date_badge" translatable="false">지원 종류</string>
+    <string name="delivery_date_badge" translatable="false">전기 지원 가능여부</string>
     <string name="delivery_time_mock" translatable="false">무관</string>
     <string name="recruitment_deadline" translatable="false">모집 기한</string>
     <string name="deadline" translatable="false">24 minutes</string>
@@ -34,5 +36,4 @@
     <string name="btn_annotation_mock" translatable="false">이 행사에 참가신청을 원하면 버튼을 눌러주세요</string>
     <string name="content_from1_mock">20대</string>
     <string name="content_to1_mock">7대</string>
-    <string name="internal_storage">Internal storage</string>
 </resources>

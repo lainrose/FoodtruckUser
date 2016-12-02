@@ -4,12 +4,8 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by DH on 2016-11-30.
- */
-
 public class ServiceGenerator {
-    public static final String API_BASE_URL = "https://server-blackdog11.c9users.io/";
+    public static final String API_BASE_URL = "https://server2-blackdog11.c9users.io/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

@@ -3,6 +3,7 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,15 @@ import java.util.ArrayList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.FestiveAdapter;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FestiveModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentFestive extends Fragment {
 
@@ -45,20 +51,12 @@ public class FragmentFestive extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_festive, null);
 
         festiveListView = (ListView) view.findViewById(R.id.mainListView);
-        initFestive();
-        festiveAdapter = new FestiveAdapter(getContext(), festiveItems);
-        festiveListView.setAdapter(festiveAdapter);
-        festiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                ((FoldingCell) view).toggle(false);
-                festiveAdapter.registerToggle(pos);
-            }
-        });
+
+
         festiveWrite = (FloatingActionButton)view.findViewById(R.id.festive_write);
         festiveWrite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +64,57 @@ public class FragmentFestive extends Fragment {
                 Utill.getInstance().MoveAcitivity(getContext(), AcitivityFestiveWriting.class);
             }
         });
+        ApiService service = ServiceGenerator.createService(ApiService.class);
+        Call<ArrayList<FestiveModel>> call = service.festival_info();
+        call.enqueue(new Callback<ArrayList<FestiveModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<FestiveModel>> call, Response<ArrayList<FestiveModel>> response) {
+                festiveItems = response.body();
+
+                if(festiveItems == null) {
+                    return;
+                }
+
+                Log.d("FESTIVAL", festiveItems.get(0).getFestive_title());
+
+                // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
+                final FestiveAdapter adapter = new FestiveAdapter(getContext(), festiveItems);
+
+                // add default btn handler for each request btn on each item if custom handler not found
+                adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "DEFAULT HANDLER FOR ALL BUTTONS", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // set elements to adapter
+                festiveListView.setAdapter(adapter);
+
+                // set on click event listener to list view
+                festiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+
+
+                        // toggle clicked cell state
+                        ((FoldingCell) view).toggle(false);
+                        // register in adapter that state for selected cell is toggled
+                        adapter.registerToggle(pos);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<FestiveModel>> call, Throwable t) {
+                Log.d("FESTIVAL", t.toString());
+            }
+        });
 
         return view;
-    }
 
+    }
+    /*
     private void initFestive() {
         festiveItems.clear();
         for (int i = 0; i < 5; i++) {
@@ -89,4 +134,5 @@ public class FragmentFestive extends Fragment {
             festiveItems.add(item);
         }
     }
+    */
 }

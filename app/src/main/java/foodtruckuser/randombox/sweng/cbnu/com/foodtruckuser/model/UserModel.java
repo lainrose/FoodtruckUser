@@ -11,7 +11,6 @@ public class UserModel {
         if(USER_INFO == null){ //있는지 체크 없으면
             USER_INFO = new UserModel(); //생성한뒤
         }
-
         return USER_INFO; //성성자를 넘긴다.
     }
 

@@ -51,7 +51,7 @@
         <ImageView
             android:id="@+id/festive_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:padding="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/festive_img" />
@@ -93,7 +93,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_below="@+id/festive_content"
                 android:textColor="@color/mainTextColor"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
 

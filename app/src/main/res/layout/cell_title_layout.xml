@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/bgTitleRight"
+        android:background="#ffffff"
         android:paddingBottom="20dp"
         android:paddingEnd="20dp"
         android:paddingStart="15dp"
@@ -61,13 +61,14 @@
 
         <TextView
             android:id="@+id/title_festive"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            />
 
         <ImageView
             android:id="@+id/title_from_to_dots_divider"
@@ -76,7 +77,8 @@
             android:layout_below="@id/title_festive"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:src="@color/contentDividerLine" />
+            android:src="@color/contentDividerLine"
+            />
 
         <TextView
             android:id="@+id/title_place"
@@ -87,37 +89,60 @@
             android:fadingEdge="horizontal"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/title_requests_count"
+            android:id="@+id/title_recruitment_truck"
             style="@style/TitleBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:text="7대 "/>
 
         <TextView
             style="@style/TitleBadgeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_requests_count"
-            android:layout_alignStart="@id/title_requests_count"
-            android:text="@string/requests_count_badge" />
-
-
+            android:layout_above="@id/title_recruitment_truck"
+            android:layout_alignStart="@id/title_recruitment_truck"
+            android:text="@string/recruit_num" />
 
         <TextView
-            android:id="@+id/title_detail"
+            android:id="@+id/title_cost"
             style="@style/TitleBadgeText"
-            android:text="@string/weight_badge"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:textColor="#22FFC7"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:text="@string/cost_charge" />
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/title_cost"
+            android:layout_alignStart="@id/title_cost"
+            android:text="@string/cost"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/title_deadline"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/deadline"/>
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/title_deadline"
+            android:layout_alignStart="@id/title_deadline"
+            android:text="@string/recruitment_deadline"
+            android:id="@+id/textView3" />
 
 
     </RelativeLayout>
