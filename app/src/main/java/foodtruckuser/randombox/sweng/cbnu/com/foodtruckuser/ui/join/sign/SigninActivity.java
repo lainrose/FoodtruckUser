@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
@@ -82,13 +83,7 @@ public class SigninActivity extends AppCompatActivity {
 
     public void Onclick_Signin(View v) {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://server-blackdog11.c9users.io")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService service = retrofit.create(ApiService.class);
-
+        ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<UserModel> convertedContent = service.request_login(et_signin_email.getText().toString(), et_signin_pw.getText().toString());
         convertedContent.enqueue(new Callback<UserModel>() {
             @Override

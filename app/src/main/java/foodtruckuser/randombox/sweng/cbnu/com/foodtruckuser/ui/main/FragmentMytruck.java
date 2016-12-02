@@ -83,7 +83,9 @@ public class FragmentMytruck extends Fragment {
                 ArrayList<FoodTruckModel> myTruckList = response.body();
 
 //                Log.d("TAG", "바디: " + response.body().toString());
-
+                if(myTruckList == null) {
+                    return;
+                }
                 for (FoodTruckModel myTruck: myTruckList) {
                     listitems.add(myTruck);
                 }

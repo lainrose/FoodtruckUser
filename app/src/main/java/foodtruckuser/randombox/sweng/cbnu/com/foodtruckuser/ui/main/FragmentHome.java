@@ -208,9 +208,11 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
                 Log.d("TAG", "바디: " + response.body().toString());
 
-                for (FoodTruckModel foodTruck : foodTruckList
-                        ) {
-                    //foodTruck.setFtImage(FT_IMAGES[0]);
+                if(foodTruckList == null) {
+                    return;
+                }
+
+                for (FoodTruckModel foodTruck : foodTruckList) {
                     if (likedTruckIdSet.contains(foodTruck.getFT_ID())) {
                         foodTruck.setFT_LIKE(true);
                         Log.d("TEST", "꺄륵" + foodTruck.getFtName());

@@ -344,8 +344,14 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             public void onResponse(Call<ArrayList<FoodTruckModel>> call, Response<ArrayList<FoodTruckModel>> response) {
                 ArrayList<FoodTruckModel> foodTruckList = response.body();
 
-                for (FoodTruckModel foodTruck : foodTruckList
-                        ) {
+                if(foodTruckList == null) {
+                    return;
+                }
+
+                for (FoodTruckModel foodTruck : foodTruckList) {
+                    if(foodTruck.getFT_LAT() == null || foodTruck.getFT_LNG() == null) {
+                        break;
+                    }
                     TruckLatLng.add(new LatLng(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
                     foodTruck.setFT_LOCATIONNAME(gpsService.findAddress(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
                     listitems.add(foodTruck);
