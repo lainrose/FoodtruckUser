@@ -34,8 +34,8 @@
                 android:layout_alignRight="@id/image"
                 android:layout_alignTop="@id/image"
                 android:gravity="center"
-                android:textColor="#FFFFFF"
-                android:textSize="30dp"
+                android:textColor="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold"/>
         </RelativeLayout>
         <TextView

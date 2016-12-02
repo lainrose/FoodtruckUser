@@ -61,17 +61,11 @@ public class FragmentMain extends AppCompatActivity {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView, new FragmentFestive()).commit();
                 }
-                else if (menuItem.getItemId() == R.id.menu_review) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView, new FragmentMyReview()).commit();
-                }
                 else if (menuItem.getItemId() == R.id.menu_settings) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView, new SettingsFragment()).commit();
                 }
-                else if (menuItem.getItemId() == R.id.menu_about) {
-                    //
-                }
+
 
                 return false;
             }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,17 +49,7 @@ public class SigninActivity extends AppCompatActivity {
         et_signin_email = ((EditText) findViewById(R.id.et_pw_input));
         et_signin_pw = ((EditText) findViewById(R.id.et_pw_reinput));
         bt_auto_login = (CheckBox)findViewById(R.id.bt_auto_login);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        toolbar.setTitle("이메일로 로그인");
-        toolbar.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
-        //actionBar.setHomeAsUpIndicator(R.drawable.button_back); //뒤로가기 버튼을 본인이 만든 아이콘으로 하기 위해 필요
+        setupToolbar();
     }
 
     @Override
@@ -72,6 +63,12 @@ public class SigninActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("로그인");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -108,7 +105,6 @@ public class SigninActivity extends AppCompatActivity {
                     else{
                         PrefHelper.getInstance(mContext).setPrefEmailAutoLogin(false);
                     }
-                    Toast.makeText(getApplicationContext(), "환영합니다. 겟잇트럭", Toast.LENGTH_LONG).show();
                     Intent loginIntent = new Intent(SigninActivity.this, FragmentMain.class);
                     startActivity(loginIntent);
                     finish();

@@ -269,7 +269,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             Log.d("구글맵", "현재위치 저장했음" + mLastLocation.getLatitude() + "/" + mLastLocation.getLongitude());
             map.moveCamera(CameraUpdateFactory.newLatLng(CuttrntLocation));
             // Map 을 zoom 합니다.
-            map.animateCamera(CameraUpdateFactory.zoomTo(16));
+            map.animateCamera(CameraUpdateFactory.zoomTo(15));
             // 마커 설정.
 
         }
@@ -423,7 +423,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
         mRecyclerView.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
             @Override
             public void OnPageChanged(int oldPosition, int newPosition) {
-                CameraUpdate location = CameraUpdateFactory.newLatLngZoom(TruckLatLng.get(newPosition), 16);
+                CameraUpdate location = CameraUpdateFactory.newLatLngZoom(TruckLatLng.get(newPosition), 15);
                 Log.d("맵", "TruckLatLng " + TruckLatLng.get(newPosition));
                 // Log.d("맵", "newPosition : " + String.valueOf(newPosition));
                 map.animateCamera(location);

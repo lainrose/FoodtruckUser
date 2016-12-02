@@ -3,12 +3,14 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,7 +33,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SignupActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
+public class SignupActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private EditText et_signup_email;
@@ -39,6 +41,7 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
     private EditText et_signup_pw;
     private static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
     private int signupStatus = 2; //1은 성공, 2는 실패, 3은 중복
+    private Button bt_singup_fragment_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,40 +49,46 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
         setContentView(R.layout.signup_activity);
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("회원가입");
-        toolbar.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
-        //actionBar.setHomeAsUpIndicator(R.drawable.button_back); //뒤로가기 버튼을 본인이 만든 아이콘으로 하기 위해 필요
+        setupToolbar();
 
         et_signup_email = ((EditText) findViewById(R.id.et_signup_email));
         et_signup_pw = ((EditText) findViewById(R.id.et_signup_pw));
         et_signup_nick = ((EditText) findViewById(R.id.et_signup_nick));
-        final ActionProcessButton bt_singup_fragment_login = (ActionProcessButton) findViewById(R.id.bt_singup_login);
-        final ProgressGenerator progressGenerator = new ProgressGenerator(this);
+       bt_singup_fragment_login = (Button) findViewById(R.id.bt_singup_login);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null && extras.getBoolean(EXTRAS_ENDLESS_MODE))
-            bt_singup_fragment_login.setMode(ActionProcessButton.Mode.ENDLESS);
-         else
-            bt_singup_fragment_login.setMode(ActionProcessButton.Mode.PROGRESS);
 
         bt_singup_fragment_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (StartSingUp())
                 {
-                    progressGenerator.start(bt_singup_fragment_login);
-                    //bt_singup_fragment_login.setEnabled(false);
-                    et_signup_email.setEnabled(false);
-                    et_signup_pw.setEnabled(false);
+                    new Handler().postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run() {
+                            if(signupStatus == 1) {
+                                Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                                Intent loginIntent = new Intent(SignupActivity.this, SigninActivity.class);
+                                SignupActivity.this.startActivity(loginIntent);
+                                SignupActivity.this.finish();
+                            } else if (signupStatus == 2) {
+                                Toast.makeText(getApplicationContext(), "회원가입에 실패하였습니다.\n잠시 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
+                                return;
+                            } else {
+                                Toast.makeText(getApplicationContext(), "중복된 이메일이 있습니다.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 1500);
                 }
             }
         });
+    }
+    private void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("회원가입");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -127,7 +136,7 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
             }
             Toast.makeText(SignupActivity.this, "비밀번호를 8자이상 입력해주세요", Toast.LENGTH_SHORT).show();
             return false;
-        }
+    }
         Toast.makeText(SignupActivity.this, "올바른 이메일 형식이 아닙니다", Toast.LENGTH_SHORT).show();
         return false;
     }
@@ -170,20 +179,5 @@ public class SignupActivity extends AppCompatActivity implements ProgressGenerat
                 Log.d("실패", t.getMessage().toString());
             }
         });
-    }
-
-    @Override
-    public void onComplete() {
-        if(signupStatus == 1) {
-            Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
-            Intent loginIntent = new Intent(SignupActivity.this, SigninActivity.class);
-            SignupActivity.this.startActivity(loginIntent);
-            SignupActivity.this.finish();
-        } else if (signupStatus == 2) {
-            Toast.makeText(this, "회원가입에 실패하였습니다.\n잠시 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
-            return;
-        } else {
-            Toast.makeText(this, "중복된 이메일이 있습니다.", Toast.LENGTH_LONG).show();
-        }
     }
 }

@@ -213,6 +213,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                     //foodTruck.setFtImage(FT_IMAGES[0]);
                     if (likedTruckIdSet.contains(foodTruck.getFT_ID())) {
                         foodTruck.setFT_LIKE(true);
+
                         Log.d("TEST", "꺄륵" + foodTruck.getFtName());
                     } else {
                         foodTruck.setFT_LIKE(false);

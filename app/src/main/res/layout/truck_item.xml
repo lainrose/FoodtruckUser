@@ -47,6 +47,7 @@
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
+
             </FrameLayout>
         </LinearLayout>
 
@@ -54,13 +55,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="0.8"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="left|center">
                 <Button
                     android:id="@+id/isOpenTextButton"
@@ -69,21 +68,28 @@
                     android:clickable="false"
                     android:minWidth="60dp"
                     android:minHeight="30dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="영업여부"
+                    android:layout_marginLeft="5dp"
+                    android:text="영업중"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/payTextView"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="left|center">
+            <Button
+                android:id="@+id/payButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:minWidth="60dp"
+                android:minHeight="30dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:text="카드가능"
+                android:layout_marginLeft="5dp"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+                </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -99,15 +105,10 @@
                     android:focusable="false"
                     app:btn_color="@android:color/darker_gray"
                     app:btn_fill_color="#F44336"
+                    android:layout_marginRight="5dp"
                     app:enable_flashing="true"
                     app:siShape="@raw/heart" />
 
-                <ImageView
-                    android:id="@+id/shareImageView"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:padding="@dimen/icon_padding"
-                    android:src="@drawable/ic_share" />
             </LinearLayout>
 
 

@@ -7,7 +7,14 @@
     android:background="#ffffebdb"
     android:orientation="vertical"
     android:weightSum="1">
-
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:onClick="bt_email_login"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
@@ -24,7 +31,7 @@
         android:id="@+id/tv_login_fragment_subject"
         android:layout_marginTop="175dp"
         android:text="환영합니다"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="30.0sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -33,66 +40,60 @@
         android:layout_width="wrap_content"
         android:id="@+id/tv_login_fragment_desc"
         android:layout_marginTop="40dp"
-        android:text="빅데이터 맛집검색, 푸드트럭"
-        android:textColor="#000000"
+        android:text= "위치기반, 푸드트럭"
+        android:textColor="#FFFFFF"
         android:textSize="14.0sp"
         android:gravity="center"
         android:layout_below="@+id/tv_login_fragment_subject"
         android:layout_centerHorizontal="true" />
-
-
-        <Button
-            android:layout_width="180.0dip"
-            android:background="@drawable/border_login_button"
-            android:layout_marginRight="20.0dip"
-            android:layout_marginLeft="5.0dip"
-            android:layout_height="wrap_content"
-            android:text="이메일로 로그인"
-            android:textStyle="bold"
-            android:textColor="#ff00cdcd"
-            android:textSize="14.0sp"
-            android:id="@+id/bt_email_login"
-            android:layout_alignTop="@+id/bt_email_signup"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:layout_width="180.0dip"
-            android:background="@drawable/border_signup_button"
-            android:layout_marginLeft="20.0dip"
-            android:layout_marginRight="5.0dip"
-            android:layout_height="wrap_content"
-            android:text="이메일로 가입"
-            android:textSize="14.0sp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:id="@+id/bt_email_signup"
-            android:layout_marginBottom="48dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/bt_email_login"
-            android:nestedScrollingEnabled="false" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="페이스북으로 로그인하기"
         android:background="@drawable/border_facebooklogin_button"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         android:id="@+id/bt_faceebook_login"
-        android:layout_above="@+id/bt_email_login"
-        android:layout_alignStart="@+id/bt_email_signup"
-        android:layout_alignEnd="@+id/bt_email_login"
-        android:layout_marginBottom="5.0dip"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"/>
+    <LinearLayout
+        android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:onClick="bt_email_login"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/linearLayout">
+        <Button
+            android:layout_weight="1"
+            android:layout_width="180.0dip"
+            android:background="@drawable/border_signup_button"
+            android:layout_height="wrap_content"
+            android:text="이메일로 가입"
+            android:textSize="14.0sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/bt_email_signup" />
+        <Button
+            android:layout_weight="1"
+            android:layout_width="180.0dip"
+            android:background="@drawable/border_login_button"
+            android:layout_height="wrap_content"
+            android:text="이메일로 로그인"
+            android:textStyle="bold"
+            android:textColor="#ff00cdcd"
+            android:textSize="14.0sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/bt_email_login" />
 
+    </LinearLayout>
 
 </RelativeLayout>

@@ -2,8 +2,8 @@
 
     <stroke
         android:width="0dp"
-        android:color="#dd0606"></stroke>
-    <solid android:color="#dd0606" />
+        android:color="#aaaaaa"></stroke>
+    <solid android:color="#aaaaaa" />
     <padding
         android:bottom="5dp"
         android:top="5dp"></padding>

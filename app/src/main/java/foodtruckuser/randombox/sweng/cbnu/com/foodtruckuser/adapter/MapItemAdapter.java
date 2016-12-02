@@ -2,7 +2,6 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -141,7 +140,7 @@ public class MapItemAdapter extends RecyclerView.Adapter<MapItemAdapter.TruckVie
             super(v);
             coverImageView = (CircleImageView) v.findViewById(R.id.coverImageView);
             titleTextView = (TextView) v.findViewById(R.id.titleTextView);
-            payTextView = (TextView) v.findViewById(R.id.payTextView);
+            payTextView = (TextView) v.findViewById(R.id.payButton);
             locationTextView = (TextView) v.findViewById(R.id.locationTextView);
             categoryTextView = (TextView) v.findViewById(R.id.categoryTextView);
             reviewCountTextView = (TextView) v.findViewById(R.id.reviewCountTextView);

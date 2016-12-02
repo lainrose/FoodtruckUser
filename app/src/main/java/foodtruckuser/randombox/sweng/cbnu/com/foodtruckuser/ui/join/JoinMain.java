@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -20,6 +21,8 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.vision.text.Text;
+
 import java.util.Arrays;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
@@ -42,17 +45,45 @@ public class JoinMain extends FragmentActivity implements View.OnClickListener{
     private CallbackManager callbackManager;
     private Profile profile;
     private Button facebookbtn;
+    private TextView tv_login_fragment_desc;
+    private TextView tv_login_fragment_subject;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.joinmain_activity);
-
+        tv_login_fragment_desc = (TextView)findViewById(R.id.tv_login_fragment_desc);
+        tv_login_fragment_subject = (TextView)findViewById(R.id.tv_login_fragment_subject);
         adapter = new IntroAdapter(getSupportFragmentManager());
         pager = (ViewPager)findViewById(R.id.pager);
         pager.setAdapter(adapter);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
+        pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    tv_login_fragment_subject.setText("환영합니다");
+                    tv_login_fragment_desc.setText("위치기반 푸드트럭 검색, 겟잇트럭");
+                }
+                if(position == 1){
+                    tv_login_fragment_subject.setText("전국 푸드트럭");
+                    tv_login_fragment_desc.setText("전국 어디서나\n" + "원하는 푸드트럭을 검색해 보세요");
+                }
+                else if(position == 2){
+                    tv_login_fragment_subject.setText("편리한 검색");
+                    tv_login_fragment_desc.setText("원하는 키워드로\n" + "푸드트럭을 쉽게 찾아보세요");
+                }
+                else if(position == 3){
+                    tv_login_fragment_subject.setText("주변 푸드트럭");
+                    tv_login_fragment_desc.setText("지도에서 바로\n" + "내 주변 푸드트럭을 확인해 보세요.");
+                }
+                else if(position == 4){
+                    tv_login_fragment_subject.setText("좋아하는 맛집의 알림");
+                    tv_login_fragment_desc.setText("좋아하는 푸드트럭을 모아보세요!\n" + "근처에 오면 알림을 받을 수 있어요");
+                }
+            }
+        });
 
         bt_email_login = (Button)findViewById(R.id.bt_email_login);
         bt_email_login.setOnClickListener(this);
@@ -145,6 +176,5 @@ public class JoinMain extends FragmentActivity implements View.OnClickListener{
                 break;
         }
     }
-
 
 }

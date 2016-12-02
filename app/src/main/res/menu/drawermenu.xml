@@ -8,18 +8,11 @@
             android:id="@+id/menu_festival"
             android:icon="@drawable/ic_global_menu_popular"
             android:title="행사" />
-        <item
-            android:id="@+id/menu_review"
-            android:icon="@drawable/ic_global_menu_likes"
-            android:title="내가 쓴 리뷰" />
     </group>
     <group android:id="@+id/menu_group_2">
         <item
             android:id="@+id/menu_settings"
             android:icon="@drawable/ic_setting_light"
             android:title="설정" />
-        <item
-            android:id="@+id/menu_about"
-            android:title="자세히..." />
     </group>
 </menu>

@@ -44,7 +44,8 @@
         android:layout_marginLeft="20.0dip"
         android:layout_marginRight="20.0dip"
         android:layout_marginBottom="2.0dip"
-        android:hint="비밀번호(8자이상)" android:password="true"
+        android:hint="비밀번호(8자이상)"
+        android:password="true"
         android:singleLine="true"
         android:layout_below="@id/et_signup_email"
         android:layout_centerHorizontal="true"
@@ -67,23 +68,19 @@
         android:layout_centerHorizontal="true"
         android:imeOptions="actionDone" />
 
-    <com.dd.processbutton.iml.ActionProcessButton
+    <Button
         android:id="@+id/bt_singup_login"
-        android:layout_width="fill_parent"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:layout_height="40.0dip"
-        android:text="가입하기"
-        android:textColor="@android:color/white"
-        android:textSize="14.0sp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20.0dip"
         android:layout_marginRight="20.0dip"
         android:layout_marginBottom="10.0dip"
-        custom:pb_colorComplete="@color/green_complete"
-        custom:pb_colorNormal="@color/blue_normal"
-        custom:pb_colorPressed="@color/blue_pressed"
-        custom:pb_colorProgress="@color/purple_progress"
-        custom:pb_textComplete="Success"
-        custom:pb_textProgress="Loading"
-        android:layout_below="@id/et_signup_nick"
         android:layout_centerHorizontal="true"
+        android:layout_width="fill_parent"
+        android:background="@drawable/border_sign"
+        android:text="가입하기"
+        android:textSize="14.0sp"
+        android:layout_below="@id/et_signup_nick"
         android:onClick="Onclick_Signup"/>
 </RelativeLayout>

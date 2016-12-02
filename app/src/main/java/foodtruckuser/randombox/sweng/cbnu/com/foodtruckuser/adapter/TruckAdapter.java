@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.text.Text;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
@@ -25,8 +26,6 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.SubMain.Acitivity.AcitivityTruckDetail;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentHome;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMytruck;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,22 +55,32 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
     @Override
     public void onBindViewHolder(final TruckViewHolder holder, final int position) {
 
-        holder.titleTextView.setText(homeList.get(position).getFtName());
 
+        //카테고리
+        String category;
+        switch (homeList.get(position).getFtCategory()) {
+            case 1 : category = "한식"; break;
+            case 2 : category = "일식"; break;
+            case 3 : category = "양식"; break;
+            case 4 : category = "중식"; break;
+            case 5 : category = "분식"; break;
+            case 6 : category = "디저트"; break;
+            case 7 : category = "음료"; break;
+            default: category = ""; break;
+        }
+        holder.titleTextView.setText(homeList.get(position).getFtName() + " : " + category);
         Picasso.with(mContext).load(Url + homeList.get(position).getFT_IMAGE_URL().getUrl()).into(holder.coverImageView);
 
+        //카드 여부
         if (homeList.get(position).getFtPayment() == "false") {
-            holder.payTextView.setText("카드불가");
+            holder.payButton.setBackgroundResource(R.drawable.button_shape_green_main);
         } else {
-            holder.payTextView.setText("카드가능");
-        }
+            holder.payButton.setBackgroundResource(R.drawable.button_shape_red_main);        }
 
         //영업여부
         if (homeList.get(position).isFT_isOPEN() == true) {
-            holder.isOpenTextButton.setText("영업중");
             holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_green_main);
         } else {
-            holder.isOpenTextButton.setText("영업종료");
             holder.isOpenTextButton.setBackgroundResource(R.drawable.button_shape_red_main);
         }
 
@@ -79,7 +88,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         //Set에 푸드트럭 ID있나 검사해서 있으면 체크 해준다. 없는애들은 다 해제
         if (call.equals("FragmentHome")) {
             if (likedTruckIdSet.contains(homeList.get(position).getFT_ID())) {
-                Log.d("TEST", "좋아요 푸드트럭" + homeList.get(position).getFtName());
+                Log.d("TEST", "프홈" + homeList.get(position).getFtName());
                 holder.shineButton.setChecked(true);
                 homeList.get(position).setFT_LIKE(true);
             } else {
@@ -88,6 +97,7 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             }
             //내 푸드트럭 리스트는 무조건 좋아요 눌려있어야 하니까 설정
         } else if (call.equals("FragmentMytruck")) {
+            Log.d("TEST", "프마" + homeList.get(position).getFtName());
             holder.shineButton.setChecked(true);
             homeList.get(position).setFT_LIKE(true);
         }
@@ -169,9 +179,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
 
         public TextView titleTextView;
         public ImageView coverImageView;
-        public ImageView shareImageView;
         public ShineButton shineButton;
-        public TextView payTextView;
+        public Button payButton;
         public TextView isOpenTextButton;
 
 
@@ -179,9 +188,8 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.titleTextView);
             coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
-            shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
             shineButton = (ShineButton) v.findViewById(R.id.po_image);
-            payTextView = (TextView) v.findViewById(R.id.payTextView);
+            payButton = (Button) v.findViewById(R.id.payButton);
             isOpenTextButton = (Button) v.findViewById(R.id.isOpenTextButton);
 
         }

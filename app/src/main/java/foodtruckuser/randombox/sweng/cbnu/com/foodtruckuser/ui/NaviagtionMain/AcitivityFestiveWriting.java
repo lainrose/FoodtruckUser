@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -406,19 +405,19 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
 
         temp = year + "년 " + monthOfYear + "월 " + dayOfMonth + "일 ";
         if(Flag.equals("inputStartDateAndTime")){
-            StartDateAndTime = year + "-" + monthOfYear + "-" + dayOfMonth;;
+            StartDateAndTime = year + "-" + monthOfYear + "-" + dayOfMonth;
             inputStartDateAndTime.setText(temp);
         }
         else if(Flag.equals("inputEndDateAndTime")){
-            EndDateAndTime =year + "-" + monthOfYear + "-" + dayOfMonth;;
+            EndDateAndTime =year + "-" + monthOfYear + "-" + dayOfMonth;
             inputEndDateAndTime.setText(temp);
         }
         else if(Flag.equals("startRcruitingPeriod")){
-            StartRcruitingPeriod = year + "-" + monthOfYear + "-" + dayOfMonth;;
+            StartRcruitingPeriod = year + "-" + monthOfYear + "-" + dayOfMonth;
             startRcruitingPeriod.setText(temp);
         }
         else if(Flag.equals("endRcruitingPeriod")){
-            EndRcruitingPeriod = year + "-" + monthOfYear + "-" + dayOfMonth;;
+            EndRcruitingPeriod = year + "-" + monthOfYear + "-" + dayOfMonth;
             endRcruitingPeriod.setText(temp);
         }
     }
@@ -465,12 +464,12 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
 
     public void checkPermission() {
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
                 // Show an expanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -481,7 +480,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         1);
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an

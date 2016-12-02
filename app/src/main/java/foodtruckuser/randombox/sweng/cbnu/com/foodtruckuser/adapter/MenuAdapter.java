@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
@@ -75,9 +76,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         Picasso.with(context)
                 .load(Url + listitems.get(position).getImage().getUrl())
                 .resize((int) imageWidth, (int) imageHeight)
-                .placeholder(R.drawable.menuitem)
                 .into(holder.imageview);
-        holder.title.setText(model.getTitle());
+        if(listitems.get(position).getImage().getUrl()==null){
+            Bitmap image = BitmapFactory.decodeResource(context.getResources(), R.drawable.no_images);
+            setBitmapImage(image);
+        }
+        holder.title.setText(model.getTitle() + "  " + model.getPrice() + "원");
 
         if (call.equals("AcitivityTruckDetail")) {
             if (position == 4) {
@@ -93,22 +97,22 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return (null != listitems ? listitems.size() : 0);
     }
 
-//    private void setBitmapImage(Bitmap image) {
-//        float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
-//        float margin = (int) convertDpToPixel(10f, (Activity) context);
-//        // two images, three margins of 10dips
-//        imageWidth = ((width - (margin)) / 2);
-//        if (image != null) {
-//            float i = ((float) imageWidth) / ((float) image.getWidth());
-//            if (call.equals("AcitivityTruckMenu"))
-//                imageHeight = i * (image.getHeight());
-//            else if (call.equals("AcitivityTruckDetail"))
-//                imageHeight = imageWidth;
-//            holder.imageview.setImageBitmap(Bitmap.createScaledBitmap(image, (int) imageWidth, (int) imageHeight, false));
-//        } else {
-//            holder.imageview.setImageBitmap(image);
-//        }
-//    }
+    private void setBitmapImage(Bitmap image) {
+        float width = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
+        float margin = (int) convertDpToPixel(10f, (Activity) context);
+        // two images, three margins of 10dips
+        imageWidth = ((width - (margin)) / 2);
+        if (image != null) {
+            float i = ((float) imageWidth) / ((float) image.getWidth());
+            if (call.equals("AcitivityTruckMenu"))
+                imageHeight = i * (image.getHeight());
+            else if (call.equals("AcitivityTruckDetail"))
+                imageHeight = imageWidth;
+            holder.imageview.setImageBitmap(Bitmap.createScaledBitmap(image, (int) imageWidth, (int) imageHeight, false));
+        } else {
+            holder.imageview.setImageBitmap(image);
+        }
+    }
 
     private float convertDpToPixel(float dp, Context context) {
         Resources resources = context.getResources();
