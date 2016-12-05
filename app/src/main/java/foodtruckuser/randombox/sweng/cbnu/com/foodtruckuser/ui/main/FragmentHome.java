@@ -126,7 +126,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         initFT();
         sendToken();
-
+        requestMyTruckList(UserModel.getInstance().getUserId());
         //플로팅 아이콘
         boomMenuButton = (BoomMenuButton) view.findViewById(R.id.boom);
         viewTreeObserver = view.getViewTreeObserver();
@@ -138,7 +138,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 initBoom();
             }
         });
-        initBoom();
 
         return view;
     }
@@ -217,10 +216,10 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 for (FoodTruckModel foodTruck : foodTruckList) {
                     if (likedTruckIdSet.contains(foodTruck.getFT_ID())) {
                         foodTruck.setFT_LIKE(true);
-
                         Log.d("TEST", "꺄륵" + foodTruck.getFtName());
                     } else {
                         foodTruck.setFT_LIKE(false);
+                        Log.d("TEST", "꺄륵예외" + foodTruck.getFtName());
                     }
                     listItems.add(foodTruck);
 
@@ -374,6 +373,37 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 //        }
 //        return categoryFilteredModelList;
 //    }
+
+    public void requestMyTruckList(String user_id) {
+        likedTruckIdSet.clear();
+        PrefHelper.getInstance(getContext()).setLikedTruckid(likedTruckIdSet);
+        Log.d("TAG", "Set 초기화");
+
+        ApiService service = ServiceGenerator.createService(ApiService.class);
+        Call<ArrayList<FoodTruckModel>> convertedContent = service.like_truck_list(user_id);
+        convertedContent.enqueue(new Callback<ArrayList<FoodTruckModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<FoodTruckModel>> call, Response<ArrayList<FoodTruckModel>> response) {
+                ArrayList<FoodTruckModel> myTruckList = response.body();
+
+                if(myTruckList == null) {
+                    return;
+                }
+                for (FoodTruckModel myTruck: myTruckList) {
+                    //likeTruckList.add(myTruck);
+                    likedTruckIdSet.add(myTruck.getFT_ID());
+                }
+                PrefHelper.getInstance(getContext()).setLikedTruckid(likedTruckIdSet);
+                initFT();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<FoodTruckModel>> call, Throwable t) {
+                Log.d("실패", "onFailure: ");
+                Log.d("TAG", t.getMessage());
+            }
+        });
+    }
 
     @Override
     public void onResume() {
