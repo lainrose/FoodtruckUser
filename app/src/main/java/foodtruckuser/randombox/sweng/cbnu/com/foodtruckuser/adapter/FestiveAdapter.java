@@ -59,6 +59,7 @@ public class FestiveAdapter extends ArrayAdapter<FestiveModel> {
             viewHolder.start_date = (TextView) cell.findViewById(R.id.title_start_date);
             viewHolder.festive = (TextView) cell.findViewById(R.id.title_festive);
             viewHolder.place = (TextView) cell.findViewById(R.id.title_place);
+            viewHolder.title_festive = (TextView) cell.findViewById(R.id.title_festive);
 
             viewHolder.title_recruitment_truck= (TextView)cell.findViewById(R.id.title_recruitment_truck);
             viewHolder.title_cost = (TextView) cell.findViewById(R.id.title_cost);
@@ -99,6 +100,7 @@ public class FestiveAdapter extends ArrayAdapter<FestiveModel> {
         viewHolder.request_truck.setText(String.valueOf(item.getRequest_truck()));
         viewHolder.food_category.setText(item.getSupport_elec());
         viewHolder.deadline.setText(item.getDeadline());
+        viewHolder.title_festive.setText(item.getFestive_title());
 
         return cell;
     }
@@ -145,6 +147,7 @@ public class FestiveAdapter extends ArrayAdapter<FestiveModel> {
         TextView food_category;
         TextView deadline;
         ImageView festival_image;
+        TextView title_festive;
 
     }
 }

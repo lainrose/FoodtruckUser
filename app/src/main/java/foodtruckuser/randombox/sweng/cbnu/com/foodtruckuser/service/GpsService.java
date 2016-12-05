@@ -186,10 +186,16 @@ public class GpsService extends Service implements LocationListener {
                 if (address != null && address.size() > 0) {
                     // 주소
                     Address addr = address.get(0);
+                    currentLocationAddress = addr.getAdminArea() + " "  // 시
+                            + addr.getLocality() + " "                  // 구
+                            +addr.getThoroughfare( ) + " "              // 동
+                            + addr.getFeatureName();                    // 번지
+                    /*
                     for (int i = 0; i <= addr.getMaxAddressLineIndex(); i++) {
                         String addLine = addr.getAddressLine(i);
                         currentLocationAddress += String.format("%s", addLine);
                     }
+                    */
                 }
             }
 

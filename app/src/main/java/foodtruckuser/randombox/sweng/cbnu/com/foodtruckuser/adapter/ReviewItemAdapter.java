@@ -96,9 +96,12 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                 }
             });
 
-            holder.reviewlikebutton.setOnClickListener(new View.OnClickListener() {
+            holder.likebtn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    holder.likebtn2.setChecked(true);
+                    holder.likebtn2.setEnabled(true);
+                    holder.likebtn2.setActivated(true);
 //                    reviewitems.get(position).setLikesCount(reviewitems.get(position).isLiked() ?
 //                        reviewitems.get(position).getLikesCount()-1 : reviewitems.get(position).getLikesCount()+1);
 //                    reviewitems.get(position).setLiked(reviewitems.get(position).isLiked() ? false : true);
@@ -147,7 +150,7 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
             public ImageView ivLike;
             public TextSwitcher tsLikesCounter;
             public FrameLayout vImageRoot;
-            public ShineButton reviewlikebutton;
+            public ShineButton likebtn2;
 
             public ReviewViewHolder(View v) {
                 super(v);
@@ -161,7 +164,7 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Re
                 ivLike = (ImageView)v.findViewById(R.id.ivLike);
                 tsLikesCounter = (TextSwitcher)v.findViewById(R.id.tsLikesCounter);
                 vImageRoot = (FrameLayout)v.findViewById(R.id.vImageRoot);
-                reviewlikebutton = (ShineButton)v.findViewById(R.id.po_image2);
+                likebtn2 = (ShineButton)v.findViewById(R.id.likebtn2);
 
             }
         }

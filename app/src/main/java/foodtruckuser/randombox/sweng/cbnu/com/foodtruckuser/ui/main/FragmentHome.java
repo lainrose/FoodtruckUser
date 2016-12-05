@@ -123,6 +123,10 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 //            }
 //        }, 1000);
 
+
+        initFT();
+        sendToken();
+
         //플로팅 아이콘
         boomMenuButton = (BoomMenuButton) view.findViewById(R.id.boom);
         viewTreeObserver = view.getViewTreeObserver();
@@ -135,8 +139,6 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
             }
         });
         initBoom();
-        initFT();
-        sendToken();
 
         return view;
     }
@@ -260,8 +262,10 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 
         Drawable[] drawables = new Drawable[number];
         int[] drawablesResource = new int[]{
+
                 R.drawable.mark, R.drawable.refresh, R.drawable.copy, R.drawable.heart,
                 R.drawable.info, R.drawable.like, R.drawable.record, R.drawable.search, R.drawable.settings
+
         };
 
         String[] STRINGS = new String[]{

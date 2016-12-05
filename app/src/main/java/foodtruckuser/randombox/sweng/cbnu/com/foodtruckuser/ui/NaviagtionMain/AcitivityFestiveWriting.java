@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,6 +73,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
     private long backKeyPressedTime = 0;
     private Toast toast;
     private String StartDateAndTime;
+    private String festivetitle_Textview;
     private String EndDateAndTime;
     private String StartRcruitingPeriod;
     private String EndRcruitingPeriod;
@@ -80,6 +82,8 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
     private TextView isElectric;
     private File image;
     private MultipartBody.Part imageFileBody;
+    private EditText festive_title;
+    private CheckBox electricbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +98,9 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
         endRcruitingPeriod = (TextView)findViewById(R.id.endRcruitingPeriod);
         inputLocation = (TextView)findViewById(R.id.inputLocation);
         numOfTruck = (TextView)findViewById(R.id.numOfTruck);
-        isElectric = (TextView)findViewById(R.id.isElectric);
         writingTextView = (EditText)findViewById(R.id.writingText);
+        festive_title = (EditText)findViewById(R.id.festive_title);
+        electricbtn = (CheckBox)findViewById(R.id.electricbtn);
 
         checkPermission();
     }
@@ -240,7 +245,7 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
                             String writingText = writingTextView.getText().toString();
                             String inputLocationText = inputLocation.getText().toString();
                             String numOfTruckText = numOfTruck.getText().toString();
-                            String isElectricText = isElectric.getText().toString();
+                            festivetitle_Textview = festive_title.getText().toString();
                             // TODO: 2016-12-02 서버로 보낼 날짜 및 기타 변수
                             //StartDateAndTime // 행사 시작일
                             //EndDateAndTime // 행사 종료일
@@ -251,16 +256,17 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
                             //numOfTruckText // 트럭대수
                             //isElectricText // 전기여부 -> true, false로 반환되게 해줭
                             JsonObject ob = new JsonObject();
-                            ob.addProperty("title", new String());
+                            ob.addProperty("title", festivetitle_Textview);
                             ob.addProperty("condition", writingText);
                             ob.addProperty("place", inputLocationText);
                             ob.addProperty("start_date", StartDateAndTime);
                             ob.addProperty("end_date", EndDateAndTime);
                             ob.addProperty("applicant_start", StartRcruitingPeriod);
                             ob.addProperty("applicant_end", EndRcruitingPeriod);
-                            ob.addProperty("support_type", true);
+                            ob.addProperty("support_type", electricbtn.isChecked());
                             ob.addProperty("limit_num_of_application", numOfTruckText);
                             ob.addProperty("client_id", UserModel.getInstance().getUserId());
+
 
                             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), image);
                             imageFileBody = MultipartBody.Part.createFormData("image", image.getName(), requestBody);
