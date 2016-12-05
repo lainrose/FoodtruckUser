@@ -153,6 +153,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
                 return false;
             }
         });
+
         final GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
