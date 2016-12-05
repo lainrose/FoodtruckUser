@@ -16,7 +16,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
-
+    <string name="internal_storage">Internal Storage</string>
     <string name="festive_info" translatable="false">행사 정보</string>
     <string name="fold" translatable="false">접기</string>
     <string name="requests_count_mock" translatable="false">5</string>

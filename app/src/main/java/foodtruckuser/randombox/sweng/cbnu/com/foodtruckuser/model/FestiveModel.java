@@ -148,8 +148,6 @@ public class FestiveModel {
             return false;
         if (deadline != null ? !deadline.equals(item.deadline) : item.deadline != null)
             return false;
-
-
         return  false;
     }
 

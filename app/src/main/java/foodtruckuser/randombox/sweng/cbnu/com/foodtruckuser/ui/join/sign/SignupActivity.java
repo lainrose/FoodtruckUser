@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
@@ -152,22 +153,17 @@ public class SignupActivity extends AppCompatActivity {
 
         Log.d("회원가입", client_info.toString());
 
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://server-blackdog11.c9users.io")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService service = retrofit.create(ApiService.class);
+        ApiService service = ServiceGenerator.createService(ApiService.class);
 
         Call<Integer> convertedContent = service.client_join(client_info);
 
         convertedContent.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if(response.body().toString() == "1") {
+                int actionCheck = response.body();
+                if(actionCheck == 1) {
                     signupStatus = 1;
-                } else if(response.body().toString() == "2") {
+                } else if(actionCheck == 2) {
                     signupStatus = 2;
                 } else {
                     signupStatus = 3;
@@ -176,7 +172,7 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                Log.d("실패", t.getMessage().toString());
+                Log.d("실패", t.toString());
             }
         });
     }

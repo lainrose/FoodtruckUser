@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -32,10 +33,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.preference.PrefHelper;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GpsService;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.JoinMain;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivitySetLocationMap extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback, LocationListener {
@@ -76,7 +83,7 @@ public class ActivitySetLocationMap extends AppCompatActivity implements GoogleA
                 markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_like_select));
                 markerOptions.position(latLng);
                 CuttrntX = latLng.latitude;
-                CuttrntY = latLng.latitude;
+                CuttrntY = latLng.longitude;
                 googleMap.clear();
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 googleMap.addMarker(markerOptions);
@@ -96,9 +103,26 @@ public class ActivitySetLocationMap extends AppCompatActivity implements GoogleA
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
                                     Log.d("선택한 위치", CuttrntX +"//" + CuttrntY);
                                     //// TODO: 2016-12-01 이거 내위치 보낼꺼니까 CurrentX,Y 보내면 됨
-                                    finish();
+                                    ApiService service = ServiceGenerator.createService(ApiService.class);
+                                    Call<Boolean> call = service.set_location(UserModel.getInstance().getUserId(), (float)CuttrntX, (float)CuttrntY);
+                                    call.enqueue(new Callback<Boolean>() {
+                                        @Override
+                                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                            Boolean actionCheck = response.body();
+                                            if(actionCheck) {
+                                                Toast.makeText(getApplicationContext(), "위치 저장 성공", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Boolean> call, Throwable t) {
+
+                                        }
+                                    });
                                 }
                             })
                             .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {

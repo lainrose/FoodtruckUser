@@ -71,17 +71,8 @@ public interface ApiService {
     //행사 정보 요청
     @GET("/common/festival_info")
     Call<ArrayList<FestiveModel>> festival_info();
-//
-//    //행사 참가신청 요청
-//    @GET("/owner/request_festival")
-//    Call<Boolean> request_festival(@Query("owner_id") int owner_id, @Query("festival_id") int festival_id);
 
-    //행사 참가신청 취소 요청
-    @GET("/owner/request_cancle_festival")
-    Call<Boolean> request_cancle_festival(@Query("owner_id") int owner_id, @Query("festival_id") int festival_id);
-
-    //내가 참가신청한 행사 정보 요청
-    @GET("/owner/selected_festival_info")
-    Call<ArrayList<FestiveModel>> selected_festival(@Query("onwer_id") int owner_id);
+    @GET("/client/set_location")
+    Call<Boolean> set_location(@Query("client_id") String client_id, @Query("lat") float lat, @Query("lng") float lng);
 
 }

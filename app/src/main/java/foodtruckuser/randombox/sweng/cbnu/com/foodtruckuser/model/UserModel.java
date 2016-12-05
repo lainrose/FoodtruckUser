@@ -76,7 +76,7 @@ public class UserModel {
         USER_MAIL = userMail;
     }
 
-    public  String getUserId() {
+    public String getUserId() {
         return USER_ID;
     }
 

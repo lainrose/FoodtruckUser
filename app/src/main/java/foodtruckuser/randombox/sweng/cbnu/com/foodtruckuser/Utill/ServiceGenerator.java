@@ -5,7 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
-    public static final String API_BASE_URL = "https://server2-blackdog11.c9users.io/";
+    public static final String API_BASE_URL = "https://foodtruck-server-opwe37.c9users.io/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

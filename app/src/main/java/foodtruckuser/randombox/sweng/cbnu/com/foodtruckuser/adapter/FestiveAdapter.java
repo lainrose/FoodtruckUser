@@ -59,7 +59,6 @@ public class FestiveAdapter extends ArrayAdapter<FestiveModel> {
             viewHolder.start_date = (TextView) cell.findViewById(R.id.title_start_date);
             viewHolder.festive = (TextView) cell.findViewById(R.id.title_festive);
             viewHolder.place = (TextView) cell.findViewById(R.id.title_place);
-            viewHolder.contentRequestBtn = (TextView) cell.findViewById(R.id.request_btn);
 
             viewHolder.title_recruitment_truck= (TextView)cell.findViewById(R.id.title_recruitment_truck);
             viewHolder.title_cost = (TextView) cell.findViewById(R.id.title_cost);
@@ -101,84 +100,6 @@ public class FestiveAdapter extends ArrayAdapter<FestiveModel> {
         viewHolder.food_category.setText(item.getSupport_elec());
         viewHolder.deadline.setText(item.getDeadline());
 
-        viewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("TAG","떠라! ");
-                new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
-
-                        .setTitleText("정말 신청하시겠습니까?")
-                        .setContentText("확인 버튼을 누르면 취소할 수 없습니다.")
-                        //취소버튼 text
-                        .setCancelText("취소")
-                        //확인버튼 text
-                        .setConfirmText("확인")
-                        .showCancelButton(true)
-                        //취소버튼 리스너
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-
-                            @Override
-
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.setTitleText("삭제되었습니다.")
-                                        .setConfirmText("확인")
-                                        .showCancelButton(false)
-                                        .setCancelClickListener(null)
-                                        .setConfirmClickListener(null)
-                                        .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-
-                            }
-
-                        })
-                        // 확인버튼 리스너
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-
-                            @Override
-
-                            public void onClick(final SweetAlertDialog sDialog) {
-//                                ApiService service = ServiceGenerator.createService(ApiService.class);
-//                                Call<Boolean> call = service.request_festival(Owner.getInstance().getId(), item.getId());
-//                                call.enqueue(new Callback<Boolean>() {
-//                                    @Override
-//                                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//                                        Boolean actionCheck = response.body();
-//                                        if(actionCheck) {
-//                                            Toast.makeText(getContext(), "입점 신청 완료", Toast.LENGTH_SHORT).show();
-//                                            sDialog.dismiss();
-//                                        }
-//                                        else {
-//                                            Toast.makeText(getContext(), "입점 신청 실패", Toast.LENGTH_SHORT).show();
-//                                            sDialog.dismiss();
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<Boolean> call, Throwable t) {
-//                                        Log.d("FOLING", t.toString());
-//                                    }
-//                                });
-                            }
-
-                        })
-
-                        .show();
-            }
-        });
-/*
-     dn
-*/
-        // set custom btn handler for list item from that item
-        if (item.akgetRequestBtnClickListener() != null) {
-            //viewHolder.contentRequestBtn.setOnClickListener(item.akgetRequestBtnClickListener());
-            Log.d("클릭", "null아님");
-        } else {
-            // (optionally) add "default" handler if no handler found in item
-            //viewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
-            Log.d("클릭", "null아야");
-
-        }
-
-
         return cell;
     }
 
@@ -211,7 +132,6 @@ public class FestiveAdapter extends ArrayAdapter<FestiveModel> {
     // View lookup cache
     private static class ViewHolder {
         TextView year;
-        TextView contentRequestBtn;
         TextView festive;
         TextView place;
         TextView start_date;

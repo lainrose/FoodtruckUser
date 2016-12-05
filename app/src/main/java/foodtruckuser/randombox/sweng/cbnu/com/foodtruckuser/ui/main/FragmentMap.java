@@ -160,30 +160,6 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
             }
         });
 
-//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-//                View child = rv.findChildViewUnder(e.getX(), e.getY());
-//                if (child != null && gestureDetector.onTouchEvent(e)) {
-//                    //트럭 세부정보로 가는데 지울예정
-//                    //mRecyclerView.getChildPosition(child)
-//                    Intent submain = new Intent(getContext(), AcitivityTruckDetail.class);
-//                    getContext().startActivity(submain);
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//
-//            }
-//
-//        });
 
         return view;
     }
@@ -331,6 +307,13 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
     public void showViewPagerList() {
         mapItemAdapter = new MapItemAdapter(getActivity(), listitems);
+
+        for(FoodTruckModel item : listitems){
+            Log.d("트러들어왔냐", item.getFtName());
+            Log.d("트러들어왔냐", ""+item.getFT_LAT());
+            Log.d("트러들어왔냐", ""+item.getFT_LNG());
+
+        }
         mRecyclerView.setAdapter(mapItemAdapter);
     }
 
@@ -350,7 +333,7 @@ public class FragmentMap extends Fragment implements GoogleApiClient.OnConnectio
 
                 for (FoodTruckModel foodTruck : foodTruckList) {
                     if(foodTruck.getFT_LAT() == null || foodTruck.getFT_LNG() == null) {
-                        break;
+                        continue;
                     }
                     TruckLatLng.add(new LatLng(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));
                     foodTruck.setFT_LOCATIONNAME(gpsService.findAddress(foodTruck.getFT_LAT(), foodTruck.getFT_LNG()));

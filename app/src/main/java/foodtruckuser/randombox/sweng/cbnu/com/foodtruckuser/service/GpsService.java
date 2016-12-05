@@ -198,7 +198,7 @@ public class GpsService extends Service implements LocationListener {
             e.printStackTrace();
         }
         //대한민국 없애주기
-        return currentLocationAddress.substring(5);
+        return currentLocationAddress;
     }
     @Override
     public IBinder onBind(Intent arg0) {

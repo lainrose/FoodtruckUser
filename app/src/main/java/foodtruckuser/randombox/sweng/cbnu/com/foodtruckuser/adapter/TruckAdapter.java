@@ -140,7 +140,12 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         convertedContent.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Log.d("TAG", "좋아요 푸드트럭" + response.body().toString());
+                Boolean actioncheck = response.body();
+
+                if(actioncheck) {
+                    Toast.makeText(mContext, holder.titleTextView.getText() + "을" + " 좋아요!", Toast.LENGTH_SHORT).show();
+                    homeList.get(position).setFT_LIKE(true);
+                }
             }
 
             @Override
@@ -148,8 +153,6 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
 
             }
         });
-        Toast.makeText(mContext, holder.titleTextView.getText() + "을" + " 좋아요!", Toast.LENGTH_SHORT).show();
-        homeList.get(position).setFT_LIKE(true);
     }
 
     public void requestRemoveLikeTruck(final TruckViewHolder holder, final int position) {
@@ -158,7 +161,12 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
         convertedContent.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Log.d("TAG", "좋아요 취소 푸드트럭" + response.body().toString());
+                Boolean actioncheck = response.body();
+
+                if(actioncheck) {
+                    Toast.makeText(mContext, holder.titleTextView.getText() + "을" + " 좋아요 취소!", Toast.LENGTH_SHORT).show();
+                    homeList.get(position).setFT_LIKE(false);
+                }
             }
 
             @Override
@@ -166,8 +174,6 @@ public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.TruckViewHol
 
             }
         });
-        Toast.makeText(mContext, holder.titleTextView.getText() + "을" + " 좋아요 취소!", Toast.LENGTH_SHORT).show();
-        homeList.get(position).setFT_LIKE(false);
     }
 
     @Override

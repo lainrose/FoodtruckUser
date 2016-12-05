@@ -71,7 +71,7 @@ public final class PrefHelper {
   }
 
   public String getPrefUserId() {
-    return getString(PREF_USER_ID,"");
+    return getString(PREF_USER_ID, "");
   }
   public void setPrefUserId(String paramString) {
     setString(PREF_USER_ID, paramString);
