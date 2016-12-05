@@ -23,11 +23,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.FileUtils;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.ReviewModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,8 +76,13 @@ public class AcitivityWriting extends AppCompatActivity implements View.OnClickL
                     , 3.4f
             );
 
+            File image = FileUtils.getFile(this, mImageCaptureUri);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), image);
+            MultipartBody.Part imageFileBody = MultipartBody.Part.createFormData("image", image.getName(), requestBody);
+
+
             ApiService service = ServiceGenerator.createService(ApiService.class);
-            Call<FoodTruckModel> convertedContent = service.save_review(jsonObject);
+            Call<FoodTruckModel> convertedContent = service.save_review(imageFileBody, jsonObject);
             convertedContent.enqueue(new Callback<FoodTruckModel>() {
                 @Override
                 public void onResponse(Call<FoodTruckModel> call, Response<FoodTruckModel> response) {

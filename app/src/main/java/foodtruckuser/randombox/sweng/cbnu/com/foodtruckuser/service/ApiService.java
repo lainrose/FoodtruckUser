@@ -56,9 +56,9 @@ public interface ApiService {
     @POST("/client/like_truck_list")
     Call<ArrayList<FoodTruckModel>> like_truck_list(@Field("client_id") String id);
 
-    @FormUrlEncoded
+    @Multipart
     @POST("/client/save_review")
-    Call<FoodTruckModel> save_review(@Field("review_info") JsonObject review_info);
+    Call<FoodTruckModel> save_review(@Part MultipartBody.Part file, @Part("review_info") JsonObject review_info);
 
     @GET("/client/save_token")
     Call<Boolean> save_token(@Query("token") String token, @Query("client_id") String id);

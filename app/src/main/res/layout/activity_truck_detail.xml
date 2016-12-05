@@ -585,10 +585,11 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/floatingbutton"/>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/floatingbutton"/>
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
 
