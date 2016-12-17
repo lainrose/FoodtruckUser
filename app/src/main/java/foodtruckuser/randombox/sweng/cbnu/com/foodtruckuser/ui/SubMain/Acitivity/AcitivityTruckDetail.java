@@ -647,6 +647,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
 
                 Log.d("TAG", "바디: " + response.body().toString());
                 Log.d("TAG", "메뉴리스트 사이즈 : " + menuitems.size());
+                MenuModel.MENU_INFO_LIST = menuList; //싱글톤(메뉴)
 
                 if (menuList.size() >= 5) {
                     for (int i = 0; i < 5; i++) {
@@ -657,7 +658,7 @@ public class AcitivityTruckDetail extends AppCompatActivity implements GoogleApi
                         menuitems.add(menu);
                     }
                 }
-                MenuModel.MENU_INFO_LIST = menuitems; //싱글톤(메뉴)
+
                 showMenuCardViewList(menuitems); //서버에서 받아오면 카드뷰 그려주게하기
             }
 

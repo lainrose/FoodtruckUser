@@ -14,7 +14,7 @@
         android:background="@color/colorPrimary"
         android:id="@+id/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="리뷰 쓰기" />
+        app:title="행사 작성하기" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -166,7 +166,6 @@
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="text"
-                            android:imeOptions="actionNext"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:onClick="onClick">
@@ -191,7 +190,6 @@
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="text"
-                            android:imeOptions="actionNext"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp">
                         </EditText>
@@ -215,7 +213,6 @@
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="number"
-                            android:imeOptions="actionNext"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp">
                         </EditText>
@@ -240,7 +237,6 @@
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="date|datetime"
-                            android:imeOptions="actionNext"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:onClick="onClick">
@@ -266,7 +262,6 @@
                             android:singleLine="true"
                             android:layout_centerHorizontal="true"
                             android:inputType="date|datetime"
-                            android:imeOptions="actionNext"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:onClick="onClick">

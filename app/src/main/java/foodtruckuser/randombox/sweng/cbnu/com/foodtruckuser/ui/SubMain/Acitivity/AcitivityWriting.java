@@ -62,6 +62,7 @@ public class AcitivityWriting extends AppCompatActivity implements View.OnClickL
     private void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("리뷰 작성하기");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override

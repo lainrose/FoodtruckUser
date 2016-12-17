@@ -108,7 +108,18 @@ public class AcitivityFestiveWriting extends AppCompatActivity implements DatePi
     private void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("행사 작성하기");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // NavUtils.navigateUpFromSameTask(this);
+                finish();
+                overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void doTakePhotoAction() // 카메라 촬영 후 이미지 가져오기

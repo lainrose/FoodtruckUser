@@ -45,8 +45,6 @@ import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentHome extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -122,10 +120,9 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
 //                showCardViewList(listItems); //실제로 카드뷰에 서버로부터 받아온 푸드트럭 객체 추가.
 //            }
 //        }, 1000);
-
-
-        initFT();
         sendToken();
+
+
         requestMyTruckList(UserModel.getInstance().getUserId());
         //플로팅 아이콘
         boomMenuButton = (BoomMenuButton) view.findViewById(R.id.boom);
@@ -138,7 +135,7 @@ public class FragmentHome extends Fragment implements SearchView.OnQueryTextList
                 initBoom();
             }
         });
-
+        initBoom();
         return view;
     }
 

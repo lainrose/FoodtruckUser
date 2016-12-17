@@ -3,6 +3,7 @@ package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +75,6 @@ public class FragmentFestive extends Fragment {
                 if(festiveItems == null) {
                     return;
                 }
-
-                Log.d("FESTIVAL", festiveItems.get(0).getFestive_title());
 
                 // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
                 final FestiveAdapter adapter = new FestiveAdapter(getContext(), festiveItems);
