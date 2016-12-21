@@ -1,10 +1,8 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.sign;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,25 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.gson.JsonObject;
-import com.squareup.okhttp.ResponseBody;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.ServiceGenerator;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.UserModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
-import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main.FragmentMain;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -52,10 +41,10 @@ public class SignupActivity extends AppCompatActivity {
 
         setupToolbar();
 
-        et_signup_email = ((EditText) findViewById(R.id.et_signup_email));
-        et_signup_pw = ((EditText) findViewById(R.id.et_signup_pw));
+        et_signup_email = ((EditText) findViewById(R.id.etCertifiedEmail));
+        et_signup_pw = ((EditText) findViewById(R.id.etCertifiedNum));
         et_signup_nick = ((EditText) findViewById(R.id.et_signup_nick));
-       bt_singup_fragment_login = (Button) findViewById(R.id.bt_singup_login);
+       bt_singup_fragment_login = (Button) findViewById(R.id.btCertified);
 
 
         bt_singup_fragment_login.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,8 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.regex.Pattern;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
@@ -25,6 +28,8 @@ import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.adapter.FestiveAdapt
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FestiveModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.model.FoodTruckModel;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.ApiService;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GMailSender;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.join.CertifiedActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,7 +67,32 @@ public class FragmentFestive extends Fragment {
         festiveWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utill.getInstance().MoveAcitivity(getContext(), AcitivityFestiveWriting.class);
+                if(true){
+                    new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("행사를 이용하시려면\n이메일 인증을 해야됩니다.\n인증 하시겠습니까?")
+                            //.setContentText("확인 버튼을 누르면 취소할 수 없습니다.")
+                            .setCancelText("취소")
+                            .setConfirmText("확인")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                    Utill.getInstance().MoveAcitivity(getContext(), CertifiedActivity.class);
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                }
+                            }).show();
+                }
+                else{
+                    Utill.getInstance().MoveAcitivity(getContext(), AcitivityFestiveWriting.class);
+                }
+
+
+
             }
         });
         ApiService service = ServiceGenerator.createService(ApiService.class);
@@ -113,25 +143,8 @@ public class FragmentFestive extends Fragment {
         return view;
 
     }
-    /*
-    private void initFestive() {
-        festiveItems.clear();
-        for (int i = 0; i < 5; i++) {
-            FestiveModel item = new FestiveModel();
-            item.setYear(YEAR[i]);
-            item.setPledgePrice(PLEDGE_PRICE[i]);
-            item.setFestive_title(FESTIVE_TITLE[i]);
-            item.setPlace(PLACE[i]);
-            item.setRequestsCount(REQUEST_COUNT[i]);
-            item.setStart_date(START_DATE[i]);
-            item.setEnd_date(END_DATE[i]);
-            item.setFestive_content_view(CONTENT_VIEW[i]);
-            item.setRecruitment_truck(RECRUIT_TRUCK[i]);
-            item.setRequest_truck(REQUEST_TRUCK[i]);
-            item.setFood_category(CATEGORY[i]);
-            item.setDeadline(DEADLINE[i]);
-            festiveItems.add(item);
-        }
+
+    private boolean check_email(String paramString) {
+        return Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$").matcher(paramString).matches();
     }
-    */
 }

@@ -1,6 +1,7 @@
 package foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.main;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,11 +10,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Random;
+import java.util.regex.Pattern;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.R;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.Utill.Utill;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.service.GMailSender;
+import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.ActivitySetLocationMap;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.FragmentFestive;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.FragmentMyReview;
 import foodtruckuser.randombox.sweng.cbnu.com.foodtruckuser.ui.NaviagtionMain.SettingsFragment;
@@ -58,6 +66,7 @@ public class FragmentMain extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
                 }
                 else if (menuItem.getItemId() == R.id.menu_festival) {
+
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView, new FragmentFestive()).commit();
                 }
@@ -104,5 +113,9 @@ public class FragmentMain extends AppCompatActivity {
     public void showGuide() {
         toast = Toast.makeText(getApplication(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private boolean check_email(String paramString) {
+        return Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$").matcher(paramString).matches();
     }
 }

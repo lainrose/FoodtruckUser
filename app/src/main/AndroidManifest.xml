@@ -43,6 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.join.JoinMain" />
+        <activity android:name=".ui.join.CertifiedActivity"/>
         <activity android:name=".ui.join.sign.SigninActivity" />
         <activity android:name=".ui.join.sign.SignupActivity" />
         <activity android:name=".ui.SubMain.Acitivity.ActivityComments" />

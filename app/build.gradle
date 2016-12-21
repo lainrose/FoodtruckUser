@@ -48,7 +48,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile'com.lsjwzh:recyclerviewpager:1.0.8'
+    compile 'com.lsjwzh:recyclerviewpager:1.0.8'
     compile 'com.hedgehog.ratingbar:app:1.1.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:multidex:1.0.0'
@@ -61,6 +61,6 @@ dependencies {
     compile 'com.fnp:material-preferences:0.1.4'
     compile 'com.pavelsikun:material-seekbar-preference:2.3.0+'
     compile 'com.wdullaer:materialdatetimepicker:3.0.0'
-
+    compile files('libs/activation.jar')
 }
 apply plugin: 'com.google.gms.google-services'
